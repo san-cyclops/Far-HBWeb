@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<!DOCTYPE html>
+
+<html>
+
+<body ng-controller="payController" data-ng-app="RoomPayment">
+
+    <div class="panel panel-yellow" style="padding-right:5%;padding-left:5%;">
+        <div class="panel-heading" style="font-size:23px;">
+            Room Payment
+        </div>
+        <br />
+
+        <form action="#" class="form-horizontal">
+            <div class="form-body pal">
+                <div class="form-group">
+
+                    <label for="booking no" class="col-md-2 control-label"> Booking No </label>
+
+                    <div class="col-md-2">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="booking" @*ng-options="p for p in bno"*@>
+                                <option value="1">b1</option>
+                                <option value="2">b2</option>
+                                <option value="3">b3</option>
+                                <option value="4">b4</option>
+                                <option value="5">b5</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                   
+                        <label for="room no" class="col-md-2 control-label"> Room ID</label>
+                  
+                        <div class="col-md-2">
+                            <select class="form-control" data-ng-model="rid" @*ng-options="p for p in roomid"*@>
+                                <option value="1">r001</option>
+                                <option value="2">r002</option>
+                                <option value="3">r003</option>
+                                <option value="4">r004</option>
+                            </select>
+                        </div>
+                    <div class="col-md-2">
+                        
+                    </div>   
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputrefference" class="col-md-2 control-label"> Amount </label>
+                    <div class="col-md-2">
+                        <div class="input-icon right">
+
+                            <input id="amount" type="number" class="form-control" data-ng-model="amount" style="padding-left:40px;" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+            <div class="col-md-2">
+
+                </div>
+                    <div class="col-md-2">
+                        <input id="bno" type="text" class="form-control" placeholder="Booking No"/>
+                    </div>
+                    <div class="col-md-2">
+                        <input id="tno" type="text" class="form-control" placeholder="Telephone No"/>
+                    </div>
+                    
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputrefference" class="col-md-2 control-label"> Tax </label>
+                    <div class="col-md-2">
+                        <div class="input-icon right">
+
+                            <input id="tax" type="number" placeholder="" class="form-control" data-ng-model="tax" style="padding-left:40px;" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputrefference" class="col-md-2 control-label"> Total </label>
+                    <div class="col-md-2">
+                        <div class="input-icon right">
+
+                            <input id="tot" type="number"  class="form-control" data-ng-model="total" style="padding-left:40px;" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+                <br/>
+                <div class="form-group">
+                    <div class="col-sm-3">
+
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary" ng-click="paid()">Paid</button>
+                    </div>
+          
+                    <div class="col-sm-3">
+
+                    </div>
+                    <div class="col-sm-3">
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
+<script src="~/Scripts/RoomPayment/payment.js"></script>

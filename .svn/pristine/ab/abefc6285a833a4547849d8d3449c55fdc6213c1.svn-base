@@ -1,0 +1,1294 @@
+﻿@model WebUI.Models.HotelBooking
+@{
+    ViewBag.Title = "Hotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<link rel="stylesheet" href="../../Content/Hotel.css" type="text/css">
+
+
+
+
+
+<style>
+    .center {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+
+</script>
+<link href="~/Content/headerCSS.css" rel="stylesheet" />
+<link href="~/Content/footerCSS.css" rel="stylesheet" />
+
+<header>
+    <!--Start upper section-->
+
+    <div class="row">
+        <div class="upper">
+            <ul style="padding-left:100px;font-size:13px;">
+                <li><a href="http://tag2travel.com/index.php/group-bookings" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,');return false;">Group Bookings</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/currency-converter2" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Currency Converter</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/enquire-noww" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Enquire Now</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/get-a-quotee" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Get A Quote</a></li>
+                <li style="float:right; padding-right:110px;"><a href="mailto:sales@tag2travel.com" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,');return false;">Email Us : sales@tag2travel.com</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!--End upper section-->
+    <!--Start middle section-->
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="logomobile" style="padding-left:104px; height:84px;">
+            <br />
+            <a href="http://tag2travel.com/"><img alt="" class="image-logo" src="~/Content/img/log.PNG" style="width:250px;height:42px;"></a>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+            <div id="mySidenav" class="sidenav">
+
+                <a href="tel:+94115920607" id="blog">
+                    <img src="http://www.clker.com/cliparts/f/D/Z/i/d/G/phone-logo-md.png" id="image" alt="Smiley face" height="25" width="25">
+
+
+
+                    Call us&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp+94115920607
+                </a>
+
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=94767688881&text=I want to know some information.." id="about">
+
+                    <img src="http://pngimg.com/uploads/whatsapp/whatsapp_PNG1.png"
+                         id="image" alt="Smiley face" height="25" width="25">
+
+
+
+
+
+                    WhatsApp&nbsp&nbsp +94767688881
+                </a>
+
+
+
+
+
+                <br />
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <!--End middle section-->
+    <!--Satrt lower Section-->
+    <div class="row">
+
+
+
+    </div>
+    <div class="row">
+        <div style="padding-left:100px;border-bottom:2px solid white;text-decoration: none !important;" class="topnav" id="myTopnav">
+            <a class="active" href="http://tag2travel.com/"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/home.png"> HOME</a>
+            <a href="http://tag2travel.com/index.php/flight"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/flight1.png"> FLIGHT</a>
+            <a href="http://tag2travel.com/index.php/holidays"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/holiday1.png">HOLIDAYS</a>
+            <a href="http://tag2travel.com/index.php/sri-lanka"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/srilanka1.png">SRILANKA</a>
+            <a href="http://tag2travel.com/index.php/destinations"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/destination1.png">DESTINATION</a>
+            <a href="http://tag2travel.com/index.php/promotions-offers"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/promotions1.png">PROMOTIONS</a>
+            <a href="http://tag2travel.com/index.php/about-us"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/aboutus1.png">ABOUT US</a>
+            <a href="http://tag2travel.com/index.php/wf-menu-cpanel/wf-menu-cpanel/get-contact"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/contactus1.png">CONTACT</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </div>
+    <!--End lower section-->
+
+</header>
+
+
+
+<div ng-app="mymodule" ng-controller="ctrl">
+
+
+
+    <style>
+        .hidediv {
+            display: none;
+        }
+
+
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h5 {
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+
+    <div ng-hide="loaded2">
+        <div ng-hide="loaded">
+            @*<div class="center">*@@****************loading screen 2*******hotelsearch***********@
+            <div class="container">
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/leftbanner2.jpg" style="height:500px;" class="img-responsive" alt="Cinque Terre" />
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+                    <br>
+                    <div class="jumbotron text-center">
+                        <h1 style="font-size:28px; text-align:center;"><b>Almost there....</b></h1>
+
+                        <br /><br /><br /><br /><br />
+                        <img src="~/Content/img/loadingGif.gif"  id="gif" class="img-responsive" alt="Cinque Terre" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; height: 150px; width:150px; display:inline-block;" />
+                        <br /><br />
+                        <div class="container">
+                            <p style="font-size:17px; text-align:center;"><b>Searching for hotel details</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/rightbanner2.jpg" style="height:500px;" class="img-responsive" alt="Cinque Terre" />
+                </div>
+            </div>
+
+
+
+            @*</div>*@@*******************end of loading screen 2***********hotelsearch**************@
+
+        </div>
+
+        <div class="main-container" ng-cloak="" ng-show="loaded">
+
+
+
+
+
+
+            <script src="~/Scripts/hotelDescriptionScript.js"></script>
+            <div class="center-main-element" style="margin-bottom: 5px; margin-top: 10px;">
+                <div class="bredscrum-container">
+                    <ol class="breadcrumb" style="margin-bottom: 0px;">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/hotels">Hotels</a></li>
+                        <li class="active"> {{respData.hotels[0].name}} </li>
+                        <span class="hidden-xs" style="color: red; float: right;">
+                            <i class="fa fa-clock-o"></i>
+                            @*<div id="countdown" style="display: inline-block">09:06</div> min*@
+                        </span>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="center-main-element">
+
+                <div id="gallery" class="col-md-12" style="background-color: white; padding: 0 !important; margin-top: 20px;">
+
+                    <!-- Start -->
+                    <div style="width: 100%;">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <h2 style="color: black; margin: 0;">
+                                    {{respData.hotels[0].name}}
+                                </h2>
+                                <h5 style="color: #666;">
+                                    <i style="font-size: 15px; color: #4393FF;" class="fa fa-map-marker"></i>
+                                    {{respData.hotels[0].hotelrep[0].postalCode}},{{respData.hotels[0].hotelrep[0].address}}
+                                </h5>
+                                <h6 style="color: black; margin: 0;"></h6>
+                            </div>
+
+
+
+                            <div class="col-md-8 hidden-sm hidden-xs" style="padding: 10px 0px;">
+                                <div class="quick-launch">
+                                    <a class="linkNav" href="#jssor_1"><i class="fa fa-bars"></i> About</a>
+                                </div>
+                                <div class="quick-launch">
+                                    <a class="linkNav" href="#amenities_services_scroll"><i class="fa fa-exclamation-circle"></i> Amenities</a>
+                                </div>
+                                <div class="quick-launch">
+                                    <a class="linkNav" href="#room-table"><i class="fa fa-bed"></i> Room Availability</a>
+                                </div>
+                                <div class="quick-launch">
+                                    <a class="linkNav" href="#map"><i class="fa fa-map-marker"></i> Location</a>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9">
+
+                        @*******************@
+
+                        <script src="~/Scripts/Hotel/hotelslider.js"></script>
+
+                        <style>
+                            .jssora05l, .jssora05r {
+                                display: block;
+                                position: absolute;
+                                width: 40px;
+                                height: 40px;
+                                cursor: pointer;
+                                background: url('../../Content/img/a17.png') no-repeat;
+                                overflow: hidden;
+                            }
+
+                            .jssora05l {
+                                background-position: -10px -40px;
+                            }
+
+                            .jssora05r {
+                                background-position: -70px -40px;
+                            }
+
+                            .jssora05l:hover {
+                                background-position: -130px -40px;
+                            }
+
+                            .jssora05r:hover {
+                                background-position: -190px -40px;
+                            }
+
+                            .jssora05l.jssora05ldn {
+                                background-position: -250px -40px;
+                            }
+
+                            .jssora05r.jssora05rdn {
+                                background-position: -310px -40px;
+                            }
+
+                            .jssora05l.jssora05lds {
+                                background-position: -10px -40px;
+                                opacity: .3;
+                                pointer-events: none;
+                            }
+
+                            .jssora05r.jssora05rds {
+                                background-position: -70px -40px;
+                                opacity: .3;
+                                pointer-events: none;
+                            }
+
+                            .jssort01-99-66 .p {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 99px;
+                                height: 66px;
+                            }
+
+                            .jssort01-99-66 .t {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border: none;
+                            }
+
+                            .jssort01-99-66 .w {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .jssort01-99-66 .c {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 95px;
+                                height: 62px;
+                                border: #000 2px solid;
+                                box-sizing: content-box;
+                                background: url('../../Content/img/t01.png') -800px -800px no-repeat;
+                                _background: none;
+                            }
+
+                            .jssort01-99-66 .pav .c {
+                                top: 2px;
+                                _top: 0;
+                                left: 2px;
+                                _left: 0;
+                                width: 95px;
+                                height: 62px;
+                                border: #000 0 solid;
+                                _border: #fff 2px solid;
+                                background-position: 50% 50%;
+                            }
+
+                            .jssort01-99-66 .p:hover .c {
+                                top: 0;
+                                left: 0;
+                                width: 97px;
+                                height: 64px;
+                                border: #fff 1px solid;
+                                background-position: 50% 50%;
+                            }
+
+                            .jssort01-99-66 .p.pdn .c {
+                                background-position: 50% 50%;
+                                width: 95px;
+                                height: 62px;
+                                border: #000 2px solid;
+                            }
+
+                            * html .jssort01-99-66 .c, * html .jssort01-99-66 .pdn .c, * html .jssort01-99-66 .pav .c {
+                                width: 99px;
+                                height: 66px;
+                            }
+                        </style>
+
+
+
+                        <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 915px; height: 350px; overflow: hidden; visibility: hidden; background-color: #24262e;">
+                            <!-- Loading Screen -->
+                            <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                                <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                                <div style="position: absolute; display: block; background: url('../../Content/img/loading.gif') no-repeat center center; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                            </div>
+                            <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 240px; width: 720px; height: 350px; overflow: hidden;">
+                                <div data-p="133.75">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[0].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[0].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[1].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[1].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[2].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[2].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[3].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[3].path}}">
+                                </div>
+                                <img data-u="add" title="Jssor Slider" style="display: block; position: absolute; top: 0; right: 0; width: 16px; height: 16px; z-index: 1000;" src="../../Content/img/icon-16.png" />
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[4].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[4].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[5].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[5].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[6].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[6].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[7].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[7].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[8].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[8].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[10].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[10].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[11].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[11].path}}">
+                                </div>
+                                <a data-u="any" style="display: none">Image Gallery with Vertical Thumbnail</a>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[12].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[12].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[13].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[13].path}}">
+                                </div>
+                                <div data-p="133.75" style="display: none;">
+                                    <img data-u="image" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[14].path}}">
+                                    <img data-u="thumb" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[14].path}}">
+                                </div>
+
+
+                            </div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="jssort01-99-66" style="position: absolute; left: 0px; top: 0px; width: 240px; height: 350px;" data-autocenter="2">
+                                <!-- Thumbnail Item Skin Begin -->
+                                <div data-u="slides" style="cursor: default;">
+                                    <div data-u="prototype" class="p">
+                                        <div class="w">
+                                            <div data-u="thumbnailtemplate" class="t"></div>
+                                        </div>
+                                        <div class="c"></div>
+                                    </div>
+                                </div>
+                                <!-- Thumbnail Item Skin End -->
+                            </div>
+                            <!-- Arrow Navigator -->
+                            <span data-u="arrowleft" class="jssora05l" style="top: 0px; left: 248px; width: 40px; height: 40px;" data-autocenter="2"></span>
+                            <span data-u="arrowright" class="jssora05r" style="top: 0px; right: 8px; width: 40px; height: 40px;" data-autocenter="2"></span>
+                        </div>
+
+
+                        <script type="text/javascript">jssor_1_slider_init();</script>
+                        <!-- #endregion Jssor Slider End -->
+                        @*******************@
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="col-md-12" style="padding: 0;">
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <span class="h1" style="margin-top: 5px;">
+                                    5 / <span class="h4">{{respData.hotels[0].hotelstar}}</span>
+
+                                </span>
+
+
+                                <span ng-repeat="n in createArray(hotel.hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+
+
+
+                                <hr class="clearHr">
+                                <span class="text-info">Hotel Category :</span><br>
+                                <span class="h4"> {{respData.hotels[0].categoryName }}  </span>
+                                <hr class="clearHr">
+
+                                <hr class="clearHr">
+                                <span class="text-info">Accommodation Type : {{AccommodationType}}</span><br>
+                                <span class="h4"> {{respData.hotels[0].hotelrep[0].accommodationTypeCode }}  </span>
+                                <hr class="clearHr">
+                                @*<span class="text-info">Terminal :</span><br>
+                                    <span class="h4">{{respData.hotels[0].terminalrep[0].name }}</span>*@
+
+                                <div id="mapSmall" style="height: 155px !important;width: 100% !important;">
+                                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChibnp4F9ivC6bGBkHUEgijTHD_swaH0g&callback=initMap"
+                                            type="text/javascript"></script>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <!---- About ---->
+
+                    <h4 class="margin-top-24 color-4D font-siz-21 text-bold">About</h4>
+                    <div class="abouthotel">
+                        <p itemprop="description" class="line-1-1 font-siz-14 color-4D" style="line-height: 1.6em;">
+                            {{respData.hotels[0].hotelrep[0].description }}
+                        </p>
+                    </div>
+                    <style>
+                        .facilities ul {
+                            position: relative;
+                            padding: 15px;
+                            display: block;
+                            overflow: auto;
+                            clear: both;
+                            height: 1%;
+                            font-size: 11px;
+                            columns: 4;
+                            -webkit-columns: 4;
+                            -moz-columns: 4;
+                        }
+
+                        .facilities li {
+                            width: 100%;
+                            float: left;
+                            height: 1%;
+                            display: block;
+                            list-style-type: circle;
+                            margin-right: 1%;
+                            font-size: 12px;
+                            line-height: 20px;
+                        }
+
+                        .facilities h4 {
+                            background: #f3f3f3;
+                            clear: both;
+                            padding: 10px 15px;
+                            color: #4d4d4d;
+                            font-size: 12px;
+                            font-weight: bold;
+                        }
+                    </style>
+
+                    <div class="clearfix"></div>
+
+                    <!---- facilityrep ---->
+                    <div id="amenities_services_scroll" class="facilities">
+                        <hr />
+                        <h4 class="margin-top-24 padding-bottom-16 color-4D font-siz-21 text-bold" id="amenities" style="font-size:21px;color:#4d4d4d;font-weight:500;background-color:white;padding-left:0px;">Amenities and Services</h4>
+
+
+                        <div ng-repeat="facility in facilities  | unique: 'fgdescription'">
+
+                            @*<div class="facility col-md-4 col-sm-4 col-xs-6">*@
+
+                            @*<hr />*@
+                            <h4>
+                                <i class="fa fa-check-circle margin-right-16 margin-bottom-8 color-F7">
+                                </i>
+                                {{facility.fgdescription}}
+                            </h4>
+                            <ul>
+                                <li style="list-style: none;">
+                                    @*<hr />*@
+                                    <div ng-repeat="facility in facilities | filter: facility.fgdescription | unique: 'DESCRIPTION'">
+
+                                        <i class="fa fa-flag-checkered margin-right-16 margin-bottom-8 color-F7">
+                                        </i>
+                                        {{facility.DESCRIPTION}}
+                                    </div>
+                                </li>
+                            </ul>
+                            @*</div>*@
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p itemprop="description" class="line-1-1 font-siz-12 color-4D" style="line-height: 1.2em;">
+                            * Same services shall be paid at the establishment
+                        </p>
+
+                    </div>
+
+
+
+                    <!---- retecommnet ---->
+                    @*<div class="col-md-12">
+                            <h4 style="color: #31708f;" class="margin-top-24 padding-bottom-16 color-4D font-siz-21 text-bold" id="amenities">Rate Comment</h4>
+                            <span class="block-obj padding-bottom-8 fontsz-12"> {{respData.hotels[0].retecommnet}} </span>
+                        </div>*@
+
+                    <div class="clearfix"></div>
+
+                    <!---- Room Availability ---->
+
+                    <div class="text-bold  margin-top-32 hidden-xs hidden-sm block-obj" style="font-weight: bold">
+                        <div class="col-md-4 font-siz-13 padding-top-16 padding-bottom-8" style="font-weight: bold">TYPE</div>
+                        <div class="col-md-4 font-siz-13 padding-top-16 padding-bottom-8" style="font-weight: bold">
+                            <div class="row">Cancellation Policy</div>
+                        </div>
+                        <div class="col-md-2 font-siz-13 padding-top-16 padding-bottom-8" style="font-weight: bold">PRICE</div>
+                        <div class="col-md-2 font-siz-13 padding-top-16 padding-bottom-8"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12" id="room-table" style="padding-top: 20px;">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="border-ccc-1" style="padding-top: 10px;" ng-repeat="room in rooms">
+
+                                    <h4 style="color: #31708f;"><i class="fa fa-bed" aria-hidden="true"></i> {{room.name }}</h4>
+
+                                    <div class="col-md-12" style="" ng-repeat="rate in room.rates">
+                                        <div style="margin-bottom: 5px;">
+                                            <div class="row" style="padding-bottom: 5px; padding-top: 5px;">
+
+                                                <!--Room board basis-->
+                                                <div class="col-md-4 border-bot-ash"> 
+                                                    <span class="badge">{{$index+1}}</span>&nbsp; Board Basis :{{rate.boardName }}
+                                                </div>
+
+                                                <!--Cancellation policy-->
+                                                <div class="col-md-4 back-ash">
+                                                    @*<span style="background-color: #a94a44; padding: 3px 7px; border-radius: 3px 0px 0px 3px;" class="padding-8 color-wh"><i class="fa fa-times-circle" aria-hidden="true"></i></span>*@
+                                                    <span style="background-color: #d3d3d3; margin-left: -5px; padding: 3px 8px; border-radius: 0px 3px 3px 0px;" class="padding-8 color-wh back-gr-rose" data-toggle="tooltip" data-html="true" tooltip="" data-original-title="" title="">Non Refundable</span>
+                                                </div>
+
+                                                <!--pricing area-->
+                                                <div class="col-md-2">
+                                                    <span class="text-center" style="display: block; font-size: 18px;">
+                                                        LKR {{(rate.net)}}
+                                                    </span>
+                                                    <span class="text-center color-ash" style="display: block; font-size: 11px;">Taxes not included</span>
+
+                                                </div>
+
+                                                <!--Show submit button-->
+                                                <div class="col-md-2">
+                                                    <input type="submit" style="background-color:#5cb85c;" value="Book Now" class="pull-right new-btn submitkey" ng-click="removeTask(rate.rateKey);">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <br />
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            @***************************************************location************************************************************************@
+            <div class="col-md-12 col-lg-12 clearfix">
+                <div class="col-md-6 col-lg-6">
+                    <h4 class="margin-top-24 padding-bottom-16 color-4D font-siz-21 text-bold" id="amenities">Location</h4>
+                    <div id="map" style="height: 420px !important;width: 100% !important;">
+                    </div>
+                </div>
+               
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChibnp4F9ivC6bGBkHUEgijTHD_swaH0g&callback=initMap"
+                        type="text/javascript"></script>
+                <div class="col-md-6 col-lg-6 InterestingPoints">
+                    @*************************Interesting points******************@
+
+                    <h4 class="margin-top-24 padding-bottom-16 color-4D font-siz-21 text-bold" id="amenities">Nearby</h4>
+                    <div>
+                        <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9">
+                            <h5>Nearby place</h5>
+                            <div class="block-obj padding-top-16 font-siz-12" ng-repeat="x in InterestPoint">
+                                <i class="fa fa-check" style="color: #25d422;border: 1px #ccc solid;padding: 8px;border-radius: 20px;margin-right: 8px;" aria-hidden="true"></i> {{x.poiName}}
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                            <h5>Distance</h5>
+                            <div class="block-obj padding-top-16 padding-left-6 font-siz-12" ng-repeat="x in InterestPoint">
+                                <i class="fa fa-location-arrow" style="color: #25d422;border: 1px #ccc solid;padding: 8px;border-radius: 20px;margin-right: 8px;" aria-hidden="true"></i> {{x.distance}} m
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+
+
+
+
+
+            <div class="clearfix"></div>
+
+
+
+
+            <br /><br />
+        </div>@******@
+    </div>@***@
+
+    @******* Payment View *****************************************************************************************@
+
+
+
+    <div class="main-container" ng-cloak="" ng-show="loaded1">
+        @*style="display: none"*@
+        <div class="col-lg-12 col-md-12 col-xs-12  padding-bottom-24 padding-top-4">
+
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding-bottom-24">
+
+                    <span class="font-siz-16 text-bolder color-55F margin-bottom-32">Room Details</span>
+                    <div class="roomdetails">
+                        <div class="row box-brder margin-top-16">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-top-16 padding-bottom-24 padding-16 center-block block-obj">
+                                <img style="width: 100%; max-height: 150px;" class="" src="http://photos.hotelbeds.com/giata/{{respData.hotels[0].images[0].path}}">
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 padding-top-8 padding-right-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-7 col-xs-12">
+                                        <span class="font-siz-16 text-bolder color-55F word-spacing block-obj">{{respData.hotels[0].name}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                                    <div class="col-lg-7 col-md-5 col-sm-5 col-xs-12">
+                                        <div class="row">
+                                            <span class="font-siz-12 color-707C80 text-bold word-spacing block-obj">{{respData.hotels[0].hotelrep[0].address}}</span>
+                                            <span class="font-siz-12 font-colora4 word-spacing text-bolder block-obj">INCLUDES</span>
+                                            <span class="font-siz-12 color-707C80 text-bold word-spacing block-obj">{{respData.hotels[0].categoryName }}</span>
+                                            <span class="font-siz-12 color-707C80 text-bold word-spacing block-obj">
+                                                <span class="block-obj margin-top-8 margin-bottom-16" data-toggle="tooltip" tooltip="Tooltip on left" tooltip-placement="top">
+
+
+                                                    <span style="background-color: #a94a44; padding: 3px 7px; border-radius: 3px 0px 0px 3px;" class="padding-8 color-wh"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                                                    <span style="background-color: #cc6666; margin-left: -5px; padding: 3px 8px; border-radius: 0px 3px 3px 0px;" class="padding-8 color-wh back-gr-rose" data-toggle="tooltip" data-html="true" tooltip="" data-original-title="" title="">Non Refundable</span>
+
+                                                </span>
+
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 padding-left-16 margin-top-8 block-obj center-block pull-right">
+                                            <!--<span class="font-siz-11 color-707C80 text-bolder word-spacing block-obj">Check Out date</span>-->
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rcorners3 padding-top-4 padding-bottom-4 margin-bottom-4 margin-top-4" style="">
+                                                <div class="row" style="padding-top: 0px !important;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                                        <img class="map-size color-707C80 margin-left-min16  margin-top-8" src="../../Content/img/calender.png">
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                                        <span class="font-siz-12 color-707C80 text-bold word-spacing150 block-obj text-center text-bolder">Check in date</span>
+                                                        <span class="font-siz-13 color-707C80 text-bold word-spacing150 block-obj text-center">@Model.DepartureDate</span>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<span class="font-siz-11 color-707C80 text-bolder word-spacing block-obj">Check Out date</span>-->
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rcorners3 padding-top-4 padding-bottom-4 margin-bottom-4 margin-top-4">
+                                                <div class="row" style="padding-top: 0px !important;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                                        <img class="map-size color-707C80 margin-left-min16 margin-top-8" src="../../Content/img/calender.png">
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                                        <span class="font-siz-12 color-707C80 text-bold word-spacing150 block-obj text-center  text-bolder">Check out date</span>
+                                                        <span class="font-siz-13 color-707C80 text-bold word-spacing150 block-obj text-center">@Model.ReturnDate</span>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-bottom-8 padding-top-24">
+                        <span class="block-obj back-gr-f2 padding-16 padding-bottom-32">
+                            <span class="font-siz-14 text-bolder color-55F word-spacing block-obj">Rate Comment</span>
+                            <span class="font-siz-12 color-707C80 word-spacing block-obj">{{rate.hotel.rooms[0].rates[0].rateComments}}</span>
+                            <span class="font-siz-14 text-bolder color-55F word-spacing block-obj">Cancellation Policy</span>
+                            <span class="font-siz-12 color-707C80 word-spacing block-obj"> Non Refundable </span>
+                             @*Hide cancellation Policies*@
+                            <div ng-repeat="varx in cancellationPolicies" class="hidden">
+
+                                @*<div class="facility col-md-4 col-sm-4 col-xs-6">*@
+
+                                @*<hr />*@
+                                <p>
+                                    <i class="fa fa-check-circle  color-F7">
+                                    </i>
+                                    {{varx.amount}}
+                                    <i class="fa fa-check-circle color-F7">
+                                    </i>
+                                    {{varx.from}}
+                                    <i class="fa fa-check-circle color-F7">
+                                    </i>
+                                    {{varx.hotelAmount}}
+
+                                </p>
+                                
+                                
+
+                            </div>
+
+                        </span>
+                    </div>
+
+
+                    <div class="col-md-12 ">
+                        <span class="block-obj style2 visible-lg visible-md"></span>
+                    </div>
+                    <!--......-->
+                    <!--.Whos travel..-->
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-10 margin-top-16">
+                            <span class="font-siz-18 text-bolder color-55F block-obj">Enter your details</span>
+                            <span class="font-siz-12 text-bold color-707C80 block-obj">The primary guest must be 18 or older</span>
+                        </div>
+                    </div>
+
+
+                    @*Adults*@
+
+                    <div>
+                        <ul>
+                            <li ng-repeat="elemnt in questionelemnt">
+                                <div>
+
+                                    <div style="display: inline">
+                                        <script src="~/Scripts/HotelPageValidations.js"></script>
+
+                                        <div class="col-lg-12 col-md-12 col-xs-12 padding-4">
+                                            <div class="col-lg-2 col-md-3 col-sm-2 col-xs-4 padding-right-0">
+                                                <select id="genderSelect" ng-model="elemnt.titile" class="form-control" ng-options="environment.name for environment in titiles"></select>
+                                                @*<span ng-model="elemnt.question" ng-hide="editorEnabled" class="font-siz-12 text-bold color-707C80 block-obj" ng-click="editorEnabled=true">
+                                                        {{elemnt.question}}
+                                                    </span>*@
+                                            </div>
+
+                                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-8">
+                                                <div class="form-group">
+                                                    <span>
+                                                        <input type="text" class="form-control" ng-model="elemnt.name" placeholder="name" required />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ">
+                                                <div class="form-group">
+                                                    <span>
+                                                        <input type="text" class="form-control" ng-model="elemnt.surname" placeholder="surname" required />
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <span ng-hide="elemnt.id != 0">
+
+                                            <!--/..................Contact Details Topic...................../---->
+                                            <div class="row">
+                                                <div class="col-md-8 col-sm-8 col-xs-12 margin-top-16">
+                                                    <span class="font-siz-18 text-bolder color-55F block-obj">Contact Details</span>
+                                                    <span class="font-siz-12 text-bold color-707C80 block-obj">Voucher and booking details will be sent to below mail address</span>
+                                                </div>
+                                            </div>
+                                            <!--/..................Contact Details ...................../---->
+                                            <div class="row">
+                                                <div class="margin-top-16">
+                                                    <div class="col-lg-12 col-md-12 col-xs-12 padding-4">
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 padding-right-0">
+                                                            <input class="selectpicker form-control" value="+94" readonly="" style="text-align: right;">
+                                                        </div>
+
+                                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-8">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="Mobile" aria-describedby="emailHelp" placeholder="Mobile Number" data-ng-model="elemnt.Mobile" name="Mobile" value="">
+                                                                <small class="help-block hidden" style="margin-top: 0 !important; margin-bottom: 0 !important">Invalid contact number.</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ">
+                                                            <div class="form-group">
+                                                                <input type="email" id="Email" class="form-control" aria-describedby="emailHelp" placeholder="Email" data-ng-model="elemnt.EmailAddress" name="Email" value="">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+                                <hr />
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-12 ">
+                        <span class="block-obj style2 visible-lg visible-md"></span>
+                    </div>
+
+                    @*Childs*@
+                    <!--/..................Child Details Topic...................../---->
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-12 margin-top-16">
+                            <span class="font-siz-18 text-bolder color-55F block-obj">Child Details</span>
+                        </div>
+                    </div>
+                    <div>
+                        <ul>
+                            <li ng-repeat="elemnt1 in childelemnt">
+                                <div>
+
+                                    <div style="display: inline">
+
+
+                                        <div class="col-lg-12 col-md-12 col-xs-12 padding-4">
+                                            <div class="col-lg-2 col-md-3 col-sm-2 col-xs-4 padding-right-0">
+
+                                            </div>
+
+                                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-8">
+                                                <div class="form-group">
+                                                    <span>
+                                                        <input type="text" class="form-control" ng-model="elemnt1.name" placeholder="name" required />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ">
+                                                <div class="form-group">
+                                                    <span>
+                                                        <input type="text" class="form-control" ng-model="elemnt1.surname" placeholder="surname" required />
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+                <div class="col-md-12 ">
+                    <span class="block-obj style2 visible-lg visible-md"></span>
+                </div>
+
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+
+
+                    <div class="margin-left-16">
+                        <span class="font-siz-16 text-bolder color-55F margin-bottom-16">Room Rates</span>
+                    </div>
+                    <div class="roomrate">
+                        <div class="row box-brder block-obj center-block margin-top-16">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-top-16">
+
+                                <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">ROOM TYPE</span>
+                                <span class="font-siz-11 font-weight-normal block-obj margin-bottom-24 border-bottom-ddd color-black">{{rate.hotel.rooms[0].name}}</span>
+                                <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">GUEST(S) &amp; NIGHTS</span>
+                                <span class="font-siz-11 font-weight-normal block-obj margin-bottom-16 color-black">{{Adults}} Adult/s, {{Childrens}} Children</span>
+                                <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">Child Details</span>
+                                <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">Room 1:</span>
+                                <div>
+                                    <div class="col-md-4">
+                                        <label name="lblOccup1" class="labelx"> Child - {{datax.Children1}}</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label name="lblOccup1" class="labelx">Child Ages - {{datax.C1Age1}} - {{datax.C1Age2}} -{{datax.C1Age3}} -{{datax.C1Age4}}</label>
+                                    </div>
+                                </div>
+
+                                <div ng-show="room2">
+                                    <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">Room 2:</span>
+
+                                    <div class="col-md-6">
+                                        <label name="lblOccup1" class="labelx">Child - {{datax.Children2}}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label name="lblOccup1" class="labelx">Child Ages - {{datax.C2Age1}} - {{datax.C2Age2}} -{{datax.C2Age3}} -{{datax.C2Age4}}</label>
+                                    </div>
+                                </div>
+                                <div ng-show="room3">
+                                    <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">Room 3:</span>
+
+                                    <div class="col-md-6">
+                                        <label name="lblOccup1" class="labelx"> Child - {{datax.Children3}}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label name="lblOccup1" class="labelx"> Child Ages - {{datax.C3Age1}} - {{datax.C3Age2}} -{{datax.C3Age3}} -{{datax.C3Age4}}</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-top-16">
+
+                                <span class="font-siz-12 text-bolder font-colora4 block-obj margin-bottom-8">ROOMS</span>
+                                <span class="font-siz-11 font-weight-normal block-obj margin-bottom-24 border-bottom-ddd color-black">{{datax.Rooms}} x</span>
+                                <span class="font-siz-13 text-bolder font-colora4 block-obj margin-bottom-8">ROOMS PRICE</span>
+                                <span class="font-siz-13 block-obj margin-bottom-16 color-black">LKR {{rate.hotel.rooms[0].rates[0].net}}</span>
+                                <span class="font-siz-13 text-bolder font-colora4 block-obj margin-bottom-8">TAX</span>
+                                <span class="font-siz-13 block-obj margin-bottom-16 color-black  text-bolde">3%</span>
+
+
+
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-top-16">
+
+
+                                <div class="col-md-12 col-xs-12 back-gr-f2 padding-top-4 border-top-bottom-bbb">
+                                    <div class="col-md-8 col-sm-8 col-xs-7 padding-bottom-8 padding-left-0">
+                                        <span class="font-siz-16 text-bolder ">Grand Total</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-5  padding-bottom-8 padding-right-0 padding-left-0">
+                                        <span class="font-siz-16 text-bolder" id="grandtot">LKR {{NetPrice}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 margin-top-8">
+                            <span class="font-siz-16 text-bolder color-55F">Cancellation Policy &amp; Terms of Booking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-8 col-md-8 col-xs-12  padding-4 padding-bottom-16">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-4">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="policyterms">
+                                    <div class="margin-bottom-12 row">
+                                        <span class="margin-top-5  font-siz-13 ">
+                                            By clicking the "Continue Booking" button below, I understand and agree with the Rules and Restrictions for this selected room. I agree to the<span class="color-blue-lum font-siz-13 text-bold cursor-point" onclick="window.open('#');"> Privacy Policy </span>  and the <span class="color-blue-lum font-siz-13 text-bold cursor-point" onclick="window.open('#');">Terms and Conditions of Tag2Travel.com</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-right-0 padding-left-0">
+
+                                <div class="col-md-6 col-lg-6 col-sm-6">
+
+                                    <div id="s-msg" style="display: none;">
+                                        <div id="s-text" class="alert alert-success">
+                                        </div>
+                                    </div>
+
+                                    <div id="e-msg" style="display: none;">
+                                        <div id="e-text" class="alert alert-danger">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 padding-right-0 padding-left-0">
+                                    <div class="grossamount">
+                                        <div>
+                                            <p class="block" style="text-align: right;"> Gross Amount: <span class="__grand_ttl" style="font-weight: bold">LKR {{Price}}</span>  </p>
+                                            <p class="block" style="text-align: right;"> Tax: <span class="__grand_ttl" style="font-weight: bold">3%</span>  </p><hr />
+                                            <p class="block" style="text-align: right; font-size:20px;"> Total Amount:&nbsp; <span class="__grand_ttl" style="font-weight: bold">LKR {{NetPrice}}</span>  </p>
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" id="paymentbutton" data-ng-click="sendList();">Make Payment</button>
+
+
+                                        @*<button type="button" class=""  style="border:none; border-radius:4px;background-color:royalblue; color:white; width:200px;height:35px;">Make Payment</button>*@
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    @******* End Payment View *****************************************************************************************@
+
+
+    @******* Booking Conferm View *****************************************************************************************@
+
+    @******* End Booking Conferm View *****************************************************************************************@
+    <footer style="float:none!important;">
+
+        <div class="upperf" style="color:#1B3C6F;">
+            <!--<div class="Customer">-->
+
+            <div class="row" style="color:#b4b8bf">
+                <!--start information-->
+                <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+                <div class="info" style="padding-left:10px;">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <h3 class="header" style="text-align:left;font-size:18px;"> Quick Links </h3>
+                        <hr>
+                        <ul class="arrow" style="text-align:left; color:#b4b8bf">
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/about-us">About us</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/faq">FAQ's</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/wf-menu-cpanel/wf-menu-cpanel/get-contact">Contact us</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/holiday-check-list">Holiday Check List</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/privacy-policy" target="_blank">Privacy Policy</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/terms" onclick="window.open(this.href,'','scrollbars=yes,resizable=yes,location=yes,menubar=yes,status=yes,toolbar=yes,left=0,top=0');return false;">Terms and Conditions</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/sri-lanka">Sri Lanka</a></li>
+                            <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/destinations">Destinations</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!--End Information-->
+                <!--Start Subscribe-->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="emailsubscribe">
+                        <h3 class="header" style="text-align:left;font-size:18px;">Subscribe To Our Newsletter</h3>
+                        <hr>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <form>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <div class="mail" style="color:#b4b8bf">
+
+                                    <p style="text-align:left;color:#b4b8bf!important;padding-bottom:10px;">Email</p>
+                                    <p style="text-align:left;color:#b4b8bf!important;">Name  </p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                <div style="color:#b4b8bf; text-align:left; ">
+                                    <form class="myForm">
+                                        <input type="email" value="" placeholder="Enter your E-mail" id="SubscribeEmail" ng-model='SubscribeEmail' style="border-radius:4px; border:none;width:260px;height:28px;" onblur="validateEmail(this);"><br /><br />
+                                        <input type="text" value="" placeholder="Enter your Name" id="SubscribeName" ng-model='SubscribeName' style="border-radius:4px; border:none;width:260px;height:28px;">
+                                        <br>
+                                        <br />
+                                        <button class="sub" id='validate' data-ng-click="sendSubscribeMail()">Subscribe </button>
+                                        <br><br>
+
+                                        <script src="~/Scripts/emailValidation.js"></script>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <h2 id='result'></h2>
+
+
+
+                </div>
+
+
+                <!--End Subscribe-->
+                <!--Start About Us-->
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <h3 class="header"></h3>
+                    <div class="aboutus">
+                        <h3 class="header" style="text-align:left;font-size:18px;"> About Us</h3>
+                        <hr>
+                        <p style="text-align:justify;color:#b4b8bf!important;">
+                            In simple terms, we are a team of travel enthusiasts with the expertise of destination and activity planning – who have experienced travelling themselves and are working towards gifting those experiences to our clients.
+                        </p>
+
+                        <p class="logo">
+                            <img src="~/Content/img/footerlogoimg.jpg" class="img-responsive" alt="">
+
+                            <!--<img src="D:\codes\images\sri1.png" alt="">-->
+                        </p>
+                    </div>
+                </div>
+
+                <!--</div>-->
+                <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+            </div>
+        </div>
+        <!--End About Us-->
+
+
+
+        <div class="footer" style="background-color:#112646; text-align:left;">
+
+            <div class="row">
+                <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div id="sp-footer1" class="span8">
+                        <span class="copyright">Copyright © 2017 Tag2Travel.com. All Rights Reserved.</span>
+                        <!--<span class="designed-by">
+                            Using <a class="sp-brand" target="_blank" href="http://www.joomshaper.com/helix">Helix</a>
+                        </span>-->
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <!--we accepted-->
+                    <img src="~/Content/img/visaimg.png" />
+                    <img src="~/Content/img/mastercardimg.png">
+                
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <!-- Add font awesome icons -->
+                    <a href="https://www.facebook.com/Tag2travel" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com/tag2Travel" class="fa fa-twitter"></a>
+                    <a href="https://plus.google.com/u/0/101191713416721482821" class="fa fa-google-plus" style="background-color: rgb(221, 75, 57);"></a>
+                    <a href="mailto:sales@tag2travel.com" class="fa fa-envelope"></a>
+                    @*<a href="http://www.pinterest.com/" class="fa fa-pinterest"></a>*@
+                </div>
+
+                <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+            </div>
+        </div>
+
+
+
+
+    </footer>
+
+
+
+</div>@*- End ng-controller*@
+
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/ApiHotel/Module.js"></script>
+<script src="~/Scripts/ApiHotel/Service.js"></script>
+<script src="~/Scripts/ApiHotel/Controller.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+@*2017*@
+

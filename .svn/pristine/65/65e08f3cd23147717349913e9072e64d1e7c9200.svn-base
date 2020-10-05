@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "NoPermission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="font-size:200px;color:red;">You do not have Permission
+    to this page</h2>
+

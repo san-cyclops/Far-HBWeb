@@ -1,0 +1,4 @@
+﻿var app;
+(function() {
+    app = angular.module("APIModule", ['ngResource', 'ui.bootstrap', 'ui-rangeSlider', 'ngAnimate']);
+})();

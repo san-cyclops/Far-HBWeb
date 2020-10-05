@@ -1,0 +1,2693 @@
+﻿@model HB.WebUI.Models.HotelBooking
+@{
+    ViewBag.Title = "Booking";
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+<style>
+    #wrapper {
+        font: 20px Calibri;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-family: Arial;
+        font-size: 1.4em;
+    }
+
+    label {
+        /*display: inline-block;*/
+        /*margin-bottom: 5px;*/
+        /*font-weight: bold;*/
+    }
+
+
+    table, tr, td, th {
+        border: 1px solid #ccc;
+        color: black;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .search_again_wrapper {
+        background: #f3f3f3;
+        box-shadow: 2px 2px 2px 1px #757575 !important;
+    }
+
+    .hotel_result .result-block {
+        margin: 0 0 8px;
+        background: #fff;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        border: .5px solid #d8d8d8;
+        padding: 8px;
+    }
+
+        .hotel_result .result-block .hotel-des .maptext p span.freeconcellation {
+            color: #3fbf86;
+            padding-left: 0;
+            font-size: .9em;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box {
+            padding-left: 0;
+            border-left: none;
+        }
+
+        .hotel_result .result-block .hotel-des .star {
+            padding: 3px 0 0 2px;
+        }
+
+        .hotel_result .result-block .hotel-des .hotdeal p span.hotdealbox {
+            font-size: .7em;
+            width: auto;
+        }
+
+        .hotel_result .result-block .hotel-des .hotel-name h2 {
+            font-size: 1.2em;
+        }
+
+        .hotel_result .result-block .hotel-des .hotdeal .hotdealpro {
+            padding-left: 5px;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box .hotel_price {
+            font-size: 1em;
+        }
+
+        .hotel_result .result-block .hotel-des .maptext p span.cityname {
+            font-size: .9em;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box p {
+            text-align: right;
+            margin: 0;
+            font-size: .86em;
+        }
+</style>
+
+<style>
+    /*##star Rating Styles ----------------------*/
+    .stars {
+        padding-top: 10px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    span.glyphicon {
+        padding: 5px;
+    }
+
+    .glyphicon-star-empty {
+        color: #9d9d9d;
+    }
+
+    .glyphicon-star-empty,
+    .glyphicon-star {
+        font-size: 18px;
+    }
+
+    .glyphicon-star {
+        color: #FD4;
+        transition: all .25s;
+    }
+
+        .glyphicon-star:hover {
+            transform: rotate(-15deg) scale(1.3);
+        }
+
+    .center {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+</style>
+
+<style>
+    /*......stylesheet of the loading screen..................*/
+    body {
+        text-align: center;
+    }
+
+    .container {
+        color: black;
+        text-align: center;
+    }
+
+    .img-responsive {
+        align-content: center;
+        align-items: center;
+    }
+
+    /*........end of loading screen stylesheet*....................../
+</style>
+
+<style>
+    @*button sort*@ #btn-group {
+        background-color: #5cb85c;
+        color: #ffffff;
+        padding: 6px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border: 1px solid #4cae4c;
+        border-radius: 4px;
+    }
+
+
+
+
+    @*button sort*@
+</style>
+
+<link rel="stylesheet" href="../../Content/common.css" type="text/css">
+<link rel="stylesheet" href="../../Content/loaded.css" type="text/css">
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+
+</script>
+
+@***********far header style************@
+
+<head>
+
+    
+       <style type="text/css">
+        img.wp-smiley,
+        img.emoji {
+            display: inline !important;
+            border: none !important;
+            box-shadow: none !important;
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+            vertical-align: -0.1em !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+    </style>
+    <link rel="stylesheet" id="glt-toolbar-styles-css" href="http://farholidays.com/wp-content/plugins/google-language-translator/css/toolbar.css?ver=4.6.8" type="text/css" media="all">
+    <link rel="stylesheet" id="google-language-translator-css" href="http://farholidays.com/wp-content/plugins/google-language-translator/css/style.css?ver=4.6.8" type="text/css" media="all">
+    <link rel="stylesheet" id="contact-form-7-css" href="http://farholidays.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.1" type="text/css" media="all">
+    <style id="rs-plugin-settings-inline-css" type="text/css">
+        #rs-demo-id {
+        }
+
+        .tp-caption.nicdarkwithlight50, .nicdarkwithlight50 {
+            font-size: 50px;
+            line-height: 50px;
+            font-weight: 100;
+            font-family: "Open Sans";
+            color: rgb(255,255,255);
+            text-decoration: none;
+            background-color: transparent;
+            border-width: 0px;
+            border-color: rgb(0,0,0);
+            border-style: none;
+            text-shadow: none;
+        }
+
+        .tp-caption.nicdarkwithregular75, .nicdarkwithregular75 {
+            font-size: 75px;
+            line-height: 75px;
+            font-weight: 500;
+            font-family: "Open Sans";
+            color: rgb(255,255,255);
+            text-decoration: none;
+            background-color: transparent;
+            border-width: 0px;
+            border-color: rgb(0,0,0);
+            border-style: none;
+            text-shadow: none;
+        }
+
+        .tp-caption.nicdarkwithlight40, .nicdarkwithlight40 {
+            font-size: 40px;
+            line-height: 40px;
+            font-weight: 100;
+            font-family: "Open Sans";
+            color: rgb(255,255,255);
+            text-decoration: none;
+            background-color: transparent;
+            border-width: 0px;
+            border-color: rgb(0,0,0);
+            border-style: none;
+            text-shadow: none;
+        }
+
+        #rev_slider_2_1_wrapper .tp-loader.spinner2 {
+            background-color: #1bbc9b !important;
+        }
+
+        #rev_slider_2_1 .uranus.tparrows {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0);
+        }
+
+            #rev_slider_2_1 .uranus.tparrows:before {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 40px;
+                transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+            }
+
+            #rev_slider_2_1 .uranus.tparrows:hover:before {
+                opacity: 0.75;
+            }
+    </style>
+    <link rel="stylesheet" id="spu-public-css-css" href="http://farholidays.com/wp-content/plugins/popups/public/assets/css/public.css?ver=1.7.3" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://farholidays.com/wp-content/themes/lovetravel/style.css?ver=4.6.8" type="text/css" media="all">
+    <link rel="stylesheet" id="responsive-css" href="http://farholidays.com/wp-content/themes/lovetravel/css/nicdark_responsive.css?ver=4.6.8" type="text/css" media="all">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans%7CMontez&amp;amp;subset=latin">
+    <style type="text/css">
+        #glt-translate-trigger {
+            background: linear-gradient(#666, #23282d);
+        }
+
+        p.hello {
+            font-size: 12px;
+            color: darkgray;
+        }
+
+        #google_language_translator, #flags {
+            text-align: left;
+        }
+
+        #google_language_translator {
+            clear: both;
+        }
+
+        #flags {
+            width: 165px;
+        }
+
+            #flags a {
+                display: inline-block;
+                margin-right: 2px;
+            }
+
+        .goog-tooltip {
+            display: none !important;
+        }
+
+            .goog-tooltip:hover {
+                display: none !important;
+            }
+
+        .goog-text-highlight {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        #google_language_translator {
+            width: auto !important;
+        }
+
+        #google_language_translator {
+            color: transparent;
+        }
+
+        body {
+            top: 0px !important;
+        }
+    </style>
+    <style type="text/css">
+        /*start header*/
+        .slowup {
+            margin-top: -35px;
+        }
+
+        .nicdark_logo img {
+            width: 133px;
+            margin-top: 3px;
+        }
+        /*end header*/
+
+
+        /*widget title color*/
+        .widget_archive > h2 {
+            background-color: #1bbc9b;
+        }
+
+        #wp-calendar caption, .widget_calendar > h2 {
+            background-color: #21c8f2;
+        }
+
+        .widget_categories > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_nav_menu > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_meta > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_pages > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_recent_comments > h2 {
+            background-color: #f7d722;
+        }
+
+        .widget_recent_entries > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_slider > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_rss > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_search > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_text > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget_tag_cloud > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .tt_upcoming_events_widget > h2 {
+            background-color: #1bbc9b;
+        }
+
+        .widget.woocommerce > h2 {
+            background-color: #1bbc9b;
+        }
+        /*end widget title color*/
+
+
+        /*start color and font settings*/
+        /****************************************START GREYDARK******************************************************/
+        /*first*/
+        .nicdark_bg_greydark, .cart_totals h2, .ui-datepicker-header, .products li h3, .menu > .greydark > .sub-menu li, #payment, .products li .star-rating {
+            background-color: #434a54;
+        }
+
+        .menu > .greydark > a:after, .menu > .greydark .sub-menu li:first-child:before, .menu > .greydark .sub-menu li ul li:first-child:before {
+            color: #434a54;
+        }
+
+        .nicdark_bg_greydark_hover:hover, .wpb_toggle.nicdark_bg_greydark, .nicdark_tab_dark .vc_tta-tab.vc_active a, .nicdark_tab_dark .vc_tta-panel-body {
+            background-color: #434a54 !important;
+        }
+
+        .nicdark_tab_dark .vc_tta-tab.vc_active a, .nicdark_tab_dark .vc_tta-panels {
+            border: 1px solid #434a54;
+        }
+
+        .nicdark_tab_dark .vc_tta-panel.vc_active .vc_tta-panel-title a {
+            background-color: #4a515b !important;
+        }
+
+        .nicdark_tab_dark .vc_tta-tab.vc_active a:hover {
+            background-color: #4a515b !important;
+        }
+
+        .nicdark_tab_dark .vc_tta-panels {
+            background-color: #434a54 !important;
+            box-shadow: 0px 0px 0px 0px #4a515b !important;
+        }
+
+        .woocommerce-ordering select {
+            background-color: #434a54 !important;
+            box-shadow: 0px 0px 0px 0px #4a515b;
+        }
+
+        .nicdark_triangle.greydark {
+            border-color: #434a54 transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_bg_greydark2, .nicdark_bg_greydark2_hover:hover {
+            background-color: #4a515b !important;
+        }
+
+        .menu > .greydark:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.greydark > ul > li > a {
+            background-color: #4a515b;
+        }
+
+        .nicdark_dark_widgets .widget.widget_product_search form input[type=text], .nicdark_bg_greydark .tinynav, .nicdark_dark_widgets .widget_search input[type="text"], .nicdark_dark_widgets .tagcloud a {
+            border: 0px solid #e5e5e5;
+            background-color: #4a515b;
+        }
+
+        .menu > .greydark .sub-menu li:last-child, .nicdark_shadow.nicdark_bg_greydark {
+            box-shadow: 0px 4px 0px 0px #4a515b;
+        }
+
+        .menu > .greydark > .sub-menu li, .nicdark_megamenu.greydark ul li ol li a, .nicdark_dark_widgets .widget ul li, #payment ul li {
+            border-bottom: 1px solid #4a515b;
+        }
+
+        .nicdark_dark_widgets .widget.widget_shopping_cart .widget_shopping_cart_content p.total {
+            border-top: 3px double #4a515b;
+        }
+
+        .woocommerce .widget_price_filter .price_slider_amount .price_label {
+            box-shadow: 0px 4px 0px 0px #353b3d;
+            background-color: #4a515b;
+        }
+
+        .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content, .woocommerce-page .widget_price_filter .price_slider_wrapper .ui-widget-content {
+            background: #4a515b;
+        }
+
+        .nicdark_dark_widgets .widget_nav_menu .menu li .sub-menu li {
+            border-bottom: 0px solid #4a515b;
+        }
+
+        .nicdark_megamenu.greydark ol li a {
+            border-right: 1px solid #4a515b;
+        }
+
+        .nicdark_shadow_none.wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {
+            box-shadow: 0px 0px 0px 0px #4a515b !important;
+        }
+
+        .nicdark_border_greydark, .nicdark_border_greydark td, .nicdark_border_greydark th {
+            border: 2px solid #4a515b;
+        }
+
+        /*third*/
+        .nicdark_shadow.nicdark_bg_greydark2 {
+            box-shadow: 0px 4px 0px 0px #353b3d;
+        }
+        /****************************************END GREYDARK******************************************************/
+
+        /****************************************START GREEN******************************************************/
+        /*first*/
+        .nicdark_bg_green {
+            background-color: #1bbc9b;
+        }
+
+        p.green, h1.green, h2.green, h3.green, h4.green, h5.green, h6.green, a.green, i.green, span.green, input[type="text"].green, textarea.green, input[type="submit"].green, select.green {
+            color: #1bbc9b;
+        }
+
+        .nicdark_bg_green_hover:hover {
+            background-color: #1bbc9b !important;
+        }
+
+        .nicdark_triangle.green {
+            border-color: #1bbc9b transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_border_green, .nicdark_border_green td, .nicdark_border_green th {
+            border: 2px solid #18b292;
+        }
+
+        .nicdark_shadow.nicdark_bg_green {
+            box-shadow: 0px 4px 0px 0px #18b292;
+        }
+
+        .nicdark_bg_greendark {
+            background-color: #18b292;
+        }
+
+        .nicdark_iconbg.green {
+            color: #18b292;
+        }
+
+        .nicdark_bg_greendark_hover:hover {
+            background-color: #18b292 !important;
+        }
+        /*third*/
+        .nicdark_border_greendark, .nicdark_border_greendark td, .nicdark_border_greendark th {
+            border: 2px solid #65ae83;
+        }
+
+        .nicdark_shadow.nicdark_bg_greendark {
+            box-shadow: 0px 4px 0px 0px #65ae83;
+        }
+        /*slider range*/
+        .nicdark_slider_range_green.ui-slider .ui-slider-handle {
+            background-color: #1bbc9b;
+        }
+
+        .nicdark_slider_range_green.ui-slider .ui-slider-range {
+            background-color: #18b292;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-green.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #1bbc9b;
+            background-color: #1bbc9b;
+        }
+
+            .vc_tta-color-green.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #18b292;
+            }
+
+        .vc_tta-color-green.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #1bbc9b;
+            background-color: #1bbc9b;
+        }
+
+            .vc_tta-color-green.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #18b292;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_green .vc_toggle_title {
+            background-color: #1bbc9b;
+        }
+
+        /****************************************END GREEN******************************************************/
+
+        /****************************************START BLUE******************************************************/
+        /*first*/
+        .nicdark_bg_blue {
+            background-color: #14b9d5;
+        }
+
+        .nicdark_bg_blue_hover:hover {
+            background-color: #14b9d5 !important;
+        }
+
+        p.blue, h1.blue, h2.blue, h3.blue, h4.blue, h5.blue, h6.blue, a.blue, i.blue, span.blue, input[type="text"].blue, textarea.blue, input[type="submit"].blue, select.blue {
+            color: #14b9d5;
+        }
+
+        .nicdark_triangle.blue {
+            border-color: #14b9d5 transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_border_blue, .nicdark_border_blue td, .nicdark_border_blue th {
+            border: 2px solid #15b0ca;
+        }
+
+        .nicdark_bg_bluedark {
+            background-color: #15b0ca;
+        }
+
+        .nicdark_iconbg.blue {
+            color: #15b0ca;
+        }
+
+        .nicdark_bg_bluedark_hover:hover {
+            background-color: #15b0ca !important;
+        }
+
+        .nicdark_shadow.nicdark_bg_blue {
+            box-shadow: 0px 4px 0px 0px #15b0ca;
+        }
+        /*third*/
+        .nicdark_border_bluedark, .nicdark_border_bluedark td, .nicdark_border_bluedark th {
+            border: 2px solid #6dc0d5;
+        }
+
+        .nicdark_shadow.nicdark_bg_bluedark {
+            box-shadow: 0px 4px 0px 0px #6dc0d5;
+        }
+        /*slider range*/
+        .nicdark_slider_range_blue.ui-slider .ui-slider-handle {
+            background-color: #14b9d5;
+        }
+
+        .nicdark_slider_range_blue.ui-slider .ui-slider-range {
+            background-color: #15b0ca;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-blue.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #14b9d5;
+            background-color: #14b9d5;
+        }
+
+            .vc_tta-color-blue.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #15b0ca;
+            }
+
+        .vc_tta-color-blue.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #14b9d5;
+            background-color: #14b9d5;
+        }
+
+            .vc_tta-color-blue.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #15b0ca;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_blue .vc_toggle_title {
+            background-color: #14b9d5;
+        }
+
+        /****************************************END BLUE******************************************************/
+
+        /****************************************START VIOLET******************************************************/
+        /*first*/
+        .nicdark_bg_violet {
+            background-color: #c377e4;
+        }
+
+        .nicdark_bg_violet_hover:hover {
+            background-color: #c377e4 !important;
+        }
+
+        p.violet, h1.violet, h2.violet, h3.violet, h4.violet, h5.violet, h6.violet, a.violet, i.violet, span.violet, input[type="text"].violet, textarea.violet, input[type="submit"].violet, select.violet {
+            color: #c377e4;
+        }
+
+        .nicdark_triangle.violet {
+            border-color: #c377e4 transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_bg_violetdark {
+            background-color: #BA71DA;
+        }
+
+        .nicdark_border_violet, .nicdark_border_violet td, .nicdark_border_violet th {
+            border: 2px solid #BA71DA;
+        }
+
+        .nicdark_shadow.nicdark_bg_violet {
+            box-shadow: 0px 4px 0px 0px #BA71DA;
+        }
+
+        .nicdark_iconbg.violet {
+            color: #BA71DA;
+        }
+
+        .nicdark_bg_violetdark_hover:hover {
+            background-color: #BA71DA !important;
+        }
+        /*third*/
+        .nicdark_border_violetdark, .nicdark_border_violetdark td, .nicdark_border_violetdark th {
+            border: 2px solid #a675af;
+        }
+
+        .nicdark_shadow.nicdark_bg_violetdark {
+            box-shadow: 0px 4px 0px 0px #a675af;
+        }
+        /*slider range*/
+        .nicdark_slider_range_violet.ui-slider .ui-slider-handle {
+            background-color: #c377e4;
+        }
+
+        .nicdark_slider_range_violet.ui-slider .ui-slider-range {
+            background-color: #BA71DA;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-violet.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #c377e4;
+            background-color: #c377e4;
+        }
+
+            .vc_tta-color-violet.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #BA71DA;
+            }
+
+        .vc_tta-color-violet.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #c377e4;
+            background-color: #c377e4;
+        }
+
+            .vc_tta-color-violet.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #BA71DA;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_violet .vc_toggle_title {
+            background-color: #c377e4;
+        }
+
+        /****************************************END VIOLET******************************************************/
+
+        /****************************************START ORANGE******************************************************/
+        /*first*/
+        .nicdark_bg_orange {
+            background-color: #f3a46b;
+        }
+
+        .nicdark_bg_orange_hover:hover {
+            background-color: #f3a46b !important;
+        }
+
+        p.orange, h1.orange, h2.orange, h3.orange, h4.orange, h5.orange, h6.orange, a.orange, i.orange, span.orange, input[type="text"].orange, textarea.orange, input[type="submit"].orange, select.orange {
+            color: #f3a46b;
+        }
+
+        .nicdark_triangle.orange {
+            border-color: #f3a46b transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_bg_orangedark {
+            background-color: #e89d67;
+        }
+
+        .nicdark_bg_orangedark_hover:hover {
+            background-color: #e89d67 !important;
+        }
+
+        .nicdark_border_orange, .nicdark_border_orange td, .nicdark_border_orange th {
+            border: 2px solid #e89d67;
+        }
+
+        .nicdark_shadow.nicdark_bg_orange {
+            box-shadow: 0px 4px 0px 0px #e89d67;
+        }
+
+        .nicdark_iconbg.orange {
+            color: #e89d67;
+        }
+        /*third*/
+        .nicdark_border_orangedark, .nicdark_border_orangedark td, .nicdark_border_orangedark th {
+            border: 2px solid #d8734c;
+        }
+
+        .nicdark_shadow.nicdark_bg_orangedark {
+            box-shadow: 0px 4px 0px 0px #d8734c;
+        }
+        /*slider range*/
+        .nicdark_slider_range_orange.ui-slider .ui-slider-handle {
+            background-color: #f3a46b;
+        }
+
+        .nicdark_slider_range_orange.ui-slider .ui-slider-range {
+            background-color: #e89d67;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-orange.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #f3a46b;
+            background-color: #f3a46b;
+        }
+
+            .vc_tta-color-orange.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #e89d67;
+            }
+
+        .vc_tta-color-orange.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #f3a46b;
+            background-color: #f3a46b;
+        }
+
+            .vc_tta-color-orange.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #e89d67;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_orange .vc_toggle_title {
+            background-color: #f3a46b;
+        }
+
+        /****************************************END ORANGE******************************************************/
+
+        /****************************************START RED******************************************************/
+        /*first*/
+        .nicdark_bg_red {
+            background-color: #f76570;
+        }
+
+        .nicdark_bg_red_hover:hover {
+            background-color: #f76570 !important;
+        }
+
+        p.red, h1.red, h2.red, h3.red, h4.red, h5.red, h6.red, a.red, i.red, span.red, input[type="text"].red, textarea.red, input[type="submit"].red, select.red {
+            color: #f76570;
+        }
+
+        .nicdark_triangle.red {
+            border-color: #f76570 transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_bg_reddark {
+            background-color: #ef606b;
+        }
+
+        .nicdark_border_red, .nicdark_border_red td, .nicdark_border_red th {
+            border: 2px solid #ef606b;
+        }
+
+        .nicdark_shadow.nicdark_bg_red {
+            box-shadow: 0px 4px 0px 0px #ef606b;
+        }
+
+        .nicdark_iconbg.red {
+            color: #ef606b;
+        }
+
+        .nicdark_bg_reddark_hover:hover {
+            background-color: #ef606b !important;
+        }
+        /*third*/
+        .nicdark_border_reddark, .nicdark_border_reddark td, .nicdark_border_reddark th {
+            border: 2px solid #bf6363;
+        }
+
+        .nicdark_shadow.nicdark_bg_reddark {
+            box-shadow: 0px 4px 0px 0px #bf6363;
+        }
+        /*slider range*/
+        .nicdark_slider_range_red.ui-slider .ui-slider-handle {
+            background-color: #f76570;
+        }
+
+        .nicdark_slider_range_red.ui-slider .ui-slider-range {
+            background-color: #ef606b;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-juicy-pink.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #f76570;
+            background-color: #f76570;
+        }
+
+            .vc_tta-color-juicy-pink.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #ef606b;
+            }
+
+        .vc_tta-color-juicy-pink.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #f76570;
+            background-color: #f76570;
+        }
+
+            .vc_tta-color-juicy-pink.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #ef606b;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_juicy_pink .vc_toggle_title {
+            background-color: #f76570;
+        }
+
+        /****************************************END RED******************************************************/
+
+        /****************************************START YELLOW******************************************************/
+        /*first*/
+        .nicdark_bg_yellow {
+            background-color: #ffd205;
+        }
+
+        .nicdark_bg_yellow_hover:hover {
+            background-color: #ffd205 !important;
+        }
+
+        p.yellow, h1.yellow, h2.yellow, h3.yellow, h4.yellow, h5.yellow, h6.yellow, a.yellow, i.yellow, span.yellow, input[type="text"].yellow, textarea.yellow, input[type="submit"].yellow, select.yellow {
+            color: #ffd205;
+        }
+
+        .nicdark_triangle.yellow {
+            border-color: #ffd205 transparent transparent transparent;
+        }
+        /*second*/
+        .nicdark_bg_yellowdark {
+            background-color: #f4c906;
+        }
+
+        .nicdark_border_yellow, .nicdark_border_yellow td, .nicdark_border_yellow th {
+            border: 2px solid #f4c906;
+        }
+
+        .nicdark_shadow.nicdark_bg_yellow {
+            box-shadow: 0px 4px 0px 0px #f4c906;
+        }
+
+        .nicdark_iconbg.yellow {
+            color: #f4c906;
+        }
+
+        .nicdark_bg_yellowdark_hover:hover {
+            background-color: #f4c906 !important;
+        }
+        /*third*/
+        .nicdark_border_yellowdark, .nicdark_border_yellowdark td, .nicdark_border_yellowdark th {
+            border: 2px solid #d4ae49;
+        }
+
+        .nicdark_shadow.nicdark_bg_yellowdark {
+            box-shadow: 0px 4px 0px 0px #d4ae49;
+        }
+        /*slider range*/
+        .nicdark_slider_range_yellow.ui-slider .ui-slider-handle {
+            background-color: #ffd205;
+        }
+
+        .nicdark_slider_range_yellow.ui-slider .ui-slider-range {
+            background-color: #f4c906;
+        }
+
+        /*vc tab*/
+        .vc_tta-color-chino.vc_tta-style-classic .vc_tta-tab > a {
+            border-color: #ffd205;
+            background-color: #ffd205;
+        }
+
+            .vc_tta-color-chino.vc_tta-style-classic .vc_tta-tab > a:hover {
+                background-color: #f4c906;
+            }
+
+        .vc_tta-color-chino.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading {
+            border-color: #ffd205;
+            background-color: #ffd205;
+        }
+
+            .vc_tta-color-chino.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading:hover {
+                background-color: #f4c906;
+            }
+        /*vc toogle*/
+        .vc_toggle_square.vc_toggle_color_chino .vc_toggle_title {
+            background-color: #ffd205;
+        }
+
+        /****************************************END YELLOW******************************************************/
+
+        /****************************************START MENU******************************************************/
+        /*divider and triangle color: FIRST COLOR*/
+        .menu > .green > a:after, .menu > .green .sub-menu li:first-child:before, .menu > .green .sub-menu li ul li:first-child:before {
+            color: #1bbc9b;
+        }
+
+        .menu > .blue > a:after, .menu > .blue .sub-menu li:first-child:before, .menu > .blue .sub-menu li ul li:first-child:before {
+            color: #14b9d5;
+        }
+
+        .menu > .violet > a:after, .menu > .violet .sub-menu li:first-child:before, .menu > .violet .sub-menu li ul li:first-child:before {
+            color: #c377e4;
+        }
+
+        .menu > .orange > a:after, .menu > .orange .sub-menu li:first-child:before, .menu > .orange .sub-menu li ul li:first-child:before {
+            color: #f3a46b;
+        }
+
+        .menu > .red > a:after, .menu > .red .sub-menu li:first-child:before, .menu > .red .sub-menu li ul li:first-child:before {
+            color: #f76570;
+        }
+
+        .menu > .yellow > a:after, .menu > .yellow .sub-menu li:first-child:before, .menu > .yellow .sub-menu li ul li:first-child:before {
+            color: #ffd205;
+        }
+        /*dropdown: FIRST COLOR*/
+        .menu > .yellow > .sub-menu li {
+            background-color: #ffd205;
+        }
+
+        .menu > .green > .sub-menu li {
+            background-color: #1bbc9b;
+        }
+
+        .menu > .blue > .sub-menu li {
+            background-color: #14b9d5;
+        }
+
+        .menu > .violet > .sub-menu li {
+            background-color: #c377e4;
+        }
+
+        .menu > .orange > .sub-menu li {
+            background-color: #f3a46b;
+        }
+
+        .menu > .red > .sub-menu li {
+            background-color: #f76570;
+        }
+        /*tinynav: SECOND COLOR -> THIRD COLOR*/
+        .nicdark_bg_yellow .tinynav {
+            color: #fff;
+            background-color: #f4c906;
+            box-shadow: 0px 4px 0px 0px #d4ae49;
+        }
+
+        .nicdark_bg_orange .tinynav {
+            color: #fff;
+            background-color: #e89d67;
+            box-shadow: 0px 4px 0px 0px #d8734c;
+        }
+
+        .nicdark_bg_red .tinynav {
+            color: #fff;
+            background-color: #ef606b;
+            box-shadow: 0px 4px 0px 0px #bf6363;
+        }
+
+        .nicdark_bg_green .tinynav {
+            color: #fff;
+            background-color: #18b292;
+            box-shadow: 0px 4px 0px 0px #65ae83;
+        }
+
+        .nicdark_bg_blue .tinynav {
+            color: #fff;
+            background-color: #15b0ca;
+            box-shadow: 0px 4px 0px 0px #6dc0d5;
+        }
+
+        .nicdark_bg_violet .tinynav {
+            color: #fff;
+            background-color: #BA71DA;
+            box-shadow: 0px 4px 0px 0px #a675af;
+        }
+        /*border bottom li: SECOND COLOR*/
+        .menu > .yellow > .sub-menu li, .nicdark_megamenu.yellow ul li ol li a {
+            border-bottom: 1px solid #f4c906;
+        }
+
+        .menu > .green > .sub-menu li, .nicdark_megamenu.green ul li ol li a {
+            border-bottom: 1px solid #18b292;
+        }
+
+        .menu > .blue > .sub-menu li, .nicdark_megamenu.blue ul li ol li a {
+            border-bottom: 1px solid #15b0ca;
+        }
+
+        .menu > .violet > .sub-menu li, .nicdark_megamenu.violet ul li ol li a {
+            border-bottom: 1px solid #BA71DA;
+        }
+
+        .menu > .orange > .sub-menu li, .nicdark_megamenu.orange ul li ol li a {
+            border-bottom: 1px solid #e89d67;
+        }
+
+        .menu > .red > .sub-menu li, .nicdark_megamenu.red ul li ol li a {
+            border-bottom: 1px solid #ef606b;
+        }
+        /*shadow: SECOND COLOR*/
+        .menu > .yellow .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #f4c906;
+        }
+
+        .menu > .orange .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #e89d67;
+        }
+
+        .menu > .red .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #ef606b;
+        }
+
+        .menu > .blue .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #15b0ca;
+        }
+
+        .menu > .green .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #18b292;
+        }
+
+        .menu > .violet .sub-menu li:last-child {
+            box-shadow: 0px 4px 0px 0px #BA71DA;
+        }
+        /*hover li bgcolor: SECOND COLOR*/
+        .menu > .yellow > .sub-menu li:hover, .nicdark_megamenu.yellow > ul > li > a {
+            background-color: #f4c906;
+        }
+
+        .menu > .green:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.green > ul > li > a {
+            background-color: #18b292;
+        }
+
+        .menu > .blue:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.blue > ul > li > a {
+            background-color: #15b0ca;
+        }
+
+        .menu > .violet:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.violet > ul > li > a {
+            background-color: #BA71DA;
+        }
+
+        .menu > .orange:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.orange > ul > li > a {
+            background-color: #e89d67;
+        }
+
+        .menu > .red:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.red > ul > li > a {
+            background-color: #ef606b;
+        }
+        /*megamenu border color: SECOND COLOR*/
+        .nicdark_megamenu.yellow ol li a {
+            border-right: 1px solid #f4c906;
+        }
+
+        .nicdark_megamenu.orange ol li a {
+            border-right: 1px solid #e89d67;
+        }
+
+        .nicdark_megamenu.red ol li a {
+            border-right: 1px solid #ef606b;
+        }
+
+        .nicdark_megamenu.blue ol li a {
+            border-right: 1px solid #15b0ca;
+        }
+
+        .nicdark_megamenu.green ol li a {
+            border-right: 1px solid #18b292;
+        }
+
+        .nicdark_megamenu.violet ol li a {
+            border-right: 1px solid #BA71DA;
+        }
+        /****************************************END MENU******************************************************/
+
+        /****************************************START ELEMENTS******************************************************/
+        /*button search*/
+        .widget_search input[type="submit"] {
+            background-color: #1bbc9b;
+        }
+        /*post elements*/
+        .comment-respond input[type="submit"] {
+            background-color: #f3a46b;
+        }
+
+        .comment-reply-link {
+            background-color: #f3a46b;
+        }
+        /*calendar*/
+        .ui-datepicker-calendar thead {
+            background-color: #1bbc9b;
+        }
+
+        .ui-datepicker-today a {
+            background-color: #1bbc9b;
+        }
+
+        .ui-datepicker-calendar .ui-state-hover {
+            background-color: #1bbc9b;
+        }
+        /*cf7*/
+        div.wpcf7-validation-errors, div.wpcf7-mail-sent-ng, div.wpcf7-spam-blocked {
+            background-color: #f3a46b;
+        }
+
+        div.wpcf7-mail-sent-ok {
+            background-color: #1bbc9b;
+        }
+
+        .wpcf7-not-valid-tip:before {
+            color: #ef606b;
+        }
+
+        .wpcf7-not-valid-tip {
+            background-color: #f76570;
+        }
+        /*pagination*/
+        .nicdark_btn.active {
+            background-color: #1bbc9b;
+        }
+        /****************************************END ELEMENTS******************************************************/
+
+        /****************************************START WOO ELEMENTS******************************************************/
+
+        /*red*/
+        .out-of-stock,
+        .woocommerce-error,
+        .woocommerce .form-row button,
+        .wc-backward {
+            background-color: #f76570;
+            box-shadow: 0px 0px 0px 0px #ef606b;
+        }
+
+        .shop_table .actions .checkout-button {
+            background-color: #f76570 !important;
+            box-shadow: 0px 4px 0px 0px #ef606b;
+        }
+
+        .woocommerce table.cart a.remove,
+        .woocommerce-page table.cart a.remove,
+        .woocommerce #content table.cart a.remove,
+        .woocommerce-page #content table.cart a.remove {
+            background-color: #f76570;
+        }
+
+            .woocommerce table.cart a.remove:hover,
+            .woocommerce-page table.cart a.remove:hover,
+            .woocommerce #content table.cart a.remove:hover,
+            .woocommerce-page #content table.cart a.remove:hover {
+                background-color: #ef606b;
+            }
+
+        /*orange*/
+        .shop_table .actions .button {
+            background-color: #f3a46b !important;
+            box-shadow: 0px 0px 0px 0px #e89d67;
+        }
+
+        .woocommerce table.shop_table th,
+        .woocommerce-page table.shop_table th {
+            background: #f3a46b;
+        }
+
+        /*yellow*/
+        .woocommerce .widget_price_filter .button {
+            background-color: #ffd205;
+            box-shadow: 0px 4px 0px 0px #f4c906;
+        }
+
+        .woocommerce-product-rating .star-rating,
+        #reviews .star-rating,
+        .widget.widget_recent_reviews ul.product_list_widget li .star-rating,
+        .widget.widget_top_rated_products ul.product_list_widget li .star-rating,
+        p.stars a.star-1:after,
+        p.stars a.star-2:after,
+        p.stars a.star-3:after,
+        p.stars a.star-4:after,
+        p.stars a.star-5:after {
+            color: #ffd205;
+        }
+
+        .shop_table .actions .coupon .button {
+            background-color: #ffd205 !important;
+            box-shadow: 0px 0px 0px 0px #f4c906;
+        }
+
+        .woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
+        .woocommerce-page .widget_price_filter .ui-slider .ui-slider-handle {
+            border: 1px solid #ffd205;
+            background: #ffd205;
+        }
+
+        .woocommerce .widget_price_filter .ui-slider .ui-slider-range,
+        .woocommerce-page .widget_price_filter .ui-slider .ui-slider-range {
+            background: #ffd205;
+        }
+
+        /*blue*/
+        .shipping_calculator h2,
+        #customer_details .col-2 h3,
+        #customer_details .col-1 h3,
+        .woocommerce-cart .cart-collaterals .cart_totals .shipping-calculator-button,
+        .woocommerce .addresses .col-1 h3 {
+            background-color: #14b9d5;
+        }
+
+        .woocommerce-info,
+        .woocommerce .addresses .col-1 a,
+        .widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button {
+            background-color: #14b9d5;
+            box-shadow: 0px 0px 0px 0px #15b0ca;
+        }
+
+        /*green*/
+        .product .onsale,
+        .woocommerce-pagination span.current,
+        .products li .added_to_cart,
+        button.single_add_to_cart_button,
+        .woocommerce-message,
+        .shipping_calculator button,
+        #payment input.button,
+        .woocommerce .addresses .col-2 a,
+        .widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout {
+            background-color: #1bbc9b;
+            box-shadow: 0px 0px 0px 1px #18b292;
+        }
+
+        .woocommerce .comment-respond input[type="submit"] {
+            background: #1bbc9b !important;
+            box-shadow: 0px 0px 0px 0px #18b292;
+        }
+
+        .woocommerce button,
+        .woocommerce input[type=submit],
+        p.stars a:hover,
+        p.stars a.active {
+            background: #1bbc9b !important;
+            box-shadow: 0px 0px 0px 0px #18b292;
+        }
+
+        .upsells.products h2:after,
+        .product .product_title:after,
+        .woocommerce-tabs li a,
+        .woocommerce-account .woocommerce h2:after,
+        .woocommerce-checkout .woocommerce h2:after,
+        .woocommerce .addresses .col-2 h3,
+        #order_review table thead,
+        table.order_details thead,
+        .woocommerce form h3:after,
+        .product .related h2:after,
+        .woocommerce-cart .cart-collaterals .cart_totals .wc-proceed-to-checkout {
+            background-color: #1bbc9b;
+        }
+
+        .entry-summary div .price ins {
+            color: #1bbc9b;
+        }
+
+        /****************************************END WOO ELEMENTS******************************************************/
+
+        /* 20 - START NICDARKFILTER*/
+        .nicdark_filter.green {
+            background: rgba(111,193,145,0.8);
+        }
+
+        .nicdark_filter.blue {
+            background: rgba(116,206,228,0.8);
+        }
+
+        .nicdark_filter.violet {
+            background: rgba(195,137,206,0.8);
+        }
+
+        .nicdark_filter.yellow {
+            background: rgba(237,191,71,0.8);
+        }
+
+        .nicdark_filter.orange {
+            background: rgba(236,119,75,0.8);
+        }
+
+        .nicdark_filter.red {
+            background: rgba(225,108,108,0.8);
+        }
+        /*END NICDARKFILTER*/
+
+        /*GRADIENT*/
+        .nicdark_bg_gradient {
+            background: #f76570; /* Old browsers */
+            background: -moz-linear-gradient(left, #f76570 0%, #f76570 8%, #f3a46b 8%, #f3a46b 16%, #f3a46b 16%, #ffd205 16%, #ffd205 24%, #ffd205 24%, #1bbc9b 24%, #1bbc9b 25%, #1bbc9b 32%, #14b9d5 32%, #14b9d5 40%, #c377e4 40%, #c377e4 48%, #f76570 48%, #f76570 56%, #f3a46b 56%, #f3a46b 64%, #ffd205 64%, #ffd205 72%, #1bbc9b 72%, #1bbc9b 80%, #14b9d5 80%, #14b9d5 80%, #14b9d5 89%, #c377e4 89%, #c377e4 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f76570), color-stop(8%,#f76570), color-stop(8%,#f3a46b), color-stop(16%,#f3a46b), color-stop(16%,#f3a46b), color-stop(16%,#ffd205), color-stop(24%,#ffd205), color-stop(24%,#ffd205), color-stop(24%,#1bbc9b), color-stop(25%,#1bbc9b), color-stop(32%,#1bbc9b), color-stop(32%,#14b9d5), color-stop(40%,#14b9d5), color-stop(40%,#c377e4), color-stop(48%,#c377e4), color-stop(48%,#f76570), color-stop(56%,#f76570), color-stop(56%,#f3a46b), color-stop(64%,#f3a46b), color-stop(64%,#ffd205), color-stop(72%,#ffd205), color-stop(72%,#1bbc9b), color-stop(80%,#1bbc9b), color-stop(80%,#14b9d5), color-stop(80%,#14b9d5), color-stop(89%,#14b9d5), color-stop(89%,#c377e4), color-stop(100%,#c377e4)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(left, #f76570 0%,#f76570 8%,#f3a46b 8%,#f3a46b 16%,#f3a46b 16%,#ffd205 16%,#ffd205 24%,#ffd205 24%,#1bbc9b 24%,#1bbc9b 25%,#1bbc9b 32%,#14b9d5 32%,#14b9d5 40%,#c377e4 40%,#c377e4 48%,#f76570 48%,#f76570 56%,#f3a46b 56%,#f3a46b 64%,#ffd205 64%,#ffd205 72%,#1bbc9b 72%,#1bbc9b 80%,#14b9d5 80%,#14b9d5 80%,#14b9d5 89%,#c377e4 89%,#c377e4 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(left, #f76570 0%,#f76570 8%,#f3a46b 8%,#f3a46b 16%,#f3a46b 16%,#ffd205 16%,#ffd205 24%,#ffd205 24%,#1bbc9b 24%,#1bbc9b 25%,#1bbc9b 32%,#14b9d5 32%,#14b9d5 40%,#c377e4 40%,#c377e4 48%,#f76570 48%,#f76570 56%,#f3a46b 56%,#f3a46b 64%,#ffd205 64%,#ffd205 72%,#1bbc9b 72%,#1bbc9b 80%,#14b9d5 80%,#14b9d5 80%,#14b9d5 89%,#c377e4 89%,#c377e4 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(left, #f76570 0%,#f76570 8%,#f3a46b 8%,#f3a46b 16%,#f3a46b 16%,#ffd205 16%,#ffd205 24%,#ffd205 24%,#1bbc9b 24%,#1bbc9b 25%,#1bbc9b 32%,#14b9d5 32%,#14b9d5 40%,#c377e4 40%,#c377e4 48%,#f76570 48%,#f76570 56%,#f3a46b 56%,#f3a46b 64%,#ffd205 64%,#ffd205 72%,#1bbc9b 72%,#1bbc9b 80%,#14b9d5 80%,#14b9d5 80%,#14b9d5 89%,#c377e4 89%,#c377e4 100%); /* IE10+ */
+            background: linear-gradient(to right, #f76570 0%,#f76570 8%,#f3a46b 8%,#f3a46b 16%,#f3a46b 16%,#ffd205 16%,#ffd205 24%,#ffd205 24%,#1bbc9b 24%,#1bbc9b 25%,#1bbc9b 32%,#14b9d5 32%,#14b9d5 40%,#c377e4 40%,#c377e4 48%,#f76570 48%,#f76570 56%,#f3a46b 56%,#f3a46b 64%,#ffd205 64%,#ffd205 72%,#1bbc9b 72%,#1bbc9b 80%,#14b9d5 80%,#14b9d5 80%,#14b9d5 89%,#c377e4 89%,#c377e4 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f76570', endColorstr='#c377e4',GradientType=1 ); /* IE6-9 */
+        }
+        /*GRADIENT*/
+
+        /****************************************START FIRST FONT******************************************************/
+        .mfp-counter,
+        .mfp-title,
+        #wp-calendar caption,
+        #wp-calendar thead th,
+        .widget_search input[type="submit"],
+        .comment-respond input[type="submit"],
+        .comment-reply-link,
+        .nicdark_btn,
+        .nicdark_btn_icon,
+        .ui-datepicker-title,
+        .ui-datepicker-calendar thead,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        input[type="text"],
+        textarea,
+        select,
+        a.title,
+        span.title,
+        small.title,
+        input[type="submit"],
+        .product .onsale,
+        .woocommerce-pagination a,
+        .woocommerce-pagination span,
+        .woocommerce-pagination span.current,
+        .products li .add_to_cart_button,
+        .products li .product_type_variable,
+        .products li.outofstock a.button,
+        .products li.product-type-external a.button,
+        .products li.product-type-grouped a.button,
+        .quantity .minus,
+        .quantity .plus,
+        .quantity .qty,
+        button.single_add_to_cart_button,
+        .woocommerce-tabs li a,
+        .woocommerce .comment-reply-title,
+        .woocommerce table.shop_table th,
+        .woocommerce-page table.shop_table th,
+        .cart_totals h2,
+        .shipping_calculator h2 a,
+        .shipping_calculator button,
+        #customer_details .col-2 h3,
+        .woocommerce .addresses a,
+        .widget.woocommerce h2,
+        .widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button,
+        .woocommerce .widget_price_filter .price_slider_amount .price_label,
+        .woocommerce .widget_price_filter .button,
+        .wc-backward,
+        #ship-to-different-address label {
+            font-family: Open Sans;
+        }
+
+        .tp-arr-titleholder,
+        .woocommerce-billing-fields h3 {
+            font-family: Open Sans !important;
+        }
+
+        /****************************************START SECOND FONT******************************************************/
+        .widget,
+        .widget_search input[type="text"],
+        .comment-reply-title,
+        .comment-author,
+        .tinynav,
+        .menu a,
+        .nicdark_archive1_content,
+        .ui-tooltip,
+        h1.subtitle,
+        h2.subtitle,
+        h3.subtitle,
+        h4.subtitle,
+        h5.subtitle,
+        h6.subtitle,
+        input[type="text"].subtitle,
+        textarea.subtitle,
+        select.subtitle,
+        span.subtitle,
+        p,
+        html,
+        a,
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        .wpcf7-select,
+        .widget_archive select,
+        .widget_categories select,
+        .widget_text select,
+        .wpb_heading,
+        div.wpcf7-validation-errors,
+        div.wpcf7-mail-sent-ng,
+        div.wpcf7-spam-blocked,
+        div.wpcf7-mail-sent-ok,
+        .wpcf7-not-valid-tip,
+        .woocommerce-account .woocommerce h2,
+        .woocommerce-checkout .woocommerce h2,
+        .product .related h2,
+        .upsells.products h2,
+        .product h1,
+        .variations_form table td select,
+        .shipping_calculator select,
+        .shipping_calculator input[type="text"],
+        .chosen-container-single .chosen-search input[type=text],
+        #order_review_heading,
+        .woocommerce form h3 {
+            font-family: Open Sans;
+        }
+
+        .nicdark_btn.subtitle,
+        .nicdark_btn_icon.subtitle {
+            font-family: Open Sans !important;
+        }
+
+
+        /****************************************START THIRD FONT******************************************************/
+        h1.signature,
+        h2.signature,
+        h3.signature,
+        h4.signature,
+        h5.signature,
+        h6.signature,
+        span.signature {
+            font-family: Montez;
+        }
+        /*end color and font settings*/
+
+
+        /*start boxed version*/
+        /*end boxed version*/
+
+        /*start custom css*/
+        /*end custom css*/
+    </style>
+
+
+    <style type="text/css">
+        .recentcomments a {
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+        <style type="text/css" data-type="vc_shortcodes-custom-css">
+        .vc_custom_1431681573399 {
+            margin-top: -90px !important;
+        }
+
+        .vc_custom_1460876772280 {
+            margin-top: -60px !important;
+            margin-right: 0px !important;
+            margin-bottom: 0px !important;
+            margin-left: 0px !important;
+            border-top-width: 0px !important;
+            border-right-width: 0px !important;
+            border-bottom-width: 0px !important;
+            border-left-width: 0px !important;
+            padding-top: 0px !important;
+            padding-right: 0px !important;
+            padding-bottom: 0px !important;
+            padding-left: 0px !important;
+        }
+
+        .vc_custom_1431937582413 {
+            margin-top: -204px !important;
+        }
+
+        .vc_custom_1430745958006 {
+            margin: 0px !important;
+            border-width: 0px !important;
+            padding: 0px !important;
+        }
+    </style>
+    <noscript>&lt;style type="text/css"&gt; .wpb_animate_when_almost_visible { opacity: 1; }&lt;/style&gt;</noscript>
+    <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+</head>
+
+@************far header style end**************@
+<header>
+
+    <body style="position: relative; min-height: 100%; top: 0px;" id="start_nicdark_framework" class="home page page-id-3431 page-template-default wpb-js-composer js-comp-ver-4.11.2.1 vc_responsive">
+
+
+
+        <style type="text/css">
+            #wh-widget-send-button {
+                margin: 0 !important;
+                padding: 0 !important;
+                position: fixed !important;
+                z-index: 16000160 !important;
+                bottom: 0 !important;
+                text-align: center !important;
+                height: 90px;
+                width: 60px;
+                visibility: visible;
+                transition: none !important;
+            }
+
+                #wh-widget-send-button.wh-widget-right {
+                    right: 0;
+                }
+
+                #wh-widget-send-button.wh-widget-left {
+                    left: 10px;
+                }
+
+                #wh-widget-send-button iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                }
+
+            div.clear {
+                clear: both;
+            }
+        </style>
+        <div style="" class="nicdark_site">
+
+            <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
+                <div class="nicdark_overlay"></div>
+
+                <!--start left right sidebar open-->
+                <!--end left right sidebar open-->
+
+                <div class="nicdark_section nicdark_navigation nicdark_upper_level2 slowdown">
+
+                    <!--decide fullwidth or boxed header-->
+                    <div class="nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth">
+                        <!--start top header-->
+                        <!--start before navigation-->
+                        <div class="nicdark_section nicdark_bg_greydark nicdark_displaynone_responsive" style="height:35px;">
+                            <div class="nicdark_container nicdark_clearfix"  style="margin-top:-12px!important;">
+
+                                <div class="grid grid_6">
+                                    <div class="nicdark_focus">
+                                        <h6 class="white" style="text-align:left;">
+                                            <a class="white title" href="https://www.facebook.com/farholidays/" target="_black"><img src="~/Content/img/Artboard 21.png" style="width:18px;height:18px;"/> </a>
+                                            <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                                            <a class="white title" href="https://twitter.com/Far_Holidays" target="_blank"><img src="~/Content/img/Artboard 25.png" style="width:18px;height:18px;" /> </a>
+                                            <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                                            <a class="white title" href="https://plus.google.com/102992617288386456796" target="_blank"><img src="~/Content/img/Artboard 23.png" style="width:18px;height:18px;" /></a>
+                                            <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                                            <a class="white title" href="https://www.instagram.com/farholidays/?hl=en" target="_blank" ><img src="~/Content/img/Artboard 22.png" style="width:18px;height:18px;" /></a>
+                                            <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                                            <a class="white title" href="#" target="_blank"><img src="~/Content/img/Artboard 24.png" style="width:18px;height:18px;" /> </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="grid grid_6 right">
+                                    <div class="nicdark_focus right">
+                                        <h6 class="white" style="font-size:14px;">
+                                            <img src="~/Content/img/envelope-icon-20.png" style="width:18px;height:18px;" />  <a class="white title" href="mailto:sales@farholidays.com">sales@farholidays.com</a>
+                                            <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                                            <img src="~/Content/img/phone-icon-63180.png" style="width:18px;height:18px;" /> <a class="white title" href="#">+94 115 97 7799</a>
+                                        </h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end before navigation-->
+                        <!--start pop up window-->
+                        <!--end pop up window-->
+                        <!--end top header-->
+                        <!--decide gradient or not-->
+                        <div class="nicdark_space3 nicdark_bg_gradient"></div>
+                        <!--start header-->
+                        <div class="nicdark_bg_white nicdark_section nicdark_border_grey nicdark_sizing">
+
+                            <!--start container-->
+                            <div class="nicdark_container nicdark_clearfix">
+
+                                <div class="grid grid_12 percentage">
+
+                                    <div class="nicdark_space20"></div>
+
+                                    <!--logo-->
+                                    <div class="nicdark_logo nicdark_marginleft10">
+                                        <a href="http://farholidays.com"><img alt="" src="http://farholidays.com/wp-content/uploads/2016/10/web.jpg"></a>
+                                    </div>
+                                    <!--end logo-->
+                                    <!--start btn left/right sidebar open-->
+                                    <!--end btn left/right sidebar open-->
+
+                                    <div class="menu-home-container">
+                                        <ul id="menu-home" class="menu sf-js-enabled sf-arrows l_tinynav1">
+                                            <li id="menu-item-3440" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-3431 current_page_item menu-item-3440"><a href="http://farholidays.com/">HOME</a></li>
+                                            <li id="menu-item-2202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2202"><a href="http://farholidays.com/destination/">VISIT SRI LANKA</a></li>
+                                            <li id="menu-item-2297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2297"><a href="http://farholidays.com/tourpackages/">DESTINATIONS</a></li>
+                                            <li id="menu-item-2592" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2592"><a href="http://farholidays.com/flight/">FLIGHT</a></li>
+                                            <li id="menu-item-2296" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2296">
+                                                <a href="http://farholidays.com/aboutus/" class="sf-with-ul">ABOUT US</a>
+                                                <ul class="sub-menu" style="display: none;">
+                                                    <li id="menu-item-2220" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2220"><a href="http://farholidays.com/ourservices/">Services</a></li>
+                                                    <li id="menu-item-2185" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2185"><a href="http://farholidays.com/ourteam/">Our Team</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-2870" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2870"><a href="http://farholidays.com/deals/">DEALS</a></li>
+                                            <li id="menu-item-2199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2199"><a href="http://farholidays.com/contactsus/">CONTACT US</a></li>
+                                        </ul><select id="tinynav1" class="tinynav tinynav1"><option value="MENU">MENU</option><option value="http://farholidays.com/">HOME</option><option value="http://farholidays.com/destination/">VISIT SRI LANKA</option><option value="http://farholidays.com/tourpackages/">DESTINATIONS</option><option value="http://farholidays.com/flight/">FLIGHT</option><option value="http://farholidays.com/aboutus/">ABOUT US</option><option value="http://farholidays.com/ourservices/">- Services</option><option value="http://farholidays.com/ourteam/">- Our Team</option><option value="http://farholidays.com/deals/">DEALS</option><option value="http://farholidays.com/contactsus/">CONTACT US</option></select>
+                                    </div>
+
+                                    <div class="nicdark_space20"></div>
+
+                                </div>
+
+                            </div>
+                            <!--end container-->
+
+                        </div>
+                        <!--end header-->
+                    </div>
+
+                </div>
+
+              
+
+                <br /><br /><br /><br /><br /><br /><br />
+
+
+             
+
+
+
+
+
+                </div>
+        </div>
+                </header>
+
+
+
+<div data-ng-app="APIModule">
+    <div ng-controller="APIController">
+
+
+        @* ****** Begin Booking Form *******@
+        <div ng-hide="loaded">
+            <div class="container" style="padding-bottom:20px;">
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/leftbanner1.jpg" class="img-responsive" alt="Cinque Terre" style="height:500px;" />
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+                    <br>
+                    <div class="jumbotron text-center">
+                        <h1 style="font-size:28px; text-align:center;"><b>Just a moment....</b></h1>
+                        <h5 style="text-align:center;font-size:14px;">We are searching for hotels that meet your requirements</h5>
+                        <br />
+                        <img src="~/Content/img/loadingGif.gif" id="gif" alt="Cinque Terre" style=" top 0; left 0; right 0; bottom 0; margin auto; height 90px; width:90px;" />
+                        <br />
+                        <div class="container">
+                            <p style="font-size:17px;"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;<b>Get the price guarantee</b></p>
+                        </div>
+                        <div class="container">
+                            <p style="font-size:17px;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>Exclusive member deals</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/rightbanner1.jpg" style="height:500px;" class="img-responsive" alt="Cinque Terre" />
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12"><br /></div>
+            </div>
+
+        </div>
+
+
+        <div ng-cloak="" ng-show="loaded" class="col-xs-12 col-sm-12 col-md-12" style="padding-left:0px; padding-bottom:10px;padding-right:0px;">
+
+
+            @* ****** End Booking Form *******@
+            @*<div class="col-xs-12 col-sm-12 col-md-12" style="padding-top: 30px;background-color: brown">
+                </div>*@
+
+            <div class="search_again_wrapper search-again">
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="clearfix searchagain">
+
+                            <div class="col-md-3 col-cm-12 col-lg-3 col-xs-12 col-sm-5">
+
+                                <p class="wording_f ">
+                                    <span class="search-again-click"> Going To: {{respData.hotels[0].destinationName}}   </span>
+                                    <span class="city" style="display: none;"> Singapore </span>
+                                </p>
+
+                            </div>
+
+                            <div class="advance-option">
+
+                                <div class="col-md-3 col-cm-6 col-lg-3 col-xs-6 col-sm-2">
+                                    <p class="wording_a">
+                                        <label> Check In: {{respData.StrcheckIn}}</label>
+                                        <span class="icon"><i class="dd/MM/yyyy" aria-hidden="true"></i></span>
+
+                                    </p>
+
+                                </div>
+                                <div class="col-md-3 col-cm-6 col-lg-3 col-xs-6 col-sm-2">
+                                    <p class="wording_a">
+                                        <label>Check Out: {{respData.StrcheckOut}}</label>
+                                        <span class="icon"><i class="mm/dd/yyyy" aria-hidden="true"></i></span>
+
+
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-2 col-cm-12 col-lg-2 col-xs-12 col-sm-3">
+
+                                    @*<p class="wording_f"> <a href="#" class="form-control btn searchagain_btn" data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="fa fa-search" aria-hidden="true"></i> Modify Search </a> </p>*@
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- ================================= Start search again (Modify Search) ================================ -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="main_wrapper" style="padding-left:0px;padding-right:0px;">
+
+                <div class="container">
+
+                    <div class="row">
+
+
+                        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12  filter-role">
+
+                            <div class="clearfix filter">
+
+                                <!-- ====================== Start hotel mapview ============================== -->
+                                <div class="hotel_mapview hide">
+
+                                    <p class="text-center"><span class="map-location"></span><span>Search by map</span></p>
+
+                                </div>
+                                <!-- ======================== End hotel mapview ============================ -->
+
+                            </div>
+
+                            <div class="clearfix serach">
+
+                                <!-- ======================= Start hotel destination search =============================== -->
+                                <div class="clearfix hotel-destination-search">
+
+                                    <p>Hotel name</p>
+
+                                    <div class="clearfix hotel_filter">
+
+                                        <input ng-model-options="{debounce: 500}" ng-model="hotelName" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Search hotel" type="text">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
+                                <!-- ======================================== End hotel destination search ============================== -->
+
+                            </div>
+
+                            <div class="clearfix filterset">
+
+                                <!-- ============================= Start Filter your search ========================== -->
+                                <div class="clearfix filter-block">
+
+                                    <p>Filter your search</p>
+
+                                </div>
+                                <!-- =============================== End Filter your search =================================== -->
+
+                            </div>
+
+
+                            <div class="clearfix set-of-filter">
+                                <!-- ============================ Start star ratings ============================== -->
+                                <div class="col-md-12 col-sm-4 setfilter">
+
+                                    <p><b>Star Ratings</b></p>
+
+                                    <div class="clearfix price star-click-ev" ng-click="HotelApiRequestStars(1, this)">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 1">
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("1")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 2">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("2")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 3">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("3")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 4">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("4")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 5">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("5")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- ============================= End star ratings ========================== -->
+                                <!-- ========================== Start setfilter ============================= -->
+                                <div class="col-md-12 col-sm-4 setfilter">
+
+                                </div>
+                                <!-- ========================== End setfilter =============================== -->
+                                @*===================================Start BeingFilter===============================*@
+                                <div style="padding-left:20px;padding-right:20px;">
+                                    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+                                    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+                                    <script src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+                                    <script src="~/Scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+                                    @*<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>*@
+                                    <script src="http://code.angularjs.org/1.2.14/angular-resource.js"></script>
+                                    <script src="~/Scripts/rangeslider.js"></script>
+                                    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-animate.js"></script>
+                                    <link rel="stylesheet" href="~/Content/rangeslider.css" />
+
+
+                                    <h5><b>Price Range Filter</b> </h5>
+
+                                    <br />
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Less Than LKR 2000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("0","2000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig.min" max="runSliderConfig.max" model-min="sliderRanges.runMin" model-max="sliderRanges.runMax" filter="hourMinFilter" filter-options="{{runSliderConfig.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 2001 to LKR 5000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("2001","5000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig1.min1" max="runSliderConfig1.max1" model-min="sliderRanges.runMin1" model-max="sliderRanges.runMax1" filter="hourMinFilter" filter-options="{{runSliderConfig1.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 5001 to LKR 10000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("5001","10000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig2.min2" max="runSliderConfig2.max2" model-min="sliderRanges.runMin2" model-max="sliderRanges.runMax2" filter="hourMinFilter" filter-options="{{runSliderConfig2.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 10001 to LKR 50000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("10001","50000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig3.min3" max="runSliderConfig3.max3" model-min="sliderRanges.runMin3" model-max="sliderRanges.runMax3" filter="hourMinFilter" filter-options="{{runSliderConfig3.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 50001 to LKR 100000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("50001","100000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig4.min4" max="runSliderConfig4.max4" model-min="sliderRanges.runMin4" model-max="sliderRanges.runMax4" filter="hourMinFilter" filter-options="{{runSliderConfig4.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Greater Than LKR 100001
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("100001","200000")}})</p>
+                                            @*<a ng-click="filters.hotelstar = link.hotelstar=1">xxxxxxxxxx</a>
+                                                <a ng-click="filters.minRate = link.hotelstar>=1">xxxxxxxxxx</a>*@
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig5.min5" max="runSliderConfig5.max5" model-min="sliderRanges.runMin5" model-max="sliderRanges.runMax5" filter="hourMinFilter" filter-options="{{runSliderConfig5.max}}"></div>
+
+
+                                </div>
+                                @*===================================Start BeingFilter===============================*@
+                            </div>
+                        </div>
+
+                        <!-- ================================== End side bar ================================= -->
+                        <div class="col-md-9  hotel_result col-lg-9 col-xs-12 col-sm-12">
+                            <div class="clearfix result_header">
+                                <h4 class="ng-binding"><b>{{respData.hotels[0].destinationName}}</b> : {{respData.hotels.length}} Properties. Showing 1-{{respData.hotels.length}} </h4>
+
+
+                                <style>
+                                    .buttonStyle2 {
+                                        background-color: #2e7a2e !important;
+                                        color: #ffffff;
+                                        padding: 6px 16px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 14px;
+                                        border: 1px solid #4cae4c;
+                                        border-radius: 4px;
+                                    }
+
+                                    .buttonStyle3 {
+                                    }
+                                </style>
+                                <div>
+                                    <div>
+                                        <span>Sort By:</span>
+                                        <button style="background-color:#5cb85c ;padding: 7px 16px;border: 1px solid #4cae4c; border-radius: 4px; font-size: 14px;color: #ffffff;" ng-class="{'buttonStyle2' :tog==1}" ng-click="softName()"> <abbr title="Sort by Name">Name</abbr></button>
+                                        <button style="background-color:#5cb85c ;padding: 7px 16px;border: 1px solid #4cae4c; border-radius: 4px; font-size: 14px;color: #ffffff;" ng-class="{'buttonStyle2' :tog==2}" ng-click="softPrice()"><abbr title="Sort by price">Price</abbr></button>
+                                    </div>
+                                </div>
+
+
+                                <div class="body">
+                                    Your Session will expire in&nbsp;<span id="minutes"></span>&nbsp;minutes<span id="seconds"></span>&nbsp;seconds.<br />
+
+                                </div>
+
+
+
+                                <script>
+                                    var timeout = '@ViewBag.timeout'
+                                    var seconds = timeout / 1000;
+                                    if(timeout!==0){
+                                        document.getElementsByName("secondsIdle").innerHTML = seconds;
+                                        document.getElementsByName("seconds").innerHTML = seconds;
+                                        setInterval(function () {
+                                            seconds--;
+                                            document.getElementById("seconds").innerHTML = seconds;
+
+                                        }, 1000);
+
+                                        $.ajax({
+                                            url: "/Home/Hotel",
+                                            type: "POST",
+                                            data: {"timeout" : "timeout"},
+                                            success: function (timeout) {
+
+                                            },
+
+                                        });
+                                    }
+                                        //setTimeout(function ()
+                                        //{
+                                        //    alert("SessionPop!");
+                                        //}, timeout - 20 * 1000);
+
+                                        //setTimeout(function () {
+                                        //    //Show Popup before 20 seconds of timeout.
+                                        //    $find("mpeTimeout").show();
+                                        //}, timeout - 20 * 1000);
+                                    else{
+                                        setTimeout(function () {
+                                            window.location = "http://tag2travel.com/index.php?option=com_sppagebuilder&view=page&id=102";
+                                        }, timeout);
+
+                                        function ResetSession() {
+                                            //Redirect to refresh Session.
+                                            window.location = window.location.href;
+                                        }
+                                    }
+                                </script>
+
+                                <p id="filterTab" class="hide">
+
+                                    <span style="cursor: pointer;" id="hotelFilter" ng-click="HotelApiClearFilters()" class="badge bg-success hide ng-binding">  <span title="Clear Hotel Filter" class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="starFilter" class="badge bg-success hide"> Star <span class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="priceFilter" class="badge bg-success hide"> Price <span class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="clearFilter" ng-click="HotelApiClearFilters()" class="badge bg-success hide"> Clear filters <span class="filter-close-btn">x</span></span>
+                                </p>
+
+                            </div>
+
+
+
+                            @*******************************    <!-- Start first result block -->*@
+
+
+                            <div ng-repeat="hotel in filteredExercise.hotels | rangeFilter:sliderRanges |filter:{ name: hotelName }|orderBy:mySortFunction  | filter :filters " class="result-block clearfix ng-scope">
+
+
+
+                                @*hotel in respData.hotels*@
+
+                                <div class="col-md-3 col-lg-3 col-cm-3 col-xs-12 col-sm-3 img-sec">
+                                    <img class="img-responsive" style="max-height: 138px; min-height: 138px;" src="{{hotel.imagepath}}" alt="img">
+                                </div>
+
+                                <div class="col-md-9 col-lg-9 col-cm-9  col-xs-12 col-sm-9 hotel-des">
+
+                                    <!-- ======================= Start hotel details ============================== -->
+
+                                    <div class="pull-left col-md-8 col-sm-8 col-cm-8">
+                                        <div class="clearfix">
+
+                                            <div class="pull-left hotel-name" style="height:30px!important;width:100%;text-align:left;">
+                                                <h2 class="ng-binding">{{hotel.name | cut:true:34:' ...'}} </h2><br />
+                                            </div>
+
+                                            <div class="pull-left star" style="padding-left:0px;">
+                                                <span ng-repeat="n in createArray(hotel.hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <div class="pull-left mapicon">
+                                                <p>
+                                                    <i class="fa fa-map-marker"></i>
+                                                </p>
+                                            </div>
+                                            <div class="pull-left maptext">
+                                                <p>
+                                                    <span class="cityname ng-binding">{{hotel.city}},{{hotel.destinationName}}</span><span> </span>
+                                                </p>
+                                                <p>
+                                                    <span class="cityname ng-binding">{{hotel.categoryName}}</span><span> </span>
+
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix hidden-xs hotdeal">
+                                            <div class="pull-left ">
+                                                <p>
+                                                    <span class="icon-no-available-o">
+                                                        <i class="fa fa-cutlery"></i>
+                                                    </span>
+
+                                                    <span class="available-text"> {{hotel.rooms[0].rates[0].boardName}}  </span>
+                                                </p>
+                                            </div>
+                                            <div class="pull-left padding-left-24">
+                                                <p>
+                                                    <span class="icon-available-o">
+                                                        <i class="fa fa-bed"></i>
+                                                    </span>
+                                                    <span class="available-text ng-binding">{{hotel.rooms[0].name}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix hidden-xs hotdeal">
+                                            <div class="pull-left ">
+                                                <p>
+                                                    <span class="icon-no-available-o">
+                                                        <i class="fa fa-file-text"></i>
+                                                    </span>
+
+                                                    <span class="available-text" style="padding-left:0px;"> {{hotel.description | limitTo:90}} ... <a ng-href="@Url.Action("Hotel", "home")?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Adults1={{respDatapara.Adults1}}&Children1={{respDatapara.Children1}}&C1Age1={{respDatapara.C1Age1}}&C1Age2={{respDatapara.C1Age2}}&C1Age3={{respDatapara.C1Age3}}&C1Age4={{respDatapara.C1Age4}}&Adults2={{respDatapara.Adults2}}&Children2={{respDatapara.Children2}}&C2Age1={{respDatapara.C2Age1}}&C2Age2={{respDatapara.C2Age2}}&C2Age3={{respDatapara.C2Age3}}&C2Age4={{respDatapara.C2Age4}}&Adults3={{respDatapara.Adults3}}&Children3={{respDatapara.Children3}}&C3Age1={{respDatapara.C3Age1}}&C3Age2={{respDatapara.C3Age2}}&C3Age3={{respDatapara.C3Age3}}&C3Age4={{respDatapara.C3Age4}}">Read more..</a> </span>
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="clearfix hotdeal">
+                                            @*<div class="pull-left ">
+                                                    <p>
+                                                        <span class="hotdealbox">{{hotel.rooms[0].rates[0].offers[0].name}}</span>
+                                                        <span class="bullet"></span>
+                                                        <span class="pro_img padding-left-8">
+                                                        </span>
+                                                    </p>
+                                                </div>*@
+                                            <div class="pull-left padding-left-8 hotdealpro">
+                                                @*<p ng-show="{{hotel.rooms[0].rates[0].offers[0].name}} == null" class="ng-scope">{{hotel.currency}} {{hotel.rooms[0].rates[0].offers[0].amount}}</p>*@<!-- end ngIf: city !== 'MV' -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- ===================== End hotel details ======================== -->
+                                    <script>
+                                        angular.module('ng').filter('cut', function () {
+                                            return function (value, wordwise, max, tail) {
+                                                if (!value) return '';
+
+                                                max = parseInt(max, 10);
+                                                if (!max) return value;
+                                                if (value.length <= max) return value;
+
+                                                value = value.substr(0, max);
+                                                if (wordwise) {
+                                                    var lastspace = value.lastIndexOf(' ');
+                                                    if (lastspace !== -1) {
+                                                        //Also remove . and , so its gives a cleaner result.
+                                                        if (value.charAt(lastspace-1) === '.' || value.charAt(lastspace-1) === ',') {
+                                                            lastspace = lastspace - 1;
+                                                        }
+                                                        value = value.substr(0, lastspace);
+                                                    }
+                                                }
+
+                                                return value + (tail || ' …');
+                                            };
+                                        });
+                                    </script>
+                                    <!-- ======================= Start price box ========================== -->
+
+                                    <div class="pull-right col-cm-4 detail-box">
+                                        <div class="clearfix pricing-box">
+                                            <p class="numberofleft"><span ng-show="hotel.hotel_allotment <= 5" class="ng-binding ng-hide">99 rooms left !</span></p>
+                                            <p class="pricenight">From</p>
+                                            <p class="hotel_price ng-binding"> LKR {{(hotel.minRate)}} </p>
+
+                                            <p class="text-right padding-bottom-8">
+
+
+                                                @*target="_blank" open in new tab *@
+
+
+                                                @*<button target="_blank" type="button" class="btn btn-success" data-ng-click="setTab(hotel.code,respDatapara.Des,respDatapara.DepartureDate,respDatapara.ReturnDate,respDatapara.Rooms,respDatapara.Adults1,respDatapara.Children1,respDatapara.Age1)">Check Availability</button>*@
+
+                                            <p class="text-right padding-bottom-8">
+
+
+                                                @*<a href="http://72.9.159.12:8082/Home/Hotel?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Occupancy={{respDatapara.Adults1}}" class="btn btn-success"> Select Room </a>*@
+                                                @*<a href="http://localhost:13668/Home/Hotel?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Occupancy={{respDatapara.Adults1}}" class="btn btn-success"> Select Room </a>*@
+                                                <a class="btn btn-success" ng-href="@Url.Action("Hotel", "home")?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Adults1={{respDatapara.Adults1}}&Children1={{respDatapara.Children1}}&C1Age1={{respDatapara.C1Age1}}&C1Age2={{respDatapara.C1Age2}}&C1Age3={{respDatapara.C1Age3}}&C1Age4={{respDatapara.C1Age4}}&Adults2={{respDatapara.Adults2}}&Children2={{respDatapara.Children2}}&C2Age1={{respDatapara.C2Age1}}&C2Age2={{respDatapara.C2Age2}}&C2Age3={{respDatapara.C2Age3}}&C2Age4={{respDatapara.C2Age4}}&Adults3={{respDatapara.Adults3}}&Children3={{respDatapara.Children3}}&C3Age1={{respDatapara.C3Age1}}&C3Age2={{respDatapara.C3Age2}}&C3Age3={{respDatapara.C3Age3}}&C3Age4={{respDatapara.C3Age4}}"> Check Availability </a>
+
+
+
+
+                                            </p>
+
+
+                                            @*  *@
+
+                                        </div>
+                                    </div>
+                                    <!-- =================== End price box ======================== -->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        <footer>
+            <!--gradient-->
+            <div class="nicdark_space3 nicdark_bg_gradient"></div> 		<!--footer-->
+            <!--start section-->
+            <section class="nicdark_section nicdark_bg_greydark nicdark_dark_widgets">
+
+                <!--start nicdark_container-->
+                <div class="nicdark_container nicdark_clearfix">
+
+                    <div class="nicdark_space30"></div>
+
+                    <div class="grid grid_3 nomargin percentage">
+
+                        <div class="nicdark_space20"></div>
+
+                        <div class="nicdark_margin10" >
+                            <div id="text-2" class="widget widget_text">
+                                <h2 style="float:left;">Far Holidays</h2>			
+                                <div class="textwidget" style="text-align:left;">
+                                    <ul class="nicdark_list" style="float:left!important;">
+                                        <li style="float:left!important;">
+                                            <p class="nicdark_margin100 white nicdark_margintop0"><img src="~/Content/img/11456-200.png"  style="width:18px;height:18px;"/>&nbsp;&nbsp;124, Park Road, Colombo 05, Sri Lanka.</p>
+                                        </li>
+
+                                        <li style="float:left!important;">
+                                            <p class="nicdark_margin100 white"><img src="~/Content/img/phone-icon-63180.png"  style="width:18px;height:18px;"/>&nbsp;&nbsp;&nbsp;Hotline: +94 115 97 7799 </p>
+                                        </li>
+
+                                        <li style="float:left!important;">
+                                            <p class="nicdark_margin100 white"><img src="~/Content/img/envelope-icon-20.png" style="width:18px;height:18px;" />&nbsp;&nbsp;&nbsp;Mail: sales@farholidays.com</p>
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="nicdark_space20"></div>
+
+                                    <a href="mailto:sales@farholidays.com" class="nicdark_btn_icon nicdark_bg_violet small white">
+                                        <img src="~/Content/img/Artboard 3tele.png" style="width:18px;height:18px;" />
+                                    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <a href="skype:madushan.farholidays?call" class="nicdark_btn_icon nicdark_bg_blue small white">
+                                        <img src="~/Content/img/Artboard 3skype.png" style="width:18px;height:18px;" />
+                                    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <a href="skype:madushan.farholidays?chat" class="nicdark_btn_icon nicdark_bg_green small white">
+                                        <img src="~/Content/img/Artboard 3convo.png" style="width:18px;height:18px;" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid_3 nomargin percentage">
+
+                        <div class="nicdark_space20"></div>
+
+                        <div class="nicdark_margin10">
+                            <div id="text-3" class="widget widget_text"style="text-align:left;">
+                                <h2>SUBSCRIBE TO OUR NEWLETTER</h2>			
+                                <div class="textwidget" >
+                                    <div role="form" class="wpcf7" id="wpcf7-f2533-o1" lang="en-US" dir="ltr">
+                                        <div class="screen-reader-response"></div>
+                                        <form action="/#wpcf7-f2533-o1" method="post" class="wpcf7-form ng-pristine ng-valid" novalidate="novalidate">
+                                            <div style="display: none;">
+                                                <input type="hidden" name="_wpcf7" value="2533">
+                                                <input type="hidden" name="_wpcf7_version" value="4.4.1">
+                                                <input type="hidden" name="_wpcf7_locale" value="en_US">
+                                                <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f2533-o1">
+                                                <input type="hidden" name="_wpnonce" value="3f40084c17">
+                                            </div>
+                                            <p><span class="wpcf7-form-control-wrap email-954"><input type="email" name="email-954" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email nicdark_bg_greydark2" aria-required="true" aria-invalid="false" placeholder="Your Email"></span></p>
+                                            <p><input type="submit" value="SUBSCRIBE" class="wpcf7-form-control wpcf7-submit nicdark_bg_green nicdark_btn small nicdark_height_initial"><img class="ajax-loader" src="http://farholidays.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Sending ..." style="visibility: hidden;"></p>
+                                            <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid_3 nomargin percentage">
+
+                        <div class="nicdark_space20"></div>
+
+                        <div class="nicdark_margin10">
+                            <div id="text-4" class="widget widget_text">
+                                <div class="textwidget">
+                                    <img alt="" class="nicdark_activity nicdark_padding14_right nicdark_sizing nicdark_width_percentage33" src="http://farholidays.com/wp-content/uploads/2016/12/iata.png">
+
+                                    <img alt="" class="nicdark_activity nicdark_padding07 nicdark_sizing nicdark_width_percentage33" src="http://farholidays.com/wp-content/uploads/2016/12/srilanka-tourism.png">
+
+                                    <img alt="" class="nicdark_activity nicdark_padding14_left nicdark_sizing nicdark_width_percentage33" src="http://farholidays.com/wp-content/uploads/2016/12/iata1.png">
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid_3 nomargin percentage">
+
+                        <div class="nicdark_space20"></div>
+
+                        <div class="nicdark_margin10">
+                            <div id="text-5" class="widget widget_text" style="text-align:left;">
+                                <h2>Far Holidays – France</h2>			<div class="textwidget">
+                                    <ul class="nicdark_list">
+                                        <li>
+                                            <p class="nicdark_margin100 white nicdark_margintop0">
+                                                <img src="~/Content/img/11456-200.png" style="width:18px;height:18px;" />&nbsp;&nbsp;Europe Operating Center, No: 04, Rue Germaine Dir, 92110, Clichy,
+                                                France.
+                                            </p>
+                                        </li>
+
+                                        <li>
+                                            <p class="nicdark_margin100 white"><img src="~/Content/img/phone-icon-63180.png" style="width:18px;height:18px;" />&nbsp;&nbsp;&nbsp;Hotline: +33 142 706 652</p>
+                                        </li>
+
+                                        <li>
+                                            <p class="nicdark_margin100 white"><img src="~/Content/img/phone-icon-63180.png" style="width:18px;height:18px;" />&nbsp;&nbsp;&nbsp;Mobile: +33 782 799 404</p>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nicdark_space10"></div>
+
+                </div>
+                <!--end nicdark_container-->
+
+            </section>
+            <!--end section-->		<!--copyright-->
+            <!--start section-->
+            <div class="nicdark_section nicdark_bg_greydark2 ">
+
+                <!--start nicdark_container-->
+                <div class="nicdark_container nicdark_clearfix">
+
+                    <div class="grid grid_6 nicdark_aligncenter_iphoneland nicdark_aligncenter_iphonepotr" style="text-align:left;">
+                        <div class="nicdark_space20"></div>
+
+                        <p class="white">© Copyright 2017 by <span class="grey">Far Holidays (Pvt) Ltd</span></p>
+                    </div>
+
+
+                    <div class="grid grid_6">
+                        <div class="nicdark_focus right nicdark_aligncenter_iphoneland nicdark_aligncenter_iphonepotr">
+
+                            <div class="nicdark_margin10">
+                                <a href="https://www.instagram.com/farholidays/?hl=en" target="_blank"><img src="http://farholidays.com/wp-content/uploads/2017/03/instagram-icon.png"></a>
+                            </div>
+
+                            <div class="nicdark_margin10">
+                                <a href="https://twitter.com/ItHolidays?lang=en" target="_blank"><img src="http://farholidays.com/wp-content/uploads/2017/01/twitter.png"></a>
+                            </div>
+
+                            <div class="nicdark_margin10">
+                                <a href="https://plus.google.com/102992617288386456796" target="_blank"><img src="http://farholidays.com/wp-content/uploads/2017/01/google_plus.png"></a>
+                            </div>
+
+                            <div class="nicdark_margin10">
+                                <a href="https://www.facebook.com/Far-Holidays-Beyond-Travelling-372267592979890/" target="_blank"><img src="http://farholidays.com/wp-content/uploads/2017/01/facebook.png"></a>
+                            </div>
+                            <!--back to top-->
+
+                            <div class="nicdark_margin10">
+                                <a href="#start_nicdark_framework" class="nicdark_zoom nicdark_internal_link right nicdark_btn_icon nicdark_bg_greydark2 small nicdark_radius white"><i class="icon-up-open"></i></a>
+                            </div>
+
+                            <!--back to top-->
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--end nicdark_container-->
+
+            </div>
+            <!--end section-->
+            <!--end nicdark_site_fullwidth-->
+            <!--end nicdark_site-->
+            <!-- WhatsHelp.io widget -->
+            <script type="text/javascript">
+    (function () {
+        var options = {
+            facebook: "372267592979890", // Facebook page ID
+            whatsapp: "94772502020", // WhatsApp number
+            viber: "Farholidays", // Viber number
+            company_logo_url: "//fb-s-a-a.akamaihd.net/h-ak-fbx/v/t1.0-1/p50x50/16174534_601290906744223_2721098811902461541_n.jpg?oh=01331e438016b4f47bf2866f7b471dad&oe=5A501EF9&__gda__=1515969230_38eac50eb7f01477f3cf0dadf9d5ea0d", // URL of company logo (png, jpg, gif)
+            greeting_message: "Hello, how may we help you? Just send us a message now to get assistance.", // Text of greeting message
+            //call_to_action: "Message us", // Call to action
+            button_color: "#c163a1", // Color of button
+            position: "left", // Position may be 'right' or 'left'
+            order: "facebook,whatsapp,viber" // Order of buttons
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+            </script>
+            <!-- /WhatsHelp.io widget -->
+            <!--start preloader-->
+            <script type="text/javascript">
+    jQuery(window).load(function() { jQuery(".nicdark_preloader").delay(1000).fadeOut("slow"); })
+            </script>
+            <!--end preloader-->
+            <!--start google analytics-->
+            <!--end google analytics-->
+
+            <script>jQuery(document).ready(function($) { $('#flags a, a.single-language, .tool-items a').each(function() { $(this).attr('data-lang', $(this).attr('title')); }); $("a.flag").on("click",function(){function l(){doGoogleLanguageTranslator(default_lang+"|"+default_lang); }function n(){doGoogleLanguageTranslator(default_lang+"|"+lang_prefix); } lang_text=$(this).attr('data-lang'),default_lang="en",lang_prefix=$(this).attr("class").split(" ")[2],$(".tool-container").hide(),lang_prefix==default_lang?l():n()}),0==$("body > #google_language_translator").length&&$("#glt-footer").html("<div id='google_language_translator'></div>")});</script>
+
+            <div id="glt-translate-trigger"><span class="notranslate">Translate »</span></div><div id="glt-toolbar"></div><div id="flags" style="display:none"><ul id="sortable" class="ui-sortable"><li id="English"><a title="English" class="notranslate flag en united-states" data-lang="English"></a></li><li id="French"><a title="French" class="notranslate flag fr French" data-lang="French"></a></li></ul></div><div id="glt-footer"><div id="google_language_translator"><div class="skiptranslate goog-te-gadget" dir="ltr" style=""><div id=":0.targetLanguage"><select class="goog-te-combo"><option value="">Select Language</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="am">Amharic</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="ny">Chichewa</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="co">Corsican</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="fy">Frisian</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="ha">Hausa</option><option value="haw">Hawaiian</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="ig">Igbo</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="kk">Kazakh</option><option value="km">Khmer</option><option value="ko">Korean</option><option value="ku">Kurdish (Kurmanji)</option><option value="ky">Kyrgyz</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="lb">Luxembourgish</option><option value="mk">Macedonian</option><option value="mg">Malagasy</option><option value="ms">Malay</option><option value="ml">Malayalam</option><option value="mt">Maltese</option><option value="mi">Maori</option><option value="mr">Marathi</option><option value="mn">Mongolian</option><option value="my">Myanmar (Burmese)</option><option value="ne">Nepali</option><option value="no">Norwegian</option><option value="ps">Pashto</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sm">Samoan</option><option value="gd">Scots Gaelic</option><option value="sr">Serbian</option><option value="st">Sesotho</option><option value="sn">Shona</option><option value="sd">Sindhi</option><option value="si">Sinhala</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="so">Somali</option><option value="es">Spanish</option><option value="su">Sundanese</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="tg">Tajik</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="uz">Uzbek</option><option value="vi">Vietnamese</option><option value="cy">Welsh</option><option value="xh">Xhosa</option><option value="yi">Yiddish</option><option value="yo">Yoruba</option><option value="zu">Zulu</option></select></div>Powered by <span style="white-space:nowrap"><a class="goog-logo-link" href="https://translate.google.com" target="_blank"><img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png" width="37px" height="14px" style="padding-right: 3px" alt="Google Translate">Translate</a></span></div></div></div>
+            <script type="text/javascript">function GoogleLanguageTranslatorInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_language_translator');}</script>
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=GoogleLanguageTranslatorInit"></script><!-- Popups v1.7.3 - https://wordpress.org/plugins/social-popup/ -->
+            <style type="text/css">
+                        #spu-3625 {
+                            background-color: #eeeeee;
+                            color: #333;
+                            border: 2px solid #555;
+                            width:;
+                        }
+
+                        #spu-bg-3625 {
+                            opacity: 0.4;
+                        }
+                        /*
+                * Add custom CSS for this popup
+                * Be sure to start your rules with #spu-3625 { } and use !important when needed to override plugin rules
+                */
+                        .spu-box {
+                            padding: 20px 5px 5px 5px;
+                        }
+
+                            .spu-box p {
+                                margin: 0 0 0;
+                            }
+            </style>
+            <div class="spu-bg" id="spu-bg-3625" style="display: none;"></div>
+            <!-- / Popups Box -->
+            
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20"></script>
+            <script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/farholidays.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Sending ..."};
+/* ]]> */
+            </script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.1"></script>
+            <script type="text/javascript" src="//farholidays.com/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70"></script>
+            <script type="text/javascript">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+            </script>
+           
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/popups/public/assets/js/min/public-min.js?ver=1.7.3"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/main/jquery-ui.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/main/excanvas.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/menu/superfish.min.js?ver=4.6.8"></script>
+
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/js_composer/assets/lib/bower/isotope/dist/isotope.pkgd.min.js?ver=4.11.2.1"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-includes/js/imagesloaded.min.js?ver=3.2.0"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/mpopup/jquery.magnific-popup.min.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/scroolto/scroolto.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/nicescrool/jquery.nicescroll.min.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/inview/jquery.inview.min.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/plugins/countto/jquery.countTo.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/sort.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/themes/lovetravel/js/settings.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-includes/js/comment-reply.min.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-includes/js/wp-embed.min.js?ver=4.6.8"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=4.11.2.1"></script>
+            <script type="text/javascript" src="http://farholidays.com/wp-content/plugins/js_composer/assets/lib/bower/skrollr/dist/skrollr.min.js?ver=4.11.2.1"></script>
+
+
+
+            <div class="tool-container tool-top toolbar-primary" style="opacity: 0; display: none;"><div class="tool-items"><a title="English" class="notranslate flag en united-states tool-item" data-lang="English"></a><a title="French" class="notranslate flag fr French tool-item" data-lang="French"></a></div><div class="arrow"></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div ng-controller="grsPopupC" class="ng-scope"><grs-popup resize="resize"><!-- ngIf: options.enterPopup() --></grs-popup></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div>
+
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div>
+</div>
+
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+
+<script src="~/Scripts/angular-route.js"></script>
+
+<script src="~/Scripts/API/Module.js"></script>
+<script src="~/Scripts/API/Service.js"></script>
+<script src="~/Scripts/API/Controller.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+<script>
+    $(document).ready(function () {
+
+        var startDate = new Date();
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: today
+
+
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+            $('#dateto').datepicker('setStartDate', startDate);
+
+        });
+
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input1.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container1,
+            autoclose: true
+        });
+
+    })
+</script>
+
+
+
+
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/bootstrap")*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+@*@Scripts.Render("~/bundles/angular")*@

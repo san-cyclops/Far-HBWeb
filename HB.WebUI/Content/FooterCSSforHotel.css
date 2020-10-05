@@ -1,0 +1,125 @@
+﻿
+     .footer {
+       /*background-color:#1b3c6f;*/
+      color:white;
+      padding:30px 0;
+      font-family:sanchez;
+        }
+        /*.upperf {
+            background-color:#1b3c6f;
+            color:#dce1ea;
+
+        }*/
+       
+        .news {
+        font-style:unset;
+        }
+        logo {
+     padding: 12px;
+     width: 30px;
+     text-decoration: none;
+     margin: 5px 2px;
+
+        }
+        /*.fa {
+  padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}*/
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+    padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+    padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-google-plus {
+  background: #dd4b39;
+  color: white;
+    padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+    padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-pinterest {
+  background: #cb2027;
+  color: white;
+    padding: 7px;
+  font-size: 20px;
+  width: 35px;
+  border-radius: 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+        .sub {
+        border-radius: 6px;
+        border: none;
+        padding:7px;
+        background-color:#0074cc;
+        cursor: pointer;
+        font-size: 13px;
+        color:white;
+        display: inline-block; 
+        outline: none;
+        }
+        .mail {
+           /*border-radius: 3px;*/
+           /*border: 1px solid #cccccc;*/
+           /*background-color: #ffffff;*/
+        }
+        .arrow {
+        color: #4e71c9;
+        }
+        .mail { 
+        color:black;
+        }
+
+
+
+@media only screen and (max-width: 800px) {
+
+    .footer {
+        text-align: center!important;
+    }
+}

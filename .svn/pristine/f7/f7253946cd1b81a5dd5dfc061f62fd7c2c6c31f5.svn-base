@@ -1,0 +1,11 @@
+﻿app.service("APIService", function ($http) {
+    this.getHotelDetails = function () {
+     //  var url = "http://hotels.tag2travel.com:4585/api/HotelBooking/getHotelDetails";
+        //  var url = "/api/HotelBooking/getHotelDetails";
+        var url = "http://67.222.132.248:9091/api/HotelBooking/getHotelDetails";
+        return $http.get(url).then(function(response) {
+            return response.data;
+        });
+    };
+    
+});

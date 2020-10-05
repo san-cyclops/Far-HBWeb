@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace HB.WebUI.Models
+{
+    public class HotelPayment
+    {
+        public string TransactionID { get; set; }
+        public string Referencenumber { get; set; }
+        public string destination { get; set; }
+        public string hotelname { get; set; }
+        public string hoteladdress { get; set; }
+        public string hotelphone { get; set; }
+        public string hotelemail { get; set; }
+        public string roomtype { get; set; }
+        public string board { get; set; }
+        public string noofrooms { get; set; }
+        public string checkin { get; set; }
+        public string checkout { get; set; }
+        public string rate { get; set; }
+        public string pax { get; set; } 
+        public string grossamount { get; set; }
+        public string totalamount { get; set; }
+        public string ratecomment { get; set; } 
+        public string ratekey1 { get; set; }
+        public string Adults1 { get; set; }
+        public string Adults1surname { get; set; }
+        public string Adults2 { get; set; }
+        public string Adults2surname { get; set; }
+        public string Adults3 { get; set; }
+        public string Adults3surname { get; set; }
+        public string Adults1email { get; set; }
+        public string Adults1phone { get; set; }
+
+        public string child1name { get; set; }
+        public string child2name { get; set; }
+        public string child3name { get; set; }
+        public string child4name { get; set; }
+        public string Child1surname { get; set; }
+        public string Child2surname { get; set; }
+        public string Child3surname { get; set; }
+        public string Child4surname { get; set; }
+ 
+
+        public string C1Age1 { get; set; }
+        public string C1Age2 { get; set; }
+        public string C1Age3 { get; set; }
+        public string C1Age4 { get; set; }
+         
+
+        public string C2Age1 { get; set; }
+        public string C2Age2 { get; set; }
+        public string C2Age3 { get; set; }
+        public string C2Age4 { get; set; }
+
+
+        public string C3Age1 { get; set; }
+        public string C3Age2 { get; set; }
+        public string C3Age3 { get; set; }
+        public string C3Age4 { get; set; }
+
+        public string clientID { get; set; }
+        public string txnReference { get; set; }
+        public string responseCode { get; set; }
+        public string responseText { get; set; }
+        public string holderName { get; set; }
+        public string number { get; set; }
+        public string type { get; set; }
+        public string paymentAmount { get; set; }
+        public string currency { get; set; }
+
+    }
+}

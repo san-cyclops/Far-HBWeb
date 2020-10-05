@@ -1,0 +1,227 @@
+﻿@model HB.HotelRez.Models.UnabailableList
+@{
+    ViewBag.Title = "RoomUnavailable";
+    Layout = null;
+}
+
+<head>
+    <title>HotelRez | Room Unavailable</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+   
+  
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/animate.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/all.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/style-responsive.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/zabuto_calendar.min.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/pace.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/AdminStyle/styles/jquery.news-ticker.css">
+    
+
+  
+
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.multidatespicker.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/script/jquery-ui.min.js"></script>
+    <script src="~/script/jquery-ui.multidatespicker.js"></script>
+     
+    
+
+    <style>
+        body {
+            font-size: x-small !important;
+            height: 600px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--BEGIN CONTENT-->
+    <div class="page-content">
+        <div id="tab-general">
+
+            <div class="row mbl">
+                <div class="col-lg-12">
+                    <div class="col-md-12">
+                        <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-violet">
+                                <div class="panel-heading">
+                                    Room Unavailable
+                                </div>
+                                <div class="panel-body pan">
+                                    <div class="form-body pal">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-user"></i>
+                                                        @*<select class="form-control" style="padding-left:7%;" ng-model="app.roomId"></select>*@
+
+                                                        @using (Html.BeginForm("RoomUnavailable", "Home", FormMethod.Post))
+                                                        {
+                                                            @*@Html.DropDownListFor(m => m.RoomID, Model.Rooms, "Please select Room ID", new { @class = "form-control", @style = "padding-left:7%;", @ng_model = "app.roomId", @ng_change = "app.loadUnavailableDatesList()" })*@
+                                                            @Html.DropDownListFor(m => m.RoomID, Model.Rooms, "--- SELECT ---", new { @class = "form-control", @style = "padding-left:7%;", @id = "roomId", @onchange = "myFunction()" })
+                                                        }
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <div id="mdp-demo"></div>
+                                                    @*<input id="inputDate" type="text" placeholder="Unavailable-Date" class="form-control" datepicker-popup close-on-date-selection='false' ng-model='app.activeDate' ng-click='opened=true' is-open='opened' multi-select='app.selectedDates' style="background-image:url('https://fmffiles.s3.amazonaws.com/files/icon-date.-FMF1505127830.png');background-repeat:no-repeat;padding-left:35px;" />*@
+
+                                                    @*<div class="input-icon">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <input id="inputCompany" type="text" placeholder="Check-in" class="form-control" />
+
+                                                        </div>*@
+                                                </div>
+
+                                                @*<table>
+                                                    <tr>
+                                                        <td style='width:50px'></td>
+                                                        <td>
+                                                            <div>Selected Dates:</div>
+                                                            <div class='well well-sm'>
+                                                                <div ng-repeat='d in app.selectedDates | orderBy : app.identity'>
+                                                                    {{d | date : 'fullDate'}}
+                                                                    <button class='btn btn-xs btn-warning' style='margin:5px' ng-click='app.removeFromSelected(d)'>Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>*@
+
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+                                    </div>
+                                    <div class="form-actions text-right pal">
+                                        <button type="submit" class="btn btn-primary" id="Save">
+                                            Save Details
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+     
+
+
+
+    </div>
+    <!--END CONTENT-->
+
+
+    <script src="~/Content/AdminScripts/script/bootstrap.min.js"></script>
+    <script src="~/Content/AdminScripts/script/bootstrap-hover-dropdown.js"></script>
+   
+
+
+
+    <script>
+
+        var today = new Date();
+        var y = today.getFullYear();
+        $('#mdp-demo').multiDatesPicker({
+            
+            ////addDates: ['10/14/' + y, '02/19/' + y, '01/14/' + y, '11/16/' + y],           
+
+            //addDates: ['10/14/2018', '02/19/2018', '01/14/2018', '11/16/2018'],
+            numberOfMonths: [3, 4],
+            defaultDate: '1/1/' + y
+        });
+
+       
+        
+       
+    </script>
+
+    <script type="text/javascript">
+        $('#Save').click(function () {
+            var x = document.getElementById("roomId").value;
+            if (x == '') {
+                alert("Please select room Id");
+            }
+            else
+            {
+                var url = "/Home/SaveToDatabase";
+
+                $.post(url, { "unabailableList.UnavailableDates": tdDetailList, "unabailableList.RoomID": x }, function (data) {
+                    alert(data);
+                });
+            }
+       
+    })
+    </script>
+
+   <script>
+        function myFunction() {
+            var x = document.getElementById("roomId").value;
+            if (x != '') {
+                var url = "/Home/getUnavailableDateLst";
+
+                $.post(url, { "roomId": x }, function (data) {                  
+                  
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        var from = data[i].Text;
+                        var numbers = from.match(/\d+/g);
+                        var date = new Date(numbers[2], numbers[0] - 1, numbers[1]);
+                       
+                        $('#mdp-demo').multiDatesPicker({
+                            // disabled: true,
+
+                            addDates: [date]
+                        });
+                        
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+
+
+
+
+
+
+

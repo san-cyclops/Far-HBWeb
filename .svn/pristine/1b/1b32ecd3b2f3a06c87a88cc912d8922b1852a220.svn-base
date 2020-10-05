@@ -1,0 +1,44 @@
+﻿app.service("APIService", function($http) {
+    this.getDestinations = function () {
+        var url = "/api/HotelBooking/GetDestinationsRSList";
+        return $http.get(url).then(function(response) {
+            return response.data;
+        });
+    };
+    this.hotelavailability = function(sub) {
+        return $http({
+            method: "post",
+            data: sub,
+            contentType: "application/json; charset=utf-8",
+            url: "/api/HotelBooking"
+            
+        });
+    };
+    this.hotelavailabilityFilter = function (sub) {
+        return $http({
+            method: "post",
+            data: sub,
+            contentType: "application/json; charset=utf-8",
+            url: "/api/HotelBooking/PostSearch"
+
+        });
+    };
+    this.showhotelselected = function (subselect) {
+        return $http({
+            method: "post",
+            data: subselect,
+            contentType: "application/json; charset=utf-8",
+            url: "Home/HotelView"
+        });
+    };
+    //this.deleteSubscriber = function (subID) {
+    //   //var url = "http://hotels.tag2travel.com:4585/api/HotelBooking/" + subID;
+    //   var url = "http://localhost:32261/api/HotelBooking/" + subID;
+    //    return $http({
+    //        method: "delete",
+    //        contentType: "application/json; charset=utf-8",
+    //        data: subID,
+    //        url: url
+    //    });
+    //};
+});

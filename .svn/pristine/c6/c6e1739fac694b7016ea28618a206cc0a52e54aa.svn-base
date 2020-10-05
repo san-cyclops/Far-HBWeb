@@ -1,0 +1,20 @@
+﻿var app;
+
+(function () {
+
+    app = angular.module("RoomPayment", []);
+
+})();
+
+
+app.controller('payController', function ($scope) {
+    $scope.rid = "";
+    $scope.booking = "";
+    $scope.bno = ['b1', 'b2', 'b3', 'b4', 'b5'];
+    $scope.roomid = ['r001','r002','r003','r004','r005'];
+
+
+
+
+
+});         

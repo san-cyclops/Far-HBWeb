@@ -1,0 +1,191 @@
+﻿var app;
+
+(function () {
+
+    app = angular.module("Promotion", []);
+
+})();
+
+app.controller('promoController', function ($scope, $http) {
+
+
+    $scope.protype = "";
+    $scope.datefrom = "";
+    $scope.dateto = "";
+    $scope.roomidlist = "";
+    $scope.roomid = "";
+    $scope.rid = [121,132,134,154,165];
+    $scope.hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 21, 22, 23, 24];
+    $scope.departuredate1 = "";
+    $scope.returndate1 = "";
+
+    $("#lbldate").hide();
+    $("#date").hide();
+    $("#lblhrs").hide();
+    $("#hrs").hide();
+    $("#lblfrom1").hide();
+    $("#datefrom1").hide();
+    $("#lblto1").hide();
+    $("#dateto1").hide();
+
+    $('#ptype').on('change', function () {
+
+        if (this.value == '1') {
+            $("#lbldate").show();
+            $("#date").show();
+            $("#lblhrs").show();
+            $("#hrs").show();
+            $("#lblfrom1").hide();
+            $("#datefrom1").hide();
+            $("#lblto1").hide();
+            $("#dateto1").hide();
+        }
+        else if (this.value == '2') {
+            $("#lbldate").hide();
+            $("#date").hide();
+            $("#lblhrs").hide();
+            $("#hrs").hide();
+            $("#lblfrom1").show();
+            $("#datefrom1").show();
+            $("#lblto1").show();
+            $("#dateto1").show();
+        }
+    });
+
+
+    $(document).ready(function () {
+
+        var startDate = new Date();
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: today,
+
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+            $('#dateto').datepicker('setStartDate', startDate);
+
+            $("#dateto").datepicker("show");
+            var dateToBePrefilled = startDate;
+            $("#dateto").datepicker("setDate", dateToBePrefilled);
+
+
+        });
+
+
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input1.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container1,
+            autoclose: true
+
+        });
+
+
+
+    })
+    $("#date").on("dp.change", function () {
+
+        $scope.selecteddate = $("#date").val();
+
+
+    });
+
+    $(function () {
+        var dateFormat = "mm/dd/yy",
+          from = $("#datefrom1")
+            .datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+               
+            })
+            .on("change", function () {
+                to.datepicker("option", "minDate", getDate(this));
+            }),
+          to = $("#dateto1").datepicker({
+              defaultDate: "+1w",
+              changeMonth: true,
+              
+          })
+          .on("change", function () {
+              from.datepicker("option", "maxDate", getDate(this));
+          });
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch (error) {
+                date = null;
+            }
+
+            return date;
+        }
+    });
+    
+
+
+    $scope.roomidlist = [
+
+    ];
+
+    $scope.add = function () {
+        if ($scope.roomid == "") {
+           
+            return false;
+        }
+
+
+        $scope.roomidlist.push($scope.roomid);
+        $scope.roomid = '';
+        //$scope.aminitylist.add($scope.aminities);
+    };
+
+    $scope.remove = function (index) {
+        $scope.roomidlist.splice(index, 1);
+    };
+
+
+
+    $scope.submitPromo = function () {
+
+        sub = {
+            PromotionType: $scope.protype,
+            DateFrom :$scope.daparturedate1 ,
+            DateTo: $scope.returndate1,
+            Hours:$scope.hours,
+            DiscountValue: $scope.dvalue,
+            DiscountPercentage: $scope.dpercentage,
+            RoomID: $scope.roomid,
+            HotelName:8, 
+   
+           };
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/SavePromotion",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+  
+ 
+
+    };
+
+
+
+
+
+});

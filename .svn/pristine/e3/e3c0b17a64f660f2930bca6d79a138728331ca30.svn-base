@@ -1,0 +1,182 @@
+﻿@using HB.WebUI.Controllers
+
+@{
+    Layout = null;
+}
+
+
+<link href="~/Content/main.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+<body data-ng-app="HotelBookingModule">
+    <div ng-controller="HotelBooikingCtrl">
+
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Booking List
+            </div>
+            <div class="panel-body pan">
+                <form action="#">
+                    <div class="form-body pal">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputName" class="control-label">
+                                        Client ref
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+                                        <input id="ClientReference" type="text" placeholder="" data-ng-model="clientReference" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bookingtype" class="control-label">
+                                        Booking type
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+
+                                        <select data-ng-model="status" id='status' class="form-control adults1" placeholder="Status" ng-options="o for o in statuslist track by o"></select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Date from
+                            </label>
+                            <div class="">
+                                <i class=""></i>
+                                <input id="Start" type="date" placeholder="" class="form-control" data-ng-model="start" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Date to
+                            </label>
+                            <div class="">
+                                <i class=""></i>
+                                <input id="End" type="date" placeholder="" class="form-control" data-ng-model="end" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Country
+                            </label>
+                            <div class="form-group">
+                                <input id="Country" type="text" placeholder="" data-ng-model="country" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                                        <option value="volvo">sri lanka</option>
+                                        <option value="saab">2</option>
+                                        <option value="fiat">3</option>
+
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Destination
+                            </label>
+                            <div class="form-group">
+                                <input id="Destination" type="text" placeholder="" data-ng-model="destination" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                                        <option value="volvo">sri lanka</option>
+                                        <option value="saab">2</option>
+                                        <option value="fiat">3</option>
+
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Hotel
+                            </label>
+                            <div class="form-group">
+                                <input id="Hotel" type="text" placeholder="" data-ng-model="hotel" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                                        <option value="volvo">sri lanka</option>
+                                        <option value="saab">2</option>
+                                        <option value="fiat">3</option>
+
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Filtertype" class="control-label">
+                                        Filter type
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+
+                                        <select name="filterType" data-ng-model="filterType" ng-options="o for o in filterTypeOption track by o"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions text-right pal">
+                                <button type="submit" class="btn btn-primary" ng-click="getHotelBookingList()">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--END PAGE WRAPPER-->
+
+        <script src="script/jquery-1.10.2.min.js"></script>
+        <script src="script/jquery-migrate-1.2.1.min.js"></script>
+        <script src="script/jquery-ui.js"></script>
+        <script src="script/bootstrap.min.js"></script>
+        <script src="script/bootstrap-hover-dropdown.js"></script>
+        <script src="script/html5shiv.js"></script>
+        <script src="script/respond.min.js"></script>
+        <script src="script/jquery.metisMenu.js"></script>
+        <script src="script/jquery.slimscroll.js"></script>
+        <script src="script/jquery.cookie.js"></script>
+        <script src="script/icheck.min.js"></script>
+        <script src="script/custom.min.js"></script>
+        <script src="script/jquery.news-ticker.js"></script>
+        <script src="script/jquery.menu.js"></script>
+        <script src="script/pace.min.js"></script>
+        <script src="script/holder.js"></script>
+        <script src="script/responsive-tabs.js"></script>
+        <script src="script/jquery.flot.js"></script>
+        <script src="script/jquery.flot.categories.js"></script>
+        <script src="script/jquery.flot.pie.js"></script>
+        <script src="script/jquery.flot.tooltip.js"></script>
+        <script src="script/jquery.flot.resize.js"></script>
+        <script src="script/jquery.flot.fillbetween.js"></script>
+        <script src="script/jquery.flot.stack.js"></script>
+        <script src="script/jquery.flot.spline.js"></script>
+        <script src="script/zabuto_calendar.min.js"></script>
+        <script src="script/index.js"></script>
+        <!--LOADING SCRIPTS FOR CHARTS-->
+        <script src="script/highcharts.js"></script>
+        <script src="script/data.js"></script>
+        <script src="script/drilldown.js"></script>
+        <script src="script/exporting.js"></script>
+        <script src="script/highcharts-more.js"></script>
+        <script src="script/charts-highchart-pie.js"></script>
+        <script src="script/charts-highchart-more.js"></script>
+        <!--CORE JAVASCRIPT-->
+        <script src="script/main.js"></script>
+    </div>
+</body>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/ApiHotelBookingList/HotelBookingListController.js"></script>

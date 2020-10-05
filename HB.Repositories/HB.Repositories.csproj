@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C8D603F-4053-497C-89A8-4CFBB9A2AA9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Repositories</RootNamespace>
+    <AssemblyName>Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JQueryUIHelpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1440f6df3b58b47e, processorArchitecture=MSIL">
+      <HintPath>..\packages\jQueryUIHelpers.Mvc5.3.0.0\lib\net45\JQueryUIHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccommodationRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AgentLogin.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AgentMarkup.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoardRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChainRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Content.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyRate.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationsRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityGroupRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitySumRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitySumRepsBackup.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitySumReps_back.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityTypeRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeoLocationRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupCategoryRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupZoneRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelBoardCodesRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelFacilityRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelPaymentDetail.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelPhoneRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomFacilityRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomStayFacilityRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomStayRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelSegmentRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelTerminalRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZAminity.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZHotelImage.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZHotelSupplier.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZLanguage.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZNearbyPlace.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZPayment.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZPromotion.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZRoomBooking.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZRoomMaster.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZRoomUnavailable.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZUser.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRZUserPrivilege.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImageRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTypeRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IssueRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LanguageRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelHB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelHB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelHB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HotelRsListRep.cs" />
+    <Compile Include="Model\HotelRsRep.cs" />
+    <Compile Include="PromotionRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RateCommentRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoomRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SegmentRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HotelRepositoryService.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TerminalRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZoneRep.cs">
+      <DependentUpon>ModelHB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ModelHB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelHB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelHB.edmx.diagram">
+      <DependentUpon>ModelHB.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HB.Utility\HB.Utility.csproj">
+      <Project>{2a1a76a5-4d61-4ed2-8ea0-0dc90377dde7}</Project>
+      <Name>HB.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelHB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelHB.edmx</DependentUpon>
+      <LastGenOutput>ModelHB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelHB.edmx.sql" />
+    <Content Include="ModelHB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelHB.edmx</DependentUpon>
+      <LastGenOutput>ModelHB.cs</LastGenOutput>
+    </Content>
+    <Content Include="scripts\jquery-ui.unobtrusive-3.0.0.js" />
+    <Content Include="scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

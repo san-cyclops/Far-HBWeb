@@ -1,0 +1,356 @@
+﻿app.controller("APIController", function ($scope, $window, $http, filterFilter, APIService) {
+    var currency_input = 5;
+    var currency_from = "USD"; // currency codes : http://en.wikipedia.org/wiki/ISO_4217
+    var currency_to = "LKR";
+    //getcurrencyConvert();
+
+    $scope.datax = $window.data;
+    $scope.respData = 0;
+    $scope.exercise = 0;
+    $scope.DepartureDate = $window.data.DepartureDate;
+    $scope.ReturnDate = $window.data.ReturnDate,
+
+     $scope.DepartureDatenew = new Date();
+    $scope.ReturnDatenew = new Date();
+ 
+         $scope.new = "dd";
+    
+
+    //var y = $window.data.ReturnDate;
+
+    //var myDepartureDate = new Date(parseInt(x.replace('/Date(', '')));
+    //var myReturnDate = new Date(parseInt(y.replace('/Date(', '')));
+    $scope.loaded = false;
+    getAll();
+    // Star Rating
+
+    $scope.createArray = function (n) {
+        return new Array(n);
+    }
+
+
+
+
+
+
+
+
+    function getAll() {
+        var sub = {
+            Des: $scope.datax.Des.slice($scope.datax.Des.lastIndexOf("(") + 1, $scope.datax.Des.lastIndexOf(")")),
+            DepartureDate: $scope.DepartureDate,
+            ReturnDate: $scope.ReturnDate,
+            Rooms: $scope.datax.Rooms,
+            Adults1: $scope.datax.Adults1,
+            Children1: $scope.datax.Children1,
+            C1Age1: $scope.datax.C1Age1,
+            C1Age2: $scope.datax.C1Age2,
+            C1Age3: $scope.datax.C1Age3,
+            C1Age4: $scope.datax.C1Age4,
+            Adults2: $scope.datax.Adults2,
+            Children2: $scope.datax.Children2,
+            C2Age1: $scope.datax.C2Age1,
+            C2Age2: $scope.datax.C2Age2,
+            C2Age3: $scope.datax.C2Age3,
+            C2Age4: $scope.datax.C2Age4,
+            Adults3: $scope.datax.Adults3,
+            Children3: $scope.datax.Children3,
+            C3Age1: $scope.datax.C3Age1,
+            C3Age2: $scope.datax.C3Age2,
+            C3Age3: $scope.datax.C3Age3,
+            C3Age4: $scope.datax.C3Age4
+        };
+
+        var getAll = APIService.hotelavailability(sub);
+        getAll.then(function (d) {
+            console.log("Succss");
+
+
+            //if (!$.trim(d.data.hotels)) {
+            //    $scope.loaded = false;
+            //    window.location.href = "HotelResultEmpty";
+
+            //}
+            //else {
+            $scope.respData = d.data.hotels;
+            $scope.respDatapara = d.config.data;
+            $scope.loaded = true;
+            //$scope.exercise = $scope.respData;
+            //$scope.filteredExercise = $scope.exercise;
+            $scope.filteredExercise = $scope.respData;
+            $scope.softPrice();
+
+            //}
+
+
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving  the data.');
+
+        });
+    }
+
+    $('.btnsearch').click(function () {
+
+        var x = {
+            departureDatenew: $scope.DepartureDatenew,
+            returnDate: $scope.ReturnDatenew,
+        }
+
+        getAll();
+
+    });
+
+    $scope.runSliderConfig = {
+        min: 0,
+        max: 2000,
+        step: 1000,
+    };
+    $scope.runSliderConfig1 = {
+        min1: 2001,
+        max1: 5000,
+        step: 1000,
+    };
+    $scope.runSliderConfig2 = {
+        min2: 5001,
+        max2: 10000,
+        step: 1000,
+    };
+    $scope.runSliderConfig3 = {
+        min3: 10001,
+        max3: 50000,
+        step: 1000,
+    };
+    $scope.runSliderConfig4 = {
+        min4: 50001,
+        max4: 100000,
+        step: 1000,
+    };
+    $scope.runSliderConfig5 = {
+        min5: 100001,
+        max5: 200000,
+        step: 1000,
+    };
+    $scope.sliderRanges = {
+        runMin: 0,
+        runMax: 2000,
+        runMin1: 2001,
+        runMax1: 5000,
+        runMin2: 5001,
+        runMax2: 10000,
+        runMin3: 10001,
+        runMax3: 50000,
+        runMin4: 50001,
+        runMax4: 100000,
+        runMin5: 100001,
+        runMax5: 200000,
+    };
+
+
+
+
+    //*****************
+
+    function getcurrencyConvert() {
+        var rate = currencyConverter(currency_from, currency_to, currency_input);
+        console.log(rate);
+        $scope.dtss = rate;
+    };
+
+
+    function httpGet(theUrl) {
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false);
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+    function currencyConverter(currency_from, currency_to, currency_input) {
+        var yql_base_url = "https://query.yahooapis.com/v1/public/yql";
+        var yql_query = 'select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20("' + currency_from + currency_to + '")';
+        var yql_query_url = yql_base_url + "?q=" + yql_query + "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+        var http_response = httpGet(yql_query_url);
+        var http_response_json = JSON.parse(http_response);
+        //console.log(http_response);
+
+        return http_response_json.query.results.rate.Rate;
+    }
+
+
+    //*****************
+
+
+
+    $scope.getCount = function (strCat) {
+        return filterFilter($scope.respData.hotels, { hotelstar: strCat }).length;
+    };
+
+    $scope.getPriceRange = function (pricefrom, priceto) {
+        return filterFilter($scope.respData.hotels, function (hotel) {
+            // calculation
+            return hotel.minRate >= pricefrom && hotel.minRate <= priceto;
+        }).length;
+    };
+
+    $scope.filters = {};
+
+    $scope.weDontLike = function () {
+        return function (hotel) {
+            return hotel.minRate >= 0 && hotel.minRate <= 5000;
+        }
+    }
+
+
+
+
+
+    $scope.HotelApiRequestName = function () {
+        var sub = {
+            Des: $scope.datax.Des.slice($scope.datax.Des.lastIndexOf("(") + 1, $scope.datax.Des.lastIndexOf(")")),
+            DepartureDate: $window.data.DepartureDate,
+            ReturnDate: $window.data.ReturnDate,
+            Rooms: $scope.datax.Rooms,
+            Adults1: $scope.datax.Adults1,
+            Children1: $scope.datax.Children1,
+            C1Age1: $scope.datax.C1Age1,
+            C1Age2: $scope.datax.C1Age2,
+            C1Age3: $scope.datax.C1Age3,
+            C1Age4: $scope.datax.C1Age4,
+            Adults2: $scope.datax.Adults2,
+            Children2: $scope.datax.Children2,
+            C2Age1: $scope.datax.C2Age1,
+            C2Age2: $scope.datax.C2Age2,
+            C2Age3: $scope.datax.C2Age3,
+            C2Age4: $scope.datax.C2Age4,
+            Adults3: $scope.datax.Adults3,
+            Children3: $scope.datax.Children3,
+            C3Age1: $scope.datax.C3Age1,
+            C3Age2: $scope.datax.C3Age2,
+            C3Age3: $scope.datax.C3Age3,
+            C3Age4: $scope.datax.C3Age4
+        };
+
+        var getAll = APIService.hotelavailabilityFilter(sub);
+        getAll.then(function (d) {
+            console.log("Succss");
+            // $scope.respData = d;
+            $scope.respData = d.data.hotels;
+            $scope.respDatapara = d.config.data;
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving  the data.');
+            alert("Oops! Something went wrong while retrieving  the data.");
+        });
+
+
+    };
+
+    $scope.SubscribeEmail = "";
+    $scope.SubscribeName = "";
+
+    $scope.sendSubscribeMail = function ()    //**************************subscribe mail**************************
+    {
+        var sub = {
+            SubscribeEmail: $scope.SubscribeEmail,
+            SubscribeName: $scope.SubscribeName
+        };
+
+        //$http.post('/Home/sendSubscribeMail', sub);
+        $http.post('/Home/sendSubscribeMail', sub)
+           .success(function () {
+               alert("Subscribed");
+               document.clear();
+           })
+
+
+    };
+    $scope.collection = ["1", "2"];
+    //sorting
+    $scope.softName = function () {
+        $scope.sortExpression = "name";
+        $scope.tog = 1;
+
+    };
+    $scope.softPrice = function () {
+        $scope.sortExpression = "minRate";
+        $scope.tog = 2;
+
+    };
+
+
+    $scope.mySortFunction = function (filteredExercise) {
+        if (isNaN(filteredExercise[$scope.sortExpression]))
+            return filteredExercise[$scope.sortExpression];
+        return parseInt(filteredExercise[$scope.sortExpression]);
+    }
+    //sorting
+
+  
+
+
+})  
+            
+
+  
+
+
+       
+
+
+
+
+
+
+
+app.filter("rounded", function () {
+    return function (val) {
+        return val.toFixed(2);
+    }
+});
+
+
+app.filter('hourMinFilter', function () {
+    return function (value) {
+        //if (value === 120) return 'All'
+        return value;
+    };
+});
+
+app.filter('rangeFilter', function () {
+    return function (items, sliderRanges) {
+
+        /*
+          This is working well now, it was really  
+        */
+        var filtered = [];
+        var runMin = parseInt(sliderRanges.runMin);
+        var runMax = parseInt(sliderRanges.runMax);
+        var swimMin = parseInt(sliderRanges.swimMin);
+        var swimMax = parseInt(sliderRanges.swimMax);
+        var runMin1 = parseInt(sliderRanges.runMin1);
+        var runMax1 = parseInt(sliderRanges.runMax1);
+        var runMin2 = parseInt(sliderRanges.runMin2);
+        var runMax2 = parseInt(sliderRanges.runMax2);
+        var runMin3 = parseInt(sliderRanges.runMin3);
+        var runMax3 = parseInt(sliderRanges.runMax3);
+        var runMin4 = parseInt(sliderRanges.runMin4);
+        var runMax4 = parseInt(sliderRanges.runMax4);
+        var runMin5 = parseInt(sliderRanges.runMin5);
+        var runMax5 = parseInt(sliderRanges.runMax5);
+        angular.forEach(items, function (item) {
+            if ((item.minRate >= runMin && item.minRate <= runMax) || (item.minRate >= runMin1 && item.minRate <= runMax1) || (item.minRate >= runMin2 && item.minRate <= runMax2) || (item.minRate >= runMin3 && item.minRate <= runMax3) || (item.minRate >= runMin4 && item.minRate <= runMax4) || (item.minRate >= runMin5 && item.minRate <= runMax5)) {
+                filtered.push(item);
+            }
+        });
+
+        return filtered;
+    };
+
+
+
+});
+
+
+
+
+
+
+

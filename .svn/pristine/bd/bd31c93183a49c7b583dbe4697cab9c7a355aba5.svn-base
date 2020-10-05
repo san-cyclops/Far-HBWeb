@@ -1,0 +1,117 @@
+﻿var app;
+
+(function () {
+
+    app = angular.module("HotelSupplier", []);
+
+})();
+
+
+app.controller('supplierController', function ($scope,$http) {
+
+    $scope.code = "";
+    $scope.name = "";
+    $scope.address = "";
+    $scope.srating = "";
+    $scope.cperson = "";
+    $scope.owner = "";
+    $scope.email = "";
+    $scope.telephone = "";
+    $scope.long = "";
+    $scope.lat = "";
+    $scope.description = "";
+    $scope.files = "";
+    $scope.files = [];
+
+    $scope.save = function ()
+    {
+
+      var email = document.getElementById("validemail").value;
+      var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+
+      if (!re.test(email)) {
+        
+          window.alert("Please enter the Valid EmailAddress");
+          return false;
+      }
+
+
+      if ($scope.Code == "" || $scope.name == "" || $scope.address == "" || $scope.srating == "" || $scope.cperson == "" || $scope.owner == "" || $scope.email == "" || $scope.telephone == "" || $scope.long == "" || $scope.lat == "" || $scope.description == "" || $scope.files == "") {
+          alert("Please fill out this field.");
+          return false;
+
+
+      }
+      var sub = {
+          Code: $scope.code,
+          Name: $scope.name,
+          Address: $scope.address,
+          Srating: $scope.srating,
+          Contactperson: $scope.cperson,
+          Owner: $scope.owner,
+          Email: $scope.email,
+          Telephone:$scope.telephone,
+          Long: $scope.long,
+          Lat: $scope.lat,
+          Description: $scope.description,
+          Files: $scope.files,
+      };
+
+
+      var getHotelSupplierDetails = "";
+
+
+      var post = $http({
+          method: "POST",
+          url: "/Home/GetHotelSupplierData",
+          dataType: 'json',
+          data: sub,
+          headers: { "Content-Type": "application/json" }
+      });
+      
+      post.then(function (d) {
+
+          console.log("success");
+          $window.alert(d.data);
+
+      }, function (d) {
+          $window.alert("Oops!! Something went wrong!!!!.");
+      });
+
+    }
+    });
+
+
+app.directive('ngFileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.ngFileModel);
+            var isMultiple = attrs.multiple;
+            var modelSetter = model.assign;
+            element.bind('change', function () {
+                var values = [];
+                angular.forEach(element[0].files, function (item) {
+                    var value = {
+                        // File Name 
+                        name: item.name,
+                        //File Size 
+                        size: item.size,
+                        //File URL to view 
+                        url: URL.createObjectURL(item),
+                        // File Input Value 
+                        _file: item
+                    };
+                    values.push(value);
+                });
+                scope.$apply(function () {
+                    if (isMultiple) {
+                        modelSetter(scope, values);
+                    } else {
+                        modelSetter(scope, values[0]);
+                    }
+                });
+            });
+        }
+    };
+}]);

@@ -1,0 +1,171 @@
+﻿
+var app;
+
+(function () {
+
+    app = angular.module("RoomMaster", []);
+
+})();
+
+app.service('RoomService', function ($http) {
+
+    this.setRoomDetails = function (sub) {
+
+        return $http({
+            data: sub,
+            method: "post",
+            contentType: "application/json; charset=utf-8",
+            url: "/home/GetHotelRezData",
+
+        });
+
+
+    };
+});
+
+
+
+
+
+
+app.controller('demoController', function ($scope, $http, $window) {
+
+
+    $scope.hname = "";
+    $scope.address = "";
+    $scope.roomid = "";
+    $scope.refference = "";
+    $scope.board = "";
+    $scope.room = "";
+    $scope.aminities = "";
+    $scope.amitype = "";
+    $scope.name = "";
+    $scope.distance = "";
+    $scope.price = "";
+    $scope.aminitylist = "";
+    $scope.aminitytypelist = "";
+
+    $scope.roomtype = ["Deluxe Room", "Superior Room", "Executive Room", "Pacific Room", " Pacific Suite", "Deluxe Suite", "Executive Suite", "Presidential Suite"];
+    $scope.aminity = ["Balcony", "Cable channels", "Telephone", "Flat-screen TV", "Iron", "Suit press", "Ironing facilities", "Sitting area", "Heating", "Sofa", "Soundproof", "Wardrobe/Closet", "Cleaning products", "Hairdrye", "WiFi", "Free toiletries", "Shower", "Toilet", "Bathroom", "Slippers", "Bathtub or shower", "Guest bathroom", "Bidet", "Toilet paper", "Dining area", "Electric kettle", "Barbecue", "Dining table", "Outdoor furniture", "Soundproof", "Outdoor dining area", "Wake-up service", "Towels/Sheets", "Linens", "Satellite channels", "Suit press", "Outdoor furniture", "Outdoor dining area", "Free Parking", "Wardrobe/Closet", "Non-smoking Rooms", "Airport Shuttle", "Family Rooms", "Tour Desk", "Room Service", "Very Good Breakfast"];
+    $scope.btype = ["Full Board", "Half Board", "Room Only"];
+    $scope.atype = ["Free","Paid"]
+
+
+    var x = 0;
+
+    $scope.add = function () {
+        if ($scope.name == ""  || $scope.distance == null) {
+            alert("Please fill out this field.");
+            return false;
+        }
+
+        console.log($scope.name);
+        
+        if (x == 0) {
+
+            $scope.items = [{
+                name: $scope.name,
+                distance: $scope.distance
+
+            }];
+           
+        }
+        else {
+
+            $scope.items.push({
+
+                name: $scope.name,
+                distance: $scope.distance
+
+            });
+          
+            console.log("dd");
+           
+        }
+
+        x++;
+        
+    };
+
+
+    $scope.removeitems = function (index) {
+        $scope.items.splice(index, 1);
+    };
+
+    //begin aminity list
+
+    $scope.aminitylist = [];
+    $scope.aminitytypelist = [];
+
+    $scope.add1 = function () {
+        if ($scope.aminities == "" || $scope.amitype == "") {
+            alert("Please fill out this field.");
+            return false;
+        }
+
+
+        $scope.aminitylist.push($scope.aminities);
+        $scope.aminities = '';
+        $scope.aminitytypelist.push($scope.amitype);
+        $scope.amitype = '';
+        //$scope.aminitylist.add($scope.aminities);
+    };
+
+    $scope.remove = function (index) {
+
+        $scope.aminitylist.splice(index, 1);
+        $scope.aminitytypelist.splice(index, 1);
+    };
+
+    //end aminity list
+
+    $scope.save = function () {
+        if ($scope.hname == "" || $scope.address == "" || $scope.roomid == "" || $scope.refference == "" || $scope.board == "" || $scope.room == "" || $scope.price == "" || $scope.aminitylist == "" || $scope.name == "" || $scope.distance == "") {
+            alert("Please fill out this field.");
+            return false;
+          
+
+        }
+        var sub = {
+            HotelName: $scope.hname,
+            Address: $scope.address,
+            RoomId: $scope.roomid,
+            Refference: $scope.refference,
+            BoardType: $scope.board,
+            RoomType: $scope.room,
+            Price: $scope.price,
+            Aminities: $scope.aminities,
+            NearbyName: $scope.name,
+            NearbyDistance: $scope.distance,
+            Aminitylist: $scope.aminitylist,   
+            NearByPlaces:$scope.items
+
+        };
+        console.log($scope.hname);
+        console.log($scope.aminitylist);
+        console.log($scope.items); 
+
+        var getRoomDetails = "";
+       // getRoomDetails = RoomService.setRoomDetails(sub);
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/GetHotelRezData",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        
+        
+    }
+
+
+
+
+
+});
+
+
+
+

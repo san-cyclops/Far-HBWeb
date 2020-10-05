@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model string
+
+<p>Value: @Model</p>
+ 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Paycorp Payment Solutions - PayCentre Web</title>
+</head>
+<body>
+    <div>
+        <img src="merchant-logo.png" alt="Merchant Logo" />
+    </div>
+    <form id="FrmPaymentSubmit" runat="server">
+        <div>
+            <iframe id="IfmCardData" src="@Model" style="border:none; overflow:hidden; width:600px; height:400px;"></iframe>
+        </div>
+    </form>
+</body>
+</html>

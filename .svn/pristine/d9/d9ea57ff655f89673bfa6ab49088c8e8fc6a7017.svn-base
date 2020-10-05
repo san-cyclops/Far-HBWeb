@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace HB.HotelRez.Models
+{
+    public class HotelSupplierData
+    {
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+
+        public string Address { get; set; }
+
+        public string Srating { get; set; }
+
+        public string Contactperson { get; set; }
+      
+        public string Owner { get; set; }
+
+        public string Email { get; set; }
+
+        public string Telephone { get; set; }
+
+        public string Long { get; set; }
+
+        public string Lat { get; set; }
+
+        public string Description { get; set; }
+
+        public string Files { get; set; }
+
+        public string InternetAvailable { get; set; }
+
+        public string InternetType { get; set; }
+
+        public string Where { get; set; }
+
+        public string ParkAvailable { get; set; }
+
+        public string Private { get; set; }
+
+        public string Onsite { get; set; }
+
+        public string Reservation { get; set; }
+
+        public string Price { get; set; }
+
+        public string ChildrenYes { get; set; }
+
+        public string ChildrenNo { get; set; }
+
+        public string Pets { get; set; }
+
+        public string Language { get; set; }
+
+        public string AnotherLanguage { get; set; }
+
+        public string CheckInTime { get; set; }
+
+        public string CheckOutTime { get; set; }
+
+        public List<string> UrlList { get; set; }
+    }
+}

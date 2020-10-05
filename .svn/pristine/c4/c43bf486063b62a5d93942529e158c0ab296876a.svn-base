@@ -1,0 +1,893 @@
+
+using HB.HotelRez.Models;
+using Repositories;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+
+
+namespace HB.HotelRez.Controllers
+{
+    public enum formId
+    {
+        Login = 1,
+        RoomMaster = 2 ,
+        HotelSupplier = 3,
+        UserForm = 4,
+        RoomUnavailable = 5,
+        Promotion = 6,
+        RoomPayment = 7,
+        BookingCancellation = 8,
+        RoomBooking = 9,
+
+    } 
+
+    public class HomeController : Controller
+    {
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Login page.";
+
+            return View();
+        }
+
+        [Route("home/login")]
+        [HttpPost]
+        public JsonResult login(LoginData model)
+        {
+            var db = new HBNEWEntities();
+            try {
+
+                var logindata = db.HRZUsers.Where(x => x.UserName == model.username && x.PassWord == model.password).First();
+
+                if (logindata != null)
+                {
+                    if (logindata.UserType == 1)
+                    {
+                      Session["HotelCodeSession"] = logindata.HotelCode;
+                      Session["LoginUser"] = logindata.UserType;
+                      return Json("0");
+                    }
+                    else if (logindata.UserType == 2)
+                    {
+                      Session["HotelCodeSession"] = logindata.HotelCode;
+                      Session["LoginUser"] = logindata.UserType;
+                        return Json("1");
+                    }
+
+                    else if (logindata.UserType == 3)
+                    {
+                      Session["HotelCodeSession"] = logindata.HotelCode;
+                      Session["LoginUser"] = logindata.UserType;
+                        return Json("2");
+                    }
+
+                    else
+                    {
+                      return Json("User Type not inserted by the admin!");
+                     }
+
+                   
+                }
+                else
+                {
+                    return Json("You are not registered!! Intruder Detected!! Taking defensive actions!!");
+                }
+           
+
+            }
+            catch (Exception ex) {
+
+                
+            }
+
+            return Json("Wrong username or password", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RoomMaster()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.RoomMaster);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+
+            
+        }
+
+        public ActionResult HotelSupplier()
+        {
+            var db = new HBNEWEntities();
+            try {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.HotelSupplier);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+                   
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+               else
+                    return RedirectToAction("NoPermission", "Home");
+
+                
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+        }
+
+        public ActionResult NoPermission()
+        {
+            return View();
+        }
+
+      [HttpPost]
+        public JsonResult GetHotelSupplierData(HotelSupplierData hotelSupplierData)
+        {
+            try
+
+            {
+               HRZHotelSupplier hotelsupplier = new HRZHotelSupplier();
+
+
+                hotelsupplier.HotelCode = hotelSupplierData.Code;
+                hotelsupplier.HotelName = hotelSupplierData.Name;
+                hotelsupplier.Address = hotelSupplierData.Address;
+                hotelsupplier.StarRating = hotelSupplierData.Srating;
+                hotelsupplier.ContactPerson = hotelSupplierData.Contactperson;
+                hotelsupplier.Owner = hotelSupplierData.Owner;
+                hotelsupplier.Email = hotelSupplierData.Email;
+                hotelsupplier.Telephone = hotelSupplierData.Telephone;
+                hotelsupplier.Latitude = hotelSupplierData.Lat;
+                hotelsupplier.Longitude = hotelSupplierData.Long;
+                hotelsupplier.Description = hotelSupplierData.Description;
+
+                using (var db = new HBNEWEntities())
+                {
+                   
+                    db.HRZHotelSuppliers.Add(hotelsupplier);
+                    db.SaveChanges();
+                    
+                }
+
+               
+
+                return Json("Successfully Saved");
+
+            }
+
+            catch (Exception ex)
+            {
+
+
+                return Json("oOps! something went wrong");
+
+            }
+        }
+
+
+        public ActionResult UserForm()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.UserForm);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+        }
+        [HttpPost]
+        public JsonResult GetUserFormData(UserFormData userFormData)
+        {
+
+            try
+
+            {
+                HRZUser user = new HRZUser();
+
+
+                if (userFormData.UserType == "Admin")
+                {
+                    user.UserType = 1;
+                }
+                if (userFormData.UserType == "User")
+                {
+                    user.UserType = 2 ;
+                }
+                if (userFormData.UserType == "Guest")
+                {
+                    user.UserType = 3;
+                }
+
+                user.UserName = userFormData.UserName;
+                user.PassWord = userFormData.Password;
+
+
+                using (var db = new HBNEWEntities())
+                {
+
+
+
+
+                    db.HRZUsers.Add(user);
+                    db.SaveChanges();
+
+
+
+                }
+
+                return Json("Successfully Saved");
+
+            }
+
+            catch (Exception ex)
+            {
+
+
+                return Json("oOps! something went wrong");
+
+            }
+        }
+
+
+
+        public ActionResult RoomUnavailable()
+        {
+            //var db = new HBNEWEntities();
+            //try
+            //{
+            //    var user = Convert.ToInt32(Session["LoginUser"]);
+            //    var userint = Convert.ToInt32(user);
+            //    var formIdx = Convert.ToInt32(formId.HotelSupplier);
+            //    var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+            //    if (privilage.IsAccess == 1)
+            //    {
+            //        UnabailableList rm = new UnabailableList();
+            //        rm.Rooms = GetRoomId();
+            //        return View(rm);
+            //    }
+            //    else if (privilage.IsAccess == 0)
+            //    {
+            //        return RedirectToAction("NoPermission", "Home");
+            //    }
+            //    else
+            //        return RedirectToAction("NoPermission", "Home");
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    return RedirectToAction("NoPermission", "Home");
+            //}
+            try
+            {
+
+
+                // ViewBag.Message = "Room Unavailable Master page.";
+                //  return View();
+                UnabailableList rm = new UnabailableList();
+                        rm.Rooms = GetRoomId();
+                        return View(rm);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public ActionResult AdminDashboard()
+        {
+            ViewBag.Message = "Admin Dashboard page.";
+
+            return View();
+        }
+        public ActionResult Promotion()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.Promotion);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+        }
+
+        public ActionResult RoomPayment()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.RoomPayment);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+        }
+        [HttpPost]
+        public JsonResult SavePromotion(PromotionData promotiondata)
+        {
+            try {
+                HRZPromotion promotionDb = new HRZPromotion();
+                promotionDb.RoomID = promotiondata.RoomID;
+                promotionDb.DateFrom = promotiondata.DateFrom;
+                promotionDb.DateTo = promotiondata.DateTo;
+                promotionDb.DiscountPercentage = promotiondata.DateTo;
+                promotionDb.DiscountValue = promotiondata.DateTo;
+                promotionDb.PromotionType = promotiondata.DateTo;
+
+                using (var db = new HBNEWEntities())
+                {
+
+                    db.HRZPromotions.Add(promotionDb);
+                    db.SaveChanges();
+
+                }
+
+
+
+
+            }
+            catch (Exception ex) {
+
+
+            }
+
+
+            return Json("Successfully Saved");
+        }
+
+
+
+        [HttpPost]
+        public JsonResult GetHotelRezData(HotelRezData hotelRezData)
+        {
+
+            try
+
+            {
+                var hotelcode = Session["HotelCodeSession"].ToString();
+
+                using (var db = new HBNEWEntities())
+                {
+
+                    HRZRoomMaster roomaster = new HRZRoomMaster();
+
+                    roomaster.Address = hotelRezData.Address;
+                    roomaster.HotelName = hotelRezData.HotelName;
+                    roomaster.RoomID = hotelRezData.RoomId;
+                    roomaster.RoomType = hotelRezData.RoomType;
+                    roomaster.Refference = hotelRezData.Refference;
+                    roomaster.Price = hotelRezData.Price;
+                    roomaster.BoardType = hotelRezData.BoardType;
+                    roomaster.HotelCode = hotelcode;
+                   
+
+                    db.HRZRoomMasters.Add(roomaster);
+                    db.SaveChanges();
+
+                    foreach (var aminity in hotelRezData.Aminitylist)
+                    {
+                        HRZAminity amminity = new HRZAminity();
+
+                        amminity.RoomID = hotelRezData.RoomId;
+                        amminity.Name = aminity;
+                        db.HRZAminities.Add(amminity);
+
+                    }
+                    db.SaveChanges();
+
+                    foreach (var nearbyplaces in hotelRezData.NearByPlaces)
+                    {
+                        HRZNearbyPlace nearbyplace = new HRZNearbyPlace();
+
+                        nearbyplace.RoomID = hotelRezData.RoomId;
+                        nearbyplace.NearbyName = nearbyplaces.name;
+                        nearbyplace.NearbyDistance = nearbyplaces.distance;
+
+                        db.HRZNearbyPlaces.Add(nearbyplace);
+
+                    }
+                    db.SaveChanges();
+
+                }
+
+                return Json("Successfully Saved");
+
+            }
+
+            catch (Exception ex)
+            {
+
+
+                return Json("oOps! something went wrong");
+
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult GetunAvailableDates(string roomID)
+         {
+            try
+            {
+
+                UnabailableList datelist = new UnabailableList();
+                datelist.Rooms = unAvailableDateLst(roomID);
+
+                return Json(datelist.Rooms);
+            }
+            catch (Exception ex)
+            {
+                UnabailableList datelist = new UnabailableList();
+                return Json(datelist.Rooms);
+            }
+
+        }
+        public string getNewBookingNo()
+        {
+            string DocNo = "";
+            string GetNewCode = "";
+            using (var db = new HBNEWEntities())
+            {
+                DocumentRep documentRep = new DocumentRep();
+                documentRep =GetDocumentNoByForm("BookingConferm");
+                GetNewCode = "B" + new StringBuilder().Insert(0, "0", (6 - (1 + DocNo.Length))) +
+                                documentRep.DocumentNo;
+
+            }
+                return GetNewCode;
+
+        }
+        public DocumentRep GetDocumentNoByForm(string docType)
+        {
+            using (var db = new HBNEWEntities())
+            {
+                DocumentRep documentRep = new DocumentRep();
+                var documentReps = db.DocumentReps.Where(ai => ai.DocumentType == docType).FirstOrDefault();
+                if (documentReps != null) {
+
+                    documentReps.DocumentNo = documentReps.DocumentNo + 1;
+                    var Entry = db.Entry(documentRep);
+                    db.Entry(documentReps).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+
+               // UpdateDocumentNo(docType);
+
+                return documentReps;
+            }
+        }
+
+       
+
+        [HttpPost]
+        public JsonResult GetRoomBookingDetails(RoomBookingData roombookingdata)
+        {
+            try {
+                string bookingNumber = getNewBookingNo();
+
+                if (bookingNumber != null)
+                { 
+                using (var db = new HBNEWEntities())
+                {
+                    HRZRoomBooking rmbking = new HRZRoomBooking();
+                    rmbking.BookingNo = bookingNumber;
+                    rmbking.HotelCode = "hb00001";
+                    rmbking.RoomID = roombookingdata.RoomID;
+                    rmbking.DateFrom = roombookingdata.DateFrom;
+                    rmbking.DateTo = roombookingdata.DateTo;
+                    rmbking.Adult1Address = roombookingdata.Adult1Address;
+                    rmbking.Adult1Email = roombookingdata.Adult1Email;
+                    rmbking.Adult1FirstName = roombookingdata.Adult1FirastName;
+                    rmbking.Adult1LastName = roombookingdata.Adult1LastName;
+                    rmbking.Adult1NICNo = roombookingdata.Adult1NICNo;
+                    rmbking.Adult1Telephone = roombookingdata.Adult1Telephone;                
+                    rmbking.Adult2FirstName = roombookingdata.Adult2FirastName;
+                    rmbking.Adult2LastName = roombookingdata.Adult2LastName;                
+                    rmbking.Adult3FirstName = roombookingdata.Adult3FirastName;
+                    rmbking.Adult3LastName = roombookingdata.Adult3LastName;                
+                    rmbking.Chidl3Name = roombookingdata.Child3Name;
+                    rmbking.Child3Age = roombookingdata.Child3Age;
+                    rmbking.Chil21Name = roombookingdata.Child2Name;
+                    rmbking.child2Age = roombookingdata.Child2Age;
+                    rmbking.Child1Name = roombookingdata.Child1Name;
+                    rmbking.Child1Age = roombookingdata.Child1Age;
+
+                    db.HRZRoomBookings.Add(rmbking);
+                    db.SaveChanges();
+
+                }
+
+            }
+                return Json("Successfully Saved");
+            }
+            catch (Exception ex) {
+
+                return Json("oOps! something went wrong");
+            }
+           
+        }
+
+
+        public ActionResult BookingCancellation()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.BookingCancellation);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    return View();
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+        }
+        public ActionResult RoomBooking()
+        {
+            var db = new HBNEWEntities();
+            try
+            {
+                var user = Convert.ToInt32(Session["LoginUser"]);
+                var userint = Convert.ToInt32(user);
+                var formIdx = Convert.ToInt32(formId.RoomBooking);
+                var privilage = db.HRZUserPrivileges.Where(x => x.UserType == user && x.FormID == formIdx).FirstOrDefault();
+                if (privilage.IsAccess == 1)
+                {
+                    UnabailableList rmid = new UnabailableList();
+
+                    rmid.Rooms = GetRoomId();
+                    return View(rmid);
+
+                }
+                else if (privilage.IsAccess == 0)
+                {
+                    return RedirectToAction("NoPermission", "Home");
+                }
+                else
+                    return RedirectToAction("NoPermission", "Home");
+
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+           
+        }
+
+        /// <summary>
+        /// use to save unavailable date list
+        /// </summary>
+        /// <param name="unabailableList"></param>
+        /// <returns>By Anu</returns>
+        [HttpPost]
+        public JsonResult SaveToDatabase(UnabailableList unabailableList)
+        {
+            try
+            {
+
+                string roomId = unabailableList.RoomID.Trim().ToString();
+                using (var db = new HBNEWEntities())
+                {
+                    foreach (var item in unabailableList.UnavailableDates)
+                    {
+
+                        //DateTime uDate = UnixTimeStampToDateTime(double.Parse(item.Trim().ToString().Substring(0, 10)));
+                       
+
+                        db.HRZRoomUnavailables.Add(new HRZRoomUnavailable { RoomID = roomId, Date = item.Trim() });
+                        db.SaveChanges();
+                    }
+
+
+                }
+
+                return Json("Successfully Saved");
+            }
+            catch (Exception ex)
+            {
+                return Json("oOps! something went wrong");
+            }
+        }
+
+        /// <summary>
+        /// use to convert date from milisecond to date
+        /// by Anu
+        /// </summary>
+        /// <param name="unixTimeStamp"></param>
+        /// <returns></returns>
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
+        /// <summary>
+        /// Use to get unavailable date list
+        /// by Anu
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult getUnavailableDateLst(string roomId)
+        {
+            try
+            {
+
+                UnabailableList x = new UnabailableList();
+                x.Rooms = unAvailableDateLst(roomId);
+
+               // var a = x.Rooms.Select(s => s.Text);
+
+                return Json(x.Rooms.ToArray());
+            }
+            catch (Exception ex)
+            {
+                return Json("oOps! something went wrong");
+            }
+        }
+        public static List<SelectListItem> unAvailableDateLst(string roomId)
+        {
+            try
+            {
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                using (var db = new HBNEWEntities())
+                {
+
+                    var unDate = db.HRZRoomUnavailables.Where(x => x.RoomID.Equals(roomId)).ToList();
+
+
+                    foreach (var x in unDate)
+                    {
+
+                        
+                        items.Add(new SelectListItem
+                        {
+                            Text = GetCurrentUnixTimestampMillis(DateTime.Parse(x.Date)).ToString()
+                        });
+                    }
+
+                }
+
+                return items;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Use to convert date to milisecond
+        /// by anu
+        /// </summary>
+        /// <param name="localDateTime"></param>
+        /// <returns></returns>
+        public static long GetCurrentUnixTimestampMillis(DateTime localDateTime)
+        {
+            DateTime univDateTime;           
+            univDateTime = localDateTime.ToUniversalTime();
+            return (long)(univDateTime - UnixEpoch).TotalMilliseconds;
+        }
+
+        [HttpPost]
+        public JsonResult BookingList(RoomBookingData roomBookingData)
+        {
+            try
+            {
+
+                DateTime sDate = Convert.ToDateTime(roomBookingData.DateFrom.Trim());
+
+               string date = sDate.ToShortDateString();
+                using (var db = new HBNEWEntities())
+                {
+                    var bookingLst = db.HRZRoomBookings.Where(x => x.DateFrom.Equals(date) && x.IsActive == true).ToList();
+
+                 
+                    return Json(bookingLst);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json("oOps! something went wrong");
+            }
+        }
+
+        //[HttpGet]
+        //public List<UnabailableList> GetRoomId()
+        //{
+        //    try
+        //    {
+        //        List<UnabailableList> unabailableList = new List<UnabailableList>();
+        //        using (var db = new HBNEWEntities())
+        //        {
+
+        //            var roomid = db.HRZRoomMasters.Select(x => new
+        //            {
+        //                id = x.RoomId
+
+        //            }).ToList();
+
+        //            foreach (var x in roomid)
+        //            {
+        //                unabailableList.Add(new UnabailableList
+        //                {
+        //                    RoomID = x.id
+
+        //                });
+        //            }
+
+        //        }
+
+
+        //        return unabailableList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        private static List<SelectListItem> GetRoomId()
+        {
+            try
+            {
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                using (var db = new HBNEWEntities())
+                {
+
+                    var roomid = db.HRZRoomMasters.Select(x => new
+                    {
+
+                        rId = x.RoomID
+
+                    }).ToList();
+
+                    foreach (var x in roomid)
+                    {
+                        items.Add(new SelectListItem
+                        {
+                            Text = x.rId
+
+                        });
+                    }
+
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+    }
+}

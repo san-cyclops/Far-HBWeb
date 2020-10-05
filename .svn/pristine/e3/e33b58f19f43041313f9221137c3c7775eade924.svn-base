@@ -1,0 +1,47 @@
+﻿angular.module('app', ['gm.datepickerMultiSelect'])
+.controller('cancellationCtrl', function ($http, $scope) {
+    this.activeDate;
+    this.roomID;
+    this.selectedDates = [new Date().setHours(0, 0, 0, 0)];
+    $scope.respData = [];
+
+    this.identity = angular.identity;
+   
+    this.getData = function () {
+        this.activeDate;
+        if (this.activeDate == "") {
+            alert("Please select Date.");
+            return false;
+        }
+
+        var sub = {
+            DateFrom: this.activeDate,
+           
+        };
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/BookingList",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.then(function (d) {
+
+           
+            $scope.respData = d.data;
+           
+           // alert(this.respData[0].BookingNo);
+            console.log("success");
+        }, function (d) {
+
+            alert("Oops!! Something went wrong.");
+
+        });
+
+
+    }
+
+   
+});

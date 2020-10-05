@@ -1,0 +1,115 @@
+﻿var app = angular.module('mymodule', []);
+
+
+
+app.service('studentService', function ($http) {
+    this.get = function (HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x, Children1x, C1Age1x, C1Age2x, C1Age3x, C1Age4x, Adults2x, Children2x, C2Age1x, C2Age2x, C2Age3x, C2Age4x, Adults3x, Children3x, C3Age1x, C3Age2x, C3Age3x, C3Age4x) {
+        var url = "/api/HotelBooking/GetHotelDetailsRS?HotelCode=" + HotelCodex + "&des=" + Destinationx + "&DepartureDate=" + DepartureDatex + "&ReturnDate=" + ReturnDatex + "&Rooms=" + Roomsx + "&Adults1=" + Adults1x + "&Children1=" + Children1x + "&C1Age1=" + C1Age1x + "&C1Age2=" + C1Age2x + "&C1Age3=" + C1Age3x + "&C1Age4=" + C1Age4x + "&Adults2=" + Adults2x + "&Children2=" + Children2x + "&C2Age1=" + C2Age1x + "&C2Age2=" + C2Age2x + "&C2Age3=" + C2Age3x + "&C2Age4=" + C2Age4x + "&Adults3=" + Adults3x + "&Children3=" + Children3x + "&C3Age1=" + C3Age1x + "&C3Age2=" + C3Age2x + "&C3Age3=" + C3Age3x + "&C3Age4=" + C3Age4x;  
+        var response = $http.get(url);
+        return response;
+
+    };
+
+    this.getratecommnet = function (sub) {
+        var url2 = "/api/HotelBooking/GetCheckRateRs?rateKey=" + sub;
+        var response2 = $http.get(url2);
+        return response2;
+    };
+
+
+});
+
+app.controller('ctrl', function ($scope, $q, $window,$http, studentService, filterFilter) {
+    $scope.hClass = [];
+    $scope.hMClass = [];
+    $scope.respData = [];
+    $scope.loaded = false;
+    $scope.loaded1 = false;
+    $scope.loaded2 = false;
+    $scope.rate = "";
+ 
+    $scope.datax = $window.data;
+
+    var x = $window.data.DepartureDate;
+    var y = $window.data.ReturnDate;
+
+    var myDepartureDate = new Date(parseInt(x.replace('/Date(', '')));
+    var myReturnDate = new Date(parseInt(y.replace('/Date(', '')));
+
+    loadData($scope.datax.HotelCode, $scope.datax.Des, $scope.datax.DepartureDate, $scope.datax.ReturnDate, $scope.datax.Rooms, $scope.datax.Adults1, $scope.datax.Children1, $scope.datax.C1Age1, $scope.datax.C1Age2, $scope.datax.C1Age3, $scope.datax.C1Age4, $scope.datax.Adults2, $scope.datax.Children2, $scope.datax.C2Age1, $scope.datax.C2Age2, $scope.datax.C2Age3, $scope.datax.C2Age4, $scope.datax.Adults3, $scope.datax.Children3, $scope.datax.C3Age1, $scope.datax.C3Age2, $scope.datax.C3Age3, $scope.datax.C3Age4);
+
+
+    function loadData(HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x,Children1x,C1Age1x,C1Age2x,C1Age3x,C1Age4x,Adults2x,Children2x,C2Age1x,C2Age2x,C2Age3x,C2Age4x,Adults3x,Children3x,C3Age1x,C3Age2x,C3Age3x,C3Age4x) {
+
+        var promiseStudent = studentService.get(HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x, Children1x, C1Age1x, C1Age2x, C1Age3x, C1Age4x, Adults2x, Children2x, C2Age1x, C2Age2x, C2Age3x, C2Age4x, Adults3x, Children3x, C3Age1x, C3Age2x, C3Age3x, C3Age4x);
+
+        $scope.combineResult = $q.all([
+                promiseStudent
+        ]).then(function (resp) {
+                $scope.respData = resp[0].data.hotels;
+            $scope.rooms = resp[0].data.hotels.hotels[0].rooms;
+            $scope.facilities = resp[0].data.hotels.hotels[0].facilityrep;
+            $scope.DateFromx = $scope.respData.checkIn;
+            $scope.DateTox = $scope.respData.checkOut;
+            $scope.loaded = true;
+
+
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving the data.');
+            alert("Oops! Something went wrong while retrieving the data.");
+        }); 
+
+    }
+     
+
+    $scope.removeTask = function (taskId) {
+ 
+        var removeTask = studentService.getratecommnet(taskId);
+        removeTask.then(function (d) {
+            console.log("Succss");
+
+            // $scope.respData = d;
+            $scope.rate = d.data;
+            $scope.loaded1 = true;
+            $scope.loaded2 = true;
+
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving the data.');
+            alert("Oops! Something went wrong while retrieving the data.");
+        });
+
+    };
+ 
+    $scope.sendMail = function (Namex, HotelNamex, HotelAddressx, HotelPhonex, DateFromx, DateTox, Paxx, Destinationx, RoomTypex, Boardx, Pricex,Descriptionx) {
+        var post = $http({
+            method: "POST",
+            url: "/Home/SendMail",
+            dataType: 'json',
+            data: {
+                Name: Namex,
+                HotelName: HotelNamex,
+                HotelAddress: HotelAddressx,
+                HotelPhone: $scope.HotelPhonex,
+                DateFrom: DateFromx,
+                DateTo: DateTox,
+                Pax: Paxx,
+                Destination: Destinationx,
+                RoomType: RoomTypex,
+                Board: Boardx,
+                Price: Pricex,
+                Description : Descriptionx
+            },
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.success(function(data, status) {
+            $window.alert("Do not interrupt with the browser. You are being redirect to the payment page.");
+        });
+
+        post.error(function(data, status) {
+            $window.alert(data.Message);
+        });
+    };
+
+
+});

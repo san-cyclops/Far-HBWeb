@@ -1,0 +1,62 @@
+﻿
+var app = angular.module('userForm', []);
+app.controller('userController', function ($scope, $http) {
+    $scope.username = "";
+    $scope.usertype = "";
+    $scope.password = "";
+    $scope.cpassword = "";
+
+
+
+    $scope.save = function () {
+
+     if ($scope.username == "" || $scope.usertype == "" || $scope.password == ""|| $scope.cpassword == "") {
+            alert("Please fill out this field.");
+            return false;
+
+
+        }
+        var sub = {
+            UserName: $scope.username,
+            UserType: $scope.usertype,
+            Password: $scope.password, 
+        };
+     
+
+        var getUserDetails = "";
+       
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/GetUserFormData",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.then(function (d) {
+
+            console.log("success");
+            $window.alert(d.data);
+
+        }, function (d) {
+            $window.alert("Oops!! Something went wrong!!!!.");
+        });
+
+
+        var pass1 = document.getElementById("ppassword").value;
+        var pass2 = document.getElementById("cpassword").value;
+        var ok = true;
+        if (pass1 != pass2) {
+            alert("Passwords Do not match");
+            document.getElementById("ppassword").style.borderColor = "#E34234";
+            document.getElementById("cpassword").style.borderColor = "#E34234";
+            ok = false;
+        }
+        else {
+            alert("Passwords Match!!!");
+        }
+        return ok;
+    }
+
+});

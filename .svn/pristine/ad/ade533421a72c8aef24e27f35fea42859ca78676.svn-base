@@ -1,0 +1,448 @@
+﻿@{
+    ViewBag.Title = "RoomBooking";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/angular1.2.11.js"></script>
+<script data-require="angular.js@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>
+<script src="http://twitter.github.com/typeahead.js/releases/latest/bloodhound.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
+<script src="~/Scripts/RoomBooking/booking.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+
+<html>
+<body data-ng-app="BookingModule"  ng-controller="MyController">
+    
+        <div class="panel panel-yellow">
+            
+            <form action="#" class="form-horizontal">
+            <div class="form-body pal">
+
+                <div class="col-sm-12" style="padding-right:5%;padding-left:5%;border:solid;border-color:#f3a46b;border-width:1px;height:1000px;">
+                    <div class="box-body">
+
+                        <div class="col-sm-12 ">
+
+                            <div class="col-sm-12 ">
+                                <h1 style="padding-left: 2px;font-size:23px;" id="hframe">
+                                    <i class="fa fa-bed"  style="color:#000000"></i> Room Booking
+                                </h1>
+
+                                <hr />
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label name="lblroomno" class="labelx" style="color:#000000"> Room ID</label>
+                                        <select id="rno" class="form-control"></select>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label name="lblOccup1" class="labelx" style="color:#000000"> Date From</label>
+                                        <input class="form-control" id="datefrom" name="datefrom" placeholder="Date From" type="text" data-ng-model="departuredate" style="padding-left:40px;margin-left:10px;" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label name="lblOccup1" class="labelx" style="color:#000000!important;"> Date To</label>
+                                        <input class="form-control" id="dateto" name="dateto" placeholder="Date To" type="text" data-ng-model="returndate"  style="padding-left:40px;margin-left:18px;" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label name="lbladult" class="labelx" style="color:#000000"> Adults </label>
+                                        <select id="txtAdults1" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label name="lblchild" class="labelx" style="color:#000000"> Childrens </label>
+                                        <select id="txtChild1" class="form-control"  style="margin-left:10px;">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <h2 style="padding-left: 2px;font-size:20px;" id="hframe">
+                                    <i class="fa fa-bed" aria-hidden="true" style="color:#000000"></i> Customer Details
+                                </h2>
+
+                                <hr />
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-12" id="adults1">
+
+                            <div class="row">
+
+                                <div class="col-sm-3 ">
+                                    <label id="lbladults1" class="labely" style="padding-left:12%;color:#000000">Adults 1</label>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+
+                                        <label id="lblFname" class="labelx" style="color:#000000"> First Name</label>
+                                        <input name="fname" id="fname" style="padding-left:40px;font-size: 14px;" type:text" placeholder="Enter First Name" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblLname" class="labelx" style="color:#000000"> Last Name</label>
+                                        <input class="form-control" id="lname" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter Last Name" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3 ">
+
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblTele" class="labelx" style="color:#000000"> Telephone No</label>
+                                        <input class="form-control" id="teleno" placeholder="Enter Telephone No" style="padding-left:40px;font-size: 14px;" type="tel" pattern="^\d{4}-\d{3}-\d{4}$" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblmail" class="labelx" style="color:#000000"> Email</label>
+                                        <input class="form-control" id="validemail" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter Email" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+
+                                </div>
+
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblnicno" class="labelx" style="color:#000000"> NIC No</label>
+                                        <input class="form-control" id="nicno" style="padding-left:40px;font-size: 14px;" placeholder="Enter NIC No" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lbladdress" class="labelx" style="color:#000000"> Address</label>
+                                        <input class="form-control" id="address" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter Address" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="col-sm-12" id="adults2">
+                            <div class="row">
+
+                                <div class="col-sm-3 ">
+                                    <label id="lbladults2" class="labely" style="padding-left:12%;color:#000000">Adults 2</label>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+
+                                        <label id="lblFname" class="labelx" style="color:#000000"> First Name</label>
+                                        <input name="fname" id="fname" style="padding-left:40px;font-size: 14px; " type:text" placeholder="Enter First Name" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblLname" class="labelx" style="color:#000000"> Last Name</label>
+                                        <input class="form-control" id="lname" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter Last Name" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="col-sm-12" id="adults3">
+                            <div class="row">
+
+                                <div class="col-sm-3 ">
+                                    <label id="lbladults3" class="labely" style="padding-left:12%;color:#000000">Adults 3</label>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+
+                                        <label id="lblFname" class="labelx" style="color:#000000"> First Name</label>
+                                        <input name="fname" id="fname" style="padding-left:40px;font-size: 14px; " type:text" placeholder="Enter First Name" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+
+                                        <label id="lblLname" class="labelx" style="color:#000000"> Last Name</label>
+                                        <input class="form-control" id="lname" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter Last Name" type="text" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <div class="row">
+
+                                <div class="col-sm-3" id="child1">
+                                    <label class="labely" style="padding-left:12%;color:#000000">Child1</label>
+                                </div>
+                                <div class="col-sm-3" id="name1">
+                                    <label  class="labely" style="padding-left:12%;color:#000000">Name</label>
+                                    <input class="form-control" id="cname" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter name here" type="text" required />
+                                </div>
+
+                                <div class="col-sm-3" id="lblAge1">
+                                    <div class="form-group">
+
+                                        <label class="labelx" style="color:#000000">Age</label>
+                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+
+                                </div>
+                            </div>
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-3" id="child2">
+                                        <label class="labely" style="padding-left:12%;color:#000000">Child2</label>
+                                        </div>
+                                        <div class="col-sm-3" id="name2">
+                                            <label  class="labely" style="padding-left:12%;color:#000000">Name</label>
+                                            <input class="form-control"style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter name here" type="text" required />
+                                        </div>
+                                        <div class="col-sm-3 " id="lblAge2">
+                                            <div class="form-group">
+
+                                                <label class="labelx" style="color:#000000 "> Age</label>
+                                                <select class="form-control" style="margin-left:10px;">
+
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
+                                                    <option>14</option>
+                                                    <option>15</option>
+                                                    <option>16</option>
+                                                    <option>17</option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3" id="child3">
+                                            <label class="labely" style="padding-left:12%;color:#000000">Child3</label>
+                                        </div>
+                                        <div class="col-sm-3" id="name3">
+                                            <label class="labely" style="padding-left:12%;color:#000000">Name</label>
+                                            <input class="form-control" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter name here" type="text" required />
+                                        </div>
+                                        <div class="col-sm-3 " id="lblAge3">
+                                            <label class="labelx" style="color:#000000"> Age</label>
+                                            <select class="form-control" style="margin-left:10px;">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+                                                <option>14</option>
+                                                <option>15</option>
+                                                <option>16</option>
+                                                <option>17</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3" id="child4">
+                                            <label class="labely" style="padding-left:12%;color:#000000">Child3</label>
+                                        </div>
+                                        <div class="col-sm-3" id="name4">
+                                            <label class="labely" style="padding-left:12%;color:#000000">Name</label>
+                                            <input class="form-control" id="cname" style="padding-left:40px;font-size: 14px;margin-left:10px;" placeholder="Enter name here" type="text" required />
+                                        </div>
+
+                                        <div class="col-sm-3 " id="lblAge4">
+                                            <label class="labelx" style="color:#000000"> Age</label>
+                                            <select class="form-control" style="margin-left:10px;">
+                                                
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+                                                <option>14</option>
+                                                <option>15</option>
+                                                <option>16</option>
+                                                <option>17</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                       
+                                    </div>
+
+                                </div>
+                                <br />
+                        <br />
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" class="btn btn-primary" ng-click="sub()">Submit</button>
+                                        </div>
+
+                                        <div class="col-sm-3">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                </div>
+                
+            </div>
+    <section>
+        <span></span>
+    </section>
+                </form>
+</div>
+</body>
+</html>
+
+

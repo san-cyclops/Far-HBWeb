@@ -1,0 +1,795 @@
+﻿@{
+    Layout = null;
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+<!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
+<script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+<script src="~/Scripts/angular1.2.11.js"></script>
+<script src="~/Scripts/typeahead.bundle.js"></script>
+@*<script src="http://twitter.github.com/typeahead.js/releases/latest/typeahead.bundle.js"></script>*@
+<script src="http://twitter.github.com/typeahead.js/releases/latest/bloodhound.js"></script>
+
+<script src="~/Scripts/ApiHotelSearch/angular-typeahead.js"></script>
+<style>
+    .link_button2 {
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: solid 1px #1A4575;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+        background: #3A68A1;
+        color: #fee1cc;
+        text-decoration: none;
+        padding: 8px 12px;
+        text-decoration: none;
+        font-size: larger;
+    }
+
+    a.link_button2:hover {
+        text-decoration: underline;
+        background: #4479BA;
+        border: solid 1px #20538D;
+    }
+    /* bootstrap.css */
+    * {
+        font-size: 11px;
+        <!-- line-height: 1.028; -->
+    }
+
+    .bootstrap-datetimepicker-widget td.day {
+        width: 200px;
+        line-height: 10px;
+        font-size: 10px;
+    }
+
+    .labelx {
+        font-size: 14px;
+        margin-bottom: 1px;
+        /*font-weight: 400;*/
+        display: block;
+        color: #ffffff;
+    }
+
+    .labely {
+        font-size: 12px;
+        display: block;
+        color: #ffffff;
+    }
+
+    th.dow {
+        font-size: 12px;
+    }
+
+    .col-sm-2, .col-sm-1, .col-sm-4{
+        padding-right: 1px;
+        padding-left: 1px;
+    }
+
+
+
+    .booking-heading {
+        font-family: "Roboto",arial,helvetica,sans-serif;
+        margin-top: 0px;
+        font-weight: 300;
+        color: #2D2D2D;
+        line-height: 1.3em;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        padding: 0px 0px;
+    }
+
+
+    .btn:hover {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* scaffolding */
+    /* ----------- */
+
+    .tt-dropdown-menu,
+    .gist {
+        text-align: left;
+    }
+
+    .ng-invalid {
+        border-color: red !important; /* just for visual */
+    }
+
+    /* site theme */
+    /* ---------- */
+
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        /*width: 396px;
+        height: 30px;
+        padding: 8px 12px;*/
+        font-size: 18px;
+        line-height: 30px;
+        /*border: 2px solid #ccc;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        outline: none;*/
+    }
+
+    .typeahead {
+        background-color: #fff;
+    }
+
+        .typeahead:focus {
+            border: 2px solid #0097cf;
+        }
+
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-menu {
+        width: 422px;
+        margin: 12px 0;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+        .tt-suggestion:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion.tt-cursor {
+            color: #fff;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+</style>
+<body data-ng-app="APIModule" style="background: rgba(0, 0, 0, 0.2);">
+    <div ng-controller="APIController">
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container">
+                <div class="row row1">
+                    <div class="going col-sm-4">
+                        <div class="form-group">
+                            <label name="lblOccup1" class="labelx"> Going to</label>
+                            <input class='form-control typeahead' style="margin-left: 0px;margin-right: 109px; font-size: 14px" type="text" sf-typeahead options="exampleOptions" allow-custom="false" datasets="numbersDataset" ng-model="selectedNumberNonEditable" placeholder="Any worldwide city or airport" id="city">
+                        </div>
+                    </div>
+                    <div class="check in col-sm-2">
+                        <div class="col-md-4  col-xs-4  col-sm-4  col-lg-4" id="chkin">
+                            <div class="form-group">
+                                <label name="lblOccup1" class="labelx"> Check in</label>
+                                <input class="form-control" required id="datefrom" name="datefrom" placeholder="Check-in" type="text" data-ng-model="departuredate" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="check out col-sm-2">
+                        <div class="form-group">
+                            <label name="lblOccup1" class="labelx"> Check out</label>
+                            <input class="form-control" required id="dateto" name="dateto" placeholder="Check-out" type="text" data-ng-model="returndate" />
+                        </div>
+                    </div>
+                    <div class="rooms col-sm-2">
+                        <div class="form-group">
+                            <label name="lblOccup1" class="labelx"> Rooms</label>
+                            <select data-ng-model="rooms" required id='txtRooms' class="form-control adults1" placeholder="Rooms" ng-options="o for o in roomsoptions track by o"></select>
+                        </div>
+                    </div>
+                    <div class="button col-sm-2">
+                        <div class="form-group">
+                            <label name="lblOccup1" class="labelx"> </label>
+                            <br />
+                            <label name="lblOccup1"> </label><label name="lblOccup1"> </label>
+                            <a id="sbutton" target="_blank" class="btn btn-primary btn-lg" style="background-color: #E28F13; font-size: 14px" ng-href="@Url.Action("Booking", "home")?Rooms={{rooms}}&Destination={{selectedNumberNonEditable|json}}&DepartureDate={{departuredate}}&ReturnDate={{returndate}}&Adults1={{Adults1}}&Children1={{Children1}}&C1Age1={{C1Age1}}&C1Age2={{C1Age2}}&C1Age3={{C1Age3}}&C1Age4={{C1Age4}}&Adults2={{Adults2}}&Children2={{Children2}}&C2Age1={{C2Age1}}&C2Age2={{C2Age2}}&C2Age3={{C2Age3}}&C2Age4={{C2Age4}}&Adults3={{Adults3}}&Children3={{Children3}}&C3Age1={{C3Age1}}&C3Age2={{C3Age2}}&C3Age3={{C3Age3}}&C3Age4={{C3Age4}}"> Search </a>
+
+
+
+                            @*<button target="_blank" type="button"  class=" btn btn-primary btn-lg"  data-ng-click="hotelSearch()" >Search</button>*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="image col-sm-4">
+                    <div style="padding-left: 15px">
+                        <img class="img-responsive" src="~/Content/img/bookingEngineOfferBanner.jpg">
+                    </div>
+                </div>
+                <div class="row row2">
+                    <div class="room1 col-sm-2">
+                        
+                            <label id="lblRoom1" class="labely">Room 1</label>
+                        
+                    </div>
+                    <div class="adults col-sm-1">
+                        <div >
+                            <div class="form-group">
+                                <label name="lblOccup1" class="labely">Adults</label>
+                                <select id="txtAdults1" required data-ng-model="Adults1" class="form-control" ng-options="o for o in Adults1options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="children col-sm-1">
+                        <div class="form-group">
+                            <select id="txtChild1" data-ng-model="Children1" class="form-control" ng-options="o for o in Children1options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages1 col-sm-1">
+                        <div style="display: none;" id="C1Age1" >
+                            <div class="form-group">
+                                <label name="lblAge" class="labely">Ages</label>
+                                <select id="txtC1Age1" data-ng-model="C1Age1" class="form-control" ng-options="o for o in C1Age1options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: none;" id="C1Age1" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select id="txtC1Age1" data-ng-model="C1Age1" class="form-control" ng-options="o for o in C1Age1options track by o"></select>
+                            </div>
+                        </div>
+                        <div style="display: none;" id="C1Age2" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select id="txtC1Age2" data-ng-model="C1Age2" class="form-control" ng-options="o for o in C1Age2options track by o"></select>
+                            </div>
+                        </div>
+                        <div style="display: none;" id="C1Age3" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select data-ng-model="C1Age3" class="form-control" ng-options="o for o in C1Age3options track by o"></select>
+                            </div>
+                        </div>
+                        <div style="display: none;" id="C1Age4" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <select data-ng-model="C1Age4" class="form-control" ng-options="o for o in C1Age4options track by o"></select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @*<div class="ages2 col-sm-1">
+                        <div style="display: none;" id="C1Age2" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select id="txtC1Age2" data-ng-model="C1Age2" class="form-control" ng-options="o for o in C1Age2options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ages3 col-sm-1">
+                        <div style="display: none;" id="C1Age3" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select data-ng-model="C1Age3" class="form-control" ng-options="o for o in C1Age3options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ages4 col-sm-1">
+                        <div style="display: none;" id="C1Age4" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <select data-ng-model="C1Age4" class="form-control" ng-options="o for o in C1Age4options track by o"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    
+                </div>
+                <div class="row row3">
+                    <div class="room2 col-sm-2">
+                        
+                            <label id="lblRoom2" style="display: none;" class="labely">Room 2</label>
+                        
+                    </div>
+                    <div class="adults col-sm-1">
+                        <div class="form-group">
+                            <select style="display: none;" class="form-control" id="txtAdults2" data-ng-model="Adults2" ng-options="o for o in Adults2options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="children col-sm-1">
+                        <div class="form-group">
+                            <select style="display: none;" class="form-control" id="txtChild2" data-ng-model="Children2" ng-options="o for o in Children2options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages1 col-sm-1">
+                        <div class="form-group">
+                            <select data-ng-model="C2Age1" class="form-control" ng-options="o for o in C2Age1options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages2 col-sm-1">
+                        <div class="form-group">
+                            <select data-ng-model="C2Age2" class="form-control" ng-options="o for o in C2Age2options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages3 col-sm-1">
+                        <div class="form-group">
+                            <select data-ng-model="C2Age3" class="form-control" ng-options="o for o in C2Age3options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages4 col-sm-1">
+                        <div class="form-group">
+                            <select data-ng-model="C2Age4" class="form-control" ng-options="o for o in C2Age3options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row row4">
+                    <div class="room3 col-sm-2">
+                        <label id="lblRoom3" style="display: none;" class="labely">Room 3</label>
+                    </div>
+                    <div class="adults col-sm-1">
+                        <div class="form-group">
+                            <select style="display: none;" class="form-control" name="txtAdults3" id="txtAdults3" data-ng-model="Adults3" ng-options="o for o in Adults3options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="children col-sm-1">
+                        <div class="form-group">
+                            <select style="display: none;" class="form-control" id="txtChild3" data-ng-model="Children3" ng-options="o for o in Children3options track by o"></select>
+                        </div>
+                    </div>
+                    <div class="ages1 col-sm-1">
+                        <div style="display: none;" id="C3Age1" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select class="form-control" data-ng-model="C3Age1" ng-options="o for o in C3Age1options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ages2 col-sm-1">
+                        <div style="display: none;" id="C3Age2" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select class="form-control" data-ng-model="C3Age2" ng-options="o for o in C3Age2options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ages3 col-sm-1">
+                        <div style="display: none;" id="C3Age3" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <select class="form-control" data-ng-model="C3Age3" ng-options="o for o in C3Age3options track by o"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ages4 col-sm-1">
+                        <div style="display: none;" id="C3Age4" class="col-md-3 col-sm-3 col-xs-12 labely">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <select class="form-control" data-ng-model="C3Age4" ng-options="o for o in C3Age4options track by o"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row"></div>
+            </div>
+            </section>
+</div>
+</body>
+
+<script>
+    function validateForm() {
+        var x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+    }
+</script>
+
+
+
+<script type="text/javascript">
+
+
+
+
+    $('#txtRooms').on('change', function () {
+        if (this.value == '1') {
+            $("#lblRoom1").show();
+            $("#room1").show();
+            $("#room3").hide();
+            $("#room2").hide();
+            $("#txtAdults2").hide();
+            $("#txtChild2").hide();
+            $("#lblRoom2").hide();
+            $("#txtAdults3").hide();
+            $("#txtChild3").hide();
+            $("#lblRoom3").hide();
+            $("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+            $("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();
+
+        }
+        if (this.value == '2') {
+            $("#lblRoom2").show();
+            $("#lblRoom1").show();
+            $("#room1").show();
+            $("#room2").show();
+            $("#room3").hide();
+            $("#txtAdults2").show();
+            $("#txtChild2").show();
+            $("#txtAdults3").hide();
+            $("#txtChild3").hide();
+            $("#lblRoom3").hide();
+            $("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+            var num = document.getElementById("txtChild2").value;
+            if (num == 0) {
+                $("#C2Age1").hide();
+                $("#C2Age2").hide();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 1) {
+                $("#C2Age1").show();
+                $("#C2Age2").hide();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 2) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 3) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").show();
+                $("#C2Age4").hide();
+            }
+            else if (num == 4) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").show();
+                $("#C2Age4").show();
+            }
+
+
+            /*$("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();*/
+
+
+        }
+        if (this.value == '3') {
+
+            $("#lblRoom3").show();
+            $("#room1").show();
+            $("#room2").show();
+            $("#room3").show();
+            $("#lblRoom2").show();
+            $("#lblRoom1").show();
+            $("#txtAdults2").show();
+            $("#txtChild2").show();
+            $("#txtAdults3").show();
+            $("#txtChild3").show();
+            $("#lblRoom3").show();
+            /*$("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();*/
+            //check
+            var num = document.getElementById("txtChild2").value;
+            if (num == 0) {
+                $("#C2Age1").hide();
+                $("#C2Age2").hide();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 1) {
+                $("#C2Age1").show();
+                $("#C2Age2").hide();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 2) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").hide();
+                $("#C2Age4").hide();
+            }
+            else if (num == 3) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").show();
+                $("#C2Age4").hide();
+            }
+            else if (num == 4) {
+                $("#C2Age1").show();
+                $("#C2Age2").show();
+                $("#C2Age3").show();
+                $("#C2Age4").show();
+            }
+
+
+            /* $("#C2Age1").show();
+             $("#C2Age2").show();
+             $("#C2Age3").show();
+             $("#C2Age4").hide();*/
+        }
+    });
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    $('#txtChild1').on('change', function () {
+        if (this.value == '0') {
+
+
+
+            $("#lblAges").hide();
+            $("#C1Age1").hide();
+            $("#C1Age2").hide();
+            $("#C1Age3").hide();
+            $("#C1Age4").hide();
+            /*$("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+            $("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();*/
+
+        }
+        if (this.value == '1') {
+
+
+            $("#lblAges").show();
+            $("#C1Age1").show();
+            $("#C1Age2").hide();
+            $("#C1Age3").hide();
+            $("#C1Age4").hide();
+            /*$("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+            $("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();*/
+        }
+        if (this.value == '2') {
+            $("#lblAges").show();
+            $("#C1Age1").show();
+            $("#C1Age2").show();
+            $("#C1Age3").hide();
+            $("#C1Age4").hide();
+            /* $("#C3Age1").hide();
+             $("#C3Age2").hide();
+             $("#C3Age3").hide();
+             $("#C3Age4").hide();
+             $("#C2Age1").hide();
+             $("#C2Age2").hide();
+             $("#C2Age3").hide();
+             $("#C2Age4").hide();*/
+        }
+        if (this.value == '3') {
+            $("#lblAges").show();
+            $("#C1Age1").show();
+            $("#C1Age2").show();
+            $("#C1Age3").show();
+            $("#C1Age4").hide();
+            /*
+            $("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+            $("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();*/
+        }
+        if (this.value == '4') {
+            $("#lblAges").show();
+            $("#C1Age1").show();
+            $("#C1Age2").show();
+            $("#C1Age3").show();
+            $("#C1Age4").show();
+            /*  $("#C3Age1").hide();
+              $("#C3Age2").hide();
+              $("#C3Age3").hide();
+              $("#C3Age4").hide();
+              $("#C2Age1").hide();
+              $("#C2Age2").hide();
+              $("#C2Age3").hide();
+              $("#C2Age4").hide();*/
+        }
+    });
+    $('#txtChild2').on('change', function () {
+
+        if (this.value == '0') {
+            $("#C2Age1").hide();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();
+        }
+        if (this.value == '1') {
+            $("#C2Age1").show();
+            $("#C2Age2").hide();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();
+            /*$("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();*/
+        }
+        if (this.value == '2') {
+            $("#C2Age1").show();
+            $("#C2Age2").show();
+            $("#C2Age3").hide();
+            $("#C2Age4").hide();
+            /*$("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();*/
+        }
+        if (this.value == '3') {
+            $("#C2Age1").show();
+            $("#C2Age2").show();
+            $("#C2Age3").show();
+            $("#C2Age4").hide();
+            /* $("#C3Age1").hide();
+             $("#C3Age2").hide();
+             $("#C3Age3").hide();
+             $("#C3Age4").hide();*/
+        }
+        if (this.value == '4') {
+            $("#C2Age1").show();
+            $("#C2Age2").show();
+            $("#C2Age3").show();
+            $("#C2Age4").show();
+            /* $("#C3Age1").hide();
+             $("#C3Age2").hide();
+             $("#C3Age3").hide();
+             $("#C3Age4").hide();*/
+        }
+    });
+
+    $('#txtChild3').on('change', function () {
+        if (this.value == '0') {
+            $("#C3Age1").hide();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+        }
+        if (this.value == '1') {
+            $("#C3Age1").show();
+            $("#C3Age2").hide();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+        }
+        if (this.value == '2') {
+            $("#C3Age1").show();
+            $("#C3Age2").show();
+            $("#C3Age3").hide();
+            $("#C3Age4").hide();
+        }
+        if (this.value == '3') {
+            $("#C3Age1").show();
+            $("#C3Age2").show();
+            $("#C3Age3").show();
+            $("#C3Age4").hide();
+        }
+        if (this.value == '4') {
+            $("#C3Age1").show();
+            $("#C3Age2").show();
+            $("#C3Age3").show();
+            $("#C3Age4").show();
+        }
+    });
+
+
+
+</script>
+
+
+
+
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+<script>
+
+
+    $(document).ready(function () {
+
+        var startDate = new Date();
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: today
+
+
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+            $('#dateto').datepicker('setStartDate', startDate);
+        });
+
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input1.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container1,
+            autoclose: true
+        });
+
+    })
+
+
+</script>
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+@*<script src="~/Scripts/ApiHotelSearch/Module.js"></script>
+    <script src="~/Scripts/ApiHotelSearch/SearchService.js"></script>*@
+<script src="~/Scripts/ApiHotelSearch/SearchController.js"></script>

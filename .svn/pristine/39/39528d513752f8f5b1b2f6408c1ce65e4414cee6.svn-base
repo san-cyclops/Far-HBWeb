@@ -1,0 +1,239 @@
+﻿@model HB.HotelRez.Models.UnabailableList
+@{
+    ViewBag.Title = "RoomMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <style>
+        #rid
+        {
+            
+        }
+    </style>
+</head>
+<body ng-controller="demoController" data-ng-app="RoomMaster">
+
+    <div class="panel panel-dark" style="padding-right:5%;padding-left:5%;">
+        <div class="panel-heading" style="font-size:23px;">
+            Room Master
+        </div>
+       
+        <form action="#" class="form-horizontal" id="myForm">
+            <div class="form-body pal">
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2" style="padding-right:5px;" ng-hide="show">
+                    <label for="inputroom" class="control-label"> Room ID </label>
+                    <div class="input-icon right">
+                        @using (Html.BeginForm("RoomMaster", "Home", FormMethod.Post))
+                        {
+                            @Html.DropDownListFor(m => m.RoomID, Model.Rooms, "Select Room ID", new { @class = "form-control", @id = "rid", @ng_model = "roomid", @ng_change = "recall()" })
+
+                        }
+                       
+                    </div>                   
+                </div>               
+                <div class="col-md-2" style="padding-right:5px;" ng-show="show">
+                    <label for="inputroom" class="control-label"> Room ID </label>
+                    <div class="input-icon right">
+                        <input id="rid" type="text" placeholder="" class="form-control" data-ng-model="roomid" style="padding-left:40px;" />
+                    </div>
+                </div>
+                <div class="col-md-1" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputnew" class="control-label" style="color:#ffffff"> . </label>                    
+                    <button type="button" class="btn btn-info" ng-click="show=!show" style="margin-left:10px;">
+                        New
+                    </button>
+
+                </div>
+                <div class="col-md-2" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputaddress" class="control-label"> Address </label>
+                    <div class="input-icon right">
+
+                        <input id="add" type="text" placeholder="" class="form-control" data-ng-model="address" style="padding-left:40px;" />
+                    </div>
+
+                </div>
+              
+                <div class="col-md-2" style="padding-right:5px;padding-left:5px;">
+                   
+                        <label for="inputrefference" class="control-label"> Refference </label>
+                        <div class="input-icon right">
+
+                            <input id="ref" type="text" placeholder="" class="form-control" data-ng-model="refference" style="padding-left:40px;" />
+                        </div>
+
+                    
+                </div>
+                <div class="col-md-2" style="padding-right:5px;padding-left:5px;">
+                   
+                        <label for="inputboard" class="control-label"> Board Type </label>
+                        <select class="form-control" data-ng-model="board" ng-options="p for p in btype"></select>
+                   
+                </div>
+                <div class="col-md-3" style="padding-right:5px;padding-left:5px;">
+
+                    <label for="inputroomtype" class="control-label"> Room Type </label>
+                    <select class="form-control" data-ng-model="room" ng-options="p for p in roomtype"></select>
+
+                </div>
+            </div>            
+                
+            
+            <div class="form-group">               
+                <div class="col-md-3" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputami" class="control-label"> Aminities </label>
+                    <select class="form-control" data-ng-model="aminities" ng-options="p for p in aminity"></select>
+                </div>
+                <div class="col-md-2" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputatype" class="control-label" style="color:#ffffff"> 2222 </label>   
+                    <select class="form-control" data-ng-model="amitype" ng-options="p for p in atype"></select>
+                </div>
+
+                <div class="col-md-1" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputnew" class="control-label" style="color:#ffffff"> 2222 </label>
+                    <button type="button" class="btn btn-primary" ng-click="add1()" style="margin-left:10px;">
+                        Add
+                    </button>
+
+                </div>
+              
+
+                <div class="col-md-3" style="padding-right:5px;padding-left:5px;">
+                    <div class="input-icon right">
+                        <label for="inputnear" class="control-label"> Nearby</label>
+                        <input id="nearbyn" type="text" placeholder="Name" class="form-control" data-ng-model="name"/>
+                    </div>
+                </div>
+                <div class="col-md-2" style="padding-right:5px;padding-left:5px;">
+                    <div class="input-icon right">
+                        <label for="inputadd2" class="control-label" style="color:#ffffff"> 22222 </label>   
+                        <input id="nearbyd" type="number" min="0" placeholder="Distance" class="form-control" data-ng-model="distance"/>
+                    </div>
+                </div>
+                <div class="col-md-1" style="padding-right:5px;padding-left:5px;">
+                    <label for="inputnew" class="control-label" style="color:#ffffff"> 2222 </label>
+                    <button type="button" class="btn btn-primary" ng-click="add()" style="margin-left:10px;">
+                        Add
+                    </button>
+
+                </div>      
+            </div>                
+          
+           
+              <div class="form-group">               
+
+                  <div class="row">
+
+                      <div class="col-md-6">
+                          <div class="col-md-6">
+                              <ul>
+                                  <div ng-repeat="item in item1" style="margin-top:10px;font-size:smaller;">
+                                      {{item.aminities}}
+
+                                  </div>
+                              </ul>
+                          </div>
+                          <div class="col-md-4">
+                              <ul>
+                                  <div ng-repeat="item in item1" style="margin-top:10px;font-size:smaller;">
+
+                                      {{item.amitype}}
+
+                                  </div>
+                              </ul>
+                          </div>
+                          <div class="col-md-1">
+                              <ul>
+                                  <div ng-repeat="item in item1" style="margin-top:10px;font-size:smaller;">
+
+                                      <button class="btn-danger" ng-click="removeitem1($index)">x</button>
+                                  </div>
+                              </ul>
+                          </div>
+                      </div>
+
+
+                      <div class="col-md-6">
+                          <div class="col-md-6">
+                              <ul>
+                                  <div ng-repeat="item in items" style="margin-top:10px;font-size:smaller;">
+
+                                      {{item.name}}
+
+                                  </div>
+                              </ul>
+                          </div>
+                          <div class="col-md-4">
+                              <ul>
+                                  <div ng-repeat="item in items" style="margin-top:10px;font-size:smaller;">
+
+                                      {{item.distance}}
+
+                                  </div>
+                              </ul>
+                          </div>
+                          <div class="col-md-1">
+                              <ul>
+                                  <div ng-repeat="item in items" style="margin-top:10px;font-size:smaller;">
+
+                                      <button class="btn-danger" ng-click="removeitems($index)">x</button>
+                                  </div>
+                              </ul>
+
+                          </div>
+                      </div>
+
+
+                  </div>
+
+                  </div>
+
+                <div class="form-group">
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label for="inputprice" class="control-label"> Price  </label>
+                            <div class="input-icon right">
+                                <input id="price" type="number" class="form-control" data-ng-model="price" style="padding-left:40px;" />
+                            </div>
+                        </div>
+                        <div class="col-md-1" style="padding-right:5px;padding-left:5px;">
+                            <label for="inputsave" class="control-label" style="color:#ffffff"> 2222 </label>
+                            <button type="button" class="btn btn-success" ng-click="save()" style="margin-left:10px;">
+                                Save
+                            </button>
+
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-body pal">
+
+                </div>
+</form>
+    </div>
+    
+
+</body>
+</html>
+
+<script src="~/Scripts/RoomMaster/master.js"></script>

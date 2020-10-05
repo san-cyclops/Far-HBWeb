@@ -1,0 +1,215 @@
+﻿
+var app;
+
+(function () {
+
+    app = angular.module("BookingModule", []);
+
+})();
+
+app.controller('MyController', function ($scope) {
+
+    $scope.rno = "";
+    $scope.datefrom = "";
+    $scope.dateto = "";
+    $scope.fname = "";
+    $scope.lname = "";
+    $scope.teleno = "";
+    $scope.email = "";
+    $scope.nicno = "";
+    $scope.address = "";
+
+
+
+    $("#adults2").hide();
+    $("#adults3").hide();
+    $("#child1").hide();
+    $("#child2").hide();
+    $("#child3").hide();
+    $("#child4").hide();
+    $("#name1").hide();
+    $("#name2").hide();
+    $("#name3").hide();
+    $("#name4").hide();
+   
+    $("#lblAge1").hide();
+    $("#lblAge2").hide();
+    $("#lblAge3").hide();
+    $("#lblAge4").hide();
+
+    $('#txtAdults1').on('change', function () {
+       
+        if (this.value == '1') {
+            $("#adults1").show();
+            $("#adults2").hide();
+            $("#adults3").hide();
+            
+        }
+        if (this.value == '2') {
+            $("#adults1").show();
+            $("#adults2").show();
+            $("#adults3").hide();
+        }
+        if (this.value == '3') {
+            $("#adults1").show();
+            $("#adults2").show();
+            $("#adults3").show();
+        }
+    });
+
+    $('#txtChild1').on('change', function () {
+        if (this.value == '0') {
+            $("#child1").hide();
+            $("#child2").hide();
+            $("#child3").hide();
+            $("#child4").hide();
+            $("#name1").hide();
+            $("#name2").hide();
+            $("#name3").hide();
+            $("#name4").hide();
+            $("#lblAge1").hide();
+            $("#lblAge2").hide();
+            $("#lblAge3").hide();
+            $("#lblAge4").hide();
+            console.log("x");
+        }
+        if (this.value == '1') {
+            $("#child1").show();
+            $("#child2").hide();
+            $("#child3").hide();
+            $("#child4").hide();
+            $("#name1").show();
+            $("#name2").hide();
+            $("#name3").hide();
+            $("#name4").hide();
+            $("#lblAge1").show();
+            $("#lblAge2").hide();
+            $("#lblAge3").hide();
+            $("#lblAge4").hide();
+            console.log("y");
+        }
+
+        if (this.value == '2') {
+            $("#child1").show();
+            $("#child2").show();
+            $("#child3").hide();
+            $("#child4").hide();
+            $("#name1").show();
+            $("#name2").show();
+            $("#name3").hide();
+            $("#name4").hide();
+            $("#lblAge1").show();
+            $("#lblAge2").show();
+            $("#lblAge3").hide();
+            $("#lblAge4").hide();
+            console.log("z");
+        }
+        if (this.value == '3') {
+            $("#child1").show();
+            $("#child2").show();
+            $("#child3").show();
+            $("#child4").hide();
+            $("#name1").show();
+            $("#name2").show();
+            $("#name3").show();
+            $("#name4").hide();
+            $("#lblAge1").show();
+            $("#lblAge2").show();
+            $("#lblAge3").show();
+            $("#lblAge4").hide();
+            console.log("w");
+        }
+
+        if (this.value == '4') {
+            $("#child1").show();
+            $("#child2").show();
+            $("#child3").show();
+            $("#child4").show();
+            $("#name1").show();
+            $("#name2").show();
+            $("#name3").show();
+            $("#name4").show();
+            $("#lblAge1").show();
+            $("#lblAge2").show();
+            $("#lblAge3").show();
+            $("#lblAge4").show();
+            console.log("p");
+        }
+
+
+    });
+    $(document).ready(function () {
+
+        var startDate = new Date();
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: today,
+
+
+
+
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+            $('#dateto').datepicker('setStartDate', startDate);
+
+            $("#dateto").datepicker("show");
+            var dateToBePrefilled = startDate;
+            $("#dateto").datepicker("setDate", dateToBePrefilled);
+
+
+
+
+        });
+
+
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input1.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container1,
+            autoclose: true
+
+        });
+
+
+
+    })
+    $("#date").on("dp.change", function () {
+
+        $scope.selecteddate = $("#date").val();
+
+
+    });
+    
+    function Issub(email) {
+        var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return expr.test(email);
+    };
+    $scope.sub = function () {
+        var email = document.getElementById("validemail").value;
+        if (!Issub(email)) {
+            alert("Invalid email address.");
+            console.log("a");
+        }
+        
+        else{
+
+            return true();
+    }
+ 
+    }
+
+
+});
+

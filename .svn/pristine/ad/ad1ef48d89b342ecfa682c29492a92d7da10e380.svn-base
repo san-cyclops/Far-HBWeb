@@ -1,0 +1,35 @@
+﻿ app.service("APIService", function($http) {
+
+    this.hotelavailability = function(sub) {
+        return $http({
+            method: "post",
+            data: sub,
+            contentType: "application/json; charset=utf-8;text/plain",
+            timeout:30000,
+            //url: "http://localhost:8995/api/HotelBooking/Availability"
+            url: "http://67.222.132.248:9091/api/HotelBooking/Availability"
+            //url: "/api/HotelBooking/Availability"
+            
+        });
+    };
+    this.hotelavailabilityFilter = function (sub) {
+        return $http({
+            method: "post",
+            data: sub,
+            contentType: "application/json; charset=utf-8",
+            //url: "http://localhost:8995/api/HotelBooking/PostSearch"
+            url: "http://67.222.132.248:9091/api/HotelBooking/Availability"
+           //url: "/api/HotelBooking/PostSearch"
+
+        });
+    };
+    this.showhotelselected = function (subselect) {
+        return $http({
+            method: "post",
+            data: subselect,
+            contentType: "application/json; charset=utf-8",
+            url: "Hotel/HotelView"
+        });
+    };
+ 
+});

@@ -1,0 +1,103 @@
+﻿var app;
+app.service('RoomService', function ($http) {
+
+    this.setRoomDetails = function (sub) {
+
+        return $http({
+            data: sub,
+            method: "post",
+            contentType: "application/json; charset=utf-8",
+            url: "/home/GetHotelPaymentData",
+
+
+        });
+
+
+    };
+});
+
+
+(function () {
+
+    app = angular.module("RoomPayment", []);
+
+})();
+
+
+app.controller('payController', function ($scope) {
+
+    $scope.bno = "";
+    //$scope.roomid = "";
+    $scope.total = "";
+    $scope.tax = "";
+    $scope.amount = "";
+
+    $scope.rid = "";
+    $scope.booking = "";
+    //$scope.bno = ['b1', 'b2', 'b3', 'b4', 'b5'];
+    //$scope.roomid = ['r001','r002','r003','r004','r005'];
+
+
+    $scope.paid = function ()
+    {
+        console.log("dd");
+
+        if ($scope.booking == "")
+        {
+            alert("Please select Booking ID.");
+            return false;
+        }
+        if ($scope.rid == "")
+        {
+            alert("Please select Room ID.");
+            return false;
+        }
+        if ($scope.amount == "")
+        {
+            alert("Please enter Amount.");
+            return false;
+        }
+        if ($scope.amount <= 0) {
+            alert("Please enter valid Amount.");
+            return false;
+        }
+        if ($scope.tax == "")
+        {
+            alert("Please enter Tax.");
+            return false;
+        }
+        if ($scope.tax < 0) {
+            alert("Please enter valid Tax.");
+            return false;
+        }
+        if ($scope.total == "")
+        {
+            alert("Please enter Total.");
+            return false;
+        }
+        if ($scope.total <= 0) {
+            alert("Please enter valid Total Amount.");
+            return false;
+        }
+
+        var sub ={
+            BookingNo: $scope.bno,
+            Amount:$scope.amount,
+            Tax:$scope.tax,
+            Total:$scope.total,
+            RoomID: $scope.rid,
+            Booking: $scope.booking,
+}
+
+        //else {
+        //alert("Successfully Saved!")
+        //}
+
+
+    }
+});
+       
+
+    
+
+ 

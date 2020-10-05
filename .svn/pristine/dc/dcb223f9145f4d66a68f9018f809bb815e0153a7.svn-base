@@ -1,0 +1,167 @@
+﻿app.controller("APIController", function ($scope, $http, APIService) {
+ 
+ 
+    getAll();
+    //$scope.departuredate = new Date();
+    //$scope.returndate = new Date();
+    $scope.roomsoptions = ['1','2','3'];
+    $scope.Adults1options = ['1', '2', '3'];
+    $scope.Children1options = ['0', '1', '2', '3', '4'];
+    $scope.C1Age1options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C1Age2options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C1Age3options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C1Age4options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.Adults2options = ['1', '2', '3'];
+    $scope.Children2options = ['0', '1', '2', '3', '4'];
+    $scope.C2Age1options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C2Age2options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C2Age3options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C2Age4options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.Adults3options = ['1', '2', '3'];
+    $scope.Children3options = ['0', '1', '2', '3', '4'];
+    $scope.C3Age1options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C3Age2options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C3Age3options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    $scope.C3Age4options = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+
+    $scope.rooms = 1;
+    $scope.Adults1 = 1;
+    $scope.Children1 = 0;
+    $scope.C1Age1 = 0;
+    $scope.C1Age2 = 0;
+    $scope.C1Age3 = 0;
+    $scope.C1Age4 = 0;
+    $scope.Adults2 = 0;
+    $scope.Children2 = 0;
+    $scope.C2Age1 = 0;
+    $scope.C2Age2 = 0;
+    $scope.C2Age3 = 0;
+    $scope.C2Age4 = 0;
+    $scope.Adults3 = 0;
+    $scope.Children3 = 0;
+    $scope.C3Age1 = 0;
+    $scope.C3Age2 = 0;
+    $scope.C3Age3 = 0;
+    $scope.C3Age4 = 0;
+
+
+    $scope.addRooms = function (data) {
+
+        $scope.roomsall = data;
+
+
+    };
+
+ 
+ 
+    function getAll() {
+        $scope.loading = true;
+
+        var servCall = APIService.getDestinations();
+        servCall.then(function (d) {
+
+            //var data = $.parseJSON(JSON.parse(d.destination));
+            $scope.DestinationList = d;
+            $scope.loading = false;
+        }, function (error) {
+            console.log("Oops! Something went wrong while fetching the data.");
+        });
+    }
+
+    $("#date").on("dp.change", function () {
+
+        $scope.selecteddate = $("#date").val();
+         
+
+    });
+
+
+    $scope.saveSubs = function () {
+
+
+            var sub = {
+                Des: $scope.des.slice($scope.des.lastIndexOf("(") + 1, $scope.des.lastIndexOf(")")),
+                DepartureDate: $scope.departuredate,
+                ReturnDate: $scope.returndate,
+                Rooms: $scope.rooms,
+                Adults1: $scope.Adults1,
+                Children1: $scope.Children1,
+                Age1: $scope.C1Age1,
+                Adults2: $scope.Adults2,
+                Children2: $scope.Children2,
+                Age2: $scope.Age2,
+                Adults3: $scope.Adults3,
+                Children3: $scope.Children3,
+                Age3: $scope.Age3
+            };
+
+        $http.post('/Home/HotelSearch', sub);
+
+
+    };
+  
+   
+});
+
+ 
+
+app.directive('loading', ['$http', function ($http)
+    {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div class="loading"><img src="http://tag2travel.com/public/ajax-loader.gif" width="20" height="20" />LOADING...</div>',
+            link: function (scope, element, attr) {
+                scope.$watch('loading', function (val) {
+                    if (val)
+                        $(element).show();
+                    else
+                        $(element).hide();
+                });
+            }
+        };
+
+    }]);
+
+
+
+//app.directive("datepicker", function () {
+
+//    function link(scope, element, attrs, controller) {
+//        // CALL THE "datepicker()" METHOD USING THE "element" OBJECT.
+//        element.datepicker({
+//            onSelect: function (dt) {
+//                scope.$apply(function () {
+//                    // UPDATE THE VIEW VALUE WITH THE SELECTED DATE.
+//                    controller.$setViewValue(dt);
+//                });
+//            },
+//            dateFormat: "dd/mm/yy"      // SET THE FORMAT.
+//        });
+//    }
+
+//    return {
+//        require: 'ngModel',
+//        link: link
+//    };
+//});
+ 
+//app.directive('popover', function ($compile, $timeout) {
+//    return {
+//        restrict: 'A',
+//        link: function (scope, el, attrs) {
+//            var content = attrs.content;
+//            var elm = angular.element('<div/>');
+//            elm.append(attrs.content);
+//            $compile(elm)(scope);
+//            $timeout(function () {
+//                el.removeAttr('popover').attr('data-content', elm.html());
+//                el.popover();
+//            });
+//        }
+//    }
+//});
+
+
+ 

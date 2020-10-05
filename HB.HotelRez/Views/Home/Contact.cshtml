@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = null;
+}
+<html>
+<head>
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.multidatespicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/script/jquery-ui.min.js"></script>
+    <script src="~/script/jquery-ui.multidatespicker.js"></script>
+
+    <script data-require="angular.js@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <style>
+        body {
+            font-size: x-small !important;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mdp-demo"></div>
+
+
+    <input type="button" value="Save" id="Save" />
+
+    <script>
+     
+        var today = new Date();
+        var y = today.getFullYear();
+        $('#mdp-demo').multiDatesPicker({
+            addDates: ['10/14/' + y, '02/19/' + y, '01/14/' + y, '11/16/' + y],
+            numberOfMonths: [3, 4],
+            defaultDate: '1/1/' + y
+        });
+
+       
+    </script>
+
+    <script type="text/javascript">
+    $('#Save').click(function () {
+        var url = "/Home/SaveToDatabase";
+
+        $.post(url, { "unabailableList.UnavailableDates": tdDetailList }, function (data) {
+            $("#msg").html(data);
+        });
+    })
+    </script>
+
+</body>
+</html>

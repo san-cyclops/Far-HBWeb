@@ -1,0 +1,397 @@
+
+using HB.HotelRez.Models;
+using Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+
+namespace HB.HotelRez.Controllers
+{
+    public class HomeController : Controller
+    {
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult RoomMaster()
+        {
+            ViewBag.Message = "Room Master page.";
+
+            return View();
+        }
+
+
+        public ActionResult HotelSupplier1()
+        {
+            ViewBag.Message = "Hotel Supplier page.";
+
+            return View();
+        }
+        public ActionResult UserForm()
+        {
+            ViewBag.Message = "User Form page.";
+
+            return View();
+        }
+        public ActionResult Promotion()
+        {
+            ViewBag.Message = "Promotion page.";
+
+            return View();
+        }
+
+        public JsonResult GetUserFormData(UserFormData userFormData)
+        {
+
+            try
+
+            {
+                HRZUser user = new HRZUser();
+
+
+                if (userFormData.UserType == "Admin")
+                {
+                    user.UserType = 1;
+                }
+                if (userFormData.UserType == "User")
+                {
+                    user.UserType = 2 ;
+                }
+                if (userFormData.UserType == "Guest")
+                {
+                    user.UserType = 3;
+                }
+
+                user.UserName = userFormData.UserName;
+                user.PassWord = userFormData.Password;
+
+
+                using (var db = new HBNEWEntities())
+                {
+
+
+
+
+                    db.HRZUsers.Add(user);
+                    db.SaveChanges();
+
+
+
+                }
+
+                return Json("Successfully Saved");
+
+            }
+
+            catch (Exception ex)
+            {
+
+
+                return Json("oOps! something went wrong");
+
+            }
+        }
+
+
+
+        public ActionResult RoomUnavailable()
+        {
+            try
+            {
+                UnabailableList rm = new UnabailableList();
+                rm.Rooms = GetRoomId();
+                return View(rm);
+
+
+                // ViewBag.Message = "Room Unavailable Master page.";
+                //  return View();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public ActionResult AdminDashboard()
+        {
+            ViewBag.Message = "Admin Dashboard page.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetHotelRezData(HotelRezData hotelRezData)
+        {
+
+            try
+
+            {
+                using (var db = new HBNEWEntities())
+                {
+
+                    HRZRoomMaster roomaster = new HRZRoomMaster();
+
+                    roomaster.Address = hotelRezData.Address;
+                    roomaster.HotelName = hotelRezData.HotelName;
+                    roomaster.RoomID = hotelRezData.RoomId;
+                    roomaster.RoomType = hotelRezData.RoomType;
+                    roomaster.Refference = hotelRezData.Refference;
+                    roomaster.Price = hotelRezData.Price;
+                    roomaster.BoardType = hotelRezData.BoardType;
+
+                    db.HRZRoomMasters.Add(roomaster);
+                    db.SaveChanges();
+
+                    foreach (var aminity in hotelRezData.Aminitylist)
+                    {
+                        HRZAminity amminity = new HRZAminity();
+
+                        amminity.RoomID = hotelRezData.RoomId;
+                        amminity.Name = aminity;
+                        db.HRZAminities.Add(amminity);
+
+                    }
+                    db.SaveChanges();
+
+                    foreach (var nearbyplaces in hotelRezData.NearByPlaces)
+                    {
+                        HRZNearbyPlace nearbyplace = new HRZNearbyPlace();
+
+                        nearbyplace.RoomID = hotelRezData.RoomId;
+                        nearbyplace.NearbyName = nearbyplaces.name;
+                        nearbyplace.NearbyDistance = nearbyplaces.distance;
+
+                        db.HRZNearbyPlaces.Add(nearbyplace);
+
+                    }
+                    db.SaveChanges();
+
+                }
+
+                return Json("Successfully Saved");
+
+            }
+
+            catch (Exception ex)
+            {
+
+
+                return Json("oOps! something went wrong");
+
+            }
+
+        }
+
+
+        public ActionResult BookingCancellation()
+        {
+            ViewBag.Message = "Booking Cancellation.";
+
+            return View();
+        }
+        public ActionResult RoomBooking()
+        {
+            ViewBag.Message = "RoomBooking page.";
+
+            return View();
+
+        }
+        [HttpPost]
+        public JsonResult SaveToDatabase(UnabailableList unabailableList)
+        {
+            try
+            {
+
+                string roomId = unabailableList.RoomID.Trim().ToString();
+                using (var db = new HBNEWEntities())
+                {
+                    foreach (var item in unabailableList.UnavailableDates)
+                    {
+
+                        DateTime uDate = UnixTimeStampToDateTime(double.Parse(item.Trim().ToString().Substring(0, 10)));
+
+
+                        db.HRZRoomUnavailables.Add(new HRZRoomUnavailable { RoomID = roomId, Date = uDate.ToShortDateString() });
+                        db.SaveChanges();
+                    }
+
+
+                }
+
+                return Json("Successfully Saved");
+            }
+            catch (Exception ex)
+            {
+                return Json("oOps! something went wrong");
+            }
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
+        [HttpPost]
+        public JsonResult getUnavailableDateLst(string roomId)
+        {
+            try
+            {
+
+                UnabailableList x = new UnabailableList();
+                x.Rooms = unAvailableDateLst(roomId);
+
+                return Json(x.Rooms);
+            }
+            catch (Exception ex)
+            {
+                return Json("oOps! something went wrong");
+            }
+        }
+        public static List<SelectListItem> unAvailableDateLst(string roomId)
+        {
+            try
+            {
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                using (var db = new HBNEWEntities())
+                {
+
+                    var unDate = db.HRZRoomUnavailables.Where(x => x.RoomID.Equals(roomId)).ToList();
+
+
+                    foreach (var x in unDate)
+                    {
+
+                        
+                        items.Add(new SelectListItem
+                        {
+                            Text = GetCurrentUnixTimestampMillis(DateTime.Parse(x.Date)).ToString()
+                        });
+                    }
+
+                }
+
+                return items;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        public static long GetCurrentUnixTimestampMillis(DateTime localDateTime)
+        {
+            DateTime univDateTime;           
+            univDateTime = localDateTime.ToUniversalTime();
+            return (long)(univDateTime - UnixEpoch).TotalMilliseconds;
+        }
+
+        //public BookingListRS BookingList(HotelBookingList hotelBookingList)
+        //{
+        //    var bookingRs = new BookingListRS();
+        //    HotelBookingService hotelBookingService = new HotelBookingService();
+        //    bookingRs = hotelBookingService.getBookingList(hotelBookingList);
+        //    return bookingRs;
+        //}
+
+        //[HttpGet]
+        //public List<UnabailableList> GetRoomId()
+        //{
+        //    try
+        //    {
+        //        List<UnabailableList> unabailableList = new List<UnabailableList>();
+        //        using (var db = new HBNEWEntities())
+        //        {
+
+        //            var roomid = db.HRZRoomMasters.Select(x => new
+        //            {
+        //                id = x.RoomId
+
+        //            }).ToList();
+
+        //            foreach (var x in roomid)
+        //            {
+        //                unabailableList.Add(new UnabailableList
+        //                {
+        //                    RoomID = x.id
+
+        //                });
+        //            }
+
+        //        }
+
+
+        //        return unabailableList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        private static List<SelectListItem> GetRoomId()
+        {
+            try
+            {
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                using (var db = new HBNEWEntities())
+                {
+
+                    var roomid = db.HRZRoomMasters.Select(x => new
+                    {
+
+                        rId = x.RoomID
+
+                    }).ToList();
+
+                    foreach (var x in roomid)
+                    {
+                        items.Add(new SelectListItem
+                        {
+                            Text = x.rId
+
+                        });
+                    }
+
+                }
+                return items;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+    }
+    
+
+
+}

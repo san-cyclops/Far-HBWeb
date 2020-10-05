@@ -1,0 +1,2148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HBNEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccommodationReps">
+          <Key>
+            <PropertyRef Name="AccommodationRepID" />
+          </Key>
+          <Property Name="AccommodationRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="typeMultiDescription" Type="nvarchar(max)" />
+          <Property Name="typeDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BoardReps">
+          <Key>
+            <PropertyRef Name="BoardRepID" />
+          </Key>
+          <Property Name="BoardRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hotelcode" Type="int" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="multiLingualCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CategoryReps">
+          <Key>
+            <PropertyRef Name="CategoryRepID" />
+          </Key>
+          <Property Name="CategoryRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="simpleCode" Type="int" Nullable="false" />
+          <Property Name="accommodationType" Type="nvarchar(max)" />
+          <Property Name="group" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChainReps">
+          <Key>
+            <PropertyRef Name="ChainRepID" />
+          </Key>
+          <Property Name="ChainRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Contents">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CountryReps">
+          <Key>
+            <PropertyRef Name="CountryRepID" />
+          </Key>
+          <Property Name="CountryRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="isoCode" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FARHBNEW_TEST.dbo.CurrencyRate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="CurrencyRateID" />
+          </Key>
+          <Property Name="Currency" Type="nvarchar(max)" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CurrencyRateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CurrencyReps">
+          <Key>
+            <PropertyRef Name="CurrencyRepID" />
+          </Key>
+          <Property Name="CurrencyRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="currencyType" Type="nvarchar(max)" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="DestinationsReps">
+          <Key>
+            <PropertyRef Name="DestinationsRepID" />
+          </Key>
+          <Property Name="DestinationsRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="countryCode" Type="nvarchar(max)" />
+          <Property Name="isoCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DocumentReps">
+          <Key>
+            <PropertyRef Name="DocumentRepID" />
+          </Key>
+          <Property Name="DocumentRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentID" Type="bigint" />
+          <Property Name="DocumentNo" Type="bigint" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacilityGroupReps">
+          <Key>
+            <PropertyRef Name="FacilityGroupRepID" />
+          </Key>
+          <Property Name="FacilityGroupRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FacilityReps">
+          <Key>
+            <PropertyRef Name="FacilityRepID" />
+          </Key>
+          <Property Name="FacilityRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="int" Nullable="false" />
+          <Property Name="facilityTypologyCode" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FARHBNEW_TEST.dbo.FacilitySumReps' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FacilitySumReps">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="facilityCode" Type="int" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="facilityGroupCode" Type="int" />
+          <Property Name="fgdescription" Type="nvarchar(max)" />
+          <Property Name="IDX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FARHBNEW_TEST.dbo.FacilitySumReps_back' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FacilitySumReps_back">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="facilityCode" Type="int" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="facilityGroupCode" Type="int" />
+          <Property Name="fgdescription" Type="nvarchar(max)" />
+          <Property Name="IDX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FARHBNEW_TEST.dbo.FacilitySumRepsBackup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FacilitySumRepsBackup">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="facilityCode" Type="int" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="facilityGroupCode" Type="int" />
+          <Property Name="fgdescription" Type="nvarchar(max)" />
+          <Property Name="IDX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacilityTypeReps">
+          <Key>
+            <PropertyRef Name="FacilityTypeRepID" />
+          </Key>
+          <Property Name="FacilityTypeRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="conceptFlag" Type="bit" Nullable="false" />
+          <Property Name="numberFlag" Type="bit" Nullable="false" />
+          <Property Name="logicFlag" Type="bit" Nullable="false" />
+          <Property Name="feeFlag" Type="bit" Nullable="false" />
+          <Property Name="distanceFlag" Type="bit" Nullable="false" />
+          <Property Name="ageFromFlag" Type="bit" Nullable="false" />
+          <Property Name="ageToFlag" Type="bit" Nullable="false" />
+          <Property Name="dateFromFlag" Type="bit" Nullable="false" />
+          <Property Name="dateToFlag" Type="bit" Nullable="false" />
+          <Property Name="timeFromFlag" Type="bit" Nullable="false" />
+          <Property Name="timeToFlag" Type="bit" Nullable="false" />
+          <Property Name="indYesOrNoFlag" Type="bit" Nullable="false" />
+          <Property Name="amountFlag" Type="bit" Nullable="false" />
+          <Property Name="currencyFlag" Type="bit" Nullable="false" />
+          <Property Name="appTypeFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeoLocationReps">
+          <Key>
+            <PropertyRef Name="GeoLocationRepID" />
+          </Key>
+          <Property Name="GeoLocationRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="radius" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="unit" Type="int" />
+          <Property Name="secondaryLatitude" Type="float" Nullable="false" />
+          <Property Name="secondaryLongitude" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupCategoryReps">
+          <Key>
+            <PropertyRef Name="GroupCategoryRepID" />
+          </Key>
+          <Property Name="GroupCategoryRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GroupZoneReps">
+          <Key>
+            <PropertyRef Name="GroupZoneRepID" />
+          </Key>
+          <Property Name="GroupZoneRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelBoardCodesReps">
+          <Key>
+            <PropertyRef Name="HotelBoardCodesRepID" />
+          </Key>
+          <Property Name="HotelBoardCodesRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="BoardCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelFacilityReps">
+          <Key>
+            <PropertyRef Name="HotelFacilityRepID" />
+          </Key>
+          <Property Name="HotelFacilityRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="facilityCode" Type="int" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" Nullable="false" />
+          <Property Name="indLogic" Type="bit" Nullable="false" />
+          <Property Name="indFee" Type="bit" Nullable="false" />
+          <Property Name="indYesOrNo" Type="bit" Nullable="false" />
+          <Property Name="facilityName" Type="nvarchar(max)" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="distance" Type="int" Nullable="false" />
+          <Property Name="ageFrom" Type="int" Nullable="false" />
+          <Property Name="ageTo" Type="int" Nullable="false" />
+          <Property Name="currency" Type="nvarchar(max)" />
+          <Property Name="applicationType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelPaymentDetails">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="currency" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="holderName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="paymentAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="responseCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="responseText" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="txnReference" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelPhoneReps">
+          <Key>
+            <PropertyRef Name="HotelPhoneRepID" />
+          </Key>
+          <Property Name="HotelPhoneRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="phoneNumber" Type="nvarchar(max)" />
+          <Property Name="phoneType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelReps">
+          <Key>
+            <PropertyRef Name="HotelRepID" />
+          </Key>
+          <Property Name="HotelRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="countryCode" Type="nvarchar(max)" />
+          <Property Name="destinationCode" Type="nvarchar(max)" />
+          <Property Name="zoneCode" Type="smallint" Nullable="false" />
+          <Property Name="categoryCode" Type="nvarchar(max)" />
+          <Property Name="categoryGroupCode" Type="nvarchar(max)" />
+          <Property Name="chainCode" Type="nvarchar(max)" />
+          <Property Name="accommodationTypeCode" Type="nvarchar(max)" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="postalCode" Type="nvarchar(max)" />
+          <Property Name="city" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="license" Type="nvarchar(max)" />
+          <Property Name="giataCode" Type="int" Nullable="false" />
+          <Property Name="hotelstar" Type="int" Nullable="false" />
+          <Property Name="imagepath" Type="nvarchar(max)" />
+          <Property Name="destinationName" Type="nvarchar(max)" />
+          <Property Name="categoryName" Type="nvarchar(max)" />
+          <Property Name="hotel_board_basis" Type="nvarchar(max)" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HotelRoomFacilityReps">
+          <Key>
+            <PropertyRef Name="HotelRoomFacilityRepID" />
+          </Key>
+          <Property Name="HotelRoomFacilityRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="roomCode" Type="nvarchar(max)" />
+          <Property Name="facilityCode" Type="int" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="indLogic" Type="bit" Nullable="false" />
+          <Property Name="indFee" Type="bit" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="order" Type="int" Nullable="false" />
+          <Property Name="indYesOrNo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelRoomReps">
+          <Key>
+            <PropertyRef Name="HotelRoomRepID" />
+          </Key>
+          <Property Name="HotelRoomRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="roomCode" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="roomType" Type="nvarchar(max)" />
+          <Property Name="characteristicCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelRoomStayFacilityReps">
+          <Key>
+            <PropertyRef Name="HotelRoomStayFacilityRepID" />
+          </Key>
+          <Property Name="HotelRoomStayFacilityRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="facilityCode" Type="int" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelRoomStayReps">
+          <Key>
+            <PropertyRef Name="HotelRoomStayRepID" />
+          </Key>
+          <Property Name="HotelRoomStayRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="roomCode" Type="nvarchar(max)" />
+          <Property Name="stayType" Type="nvarchar(max)" />
+          <Property Name="order" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelSegmentReps">
+          <Key>
+            <PropertyRef Name="HotelSegmentRepID" />
+          </Key>
+          <Property Name="HotelSegmentRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HotelTerminalReps">
+          <Key>
+            <PropertyRef Name="HotelTerminalRepID" />
+          </Key>
+          <Property Name="HotelTerminalRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="type" Type="nvarchar(max)" />
+          <Property Name="country" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="hotelcode" Type="int" Nullable="false" />
+          <Property Name="distance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRZAminity">
+          <Key>
+            <PropertyRef Name="AminityID" />
+          </Key>
+          <Property Name="AminityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZHotelImage">
+          <Key>
+            <PropertyRef Name="HotelImageID" />
+          </Key>
+          <Property Name="HotelImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="HRZHotelSupplier">
+          <Key>
+            <PropertyRef Name="HotelSupplierID" />
+          </Key>
+          <Property Name="HotelSupplierID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelName" Type="nvarchar(max)" />
+          <Property Name="StarRating" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="Owner" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZNearbyPlaces">
+          <Key>
+            <PropertyRef Name="NearbyPlacesID" />
+          </Key>
+          <Property Name="NearbyPlacesID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NearbyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NearbyDistance" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZPromotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromotionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiscountValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiscountPercentage" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZRoomBooking">
+          <Key>
+            <PropertyRef Name="RoomBookingID" />
+          </Key>
+          <Property Name="RoomBookingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult1FirstName" Type="nvarchar(max)" />
+          <Property Name="Adult1LastName" Type="nvarchar(max)" />
+          <Property Name="Adult1Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult1Email" Type="nvarchar(max)" />
+          <Property Name="Adult1NICNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult1Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult2FirstName" Type="nvarchar(max)" />
+          <Property Name="Adult2LastName" Type="nvarchar(max)" />
+          <Property Name="Adult2Telephone" Type="nvarchar(max)" />
+          <Property Name="Adult2Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult2NICNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult2Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult3FirstName" Type="nvarchar(max)" />
+          <Property Name="Adult3LastName" Type="nvarchar(max)" />
+          <Property Name="Adult3Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult3Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult3NICNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult3Address" Type="nvarchar(max)" />
+          <Property Name="Adult4FirstName" Type="nvarchar(max)" />
+          <Property Name="Adult4LastName" Type="nvarchar(max)" />
+          <Property Name="Adult4Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult4Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult4NICNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adult4Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child1Name" Type="nvarchar(max)" />
+          <Property Name="Child1Age" Type="nvarchar" MaxLength="50" />
+          <Property Name="Chil21Name" Type="nvarchar(max)" />
+          <Property Name="child2Age" Type="nvarchar" MaxLength="50" />
+          <Property Name="Chidl3Name" Type="nvarchar(max)" />
+          <Property Name="Child3Age" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child4Name" Type="nvarchar(max)" />
+          <Property Name="Child4Age" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZRoomMaster">
+          <Key>
+            <PropertyRef Name="RoomMasterID" />
+          </Key>
+          <Property Name="RoomMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Refference" Type="nvarchar" MaxLength="50" />
+          <Property Name="BoardType" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoomType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZRoomUnavailable">
+          <Key>
+            <PropertyRef Name="RoomUnavailableID" />
+          </Key>
+          <Property Name="RoomUnavailableID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRZUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="HotelCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FARHBNEW_TEST.dbo.HRZUserPrivileges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HRZUserPrivileges">
+          <Key>
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="FormID" />
+            <PropertyRef Name="IsAccess" />
+            <PropertyRef Name="IsDelete" />
+          </Key>
+          <Property Name="HRZUserPrivilegesID" Type="bigint" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="FormID" Type="bigint" Nullable="false" />
+          <Property Name="IsAccess" Type="bigint" Nullable="false" />
+          <Property Name="IsDelete" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageReps">
+          <Key>
+            <PropertyRef Name="ImageRepID" />
+          </Key>
+          <Property Name="ImageRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="imageTypeCode" Type="nvarchar(max)" />
+          <Property Name="hotel" Type="nvarchar(max)" />
+          <Property Name="path" Type="nvarchar(max)" />
+          <Property Name="roomCode" Type="nvarchar(max)" />
+          <Property Name="roomType" Type="nvarchar(max)" />
+          <Property Name="characteristicCode" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageTypeReps">
+          <Key>
+            <PropertyRef Name="ImageTypeRepID" />
+          </Key>
+          <Property Name="ImageTypeRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="IssueReps">
+          <Key>
+            <PropertyRef Name="IssueRepID" />
+          </Key>
+          <Property Name="IssueRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="type" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="alternative" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguageReps">
+          <Key>
+            <PropertyRef Name="LanguageRepID" />
+          </Key>
+          <Property Name="LanguageRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PromotionReps">
+          <Key>
+            <PropertyRef Name="PromotionRepID" />
+          </Key>
+          <Property Name="PromotionRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RateCommentReps">
+          <Key>
+            <PropertyRef Name="RateCommentRepID" />
+          </Key>
+          <Property Name="RateCommentRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="dateEnd" Type="datetime" Nullable="false" />
+          <Property Name="dateStart" Type="datetime" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RoomReps">
+          <Key>
+            <PropertyRef Name="RoomRepID" />
+          </Key>
+          <Property Name="RoomRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="type" Type="nvarchar(max)" />
+          <Property Name="characteristic" Type="nvarchar(max)" />
+          <Property Name="minPax" Type="int" Nullable="false" />
+          <Property Name="maxPax" Type="int" Nullable="false" />
+          <Property Name="maxAdults" Type="int" Nullable="false" />
+          <Property Name="maxChildren" Type="int" Nullable="false" />
+          <Property Name="minAdults" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="typeDescription" Type="nvarchar(max)" />
+          <Property Name="characteristicDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SegmentReps">
+          <Key>
+            <PropertyRef Name="SegmentRepID" />
+          </Key>
+          <Property Name="SegmentRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelCode" Type="int" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TerminalReps">
+          <Key>
+            <PropertyRef Name="TerminalRepID" />
+          </Key>
+          <Property Name="TerminalRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" />
+          <Property Name="type" Type="nvarchar(max)" />
+          <Property Name="country" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ZoneReps">
+          <Key>
+            <PropertyRef Name="ZoneRepID" />
+          </Key>
+          <Property Name="ZoneRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zoneCode" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="Description_ContentID" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_dbo_ZoneReps_dbo_Contents_Description_ContentID">
+          <End Role="Contents" Type="Self.Contents" Multiplicity="0..1" />
+          <End Role="ZoneReps" Type="Self.ZoneReps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contents">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="ZoneReps">
+              <PropertyRef Name="Description_ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HBNEWModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccommodationReps" EntityType="Self.AccommodationReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoardReps" EntityType="Self.BoardReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryReps" EntityType="Self.CategoryReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChainReps" EntityType="Self.ChainReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contents" EntityType="Self.Contents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountryReps" EntityType="Self.CountryReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrencyReps" EntityType="Self.CurrencyReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DestinationsReps" EntityType="Self.DestinationsReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentReps" EntityType="Self.DocumentReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityGroupReps" EntityType="Self.FacilityGroupReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityReps" EntityType="Self.FacilityReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityTypeReps" EntityType="Self.FacilityTypeReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeoLocationReps" EntityType="Self.GeoLocationReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupCategoryReps" EntityType="Self.GroupCategoryReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupZoneReps" EntityType="Self.GroupZoneReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelBoardCodesReps" EntityType="Self.HotelBoardCodesReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelFacilityReps" EntityType="Self.HotelFacilityReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelPaymentDetails" EntityType="Self.HotelPaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelPhoneReps" EntityType="Self.HotelPhoneReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelReps" EntityType="Self.HotelReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelRoomFacilityReps" EntityType="Self.HotelRoomFacilityReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelRoomReps" EntityType="Self.HotelRoomReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelRoomStayFacilityReps" EntityType="Self.HotelRoomStayFacilityReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelRoomStayReps" EntityType="Self.HotelRoomStayReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelSegmentReps" EntityType="Self.HotelSegmentReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelTerminalReps" EntityType="Self.HotelTerminalReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZAminity" EntityType="Self.HRZAminity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZHotelImage" EntityType="Self.HRZHotelImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZHotelSupplier" EntityType="Self.HRZHotelSupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZNearbyPlaces" EntityType="Self.HRZNearbyPlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZPromotion" EntityType="Self.HRZPromotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZRoomBooking" EntityType="Self.HRZRoomBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZRoomMaster" EntityType="Self.HRZRoomMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZRoomUnavailable" EntityType="Self.HRZRoomUnavailable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRZUser" EntityType="Self.HRZUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageReps" EntityType="Self.ImageReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageTypeReps" EntityType="Self.ImageTypeReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueReps" EntityType="Self.IssueReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageReps" EntityType="Self.LanguageReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PromotionReps" EntityType="Self.PromotionReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateCommentReps" EntityType="Self.RateCommentReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomReps" EntityType="Self.RoomReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SegmentReps" EntityType="Self.SegmentReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminalReps" EntityType="Self.TerminalReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZoneReps" EntityType="Self.ZoneReps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrencyRate" EntityType="Self.CurrencyRate" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CurrencyRate].[Currency] AS [Currency], 
+    [CurrencyRate].[Value] AS [Value], 
+    [CurrencyRate].[CurrencyRateID] AS [CurrencyRateID]
+    FROM [dbo].[CurrencyRate] AS [CurrencyRate]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FacilitySumReps" EntityType="Self.FacilitySumReps" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FacilitySumReps].[HotelCode] AS [HotelCode], 
+    [FacilitySumReps].[facilityCode] AS [facilityCode], 
+    [FacilitySumReps].[DESCRIPTION] AS [DESCRIPTION], 
+    [FacilitySumReps].[facilityGroupCode] AS [facilityGroupCode], 
+    [FacilitySumReps].[fgdescription] AS [fgdescription], 
+    [FacilitySumReps].[IDX] AS [IDX]
+    FROM [dbo].[FacilitySumReps] AS [FacilitySumReps]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FacilitySumReps_back" EntityType="Self.FacilitySumReps_back" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FacilitySumReps_back].[HotelCode] AS [HotelCode], 
+    [FacilitySumReps_back].[facilityCode] AS [facilityCode], 
+    [FacilitySumReps_back].[DESCRIPTION] AS [DESCRIPTION], 
+    [FacilitySumReps_back].[facilityGroupCode] AS [facilityGroupCode], 
+    [FacilitySumReps_back].[fgdescription] AS [fgdescription], 
+    [FacilitySumReps_back].[IDX] AS [IDX]
+    FROM [dbo].[FacilitySumReps_back] AS [FacilitySumReps_back]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FacilitySumRepsBackup" EntityType="Self.FacilitySumRepsBackup" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FacilitySumRepsBackup].[HotelCode] AS [HotelCode], 
+    [FacilitySumRepsBackup].[facilityCode] AS [facilityCode], 
+    [FacilitySumRepsBackup].[DESCRIPTION] AS [DESCRIPTION], 
+    [FacilitySumRepsBackup].[facilityGroupCode] AS [facilityGroupCode], 
+    [FacilitySumRepsBackup].[fgdescription] AS [fgdescription], 
+    [FacilitySumRepsBackup].[IDX] AS [IDX]
+    FROM [dbo].[FacilitySumRepsBackup] AS [FacilitySumRepsBackup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HRZUserPrivileges" EntityType="Self.HRZUserPrivileges" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HRZUserPrivileges].[HRZUserPrivilegesID] AS [HRZUserPrivilegesID], 
+    [HRZUserPrivileges].[UserType] AS [UserType], 
+    [HRZUserPrivileges].[FormID] AS [FormID], 
+    [HRZUserPrivileges].[IsAccess] AS [IsAccess], 
+    [HRZUserPrivileges].[IsDelete] AS [IsDelete]
+    FROM [dbo].[HRZUserPrivileges] AS [HRZUserPrivileges]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_dbo_ZoneReps_dbo_Contents_Description_ContentID" Association="Self.FK_dbo_ZoneReps_dbo_Contents_Description_ContentID">
+            <End Role="Contents" EntitySet="Contents" />
+            <End Role="ZoneReps" EntitySet="ZoneReps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HBNEWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HBNEWEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="HBNEWModel.C__MigrationHistory" />
+          <EntitySet Name="AccommodationReps" EntityType="HBNEWModel.AccommodationRep" />
+          <EntitySet Name="BoardReps" EntityType="HBNEWModel.BoardRep" />
+          <EntitySet Name="CategoryReps" EntityType="HBNEWModel.CategoryRep" />
+          <EntitySet Name="ChainReps" EntityType="HBNEWModel.ChainRep" />
+          <EntitySet Name="Contents" EntityType="HBNEWModel.Content" />
+          <EntitySet Name="CountryReps" EntityType="HBNEWModel.CountryRep" />
+          <EntitySet Name="CurrencyReps" EntityType="HBNEWModel.CurrencyRep" />
+          <EntitySet Name="DestinationsReps" EntityType="HBNEWModel.DestinationsRep" />
+          <EntitySet Name="FacilityGroupReps" EntityType="HBNEWModel.FacilityGroupRep" />
+          <EntitySet Name="FacilityReps" EntityType="HBNEWModel.FacilityRep" />
+          <EntitySet Name="FacilityTypeReps" EntityType="HBNEWModel.FacilityTypeRep" />
+          <EntitySet Name="GeoLocationReps" EntityType="HBNEWModel.GeoLocationRep" />
+          <EntitySet Name="GroupCategoryReps" EntityType="HBNEWModel.GroupCategoryRep" />
+          <EntitySet Name="GroupZoneReps" EntityType="HBNEWModel.GroupZoneRep" />
+          <EntitySet Name="HotelBoardCodesReps" EntityType="HBNEWModel.HotelBoardCodesRep" />
+          <EntitySet Name="HotelFacilityReps" EntityType="HBNEWModel.HotelFacilityRep" />
+          <EntitySet Name="HotelPaymentDetails" EntityType="HBNEWModel.HotelPaymentDetail" />
+          <EntitySet Name="HotelPhoneReps" EntityType="HBNEWModel.HotelPhoneRep" />
+          <EntitySet Name="HotelReps" EntityType="HBNEWModel.HotelRep" />
+          <EntitySet Name="HotelRoomFacilityReps" EntityType="HBNEWModel.HotelRoomFacilityRep" />
+          <EntitySet Name="HotelRoomReps" EntityType="HBNEWModel.HotelRoomRep" />
+          <EntitySet Name="HotelRoomStayFacilityReps" EntityType="HBNEWModel.HotelRoomStayFacilityRep" />
+          <EntitySet Name="HotelRoomStayReps" EntityType="HBNEWModel.HotelRoomStayRep" />
+          <EntitySet Name="HotelSegmentReps" EntityType="HBNEWModel.HotelSegmentRep" />
+          <EntitySet Name="HotelTerminalReps" EntityType="HBNEWModel.HotelTerminalRep" />
+          <EntitySet Name="ImageReps" EntityType="HBNEWModel.ImageRep" />
+          <EntitySet Name="ImageTypeReps" EntityType="HBNEWModel.ImageTypeRep" />
+          <EntitySet Name="IssueReps" EntityType="HBNEWModel.IssueRep" />
+          <EntitySet Name="LanguageReps" EntityType="HBNEWModel.LanguageRep" />
+          <EntitySet Name="PromotionReps" EntityType="HBNEWModel.PromotionRep" />
+          <EntitySet Name="RateCommentReps" EntityType="HBNEWModel.RateCommentRep" />
+          <EntitySet Name="RoomReps" EntityType="HBNEWModel.RoomRep" />
+          <EntitySet Name="SegmentReps" EntityType="HBNEWModel.SegmentRep" />
+          <EntitySet Name="sysdiagrams" EntityType="HBNEWModel.sysdiagram" />
+          <EntitySet Name="TerminalReps" EntityType="HBNEWModel.TerminalRep" />
+          <EntitySet Name="ZoneReps" EntityType="HBNEWModel.ZoneRep" />
+          <EntitySet Name="CurrencyRates" EntityType="HBNEWModel.CurrencyRate" />
+          <EntitySet Name="DocumentReps" EntityType="HBNEWModel.DocumentRep" />
+          <EntitySet Name="FacilitySumReps" EntityType="HBNEWModel.FacilitySumRep" />
+          <EntitySet Name="FacilitySumReps_back" EntityType="HBNEWModel.FacilitySumReps_back" />
+          <EntitySet Name="FacilitySumRepsBackups" EntityType="HBNEWModel.FacilitySumRepsBackup" />
+          <AssociationSet Name="FK_dbo_ZoneReps_dbo_Contents_Description_ContentID" Association="HBNEWModel.FK_dbo_ZoneReps_dbo_Contents_Description_ContentID">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="ZoneRep" EntitySet="ZoneReps" />
+          </AssociationSet>
+          <EntitySet Name="HRZAminities" EntityType="HBNEWModel.HRZAminity" />
+          <EntitySet Name="HRZRoomUnavailables" EntityType="HBNEWModel.HRZRoomUnavailable" />
+          <EntitySet Name="HRZNearbyPlaces" EntityType="HBNEWModel.HRZNearbyPlace" />
+          <EntitySet Name="HRZRoomMasters" EntityType="HBNEWModel.HRZRoomMaster" />
+          <EntitySet Name="HRZRoomBookings" EntityType="HBNEWModel.HRZRoomBooking" />
+          <EntitySet Name="HRZUsers" EntityType="HBNEWModel.HRZUser" />
+          <EntitySet Name="HRZHotelImages" EntityType="HBNEWModel.HRZHotelImage" />
+          <EntitySet Name="HRZHotelSuppliers" EntityType="HBNEWModel.HRZHotelSupplier" />
+          <EntitySet Name="HRZPromotions" EntityType="HBNEWModel.HRZPromotion" />
+          <EntitySet Name="HRZUserPrivileges" EntityType="HBNEWModel.HRZUserPrivilege" />
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AccommodationRep">
+          <Key>
+            <PropertyRef Name="AccommodationRepID" />
+          </Key>
+          <Property Name="AccommodationRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="typeMultiDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="typeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BoardRep">
+          <Key>
+            <PropertyRef Name="BoardRepID" />
+          </Key>
+          <Property Name="BoardRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hotelcode" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="multiLingualCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CategoryRep">
+          <Key>
+            <PropertyRef Name="CategoryRepID" />
+          </Key>
+          <Property Name="CategoryRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="simpleCode" Type="Int32" Nullable="false" />
+          <Property Name="accommodationType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="group" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChainRep">
+          <Key>
+            <PropertyRef Name="ChainRepID" />
+          </Key>
+          <Property Name="ChainRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ZoneReps" Relationship="HBNEWModel.FK_dbo_ZoneReps_dbo_Contents_Description_ContentID" FromRole="Content" ToRole="ZoneRep" />
+        </EntityType>
+        <EntityType Name="CountryRep">
+          <Key>
+            <PropertyRef Name="CountryRepID" />
+          </Key>
+          <Property Name="CountryRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isoCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CurrencyRep">
+          <Key>
+            <PropertyRef Name="CurrencyRepID" />
+          </Key>
+          <Property Name="CurrencyRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="currencyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="DestinationsRep">
+          <Key>
+            <PropertyRef Name="DestinationsRepID" />
+          </Key>
+          <Property Name="DestinationsRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="countryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isoCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FacilityGroupRep">
+          <Key>
+            <PropertyRef Name="FacilityGroupRepID" />
+          </Key>
+          <Property Name="FacilityGroupRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FacilityRep">
+          <Key>
+            <PropertyRef Name="FacilityRepID" />
+          </Key>
+          <Property Name="FacilityRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityTypologyCode" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FacilityTypeRep">
+          <Key>
+            <PropertyRef Name="FacilityTypeRepID" />
+          </Key>
+          <Property Name="FacilityTypeRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="conceptFlag" Type="Boolean" Nullable="false" />
+          <Property Name="numberFlag" Type="Boolean" Nullable="false" />
+          <Property Name="logicFlag" Type="Boolean" Nullable="false" />
+          <Property Name="feeFlag" Type="Boolean" Nullable="false" />
+          <Property Name="distanceFlag" Type="Boolean" Nullable="false" />
+          <Property Name="ageFromFlag" Type="Boolean" Nullable="false" />
+          <Property Name="ageToFlag" Type="Boolean" Nullable="false" />
+          <Property Name="dateFromFlag" Type="Boolean" Nullable="false" />
+          <Property Name="dateToFlag" Type="Boolean" Nullable="false" />
+          <Property Name="timeFromFlag" Type="Boolean" Nullable="false" />
+          <Property Name="timeToFlag" Type="Boolean" Nullable="false" />
+          <Property Name="indYesOrNoFlag" Type="Boolean" Nullable="false" />
+          <Property Name="amountFlag" Type="Boolean" Nullable="false" />
+          <Property Name="currencyFlag" Type="Boolean" Nullable="false" />
+          <Property Name="appTypeFlag" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeoLocationRep">
+          <Key>
+            <PropertyRef Name="GeoLocationRepID" />
+          </Key>
+          <Property Name="GeoLocationRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="radius" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="unit" Type="Int32" />
+          <Property Name="secondaryLatitude" Type="Double" Nullable="false" />
+          <Property Name="secondaryLongitude" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupCategoryRep">
+          <Key>
+            <PropertyRef Name="GroupCategoryRepID" />
+          </Key>
+          <Property Name="GroupCategoryRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GroupZoneRep">
+          <Key>
+            <PropertyRef Name="GroupZoneRepID" />
+          </Key>
+          <Property Name="GroupZoneRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="HotelBoardCodesRep">
+          <Key>
+            <PropertyRef Name="HotelBoardCodesRepID" />
+          </Key>
+          <Property Name="HotelBoardCodesRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="BoardCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelFacilityRep">
+          <Key>
+            <PropertyRef Name="HotelFacilityRepID" />
+          </Key>
+          <Property Name="HotelFacilityRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <Property Name="indLogic" Type="Boolean" Nullable="false" />
+          <Property Name="indFee" Type="Boolean" Nullable="false" />
+          <Property Name="indYesOrNo" Type="Boolean" Nullable="false" />
+          <Property Name="facilityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="distance" Type="Int32" Nullable="false" />
+          <Property Name="ageFrom" Type="Int32" Nullable="false" />
+          <Property Name="ageTo" Type="Int32" Nullable="false" />
+          <Property Name="currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="applicationType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelPaymentDetail">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="currency" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="holderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="paymentAmount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="responseCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="responseText" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txnReference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HotelPhoneRep">
+          <Key>
+            <PropertyRef Name="HotelPhoneRepID" />
+          </Key>
+          <Property Name="HotelPhoneRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phoneType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelRep">
+          <Key>
+            <PropertyRef Name="HotelRepID" />
+          </Key>
+          <Property Name="HotelRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="countryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destinationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zoneCode" Type="Int16" Nullable="false" />
+          <Property Name="categoryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoryGroupCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="chainCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="accommodationTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="postalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="license" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="giataCode" Type="Int32" Nullable="false" />
+          <Property Name="hotelstar" Type="Int32" Nullable="false" />
+          <Property Name="imagepath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destinationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_board_basis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HotelRoomFacilityRep">
+          <Key>
+            <PropertyRef Name="HotelRoomFacilityRepID" />
+          </Key>
+          <Property Name="HotelRoomFacilityRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="roomCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facilityCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="indLogic" Type="Boolean" Nullable="false" />
+          <Property Name="indFee" Type="Boolean" Nullable="false" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <Property Name="indYesOrNo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelRoomRep">
+          <Key>
+            <PropertyRef Name="HotelRoomRepID" />
+          </Key>
+          <Property Name="HotelRoomRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="roomCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="roomType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="characteristicCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelRoomStayFacilityRep">
+          <Key>
+            <PropertyRef Name="HotelRoomStayFacilityRepID" />
+          </Key>
+          <Property Name="HotelRoomStayFacilityRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityGroupCode" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelRoomStayRep">
+          <Key>
+            <PropertyRef Name="HotelRoomStayRepID" />
+          </Key>
+          <Property Name="HotelRoomStayRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="roomCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="stayType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelSegmentRep">
+          <Key>
+            <PropertyRef Name="HotelSegmentRepID" />
+          </Key>
+          <Property Name="HotelSegmentRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HotelTerminalRep">
+          <Key>
+            <PropertyRef Name="HotelTerminalRepID" />
+          </Key>
+          <Property Name="HotelTerminalRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hotelcode" Type="Int32" Nullable="false" />
+          <Property Name="distance" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageRep">
+          <Key>
+            <PropertyRef Name="ImageRepID" />
+          </Key>
+          <Property Name="ImageRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="imageTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hotel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="roomCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="roomType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="characteristicCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageTypeRep">
+          <Key>
+            <PropertyRef Name="ImageTypeRepID" />
+          </Key>
+          <Property Name="ImageTypeRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="IssueRep">
+          <Key>
+            <PropertyRef Name="IssueRepID" />
+          </Key>
+          <Property Name="IssueRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="alternative" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguageRep">
+          <Key>
+            <PropertyRef Name="LanguageRepID" />
+          </Key>
+          <Property Name="LanguageRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PromotionRep">
+          <Key>
+            <PropertyRef Name="PromotionRepID" />
+          </Key>
+          <Property Name="PromotionRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RateCommentRep">
+          <Key>
+            <PropertyRef Name="RateCommentRepID" />
+          </Key>
+          <Property Name="RateCommentRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RoomRep">
+          <Key>
+            <PropertyRef Name="RoomRepID" />
+          </Key>
+          <Property Name="RoomRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="characteristic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="minPax" Type="Int32" Nullable="false" />
+          <Property Name="maxPax" Type="Int32" Nullable="false" />
+          <Property Name="maxAdults" Type="Int32" Nullable="false" />
+          <Property Name="maxChildren" Type="Int32" Nullable="false" />
+          <Property Name="minAdults" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="typeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="characteristicDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SegmentRep">
+          <Key>
+            <PropertyRef Name="SegmentRepID" />
+          </Key>
+          <Property Name="SegmentRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TerminalRep">
+          <Key>
+            <PropertyRef Name="TerminalRepID" />
+          </Key>
+          <Property Name="TerminalRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ZoneRep">
+          <Key>
+            <PropertyRef Name="ZoneRepID" />
+          </Key>
+          <Property Name="ZoneRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zoneCode" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_ContentID" Type="Int64" />
+          <NavigationProperty Name="Content" Relationship="HBNEWModel.FK_dbo_ZoneReps_dbo_Contents_Description_ContentID" FromRole="ZoneRep" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="CurrencyRateID" />
+          </Key>
+          <Property Name="Currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CurrencyRateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DocumentRep">
+          <Key>
+            <PropertyRef Name="DocumentRepID" />
+          </Key>
+          <Property Name="DocumentRepID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentID" Type="Int64" />
+          <Property Name="DocumentNo" Type="Int64" />
+          <Property Name="DocumentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FacilitySumRep">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityCode" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facilityGroupCode" Type="Int32" />
+          <Property Name="fgdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="FacilitySumReps_back">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityCode" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facilityGroupCode" Type="Int32" />
+          <Property Name="fgdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="FacilitySumRepsBackup">
+          <Key>
+            <PropertyRef Name="HotelCode" />
+            <PropertyRef Name="IDX" />
+          </Key>
+          <Property Name="HotelCode" Type="Int32" Nullable="false" />
+          <Property Name="facilityCode" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facilityGroupCode" Type="Int32" />
+          <Property Name="fgdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_dbo_ZoneReps_dbo_Contents_Description_ContentID">
+          <End Type="HBNEWModel.Content" Role="Content" Multiplicity="0..1" />
+          <End Type="HBNEWModel.ZoneRep" Role="ZoneRep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="ZoneRep">
+              <PropertyRef Name="Description_ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRZAminity">
+          <Key>
+            <PropertyRef Name="AminityID" />
+          </Key>
+          <Property Name="AminityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZRoomUnavailable">
+          <Key>
+            <PropertyRef Name="RoomUnavailableID" />
+          </Key>
+          <Property Name="RoomUnavailableID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZNearbyPlace">
+          <Key>
+            <PropertyRef Name="NearbyPlacesID" />
+          </Key>
+          <Property Name="NearbyPlacesID" Type="Int64" Nullable="false" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NearbyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NearbyDistance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZRoomMaster">
+          <Key>
+            <PropertyRef Name="RoomMasterID" />
+          </Key>
+          <Property Name="RoomMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Refference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZRoomBooking">
+          <Key>
+            <PropertyRef Name="RoomBookingID" />
+          </Key>
+          <Property Name="RoomBookingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1NICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult1Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2NICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult2Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3NICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult3Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4NICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adult4Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Child1Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Child1Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Chil21Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="child2Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Chidl3Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Child3Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookingNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Child4Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Child4Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="Int32" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZHotelImage">
+          <Key>
+            <PropertyRef Name="HotelImageID" />
+          </Key>
+          <Property Name="HotelImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="HRZHotelSupplier">
+          <Key>
+            <PropertyRef Name="HotelSupplierID" />
+          </Key>
+          <Property Name="HotelSupplierID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StarRating" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZPromotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromotionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HotelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRZUserPrivilege">
+          <Key>
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="FormID" />
+            <PropertyRef Name="IsAccess" />
+            <PropertyRef Name="IsDelete" />
+          </Key>
+          <Property Name="HRZUserPrivilegesID" Type="Int64" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="FormID" Type="Int64" Nullable="false" />
+          <Property Name="IsAccess" Type="Int64" Nullable="false" />
+          <Property Name="IsDelete" Type="Int64" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HBNEWModelStoreContainer" CdmEntityContainer="HBNEWEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="HBNEWModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccommodationReps">
+            <EntityTypeMapping TypeName="HBNEWModel.AccommodationRep">
+              <MappingFragment StoreEntitySet="AccommodationReps">
+                <ScalarProperty Name="typeDescription" ColumnName="typeDescription" />
+                <ScalarProperty Name="typeMultiDescription" ColumnName="typeMultiDescription" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="AccommodationRepID" ColumnName="AccommodationRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardReps">
+            <EntityTypeMapping TypeName="HBNEWModel.BoardRep">
+              <MappingFragment StoreEntitySet="BoardReps">
+                <ScalarProperty Name="multiLingualCode" ColumnName="multiLingualCode" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="Hotelcode" ColumnName="Hotelcode" />
+                <ScalarProperty Name="BoardRepID" ColumnName="BoardRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryReps">
+            <EntityTypeMapping TypeName="HBNEWModel.CategoryRep">
+              <MappingFragment StoreEntitySet="CategoryReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="group" ColumnName="group" />
+                <ScalarProperty Name="accommodationType" ColumnName="accommodationType" />
+                <ScalarProperty Name="simpleCode" ColumnName="simpleCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CategoryRepID" ColumnName="CategoryRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChainReps">
+            <EntityTypeMapping TypeName="HBNEWModel.ChainRep">
+              <MappingFragment StoreEntitySet="ChainReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="ChainRepID" ColumnName="ChainRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="HBNEWModel.Content">
+              <MappingFragment StoreEntitySet="Contents">
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountryReps">
+            <EntityTypeMapping TypeName="HBNEWModel.CountryRep">
+              <MappingFragment StoreEntitySet="CountryReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isoCode" ColumnName="isoCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CountryRepID" ColumnName="CountryRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyReps">
+            <EntityTypeMapping TypeName="HBNEWModel.CurrencyRep">
+              <MappingFragment StoreEntitySet="CurrencyReps">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="currencyType" ColumnName="currencyType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CurrencyRepID" ColumnName="CurrencyRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DestinationsReps">
+            <EntityTypeMapping TypeName="HBNEWModel.DestinationsRep">
+              <MappingFragment StoreEntitySet="DestinationsReps">
+                <ScalarProperty Name="isoCode" ColumnName="isoCode" />
+                <ScalarProperty Name="countryCode" ColumnName="countryCode" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="DestinationsRepID" ColumnName="DestinationsRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityGroupReps">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilityGroupRep">
+              <MappingFragment StoreEntitySet="FacilityGroupReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="FacilityGroupRepID" ColumnName="FacilityGroupRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityReps">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilityRep">
+              <MappingFragment StoreEntitySet="FacilityReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="facilityTypologyCode" ColumnName="facilityTypologyCode" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="FacilityRepID" ColumnName="FacilityRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityTypeReps">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilityTypeRep">
+              <MappingFragment StoreEntitySet="FacilityTypeReps">
+                <ScalarProperty Name="appTypeFlag" ColumnName="appTypeFlag" />
+                <ScalarProperty Name="currencyFlag" ColumnName="currencyFlag" />
+                <ScalarProperty Name="amountFlag" ColumnName="amountFlag" />
+                <ScalarProperty Name="indYesOrNoFlag" ColumnName="indYesOrNoFlag" />
+                <ScalarProperty Name="timeToFlag" ColumnName="timeToFlag" />
+                <ScalarProperty Name="timeFromFlag" ColumnName="timeFromFlag" />
+                <ScalarProperty Name="dateToFlag" ColumnName="dateToFlag" />
+                <ScalarProperty Name="dateFromFlag" ColumnName="dateFromFlag" />
+                <ScalarProperty Name="ageToFlag" ColumnName="ageToFlag" />
+                <ScalarProperty Name="ageFromFlag" ColumnName="ageFromFlag" />
+                <ScalarProperty Name="distanceFlag" ColumnName="distanceFlag" />
+                <ScalarProperty Name="feeFlag" ColumnName="feeFlag" />
+                <ScalarProperty Name="logicFlag" ColumnName="logicFlag" />
+                <ScalarProperty Name="numberFlag" ColumnName="numberFlag" />
+                <ScalarProperty Name="conceptFlag" ColumnName="conceptFlag" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="FacilityTypeRepID" ColumnName="FacilityTypeRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeoLocationReps">
+            <EntityTypeMapping TypeName="HBNEWModel.GeoLocationRep">
+              <MappingFragment StoreEntitySet="GeoLocationReps">
+                <ScalarProperty Name="secondaryLongitude" ColumnName="secondaryLongitude" />
+                <ScalarProperty Name="secondaryLatitude" ColumnName="secondaryLatitude" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="radius" ColumnName="radius" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="GeoLocationRepID" ColumnName="GeoLocationRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupCategoryReps">
+            <EntityTypeMapping TypeName="HBNEWModel.GroupCategoryRep">
+              <MappingFragment StoreEntitySet="GroupCategoryReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="GroupCategoryRepID" ColumnName="GroupCategoryRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupZoneReps">
+            <EntityTypeMapping TypeName="HBNEWModel.GroupZoneRep">
+              <MappingFragment StoreEntitySet="GroupZoneReps">
+                <ScalarProperty Name="GroupZoneRepID" ColumnName="GroupZoneRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelBoardCodesReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelBoardCodesRep">
+              <MappingFragment StoreEntitySet="HotelBoardCodesReps">
+                <ScalarProperty Name="BoardCode" ColumnName="BoardCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelBoardCodesRepID" ColumnName="HotelBoardCodesRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelFacilityReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelFacilityRep">
+              <MappingFragment StoreEntitySet="HotelFacilityReps">
+                <ScalarProperty Name="applicationType" ColumnName="applicationType" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="ageTo" ColumnName="ageTo" />
+                <ScalarProperty Name="ageFrom" ColumnName="ageFrom" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="facilityName" ColumnName="facilityName" />
+                <ScalarProperty Name="indYesOrNo" ColumnName="indYesOrNo" />
+                <ScalarProperty Name="indFee" ColumnName="indFee" />
+                <ScalarProperty Name="indLogic" ColumnName="indLogic" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelFacilityRepID" ColumnName="HotelFacilityRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelPaymentDetails">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelPaymentDetail">
+              <MappingFragment StoreEntitySet="HotelPaymentDetails">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="txnReference" ColumnName="txnReference" />
+                <ScalarProperty Name="responseText" ColumnName="responseText" />
+                <ScalarProperty Name="responseCode" ColumnName="responseCode" />
+                <ScalarProperty Name="paymentAmount" ColumnName="paymentAmount" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="holderName" ColumnName="holderName" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelPhoneReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelPhoneRep">
+              <MappingFragment StoreEntitySet="HotelPhoneReps">
+                <ScalarProperty Name="phoneType" ColumnName="phoneType" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelPhoneRepID" ColumnName="HotelPhoneRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelRep">
+              <MappingFragment StoreEntitySet="HotelReps">
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="hotel_board_basis" ColumnName="hotel_board_basis" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
+                <ScalarProperty Name="hotelstar" ColumnName="hotelstar" />
+                <ScalarProperty Name="giataCode" ColumnName="giataCode" />
+                <ScalarProperty Name="license" ColumnName="license" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="accommodationTypeCode" ColumnName="accommodationTypeCode" />
+                <ScalarProperty Name="chainCode" ColumnName="chainCode" />
+                <ScalarProperty Name="categoryGroupCode" ColumnName="categoryGroupCode" />
+                <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
+                <ScalarProperty Name="zoneCode" ColumnName="zoneCode" />
+                <ScalarProperty Name="destinationCode" ColumnName="destinationCode" />
+                <ScalarProperty Name="countryCode" ColumnName="countryCode" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelRepID" ColumnName="HotelRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelRoomFacilityReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelRoomFacilityRep">
+              <MappingFragment StoreEntitySet="HotelRoomFacilityReps">
+                <ScalarProperty Name="indYesOrNo" ColumnName="indYesOrNo" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="indFee" ColumnName="indFee" />
+                <ScalarProperty Name="indLogic" ColumnName="indLogic" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="roomCode" ColumnName="roomCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelRoomFacilityRepID" ColumnName="HotelRoomFacilityRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelRoomReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelRoomRep">
+              <MappingFragment StoreEntitySet="HotelRoomReps">
+                <ScalarProperty Name="characteristicCode" ColumnName="characteristicCode" />
+                <ScalarProperty Name="roomType" ColumnName="roomType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="roomCode" ColumnName="roomCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelRoomRepID" ColumnName="HotelRoomRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelRoomStayFacilityReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelRoomStayFacilityRep">
+              <MappingFragment StoreEntitySet="HotelRoomStayFacilityReps">
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelRoomStayFacilityRepID" ColumnName="HotelRoomStayFacilityRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelRoomStayReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelRoomStayRep">
+              <MappingFragment StoreEntitySet="HotelRoomStayReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="stayType" ColumnName="stayType" />
+                <ScalarProperty Name="roomCode" ColumnName="roomCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelRoomStayRepID" ColumnName="HotelRoomStayRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelSegmentReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelSegmentRep">
+              <MappingFragment StoreEntitySet="HotelSegmentReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelSegmentRepID" ColumnName="HotelSegmentRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelTerminalReps">
+            <EntityTypeMapping TypeName="HBNEWModel.HotelTerminalRep">
+              <MappingFragment StoreEntitySet="HotelTerminalReps">
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="hotelcode" ColumnName="hotelcode" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelTerminalRepID" ColumnName="HotelTerminalRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageReps">
+            <EntityTypeMapping TypeName="HBNEWModel.ImageRep">
+              <MappingFragment StoreEntitySet="ImageReps">
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="characteristicCode" ColumnName="characteristicCode" />
+                <ScalarProperty Name="roomType" ColumnName="roomType" />
+                <ScalarProperty Name="roomCode" ColumnName="roomCode" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="hotel" ColumnName="hotel" />
+                <ScalarProperty Name="imageTypeCode" ColumnName="imageTypeCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="ImageRepID" ColumnName="ImageRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageTypeReps">
+            <EntityTypeMapping TypeName="HBNEWModel.ImageTypeRep">
+              <MappingFragment StoreEntitySet="ImageTypeReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="ImageTypeRepID" ColumnName="ImageTypeRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueReps">
+            <EntityTypeMapping TypeName="HBNEWModel.IssueRep">
+              <MappingFragment StoreEntitySet="IssueReps">
+                <ScalarProperty Name="alternative" ColumnName="alternative" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="IssueRepID" ColumnName="IssueRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageReps">
+            <EntityTypeMapping TypeName="HBNEWModel.LanguageRep">
+              <MappingFragment StoreEntitySet="LanguageReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="LanguageRepID" ColumnName="LanguageRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromotionReps">
+            <EntityTypeMapping TypeName="HBNEWModel.PromotionRep">
+              <MappingFragment StoreEntitySet="PromotionReps">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="PromotionRepID" ColumnName="PromotionRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RateCommentReps">
+            <EntityTypeMapping TypeName="HBNEWModel.RateCommentRep">
+              <MappingFragment StoreEntitySet="RateCommentReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="RateCommentRepID" ColumnName="RateCommentRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomReps">
+            <EntityTypeMapping TypeName="HBNEWModel.RoomRep">
+              <MappingFragment StoreEntitySet="RoomReps">
+                <ScalarProperty Name="characteristicDescription" ColumnName="characteristicDescription" />
+                <ScalarProperty Name="typeDescription" ColumnName="typeDescription" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="minAdults" ColumnName="minAdults" />
+                <ScalarProperty Name="maxChildren" ColumnName="maxChildren" />
+                <ScalarProperty Name="maxAdults" ColumnName="maxAdults" />
+                <ScalarProperty Name="maxPax" ColumnName="maxPax" />
+                <ScalarProperty Name="minPax" ColumnName="minPax" />
+                <ScalarProperty Name="characteristic" ColumnName="characteristic" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="RoomRepID" ColumnName="RoomRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SegmentReps">
+            <EntityTypeMapping TypeName="HBNEWModel.SegmentRep">
+              <MappingFragment StoreEntitySet="SegmentReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="SegmentRepID" ColumnName="SegmentRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HBNEWModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TerminalReps">
+            <EntityTypeMapping TypeName="HBNEWModel.TerminalRep">
+              <MappingFragment StoreEntitySet="TerminalReps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="TerminalRepID" ColumnName="TerminalRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZoneReps">
+            <EntityTypeMapping TypeName="HBNEWModel.ZoneRep">
+              <MappingFragment StoreEntitySet="ZoneReps">
+                <ScalarProperty Name="Description_ContentID" ColumnName="Description_ContentID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="zoneCode" ColumnName="zoneCode" />
+                <ScalarProperty Name="ZoneRepID" ColumnName="ZoneRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyRates">
+            <EntityTypeMapping TypeName="HBNEWModel.CurrencyRate">
+              <MappingFragment StoreEntitySet="CurrencyRate">
+                <ScalarProperty Name="CurrencyRateID" ColumnName="CurrencyRateID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentReps">
+            <EntityTypeMapping TypeName="HBNEWModel.DocumentRep">
+              <MappingFragment StoreEntitySet="DocumentReps">
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="DocumentRepID" ColumnName="DocumentRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilitySumReps">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilitySumRep">
+              <MappingFragment StoreEntitySet="FacilitySumReps">
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+                <ScalarProperty Name="fgdescription" ColumnName="fgdescription" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilitySumReps_back">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilitySumReps_back">
+              <MappingFragment StoreEntitySet="FacilitySumReps_back">
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+                <ScalarProperty Name="fgdescription" ColumnName="fgdescription" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilitySumRepsBackups">
+            <EntityTypeMapping TypeName="HBNEWModel.FacilitySumRepsBackup">
+              <MappingFragment StoreEntitySet="FacilitySumRepsBackup">
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+                <ScalarProperty Name="fgdescription" ColumnName="fgdescription" />
+                <ScalarProperty Name="facilityGroupCode" ColumnName="facilityGroupCode" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="facilityCode" ColumnName="facilityCode" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZAminities">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZAminity">
+              <MappingFragment StoreEntitySet="HRZAminity">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AminityID" ColumnName="AminityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZRoomUnavailables">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZRoomUnavailable">
+              <MappingFragment StoreEntitySet="HRZRoomUnavailable">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomUnavailableID" ColumnName="RoomUnavailableID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZNearbyPlaces">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZNearbyPlace">
+              <MappingFragment StoreEntitySet="HRZNearbyPlaces">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="NearbyDistance" ColumnName="NearbyDistance" />
+                <ScalarProperty Name="NearbyName" ColumnName="NearbyName" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="NearbyPlacesID" ColumnName="NearbyPlacesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZRoomMasters">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZRoomMaster">
+              <MappingFragment StoreEntitySet="HRZRoomMaster">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="BoardType" ColumnName="BoardType" />
+                <ScalarProperty Name="Refference" ColumnName="Refference" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="RoomMasterID" ColumnName="RoomMasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZRoomBookings">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZRoomBooking">
+              <MappingFragment StoreEntitySet="HRZRoomBooking">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="Child4Age" ColumnName="Child4Age" />
+                <ScalarProperty Name="Child4Name" ColumnName="Child4Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="Child3Age" ColumnName="Child3Age" />
+                <ScalarProperty Name="Chidl3Name" ColumnName="Chidl3Name" />
+                <ScalarProperty Name="child2Age" ColumnName="child2Age" />
+                <ScalarProperty Name="Chil21Name" ColumnName="Chil21Name" />
+                <ScalarProperty Name="Child1Age" ColumnName="Child1Age" />
+                <ScalarProperty Name="Child1Name" ColumnName="Child1Name" />
+                <ScalarProperty Name="Adult4Address" ColumnName="Adult4Address" />
+                <ScalarProperty Name="Adult4NICNo" ColumnName="Adult4NICNo" />
+                <ScalarProperty Name="Adult4Email" ColumnName="Adult4Email" />
+                <ScalarProperty Name="Adult4Telephone" ColumnName="Adult4Telephone" />
+                <ScalarProperty Name="Adult4LastName" ColumnName="Adult4LastName" />
+                <ScalarProperty Name="Adult4FirstName" ColumnName="Adult4FirstName" />
+                <ScalarProperty Name="Adult3Address" ColumnName="Adult3Address" />
+                <ScalarProperty Name="Adult3NICNo" ColumnName="Adult3NICNo" />
+                <ScalarProperty Name="Adult3Email" ColumnName="Adult3Email" />
+                <ScalarProperty Name="Adult3Telephone" ColumnName="Adult3Telephone" />
+                <ScalarProperty Name="Adult3LastName" ColumnName="Adult3LastName" />
+                <ScalarProperty Name="Adult3FirstName" ColumnName="Adult3FirstName" />
+                <ScalarProperty Name="Adult2Address" ColumnName="Adult2Address" />
+                <ScalarProperty Name="Adult2NICNo" ColumnName="Adult2NICNo" />
+                <ScalarProperty Name="Adult2Email" ColumnName="Adult2Email" />
+                <ScalarProperty Name="Adult2Telephone" ColumnName="Adult2Telephone" />
+                <ScalarProperty Name="Adult2LastName" ColumnName="Adult2LastName" />
+                <ScalarProperty Name="Adult2FirstName" ColumnName="Adult2FirstName" />
+                <ScalarProperty Name="Adult1Address" ColumnName="Adult1Address" />
+                <ScalarProperty Name="Adult1NICNo" ColumnName="Adult1NICNo" />
+                <ScalarProperty Name="Adult1Email" ColumnName="Adult1Email" />
+                <ScalarProperty Name="Adult1Telephone" ColumnName="Adult1Telephone" />
+                <ScalarProperty Name="Adult1LastName" ColumnName="Adult1LastName" />
+                <ScalarProperty Name="Adult1FirstName" ColumnName="Adult1FirstName" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomBookingID" ColumnName="RoomBookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZUsers">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZUser">
+              <MappingFragment StoreEntitySet="HRZUser">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZHotelImages">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZHotelImage">
+              <MappingFragment StoreEntitySet="HRZHotelImage">
+                <ScalarProperty Name="HotelImage" ColumnName="HotelImage" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelImageID" ColumnName="HotelImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZHotelSuppliers">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZHotelSupplier">
+              <MappingFragment StoreEntitySet="HRZHotelSupplier">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="HotelSupplierID" ColumnName="HotelSupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZPromotions">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZPromotion">
+              <MappingFragment StoreEntitySet="HRZPromotion">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="DiscountValue" ColumnName="DiscountValue" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="PromotionType" ColumnName="PromotionType" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRZUserPrivileges">
+            <EntityTypeMapping TypeName="HBNEWModel.HRZUserPrivilege">
+              <MappingFragment StoreEntitySet="HRZUserPrivileges">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsAccess" ColumnName="IsAccess" />
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="HRZUserPrivilegesID" ColumnName="HRZUserPrivilegesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

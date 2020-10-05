@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WebUI.Models
+{
+    public class HotelPaymentList
+    {
+        public HotelPayment Payments { get; set; }
+        public HotelBookingConfirmation BookingConfirmations { get; set; }
+        public Guest Guests { get; set; }
+
+        public Guest ChildDetails { get; set; }
+        
+    }
+}

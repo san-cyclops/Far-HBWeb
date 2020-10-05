@@ -1,0 +1,50 @@
+﻿app.controller("APIController", function ($scope,$window, $http, APIService) {
+ 
+    $scope.datax = $window.data;
+    getAll();
+    
+
+    function getAll() {
+        var sub = $scope.datax.Des;
+        var servCall = APIService.hotelavailability(sub);
+        servCall.then(function (d) {
+            $scope.respData = d.hotels;
+        }, function (error) {
+            console.log("Oops! Something went wrong while fetching the data.");
+        });
+    }
+
+    $scope.createArray = function (n) {
+        return new Array(n);
+    }
+
+
+    $scope.setTab = function (hotelcode, des, departureDate, returnDate, rooms, occupancy) {
+        //$scope.HotelCode = hotelcode;
+        //$scope.Des = des;
+        //$scope.DepartureDate = departureDate;
+        //$scope.ReturnDate = returnDate;
+        //$scope.Rooms = rooms;
+        //$scope.Occupancy = occupancy;
+
+        mode = "edit";
+
+        //debugger;
+        //var url = '@Html.Raw(Url.Action("Hotel", "Home", new { HotelCode = "__hotelCode__", Destination = "__destination__", DepartureDate = "__departureDate__", ReturnDate = "__returnDate__",Rooms = "__rooms__",Occupancy = "__occupancy__"}))';
+        //var params = url.replace('__hotelCode__', hotelcode).replace('__destination__', des).replace('__departureDate__', departureDate).replace('__returnDate__', returnDate).replace('__rooms__', rooms).replace('__occupancy__', occupancy);
+        //window.location.href = params;
+
+        var url = 'Hotel';
+        url += '?HotelCode=' + hotelcode + '&Destination=' + des +
+                                                  '&DepartureDate=' + departureDate + '&ReturnDate=' + returnDate + '&Rooms=' + rooms + '&Occupancy=' + occupancy;
+        //window.location.href = url;
+
+
+        window.open(url, '_blank' // <- This is what makes it open in a new window.
+);
+        //load('@Url.Action("Hotel", "Home")', { HotelCode: hotelcode, Destination: des, DepartureDate: departureDate, ReturnDate: returnDate, Rooms: rooms, Occupancy: occupancy });
+    }
+});
+
+
+ 

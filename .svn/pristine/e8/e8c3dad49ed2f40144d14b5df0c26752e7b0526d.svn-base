@@ -1,0 +1,234 @@
+﻿@model HB.HotelRez.Models.PromotionData
+@{
+    ViewBag.Title = "Promotion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<script type="text/javascript" src="~/Scripts/bootstrap-1.4.1-datepicker.min.js"></script>
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="~/Scripts/jquery-1.12.1-ui.js"></script>
+@*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+<script data-require="ui-bootstrap" data-semver="0.10.0" src="~/Scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+
+<html>
+
+<body ng-controller="promoController" data-ng-app="Promotion">
+    <div class="panel panel-dark" style="padding-right:5%;padding-left:5%;">
+        <div class="panel-heading" style="font-size:23px;">
+            Promotion
+        </div>
+        <form action="#" class="form-horizontal">
+            <div class="form-body pal">
+                <div class="form-group">
+                    <label for="lblpromo" class="col-md-3 control-label"> Room ID </label>
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("Promotion", "Home", FormMethod.Post))
+                        {
+                            @Html.DropDownListFor(m => m.RoomID, Model.Rooms, new { @class = "form-control", @style = "padding-left:5%;", @ng_model = "roomId", @ng_change = "change(IsActive)" })
+                        }
+
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary" ng-click="add()" style="margin-left:10px">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in rid">
+
+                                {{item.name}}
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in rid">
+
+                                <button class="btn btn-danger" ng-click="removerid($index)">X</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                        <span ng-repeat="n in roomidlist">
+                            <button ng-click="remove($index)">{{ n }} x </button>
+                        </span>
+                       
+                    </div>
+                   
+                </div>
+
+                    <div class="form-group">
+
+                        <label for="lblpromo" class="col-md-3 control-label"> Promo Type</label>
+                        <div class="col-md-3">
+                            <select id="ptype" class="form-control" data-ng-model="protype">
+                                <option value="1"> Last Minute</option>
+                                <option value="2">Early Bird </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                            <label id="lbldate" class="control-label"> Date</label>
+
+                            @*<input class="form-control" id="date" type="text"  ng-model="date" style="padding-left:40px;" required />*@
+                            <input type="text" id="date" date='dd-MM-yyyy' class="form-control" datepicker-popup="{{dateformat}}" min="DepartDate" placeholder="Date To" ng-model="date" datepicker-options="dateOptions" />
+                         </div>
+                        <div class="col-md-3">
+                            <label id="lblhrs" class="control-label"> Hours</label>
+
+                            <select id="hrs" class="form-control" ng-model="hours">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+                            <label id="lblfrom1" class="control-label"> Date From</label>
+
+                            @*<input class="form-control" id="datefrom1" name="datefrom1" placeholder="Date From" type="text" ng-model="departuredate1" style="padding-left:40px;" required />*@
+                            <input type="text" id="datefrom1" class="form-control" date='dd-MM-yyyy' datepicker-popup="{{dateformat}}" min="mindate" placeholder="Date From" ng-model="datefrom" datepicker-options="dateOptions" ng-change="focusNextDate()" />
+                        </div>
+                        <div class="col-md-3">
+                            <label id="lblto1" class="control-label"> Date To</label>
+
+                            @*<input class="form-control" id="dateto1" name="dateto1" placeholder="Date To" type="text" ng-model="returndate1" style="padding-left:40px;" required />*@
+                            <input type="text" id="dateto1" date='dd-MM-yyyy' class="form-control" datepicker-popup="{{dateformat}}" min="DepartDate" placeholder="Date To" ng-model="dateto" datepicker-options="dateOptions" is-open="opened" />
+                        </div>
+
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="lblvalue" class="col-md-3 control-label"> Discount Value</label>
+                        <div class="col-md-3">
+                            <input id="value" type="number" style="padding-left:40px;font-size: 14px;" class="form-control" data-ng-model="dvalue"  >
+                        </div>
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="lblper" class="col-md-3 control-label"> Discount Percentage</label>
+                        <div class="col-md-3">
+                            <input id="dper" type="number" style="padding-left:40px;font-size: 14px;"  data-ng-model="dpercentage" class="form-control"  >
+                        </div>
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3">
+
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" ng-click="submitPromo()">Submit</button>
+                        </div>
+
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+
+                        </div>
+                    </div>
+                </div>
+        </form>
+
+    </div>
+
+    <script>
+  $( function() {
+    $( "#date" ).datepicker();
+  } );
+    </script>
+
+</body>
+</html>
+<script src="~/Scripts/Promotion/promotion.js"></script>

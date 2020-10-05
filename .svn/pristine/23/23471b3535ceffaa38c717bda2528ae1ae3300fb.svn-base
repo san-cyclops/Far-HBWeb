@@ -1,0 +1,615 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mail;
+using System.Web.Mvc;
+using JQueryUIHelpers;
+using WebUI.Models;
+using System.Text;
+using System.Threading.Tasks;
+using gateway_client_csharp.au.com.gateway.client;
+using gateway_client_csharp.au.com.gateway.client.component;
+using gateway_client_csharp.au.com.gateway.client.config;
+using gateway_client_csharp.au.com.gateway.client.enums;
+using gateway_client_csharp.au.com.gateway.client.ex;
+using gateway_client_csharp.au.com.gateway.client.payment;
+using HB.ApiModel.auto.messages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Web.Configuration;
+namespace WebUI.Controllers
+{
+    public class HomeController : Controller
+    {
+        Configuration config = WebConfigurationManager.OpenWebConfiguration("~/Web.Config");
+        SessionStateSection section;
+        int timeout;
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult HotelSearchIframeold()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+
+        }
+
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+            HotelBooking employee = TempData["Employee"] as HotelBooking;
+            return View();
+        }
+
+        public ActionResult Contact(string DepartureDate, string ReturnDate)
+        {
+            ViewBag.Message = "Your contact page.";
+            return View("Contact");
+        }
+
+        public ActionResult Booking(string Rooms, string Destination, string DepartureDate, string ReturnDate, string Adults1, string Children1, string C1Age1, string C1Age2, string C1Age3, string C1Age4, string Adults2, string Children2, string C2Age1, string C2Age2, string C2Age3, string C2Age4, string Adults3, string Children3, string C3Age1, string C3Age2, string C3Age3, string C3Age4,string visitorsCurrency)
+        //public ActionResult Booking(HotelSearch hotelSearch)
+        {
+            var model = new HotelBooking();
+            model.Des = Destination;
+            model.DepartureDate = DepartureDate;
+            model.ReturnDate = ReturnDate;
+            model.Rooms = Convert.ToInt32(Rooms);
+            model.Adults1 = Convert.ToInt32(Adults1);
+            model.Adults2 = Convert.ToInt32(Adults2);
+            model.Adults3 = Convert.ToInt32(Adults3);
+            model.C1Age1 = Convert.ToInt32(C1Age1);
+            model.C1Age2 = Convert.ToInt32(C1Age2);
+            model.C1Age3 = Convert.ToInt32(C1Age3);
+            model.C2Age1 = Convert.ToInt32(C2Age1);
+            model.C2Age2 = Convert.ToInt32(C2Age2);
+            model.C2Age3 = Convert.ToInt32(C2Age3);
+            model.C3Age1 = Convert.ToInt32(C3Age1);
+            model.C3Age2 = Convert.ToInt32(C3Age2);
+            model.C3Age3 = Convert.ToInt32(C3Age3);
+            model.Children1 = Convert.ToInt32(Children1);
+            model.Children2 = Convert.ToInt32(Children2);
+            model.Children3 = Convert.ToInt32(Children3);
+            model.visitorsCurrency = visitorsCurrency;
+
+
+            string output = DepartureDate.Remove(0, 1);
+            output = output.Remove(output.Length - 1, 1);
+
+            string output2 = ReturnDate.Remove(0, 1);
+            output2 = output2.Remove(output2.Length - 1, 1);
+
+            //model.DepartureDate = Convert.ToDateTime(output);
+            //model.ReturnDate = Convert.ToDateTime(output2);
+
+            var x = Convert.ToDateTime(DepartureDate);
+            var y = Convert.ToDateTime(ReturnDate);
+
+            string strDate = x.ToString("dd/MM/yyyy");
+            string strDat2e = y.ToString("dd/MM/yyyy");
+
+            model.DepartureDate = strDate;
+            model.ReturnDate = strDat2e;
+
+            Session["cur"] = visitorsCurrency;
+
+
+            //model.Rooms = Convert.ToInt32(Rooms);
+            //model.Adults1 = 1;
+
+            //Configuration config = WebConfigurationManager.OpenWebConfiguration("~/Web.Config");
+            //SessionStateSection section = (SessionStateSection)config.GetSection("system.web/sessionState");
+            //int timeout = (int)section.Timeout.TotalMinutes * 1000 * 60;
+
+            section = (SessionStateSection)config.GetSection("system.web/sessionState");
+            timeout = (int)section.Timeout.TotalMinutes * 1000 * 60;
+            ViewBag.timeout = timeout;
+
+            return View(model);
+        }
+
+        //[Route("{type}/{library}/{version}/{file?}/{renew?}")]
+        public ActionResult Hotel(long hotelCode, string Rooms, string Destination, string DepartureDate, string ReturnDate, string Adults1, string Children1, string C1Age1, string C1Age2, string C1Age3, string C1Age4, string Adults2, string Children2, string C2Age1, string C2Age2, string C2Age3, string C2Age4, string Adults3, string Children3, string C3Age1, string C3Age2, string C3Age3, string C3Age4)
+        {
+            HotelPara data = new HotelPara()
+            {
+                HotelCode = 1,
+            };
+
+            ViewBag.Message = "Your contact page.";
+            var model = new HotelBooking();
+            model.HotelCode = hotelCode;
+            model.Des = Destination;
+            model.DepartureDate = DepartureDate;
+            model.ReturnDate = ReturnDate;
+            model.Rooms = Convert.ToInt32(Rooms != "" ? Rooms : "0");
+            model.Adults1 = Convert.ToInt32(Adults1 != "" ? Adults1 : "0"); ;
+            model.Adults2 = Convert.ToInt32(Adults2 != "" ? Adults2 : "0");
+            model.Adults3 = Convert.ToInt32(Adults3 != "" ? Adults3 : "0");
+
+
+            model.C1Age1 = Convert.ToInt32(C1Age1 != "" ? C1Age1 : "0"); ;
+            model.C1Age2 = Convert.ToInt32(C1Age2 != "" ? C1Age2 : "0");
+            model.C1Age3 = Convert.ToInt32(C1Age3 != "" ? C1Age3 : "0");
+            model.C2Age1 = Convert.ToInt32(C2Age1 != "" ? C2Age1 : "0");
+            model.C2Age2 = Convert.ToInt32(C2Age2 != "" ? C2Age2 : "0");
+            model.C2Age3 = Convert.ToInt32(C2Age3 != "" ? C2Age3 : "0");
+            model.C3Age1 = Convert.ToInt32(C3Age1 != "" ? C3Age1 : "0");
+            model.C3Age2 = Convert.ToInt32(C3Age2 != "" ? C3Age2 : "0");
+            model.C3Age3 = Convert.ToInt32(C3Age3 != "" ? C3Age3 : "0");
+            model.Children1 = Convert.ToInt32(Children1);
+            model.Children2 = Convert.ToInt32(Children2);
+            model.Children3 = Convert.ToInt32(Children3);
+            string cur;
+
+            if (Session["cur"] != null)
+            {
+                cur = Session["cur"].ToString();
+                 
+            }
+            else
+            {
+                cur = "LKR";
+            }
+            model.visitorsCurrency = cur;
+
+            section = (SessionStateSection)config.GetSection("system.web/sessionState");
+            timeout = (int)section.Timeout.TotalMinutes * 1000 * 60;
+            ViewBag.timeout = timeout;
+
+            ViewBag.hotelCode = hotelCode;
+            return View(model);
+
+
+
+        }
+        static async Task<DocumentRep> GetProductAsync(string path)
+        {
+            DocumentRep product = null;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
+            {
+                product = await response.Content.ReadAsAsync<DocumentRep>();
+            }
+            return product;
+        }
+
+
+
+        public JsonResult sendSubscribeMail(SubscribeEmailClass sub)
+        //public JsonResult SendMail(string Name, string Name1, string Name2, string Name3, string Roomsx, string Adults1x, string Children1x, string C1Age1x, string C1Age2x, string C1Age3x, string C1Age4x, string Adults2x, string Children2x, string C2Age1x, string C2Age2x, string C2Age3x, string C2Age4x, string Adults3x, string Children3x, string C3Age1x, string C3Age2x, string C3Age3x, string C3Age4x, string HotelName, string HotelAddress, string DateFrom, string DateTo, string Pax, string Destination, string RoomType, string Board, string Price, string Description, string HotelPhone)
+        {
+
+            // Set a variable to the My Documents path.
+            string mydocpath = "C:/inetpub/wwwroot/farStaging/subscribed";
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            // Write the string array to a new file named "WriteLines.txt".
+            using (StreamWriter outputFile = new StreamWriter(mydocpath + @"\subscribed emails.txt",true))
+            {
+
+                outputFile.WriteLine(sub.SubscribeEmail);
+            }
+            return Json("test");
+
+        }
+
+
+
+        //private void SendHtmlFormattedEmail(string recepientEmail, string subject, string body)
+        //{
+        //    using (MailMessage mailMessage = new MailMessage())
+        //    {
+        //        mailMessage.From = new MailAddress("tag2travelhost@gmail.com");
+        //        mailMessage.Subject = subject;
+        //        mailMessage.Body = body;
+        //        mailMessage.IsBodyHtml = true;
+        //        mailMessage.To.Add(new MailAddress(recepientEmail));
+        //        SmtpClient smtp = new SmtpClient();
+        //        smtp.Host = "smtp.gmail.com";
+        //        smtp.EnableSsl = true;
+        //        System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+        //        NetworkCred.UserName = "tag2travelhost@gmail.com";
+        //        NetworkCred.Password = "farholidays@123";
+        //        smtp.UseDefaultCredentials = true;
+        //        smtp.Credentials = NetworkCred;
+        //        smtp.Port = 587;
+        //        smtp.Send(mailMessage);
+        //        TempData["notice"] = "Successfully registered";
+        //    }
+        //}
+        private string PopulateBody(HotelEmail hotelEmail, string DocNo)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Server.MapPath("\\Views\\EmailTemplate\\BookingConfermation.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+
+            int Adults = Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.Adults1) ? "0" : hotelEmail.Adults1) + Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.Adults2) ? "0" : hotelEmail.Adults2) +
+                         Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.Adults3) ? "0" : hotelEmail.Adults3);
+
+            int childrens = Convert.ToInt32(Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.children1) ? "0" : hotelEmail.children1)) + Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.children3) ? "0" : hotelEmail.children3) +
+                       Convert.ToInt32(string.IsNullOrEmpty(hotelEmail.children3) ? "0" : hotelEmail.children3);
+
+            int TotalPax = Adults + childrens;
+
+
+            body = body.Replace("{UserName}", hotelEmail.Name);
+            body = body.Replace("{DocNo}", DocNo);
+            //body = body.Replace("{Url}", url);
+            body = body.Replace("{HotelName}", hotelEmail.HotelName);
+            body = body.Replace("{HotelAddress}", hotelEmail.HotelAddress);
+            body = body.Replace("{HotelPhone}", hotelEmail.HotelPhone);
+            body = body.Replace("{DateFrom}", hotelEmail.DateFrom);
+            body = body.Replace("{DateTo}", hotelEmail.DateTo);
+            body = body.Replace("{Pax}", TotalPax.ToString());
+            body = body.Replace("{Destination}", hotelEmail.Destination);
+            body = body.Replace("{RoomType}", hotelEmail.RoomType);
+            body = body.Replace("{Board}", hotelEmail.Board);
+            body = body.Replace("{Price}", hotelEmail.Price);
+            body = body.Replace("{Description}", hotelEmail.Description);
+            body = body.Replace("{Adults}", Adults.ToString());
+            body = body.Replace("{Childrens}", childrens.ToString());
+
+
+
+
+            return body;
+        }
+
+
+        public ActionResult CustomerInfo()
+        {
+            ViewBag.Message = "Your contact page.";
+            return View();
+        }
+        public ActionResult HotelResult(string Destination)
+        {
+            var model = new HotelBooking();
+            model.Des = Destination;
+            return View(model);
+        }
+
+        public ActionResult HotelSearch()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+
+        }
+
+        public ActionResult HotelResultEmpty()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult HotelSearchIframe()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+
+        }
+
+        public ActionResult HotelSearchIframe2()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+
+        }
+
+
+
+
+        public ActionResult HotelSearchRedirect()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View("HotelSearch");
+
+        }
+
+        public ActionResult HotelHolidays(string Destination)
+        {
+            var model = new HotelBooking();
+            model.Des = Destination;
+            return View(model);
+        }
+
+       
+        public ActionResult HotelPaymentVoucher(string clientRef, string reqid)
+        {
+            if (reqid == null)
+            {
+                // redirects to forbidden-page page
+                base.Response.Redirect("http://farholidays.com/error/");
+            }
+            // builds payment-complete request
+            PaymentCompleteRequest paymentCompleteRequest = new PaymentCompleteRequest();
+            //paymentCompleteRequest.clientId = 14000914;
+            paymentCompleteRequest.clientId = Convert.ToInt32(Session["ClientID"].ToString());
+            paymentCompleteRequest.reqid = reqid;
+            PaymentCompleteResponse paymentCompleteResponse = new PaymentCompleteResponse();
+            GatewayClient gatewayClient = new GatewayClient(make_ClientConfig_Sampath());
+            try
+            {
+                // processes payment-complete request
+                paymentCompleteResponse = gatewayClient.payment.complete(paymentCompleteRequest);
+                // inspects payment-complete response
+                if (paymentCompleteResponse != null)
+                {
+                    // displays results
+                    //TxtTxnReference.Text = paymentCompleteResponse.txnReference;
+                    //TxtResponseCode.Text = paymentCompleteResponse.responseCode;
+                    //TxtResponseText.Text = paymentCompleteResponse.responseText;
+                    //TxtSettlementDate.Text = paymentCompleteResponse.settlementDate.ToString();
+                    //TxtToken.Text = paymentCompleteResponse.token;
+                    //TxtTokenResponseText.Text = paymentCompleteResponse.tokenResponseText;
+                    if (paymentCompleteResponse.responseCode != "00")
+                    {
+                        Session.Clear();
+                        base.Response.Redirect(
+                            "http://farholidays.com/error/");
+
+                    }
+                    else
+                    {
+
+
+
+                    }
+
+                }
+                else
+                {
+                    Session.Clear();
+                    base.Response.Redirect("http://farholidays.com/error/");
+                }
+            }
+
+            catch (GatewayClientException exp)
+            {
+                Session.Clear();
+                // redirects to error-page page
+                base.Response.Redirect("http://farholidays.com/error/");
+            }
+
+
+
+            HotelPayment objData = new HotelPayment();
+            if (Session["products"] != null)
+            {
+                objData = (HotelPayment) Session["products"];
+
+
+            }
+            else
+            {
+                base.Response.Redirect("http://farholidays.com/error/");
+            }
+
+            objData.clientID = paymentCompleteResponse.clientId.ToString();
+            objData.txnReference = paymentCompleteResponse.txnReference.ToString();
+            objData.responseCode = paymentCompleteResponse.responseCode.ToString();
+            objData.responseText = paymentCompleteResponse.responseText.ToString();
+            objData.holderName = paymentCompleteResponse.creditCard.holderName;
+            objData.number = paymentCompleteResponse.creditCard.number;
+            objData.type = paymentCompleteResponse.creditCard.type;
+            objData.paymentAmount = paymentCompleteResponse.transactionAmount.paymentAmount.ToString();
+            objData.currency = paymentCompleteResponse.transactionAmount.currency;
+
+
+            Models.BookingRS bookingRs = new Models.BookingRS();
+
+
+            using (var client = new HttpClient(
+                new HttpClientHandler
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip
+                }))
+            {
+
+                StringContent contentToSend = null;
+
+                var objectSerialized = JsonConvert.SerializeObject(objData, Formatting.Indented,
+                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+                contentToSend = new StringContent(objectSerialized, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage resp = null;
+
+               resp = client.PostAsync("http://67.222.132.248:9090/api/HotelBooking/ConfirmBooking/", contentToSend).Result;
+                // staging URL
+                //resp = client.PostAsync("http://hotels.tag2travel.com:7090/api/HotelBooking/ConfirmBooking/", contentToSend).Result;
+                // Live URL
+               // resp = client.PostAsync("http://hotels.tag2travel.com:4585/api/HotelBooking/ConfirmBooking/", contentToSend).Result;
+                bookingRs = resp.Content.ReadAsAsync<Models.BookingRS>().Result;
+                Session.Clear();
+            }
+
+            return new Rotativa.ViewAsPdf(bookingRs);
+           // new Rotativa.ViewAsPdf(bookingRs);
+           // return View(bookingRs);
+        }
+
+       
+        public ActionResult Promo(string Destination)
+        {
+
+
+            var model = new HotelBooking();
+            model.Des = Destination;
+            return View(model);
+        }
+        public ActionResult BookingList()
+        {
+            var model = new HotelBooking();
+            return View(model);
+        }
+
+        double PaidAmount = 0;
+
+        [HttpPost]
+        public string Sendpayment(HotelPayment objData)
+        {
+
+
+
+            var hotelBookingConfirmation = new HotelBookingConfirmation();
+
+
+            Session["products"] = objData;
+            Session["ClientData"] = objData;
+            string cur = "";
+            if (Session["cur"] != null)
+            {
+                cur = Session["cur"].ToString();
+
+            }
+            else
+            {
+                cur = "LKR";
+            }
+
+
+            int clientID = 0;
+
+         
+
+            if (cur == "LKR")
+            {
+                clientID = 14000914;
+                Session["ClientID"] = "14000914";
+                cur = "LKR";
+            }
+            else 
+            {
+                clientID = 14000915;
+                Session["ClientID"] = "14000915";
+                cur = "USD";
+            }
+
+
+
+            PaidAmount = Convert.ToDouble(objData.rate);
+            string ReturnUrl = "";
+
+
+            PaymentInitRequest paymentInitRequest = make_PaymentInitRequest(clientID, cur);
+            GatewayClient gatewayClient = new GatewayClient(make_ClientConfig_Sampath());
+            try
+            {
+                // processes payment-init request
+                PaymentInitResponse paymentInitResponse = gatewayClient.payment.init(paymentInitRequest);
+                // inspects payment-init response
+                if (paymentInitResponse != null)
+                {
+                    // places session variables
+                    base.Session.Add("https://www.farholidays.com", paymentInitResponse.paymentPageUrl);
+                    // redirects to payment-submit page [embded iframe method]
+                    //base.Response.Redirect("~/payment_submit.aspx");
+                    // redirects to payment-submit page [hosted payment-pages method]
+                    //base.Response.Redirect(paymentInitResponse.paymentPageUrl);
+
+                    //Redirect(paymentInitResponse.paymentPageUrl);
+                    //RedirectToAction("RedirectPayment", new { url = paymentInitResponse.paymentPageUrl });
+                    ReturnUrl = paymentInitResponse.paymentPageUrl;
+
+                }
+                return ReturnUrl;
+            }
+            catch (GatewayClientException exp)
+            {
+                return "~/error_page.html";
+            }
+
+        }
+
+        private ClientConfig make_ClientConfig_Sampath()
+        {
+            ClientConfig clientConfig = new ClientConfig();
+            clientConfig.serviceEndpoint = "https://sampath.paycorp.com.au/rest/service/proxy";
+            clientConfig.authToken = "e54984a0-3e95-4f7d-92b4-724da73fdf16";
+            clientConfig.hmacSecret = "TCB4DpCxSLaHaBS1";
+
+            return clientConfig;
+        }
+
+        private PaymentInitRequest make_PaymentInitRequest(int clientID, string cur)
+        {
+            PaymentInitRequest paymentInitRequest = new PaymentInitRequest();
+            //paymentInitRequest.clientId = 14000914;
+            paymentInitRequest.clientId = clientID;           
+            paymentInitRequest.transactionType = Enums.TransactionType.PURCHASE.ToString();
+            paymentInitRequest.tokenReference = "test";
+            paymentInitRequest.transactionAmount = make_TransactionAmount(cur);
+            paymentInitRequest.redirect = make_Redirect();
+            paymentInitRequest.tokenize = false;
+
+            return paymentInitRequest;
+        }
+
+        private TransactionAmount make_TransactionAmount(string cur)
+        {
+            TransactionAmount transactionAmount = new TransactionAmount();
+            transactionAmount.paymentAmount = (int)((PaidAmount) * 100);
+            transactionAmount.currency = cur;
+
+            return transactionAmount;
+        }
+
+        private Redirect make_Redirect()
+        {
+            Redirect redirect = new Redirect();
+             redirect.returnUrl = "http://localhost:51406/home/HotelPaymentVoucher";
+            // redirect.returnUrl = "http://hotels.tag2travel.com:7090/home/HotelPaymentVoucher";
+
+            redirect.returnMethod = "GET";
+
+            return redirect;
+        }
+
+
+
+
+        public ActionResult BookingCancelation()
+        {
+            return View();
+        }
+
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
+
+        public ActionResult EditableBookingList()
+        {
+            var model = new HotelBooking();
+            return View(model);
+        }
+
+
+
+        public ActionResult datetimepicker()
+        {
+            return View();
+        }
+
+
+    }
+}

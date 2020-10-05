@@ -1,0 +1,50 @@
+﻿angular.module('app', ['gm.datepickerMultiSelect'])
+.controller('roomUnavailableCtrl', function ($http) {
+    this.activeDate;
+    this.roomId = "";
+    this.selectedDates = [new Date().setHours(0, 0, 0, 0)];
+
+    this.identity = angular.identity;
+
+    this.removeFromSelected = function (dt) {
+        this.selectedDates.splice(this.selectedDates.indexOf(dt), 1);
+        console.log("Succss");
+   
+    }
+    this.saveDetails = function () {
+
+        if (this.roomId == "") {
+            alert("Please select room ID.");
+            return false;
+        }
+
+        var sub = {
+            RoomID: this.roomId,
+            UnavailableDates: this.selectedDates,
+        };
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/SaveToDatabase",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.then(function (d) {
+
+            console.log("success");
+            alert(d.data);
+
+        }, function (d) {
+
+            alert("Oops!! Something went wrong.");
+
+        });
+        
+    }
+});
+
+    
+
+    

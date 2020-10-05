@@ -1,0 +1,1097 @@
+﻿@model WebUI.Models.HotelBooking
+@{
+    ViewBag.Title = "Booking";
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+<style>
+    #wrapper {
+        font: 20px Calibri;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-family: Arial;
+        font-size: 1.4em;
+    }
+
+    label {
+        /*display: inline-block;*/
+        /*margin-bottom: 5px;*/
+        /*font-weight: bold;*/
+    }
+
+
+    table, tr, td, th {
+        border: 1px solid #ccc;
+        color: black;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .search_again_wrapper {
+        background: #f3f3f3;
+        box-shadow: 2px 2px 2px 1px #757575 !important;
+    }
+
+    .hotel_result .result-block {
+        margin: 0 0 8px;
+        background: #fff;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        border: .5px solid #d8d8d8;
+        padding: 8px;
+    }
+
+        .hotel_result .result-block .hotel-des .maptext p span.freeconcellation {
+            color: #3fbf86;
+            padding-left: 0;
+            font-size: .9em;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box {
+            padding-left: 0;
+            border-left: none;
+        }
+
+        .hotel_result .result-block .hotel-des .star {
+            padding: 3px 0 0 2px;
+
+        }
+
+        .hotel_result .result-block .hotel-des .hotdeal p span.hotdealbox {
+            font-size: .7em;
+            width: auto;
+        }
+
+        .hotel_result .result-block .hotel-des .hotel-name h2 {
+            font-size: 1.2em;
+        }
+
+        .hotel_result .result-block .hotel-des .hotdeal .hotdealpro {
+            padding-left: 5px;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box .hotel_price {
+            font-size: 1em;
+        }
+
+        .hotel_result .result-block .hotel-des .maptext p span.cityname {
+            font-size: .9em;
+        }
+
+        .hotel_result .result-block .hotel-des .detail-box .pricing-box p {
+            text-align: right;
+            margin: 0;
+            font-size: .86em;
+        }
+</style>
+
+<style>
+    /*##star Rating Styles ----------------------*/
+    .stars {
+        padding-top: 10px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    span.glyphicon {
+        padding: 5px;
+    }
+
+    .glyphicon-star-empty {
+        color: #9d9d9d;
+    }
+
+    .glyphicon-star-empty,
+    .glyphicon-star {
+        font-size: 18px;
+    }
+
+    .glyphicon-star {
+        color: #FD4;
+        transition: all .25s;
+    }
+
+        .glyphicon-star:hover {
+            transform: rotate(-15deg) scale(1.3);
+        }
+
+    .center {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+</style>
+
+<style>
+    /*......stylesheet of the loading screen..................*/
+    body {
+        text-align: center;
+    }
+
+    .container {
+        color: black;
+        text-align: center;
+    }
+
+    .img-responsive {
+        align-content: center;
+        align-items: center;
+    }
+
+    /*........end of loading screen stylesheet*....................../
+</style>
+
+<style>
+    @*button sort*@ #btn-group {
+        background-color: #5cb85c;
+        color: #ffffff;
+        padding: 6px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border: 1px solid #4cae4c;
+        border-radius: 4px;
+    }
+
+
+
+
+    @*button sort*@
+</style>
+
+<link rel="stylesheet" href="../../Content/common.css" type="text/css">
+<link rel="stylesheet" href="../../Content/loaded.css" type="text/css">
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+
+</script>
+
+
+<link href="~/Content/headerCSS.css" rel="stylesheet" />
+<link href="~/Content/footerCSS.css" rel="stylesheet" />
+
+<header>
+    <!--Start upper section-->
+
+    <div class="row">
+        <div class="upper">
+            <ul style="padding-left:100px;font-size:13px;">
+                <li><a href="http://tag2travel.com/index.php/group-bookings" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,');return false;">Group Bookings</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/currency-converter2" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Currency Converter</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/enquire-noww" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Enquire Now</a></li>
+                <li><a href="http://www.tag2travel.com/index.php/get-a-quotee" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;">Get A Quote</a></li>
+                <li style="float:right; padding-right:110px;"><a href="mailto:sales@tag2travel.com" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,');return false;">Email Us : sales@tag2travel.com</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!--End upper section-->
+    <!--Start middle section-->
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="logomobile" style="padding-left:104px; height:84px;">
+            <br />
+            <a href="http://tag2travel.com/"><img alt="" class="image-logo" src="~/Content/img/log.PNG" style="width:250px;height:42px;"></a>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+            <div id="mySidenav" class="sidenav">
+
+                <a href="tel:+94115920607" id="blog">
+                    <img src="http://www.clker.com/cliparts/f/D/Z/i/d/G/phone-logo-md.png" id="image" alt="Smiley face" height="25" width="25">
+
+
+
+                    Call us&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp+94115920607
+                </a>
+
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=94767688881&text=I want to know some information.." id="about">
+
+                    <img src="http://pngimg.com/uploads/whatsapp/whatsapp_PNG1.png"
+                         id="image" alt="Smiley face" height="25" width="25">
+
+
+
+
+
+                    WhatsApp&nbsp&nbsp +94767688881
+                </a>
+
+
+
+
+
+                <br />
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <!--End middle section-->
+    <!--Satrt lower Section-->
+    <div class="row">
+
+
+
+    </div>
+    <div class="row">
+        <div style="padding-left:100px;border-bottom:2px solid white;" class="topnav" id="myTopnav">
+            <a class="active" href="http://tag2travel.com/"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/home.png"> HOME</a>
+            <a href="http://tag2travel.com/index.php/flight"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/flight1.png"> FLIGHT</a>
+            <a href="http://tag2travel.com/index.php/holidays"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/holiday1.png">HOLIDAYS</a>
+            <a href="http://tag2travel.com/index.php/sri-lanka"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/srilanka1.png">SRILANKA</a>
+            <a href="http://tag2travel.com/index.php/destinations"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/destination1.png">DESTINATION</a>
+            <a href="http://tag2travel.com/index.php/promotions-offers"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/promotions1.png">PROMOTIONS</a>
+            <a href="http://tag2travel.com/index.php/about-us"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/aboutus1.png">ABOUT US</a>
+            <a href="http://tag2travel.com/index.php/wf-menu-cpanel/wf-menu-cpanel/get-contact"><img class="menu-image" src="http://tag2travel.com/images/menu_icon/contactus1.png">CONTACT</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </div>
+    <!--End lower section-->
+
+</header>
+
+
+
+<div data-ng-app="APIModule">
+    <div ng-controller="APIController">
+
+
+        @* ****** Begin Booking Form *******@
+        <div ng-hide="loaded">
+            <div class="container" style="padding-bottom:20px;">
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/leftbanner1.jpg" class="img-responsive" alt="Cinque Terre" style="height:500px;" />
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+                    <br>
+                    <div class="jumbotron text-center">
+                        <h1 style="font-size:28px; text-align:center;"><b>Just a moment....</b></h1>
+                        <h5 style="text-align:center;font-size:14px;">We are searching for hotels that meet your requirements</h5>
+                        <br />
+                        <img src="~/Content/img/loadingGif.gif" id="gif" alt="Cinque Terre" style=" top 0; left 0; right 0; bottom 0; margin auto; height 90px; width:90px;" />
+                        <br />
+                        <div class="container">
+                            <p style="font-size:17px;"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;<b>Get the price guarantee</b></p>
+                        </div>
+                        <div class="container">
+                            <p style="font-size:17px;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>Exclusive member deals</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm hidden-xs col-md-3 col-lg-3">
+                    <br>
+                    <img src="~/Content/img/rightbanner1.jpg" style="height:500px;" class="img-responsive" alt="Cinque Terre" />
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12"><br /></div>
+            </div>
+
+        </div>
+
+
+        <div ng-cloak="" ng-show="loaded" class="col-xs-12 col-sm-12 col-md-12" style="padding-left:0px; padding-bottom:10px;padding-right:0px;">
+
+
+            @* ****** End Booking Form *******@
+            @*<div class="col-xs-12 col-sm-12 col-md-12" style="padding-top: 30px;background-color: brown">
+                </div>*@
+
+            <div class="search_again_wrapper search-again">
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="clearfix searchagain">
+
+                            <div class="col-md-3 col-cm-12 col-lg-3 col-xs-12 col-sm-5">
+
+                                <p class="wording_f ">
+                                    <span class="search-again-click"> Going To: {{respData.hotels[0].destinationName}}   </span>
+                                    <span class="city" style="display: none;"> Singapore </span>
+                                </p>
+
+                            </div>
+
+                            <div class="advance-option">
+
+                                <div class="col-md-3 col-cm-6 col-lg-3 col-xs-6 col-sm-2">
+                                    <p class="wording_a">
+                                        <label> Check In: {{respData.StrcheckIn}}</label>
+                                        <span class="icon"><i class="dd/MM/yyyy" aria-hidden="true"></i></span>
+
+                                    </p>
+
+                                </div>
+                                <div class="col-md-3 col-cm-6 col-lg-3 col-xs-6 col-sm-2">
+                                    <p class="wording_a">
+                                        <label>Check Out: {{respData.StrcheckOut}}</label>
+                                        <span class="icon"><i class="mm/dd/yyyy" aria-hidden="true"></i></span>
+
+
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-2 col-cm-12 col-lg-2 col-xs-12 col-sm-3">
+
+                                    @*<p class="wording_f"> <a href="#" class="form-control btn searchagain_btn" data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="fa fa-search" aria-hidden="true"></i> Modify Search </a> </p>*@
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- ================================= Start search again (Modify Search) ================================ -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="main_wrapper" style="padding-left:0px;padding-right:0px;">
+
+                <div class="container">
+
+                    <div class="row">
+
+
+                        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12  filter-role">
+
+                            <div class="clearfix filter">
+
+                                <!-- ====================== Start hotel mapview ============================== -->
+                                <div class="hotel_mapview hide">
+
+                                    <p class="text-center"><span class="map-location"></span><span>Search by map</span></p>
+
+                                </div>
+                                <!-- ======================== End hotel mapview ============================ -->
+
+                            </div>
+
+                            <div class="clearfix serach">
+
+                                <!-- ======================= Start hotel destination search =============================== -->
+                                <div class="clearfix hotel-destination-search">
+
+                                    <p>Hotel name</p>
+
+                                    <div class="clearfix hotel_filter">
+
+                                        <input ng-model-options="{debounce: 500}" ng-model="hotelName" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Search hotel" type="text">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </div>
+
+                                </div>
+                                <!-- ======================================== End hotel destination search ============================== -->
+
+                            </div>
+
+                            <div class="clearfix filterset">
+
+                                <!-- ============================= Start Filter your search ========================== -->
+                                <div class="clearfix filter-block">
+
+                                    <p>Filter your search</p>
+
+                                </div>
+                                <!-- =============================== End Filter your search =================================== -->
+
+                            </div>
+
+
+                            <div class="clearfix set-of-filter">
+                                <!-- ============================ Start star ratings ============================== -->
+                                <div class="col-md-12 col-sm-4 setfilter">
+
+                                    <p><b>Star Ratings</b></p>
+
+                                    <div class="clearfix price star-click-ev" ng-click="HotelApiRequestStars(1, this)">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 1">
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("1")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 2">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("2")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 3">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("3")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 4">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star-o star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("4")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                    <div class="clearfix price star-click-ev">
+                                        <div class="pull-left">
+                                            <p ng-click="filters.hotelstar = 5">
+                                                <i class="fa fa-arrow-right " aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i> <i class="fa fa-star star" aria-hidden="true"></i>
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">[{{getCount("5")}}]</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- ============================= End star ratings ========================== -->
+                                <!-- ========================== Start setfilter ============================= -->
+                                <div class="col-md-12 col-sm-4 setfilter">
+
+                                </div>
+                                <!-- ========================== End setfilter =============================== -->
+                                @*===================================Start BeingFilter===============================*@
+                                <div style="padding-left:20px;padding-right:20px;">
+                                    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+                                    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+                                    <script src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+                                    <script src="~/Scripts/ui-bootstrap-tpls-0.10.0.js"></script>
+                                    @*<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>*@
+                                    <script src="http://code.angularjs.org/1.2.14/angular-resource.js"></script>
+                                    <script src="~/Scripts/rangeslider.js"></script>
+                                    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular-animate.js"></script>
+                                    <link rel="stylesheet" href="~/Content/rangeslider.css" />
+
+
+                                    <h5><b>Price Range Filter</b> </h5>
+
+                                    <br />
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Less Than LKR 2000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("0","2000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig.min" max="runSliderConfig.max" model-min="sliderRanges.runMin" model-max="sliderRanges.runMax" filter="hourMinFilter" filter-options="{{runSliderConfig.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 2001 to LKR 5000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("2001","5000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig1.min1" max="runSliderConfig1.max1" model-min="sliderRanges.runMin1" model-max="sliderRanges.runMax1" filter="hourMinFilter" filter-options="{{runSliderConfig1.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 5001 to LKR 10000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("5001","10000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig2.min2" max="runSliderConfig2.max2" model-min="sliderRanges.runMin2" model-max="sliderRanges.runMax2" filter="hourMinFilter" filter-options="{{runSliderConfig2.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 10001 to LKR 50000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("10001","50000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig3.min3" max="runSliderConfig3.max3" model-min="sliderRanges.runMin3" model-max="sliderRanges.runMax3" filter="hourMinFilter" filter-options="{{runSliderConfig3.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> LKR 50001 to LKR 100000
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("50001","100000")}})</p>
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig4.min4" max="runSliderConfig4.max4" model-min="sliderRanges.runMin4" model-max="sliderRanges.runMax4" filter="hourMinFilter" filter-options="{{runSliderConfig4.max}}"></div>
+                                    <div class="clearfix price checkbox_click_ev">
+                                        <div class="pull-left">
+                                            <p>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Greater Than LKR 100001
+                                            </p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <p class="ng-binding">({{getPriceRange("100001","200000")}})</p>
+                                            @*<a ng-click="filters.hotelstar = link.hotelstar=1">xxxxxxxxxx</a>
+                                                <a ng-click="filters.minRate = link.hotelstar>=1">xxxxxxxxxx</a>*@
+                                        </div>
+                                        <p>
+                                            <input hidden="hidden" type="checkbox">
+                                        </p>
+                                    </div>
+
+                                    <div range-slider="" prevent-equal-min-max="" attach-handle-values="" step="{{sliderConfig.step}}" min="runSliderConfig5.min5" max="runSliderConfig5.max5" model-min="sliderRanges.runMin5" model-max="sliderRanges.runMax5" filter="hourMinFilter" filter-options="{{runSliderConfig5.max}}"></div>
+
+
+                                </div>
+                                @*===================================Start BeingFilter===============================*@
+                            </div>
+                        </div>
+
+                        <!-- ================================== End side bar ================================= -->
+                        <div class="col-md-9  hotel_result col-lg-9 col-xs-12 col-sm-12">
+                            <div class="clearfix result_header">
+                                <h4 class="ng-binding"><b>{{respData.hotels[0].destinationName}}</b> : {{respData.hotels.length}} Properties. Showing 1-{{respData.hotels.length}} </h4>
+
+
+                                <style>
+                                    .buttonStyle2 {
+                                        background-color: #2e7a2e !important;
+                                        color: #ffffff;
+                                        padding: 6px 16px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 14px;
+                                        border: 1px solid #4cae4c;
+                                        border-radius: 4px;
+                                    }
+
+                                    .buttonStyle3 {
+                                    }
+                                </style>
+                                <div>
+                                    <div>
+                                        <span>Sort By:</span>
+                                        <button style="background-color:#5cb85c ;padding: 7px 16px;border: 1px solid #4cae4c; border-radius: 4px; font-size: 14px;color: #ffffff;" ng-class="{'buttonStyle2' :tog==1}" ng-click="softName()"> <abbr title="Sort by Name">Name</abbr></button>
+                                        <button style="background-color:#5cb85c ;padding: 7px 16px;border: 1px solid #4cae4c; border-radius: 4px; font-size: 14px;color: #ffffff;" ng-class="{'buttonStyle2' :tog==2}" ng-click="softPrice()"><abbr title="Sort by price">Price</abbr></button>
+                                    </div>
+                                </div>
+
+
+                                <div class="body">
+                                    Your Session will expire in&nbsp;<span id="minutes"></span>&nbsp;minutes<span id="seconds"></span>&nbsp;seconds.<br />
+
+                                </div>
+
+
+
+                                <script>
+                                    var timeout = '@ViewBag.timeout'
+                                    var seconds = timeout / 1000;
+                                    if(timeout!==0){
+                                        document.getElementsByName("secondsIdle").innerHTML = seconds;
+                                        document.getElementsByName("seconds").innerHTML = seconds;
+                                        setInterval(function () {
+                                            seconds--;
+                                            document.getElementById("seconds").innerHTML = seconds;
+
+                                        }, 1000);
+
+                                        $.ajax({
+                                            url: "/Home/Hotel",
+                                            type: "POST",
+                                            data: {"timeout" : "timeout"},
+                                            success: function (timeout) {
+
+                                            },
+
+                                        });
+                                    }
+                                        //setTimeout(function ()
+                                        //{
+                                        //    alert("SessionPop!");
+                                        //}, timeout - 20 * 1000);
+
+                                        //setTimeout(function () {
+                                        //    //Show Popup before 20 seconds of timeout.
+                                        //    $find("mpeTimeout").show();
+                                        //}, timeout - 20 * 1000);
+                                    else{
+                                        setTimeout(function () {
+                                            window.location = "http://tag2travel.com/index.php?option=com_sppagebuilder&view=page&id=102";
+                                        }, timeout);
+
+                                        function ResetSession() {
+                                            //Redirect to refresh Session.
+                                            window.location = window.location.href;
+                                        }
+                                    }
+                                </script>
+
+                                <p id="filterTab" class="hide">
+
+                                    <span style="cursor: pointer;" id="hotelFilter" ng-click="HotelApiClearFilters()" class="badge bg-success hide ng-binding">  <span title="Clear Hotel Filter" class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="starFilter" class="badge bg-success hide"> Star <span class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="priceFilter" class="badge bg-success hide"> Price <span class="filter-close-btn">x</span></span>
+                                    <span style="cursor: pointer;" id="clearFilter" ng-click="HotelApiClearFilters()" class="badge bg-success hide"> Clear filters <span class="filter-close-btn">x</span></span>
+                                </p>
+
+                            </div>
+
+
+
+                            @*******************************    <!-- Start first result block -->*@
+
+
+                            <div ng-repeat="hotel in filteredExercise.hotels | rangeFilter:sliderRanges |filter:{ name: hotelName }|orderBy:mySortFunction  | filter :filters " class="result-block clearfix ng-scope">
+
+
+
+                                @*hotel in respData.hotels*@
+
+                                <div class="col-md-3 col-lg-3 col-cm-3 col-xs-12 col-sm-3 img-sec">
+                                    <img class="img-responsive" style="max-height: 138px; min-height: 138px;" src="{{hotel.imagepath}}" alt="img">
+                                </div>
+
+                                <div class="col-md-9 col-lg-9 col-cm-9  col-xs-12 col-sm-9 hotel-des">
+
+                                    <!-- ======================= Start hotel details ============================== -->
+
+                                    <div class="pull-left col-md-8 col-sm-8 col-cm-8">
+                                        <div class="clearfix">
+
+                                            <div class="pull-left hotel-name" style="height:30px!important;width:100%;text-align:left;">
+                                                <h2 class="ng-binding">{{hotel.name | cut:true:34:' ...'}} </h2><br />
+                                            </div>
+
+                                            <div class="pull-left star" style="padding-left:0px;">
+                                                <span ng-repeat="n in createArray(hotel.hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <div class="pull-left mapicon">
+                                                <p>
+                                                    <i class="fa fa-map-marker"></i>
+                                                </p>
+                                            </div>
+                                            <div class="pull-left maptext">
+                                                <p>
+                                                    <span class="cityname ng-binding">{{hotel.city}},{{hotel.destinationName}}</span><span> </span>
+                                                </p>
+                                                <p>
+                                                    <span class="cityname ng-binding">{{hotel.categoryName}}</span><span> </span>
+
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix hidden-xs hotdeal">
+                                            <div class="pull-left ">
+                                                <p>
+                                                    <span class="icon-no-available-o">
+                                                        <i class="fa fa-cutlery"></i>
+                                                    </span>
+
+                                                    <span class="available-text"> {{hotel.rooms[0].rates[0].boardName}}  </span>
+                                                </p>
+                                            </div>
+                                            <div class="pull-left padding-left-24">
+                                                <p>
+                                                    <span class="icon-available-o">
+                                                        <i class="fa fa-bed"></i>
+                                                    </span>
+                                                    <span class="available-text ng-binding">{{hotel.rooms[0].name}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix hidden-xs hotdeal">
+                                            <div class="pull-left ">
+                                                <p>
+                                                    <span class="icon-no-available-o">
+                                                        <i class="fa fa-file-text"></i>
+                                                    </span>
+
+                                                    <span class="available-text" style="padding-left:0px;"> {{hotel.description | limitTo:90}} ... <a ng-href="@Url.Action("Hotel", "home")?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Adults1={{respDatapara.Adults1}}&Children1={{respDatapara.Children1}}&C1Age1={{respDatapara.C1Age1}}&C1Age2={{respDatapara.C1Age2}}&C1Age3={{respDatapara.C1Age3}}&C1Age4={{respDatapara.C1Age4}}&Adults2={{respDatapara.Adults2}}&Children2={{respDatapara.Children2}}&C2Age1={{respDatapara.C2Age1}}&C2Age2={{respDatapara.C2Age2}}&C2Age3={{respDatapara.C2Age3}}&C2Age4={{respDatapara.C2Age4}}&Adults3={{respDatapara.Adults3}}&Children3={{respDatapara.Children3}}&C3Age1={{respDatapara.C3Age1}}&C3Age2={{respDatapara.C3Age2}}&C3Age3={{respDatapara.C3Age3}}&C3Age4={{respDatapara.C3Age4}}">Read more..</a> </span>
+                                                </p>
+                                            </div>
+                                           
+                                           
+                                        </div>
+
+                                        <div class="clearfix hotdeal">
+                                            @*<div class="pull-left ">
+                                                    <p>
+                                                        <span class="hotdealbox">{{hotel.rooms[0].rates[0].offers[0].name}}</span>
+                                                        <span class="bullet"></span>
+                                                        <span class="pro_img padding-left-8">
+                                                        </span>
+                                                    </p>
+                                                </div>*@
+                                            <div class="pull-left padding-left-8 hotdealpro">
+                                                @*<p ng-show="{{hotel.rooms[0].rates[0].offers[0].name}} == null" class="ng-scope">{{hotel.currency}} {{hotel.rooms[0].rates[0].offers[0].amount}}</p>*@<!-- end ngIf: city !== 'MV' -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- ===================== End hotel details ======================== -->
+                                    <script>
+                                        angular.module('ng').filter('cut', function () {
+                                            return function (value, wordwise, max, tail) {
+                                                if (!value) return '';
+
+                                                max = parseInt(max, 10);
+                                                if (!max) return value;
+                                                if (value.length <= max) return value;
+
+                                                value = value.substr(0, max);
+                                                if (wordwise) {
+                                                    var lastspace = value.lastIndexOf(' ');
+                                                    if (lastspace !== -1) {
+                                                        //Also remove . and , so its gives a cleaner result.
+                                                        if (value.charAt(lastspace-1) === '.' || value.charAt(lastspace-1) === ',') {
+                                                            lastspace = lastspace - 1;
+                                                        }
+                                                        value = value.substr(0, lastspace);
+                                                    }
+                                                }
+
+                                                return value + (tail || ' …');
+                                            };
+                                        });
+                                    </script>
+                                    <!-- ======================= Start price box ========================== -->
+
+                                    <div class="pull-right col-cm-4 detail-box">
+                                        <div class="clearfix pricing-box">
+                                            <p class="numberofleft"><span ng-show="hotel.hotel_allotment <= 5" class="ng-binding ng-hide">99 rooms left !</span></p>
+                                            <p class="pricenight">From</p>
+                                            <p class="hotel_price ng-binding"> LKR {{(hotel.minRate)}} </p>
+
+                                            <p class="text-right padding-bottom-8">
+
+
+                                                @*target="_blank" open in new tab *@
+
+
+                                                @*<button target="_blank" type="button" class="btn btn-success" data-ng-click="setTab(hotel.code,respDatapara.Des,respDatapara.DepartureDate,respDatapara.ReturnDate,respDatapara.Rooms,respDatapara.Adults1,respDatapara.Children1,respDatapara.Age1)">Check Availability</button>*@
+
+                                            <p class="text-right padding-bottom-8">
+
+
+                                                @*<a href="http://72.9.159.12:8082/Home/Hotel?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Occupancy={{respDatapara.Adults1}}" class="btn btn-success"> Select Room </a>*@
+                                                @*<a href="http://localhost:13668/Home/Hotel?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Occupancy={{respDatapara.Adults1}}" class="btn btn-success"> Select Room </a>*@
+                                                <a class="btn btn-success" ng-href="@Url.Action("Hotel", "home")?HotelCode={{hotel.code}}&Destination={{respDatapara.Des}}&DepartureDate={{respDatapara.DepartureDate}}&ReturnDate={{respDatapara.ReturnDate}}&Rooms={{respDatapara.Rooms}}&Adults1={{respDatapara.Adults1}}&Children1={{respDatapara.Children1}}&C1Age1={{respDatapara.C1Age1}}&C1Age2={{respDatapara.C1Age2}}&C1Age3={{respDatapara.C1Age3}}&C1Age4={{respDatapara.C1Age4}}&Adults2={{respDatapara.Adults2}}&Children2={{respDatapara.Children2}}&C2Age1={{respDatapara.C2Age1}}&C2Age2={{respDatapara.C2Age2}}&C2Age3={{respDatapara.C2Age3}}&C2Age4={{respDatapara.C2Age4}}&Adults3={{respDatapara.Adults3}}&Children3={{respDatapara.Children3}}&C3Age1={{respDatapara.C3Age1}}&C3Age2={{respDatapara.C3Age2}}&C3Age3={{respDatapara.C3Age3}}&C3Age4={{respDatapara.C3Age4}}"> Check Availability </a>
+
+
+
+
+                                            </p>
+
+
+                                            @*  *@
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- =================== End price box ======================== -->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        <footer>
+
+            <div class="upperf" style="color:#1B3C6F;">
+
+                <!--<div class="Customer">-->
+
+                <div class="row" style="color:#b4b8bf">
+                    <!--start information-->
+                    <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+                    <div class="info" style="padding-left:10px;">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <h3 class="header" style="text-align:left;font-size:18px;"> Quick Links </h3>
+                            <hr>
+                            <ul class="arrow" style="text-align:left!important; color:#b4b8bf">
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/about-us">About us</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/faq">FAQ's</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/wf-menu-cpanel/wf-menu-cpanel/get-contact">Contact us</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/holiday-check-list">Holiday Check List</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/privacy-policy" target="_blank">Privacy Policy</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://tag2travel.com/index.php/terms" onclick="window.open(this.href,'','scrollbars=yes,resizable=yes,location=yes,menubar=yes,status=yes,toolbar=yes,left=0,top=0');return false;">Terms and Conditions</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/sri-lanka">Sri Lanka</a></li>
+                                <li><a style="color:#b4b8bf" target="_blank" href="http://www.tag2travel.com/index.php/destinations">Destinations</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!--End Information-->
+                    <!--Start Subscribe-->
+
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="ftsubscribe">
+                            <h3 class="header" style="text-align:left;font-size:18px;">Subscribe To Our Newsletter</h3>
+                            <hr>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <div class="mail" style="color:#b4b8bf">
+                                        <p style="text-align:left;">Email </p><br />
+                                        <p style="text-align:left;">Name  </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                    <div style="color:#b4b8bf; text-align:left; ">
+                                        <form class="myForm">
+                                            <div class="sEmail">
+                                                <input type="text" value="" placeholder="Enter your E-mail" id="SubscribeEmail" ng-model='SubscribeEmail' style="border-radius:4px; border:none;width:260px;height:28px;" onblur="validateEmail(this);"><br /><br />
+                                                <input type="text" value="" placeholder="Enter your Name" id="SubscribeName" ng-model='SubscribeName' style="border-radius:4px; border:none;width:260px;height:28px;">
+                                            </div>
+                                            <br>
+                                            <br />
+                                            <button class="sub" id='validate' data-ng-click="sendSubscribeMail()">Subscribe </button>
+                                            <br><br>
+                                            <script src="~/Scripts/emailValidation.js"></script>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h2 id='result'></h2>
+
+
+                        </div>
+                    </div>
+                    <!--End Subscribe-->
+                    <!--Start About Us-->
+
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="aboutus">
+                            <h3 class="header"></h3>
+                            <h3 class="header" style="text-align:left;font-size:18px;"> About Us</h3>
+                            <hr>
+                            <p style="text-align:justify;">
+                                In simple terms, we are a team of travel enthusiasts with the expertise of destination and activity planning – who have experienced travelling themselves and are working towards gifting those experiences to our clients.
+                            </p>
+                            <p class="logo">
+                                <img src="~/Content/img/footerlogoimg.jpg" class="img-responsive" alt="">
+
+                                <!--<img src="D:\codes\images\sri1.png" alt="">-->
+                            </p>
+
+                        </div>
+
+                        <!--</div>-->
+                        <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End About Us-->
+
+
+
+            <div class="footer" style="background-color:#112646; text-align:left;">
+
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-1 col-lg-1"></div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div id="sp-footer1" class="span8">
+                            <span class="copyright">Copyright © 2017 Tag2Travel.com. All Rights Reserved.</span>
+                            <!--<span class="designed-by">
+                                Using <a class="sp-brand" target="_blank" href="http://www.joomshaper.com/helix">Helix</a>
+                            </span>-->
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <!--we accepted-->
+                        <img src="~/Content/img/visaimg.png" />
+                        <img src="~/Content/img/mastercardimg.png">
+                     
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <!-- Add font awesome icons -->
+                        <a href="https://www.facebook.com/Tag2travel" class="fa fa-facebook"></a>
+                        <a href="https://twitter.com/tag2Travel" class="fa fa-twitter"></a>
+                        <a href="https://plus.google.com/u/0/101191713416721482821" class="fa fa-google-plus" style="background-color: rgb(221, 75, 57);"></a>
+                        <a href="mailto:sales@tag2travel.com" class="fa fa-envelope"></a>
+                        @*<a href="http://www.pinterest.com/" class="fa fa-pinterest"></a>*@
+                    </div>
+
+                    <div class="hidden-xs hidden-sm col-md-1 col-lg-1" style="width:80px;"></div>
+                </div>
+            </div>
+
+
+
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div>
+</div>
+
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+
+<script src="~/Scripts/angular-route.js"></script>
+
+<script src="~/Scripts/API/Module.js"></script>
+<script src="~/Scripts/API/Service.js"></script>
+<script src="~/Scripts/API/Controller.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+<script>
+    $(document).ready(function () {
+
+        var startDate = new Date();
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: today
+
+
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+            $('#dateto').datepicker('setStartDate', startDate);
+
+        });
+
+        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input1.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container1,
+            autoclose: true
+        });
+
+    })
+</script>
+
+
+
+
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/bootstrap")*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+@*@Scripts.Render("~/bundles/angular")*@

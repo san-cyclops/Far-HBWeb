@@ -1,0 +1,75 @@
+﻿var app;
+
+(function () {
+
+    app = angular.module("loginApp", []);
+
+})();
+
+
+
+app.controller('loginController', function ($scope, $http, $window) {
+
+
+    $scope.username = "";
+    $scope.password = "";
+
+    $scope.loginClick = function () {
+        sub = {
+            username:$scope.username,
+            password:$scope.password
+        }
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/login",
+            dataType: 'json',
+            accept:' application/json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+            post.then(function success(d) {
+            console.log("succesasdasdasdasdasdasdasdasdasdasdasdasdasdass");
+            $window.alert(d.data);
+            $window.open('/Home/Dashboard', '_blank');
+
+        }, function (error) {
+            $window.alert("Oops!! Something went wrong!!!!.");
+        });
+
+
+
+
+        //var post = $http({
+        //    method: "POST",
+        //    url: "/Home/login",
+        //    dataType: 'json',
+        //    data: sub,
+        //    headers: { "Content-Type": "application/json" }
+        //});
+
+        //post.then(function (d) {
+        //    //if (d.data == 0) {
+        //    //    console.log(d.data + "admin");
+        //    //    $window.open('/Home/AdminDashboard', '_blank');
+        //    //}
+        //    //else if (d.data == 0) {
+        //    //    console.log(d.data + "admin");
+        //    //    $window.open('/Home/AdminDashboard', '_blank');
+        //    //}
+        //    //else if (d.data == 0) {
+        //    //    console.log(d.data + "admin");
+        //    //    $window.open('/Home/AdminDashboard', '_blank');
+        //    //}
+        //    //else
+        //    //    console.log(d.data);
+        //    console.log("success");
+        //    $window.alert(d.data);
+
+        //}, function (d) {
+        //    $window.alert("Oops!! Something went wrong!!!!.");
+        //});
+    
+    }
+
+});

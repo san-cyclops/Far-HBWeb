@@ -1,0 +1,511 @@
+﻿@model HB.HotelRez.Models.HotelSupplierData
+@{
+    ViewBag.Title = "HotelSupplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<head>
+    <style>
+        .file {
+            color: #ffffff;
+            background-color: #428bca;
+            border-color: #357ebd;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            width: 248px;
+        }
+
+
+    </style>
+    @*<link rel="text/javascript" href="~/Scripts/bootstrap-0.11.0.min,js">~/Scripts/bootstrap-0.11.0.min,js>*@
+   
+    <script data-require="ui-bootstrap" data-semver="0.11.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    @*<script data-require="angular.js" data-semver="1.3.1" src="//code.angularjs.org/1.3.1/angular.js"></script>*@
+    <link data-require="bootstrap-css" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.3-min.js"> </script>
+
+    <script src="~/Scripts/jquery-2.1.1-min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-2.2.2-min.js"></script>
+    <script type="text/javascript"  src="~/Scripts/bootstrap-datetimepicker-min.js"></script>
+   
+    @*<script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js" data-semver="1.0.8"></script>*@
+    <script src="app.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+</head>
+
+<body ng-controller="supplierController" data-ng-app="HotelSupplier">
+    <div class="container" style="border:solid;border-color:#E9E9E9;  border-width:1px;margin-top:10px;margin-bottom:10px;">
+    <div class="panel panel-dark">
+       
+        <div class="panel-heading" style="font-size:20px;">
+            Hotel Supplier
+        </div>
+
+        <form action="#" class="form-horizontal" name="myform">
+            <div class="form-body pal">
+
+                <div class="form-group">
+
+                    <label for="code" class="col-md-3 control-label">Hotel Code</label>
+
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            @*<input style="height:34px;" id="ccode" type="number" class="form-control" data-ng-model="code" />*@
+                            @using (Html.BeginForm("Promotion", "Home", FormMethod.Post))
+                            {
+                               @Html.TextBoxFor(m => m.HotelCode, new { @class = "form-control", @readonly = "readonly",style="height:34px;" })
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label"> Hotel Name </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="nname" type="text" placeholder="" class="form-control" data-ng-model="name" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputaddress" class="col-md-3 control-label"> Address </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="aadd" type="text" placeholder="" class="form-control" data-ng-model="address" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="srating" class="col-md-3 control-label"> Star Rating</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="srating"  style="height:34px;" id="ssrating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="cperson" class="col-md-3 control-label"> Contact Person </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="ccperson" type="text" placeholder="" class="form-control" data-ng-model="cperson" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="owner" class="col-md-3 control-label">Owner Name </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="oowner" type="text" placeholder="" class="form-control" data-ng-model="owner" />
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">Email</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <input style="height:34px;" id="validemail" type="text" placeholder="" class="form-control" data-ng-model="email" />
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="telephone" class="col-md-3 control-label">Telephone</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="validtelephone" type="number" placeholder="" class="form-control" data-ng-model="telephone" />
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gps" class="col-md-3 control-label"> GPS Cordinate</label>
+
+                    <div class="col-md-3">
+
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="gpslong" type="number" placeholder="Longitude" class="form-control" data-ng-model="long" />
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="gpslat" type="text" placeholder="Latitude" class="form-control" data-ng-model="lat" />
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-md-3 control-label">Description </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input style="height:34px;" id="ddescription" type="text" placeholder="" class="form-control" data-ng-model="description" />
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+            <div style="border:solid;border-color:#E9E9E9;  border-width:1px">
+                <div class="form-group">
+                    <label style="font-size:20px;" class="col-md-3 control-label">Internet</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                         </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="iavailable" class="col-md-3 control-label">Is Internet Available To Guests?</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="selection" id="InternetAvailable" ng-options="input for input in inputs">
+                                @*<option value="Yes Free">Yes Free</option>
+                                <option value="Yes Paid">Yes Paid</option>
+                                <option>No</option>*@
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inttype" class="col-md-3 control-label">What Type Of Internet?</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="internettype" id="TypeOfInternet" ng-disabled="selection === 'No'" >
+                                <option value="Wi-Fi">Wi-Fi</option>
+                                <option value="Dongal">Dongal</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="where" class="col-md-3 control-label">Where?</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="where" id="WhereIsInternet" ng-disabled="selection === 'No'">
+                                <option value="Public Areas">Public Areas</option>
+                                <option value="In Room">In Room</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+            </div>
+            <div style="border:solid;border-color:#E9E9E9;  border-width: 1px;">
+
+                <div class="form-group" >
+                    <label style="font-size:20px;" class="col-md-3 control-label">Parking</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="parkingavailable" class="col-md-3 control-label">Is Parking Availabe To Guests?</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="parkavailable" id="IsParkingAvailable">
+                                <option value="Yes Free">Yes Free</option>
+                                <option value="Yes Paid">Yes Paid</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3" id="parkingType">
+                        <input type="radio" name="parkingTypePrivate" value="Private"  data-ng-model="parkingareas"checked id="parkingTypePrivate">Private
+                        <input type="radio" name="parkingTypeOnSite" value="On Site"  data-ng-model="parkingareas"checked id="parkingTypeOnSite"> On Site
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reservation" class="col-md-3 control-label">Do Guests Need To Reserve A Parking Space</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="reservation" id="IsReservationNeeded">
+                                <option value="Reservation Needed">Reservation Needed</option>
+                                <option value="No">No</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" class="col-md-3 control-label">Price for Parking (Per Day)</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <input style="height:34px;" id="parkingPrice" type="number" placeholder="price for parking" class="form-control" data-ng-model="price" ng-disabled="parkavailable === 'Yes Free'"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+
+            </div>
+            <div style="border:solid;border-color:#E9E9E9;  border-width: 1px;">
+                <div class="form-group" >
+        <label style="font-size:20px;" class="col-md-3 control-label">Children</label>
+        <div class="col-md-3">
+            <div class="input-icon right">
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+    </div>
+                <div class="form-group">
+                    <label for="children " class="col-md-3 control-label">Children</label>
+                    <div class="col-md-3">
+                        Can You Accommodate Children?
+                        <br>
+                        <label for="" class="control-label">(You Can Specify The Ages And Prices Later)</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="radio" name="yes" value="yes" data-ng-model="Children" checked id="ChildrenAllowed">Yes
+                        <input type="radio" name="no" value="no" data-ng-model="Children" checked id="ChildrenNotAllowed"> No
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+            </div>
+            <div style="border:solid;border-color:#E9E9E9;  border-width: thin">
+                     <div class="form-group" >
+                        <label style="font-size:20px;" class="col-md-3 control-label">Pets</label>
+                        <div class="col-md-3">
+                            <div class="input-icon right">
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                    </div>
+                <div class="form-group">
+                    <label for="Pets" class="col-md-3 control-label">Do You Allowed Pets</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" data-ng-model="pets" id="petsAllowed">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+            <div style="border:solid;border-color:#E9E9E9;  border-width: 1px;">
+                <div class="form-group">
+                    <label style="font-size:20px;" class="col-md-3 control-label">Languages Spoken by Your Staff</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="language" class="col-md-3 control-label">Language Spoken By Your Staff</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <select class="form-control" ng-model="language" ng-options="x for x in anlanguage">
+                             </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="alanguage" class="col-md-3 control-label">Add Another Language</label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            @*<select class="form-control" data-ng-model="alanguage">
+                                <option>English</option>
+                                <option>Sinhala</option>
+                            </select>*@
+                            <input style="height:34px;" id="alanguage" type="text" placeholder="" class="form-control" data-ng-model="alanguage"  />
+                   
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary" ng-click="Add()">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in items">
+
+                                {{item.alanguage}}
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                   
+                            <ul>
+                                <li ng-repeat="item in items">
+
+                                    <button style="wi" class="btn btn-danger" ng-click="removeitems($index)">X</button>
+                                </li>
+                            </ul>
+                      </div>
+                    <div class="col-md-3"></div>
+                  
+                </div>
+           </div>
+                <div>
+                <div class="form-group">
+                <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <label for="checkintime">Check In Time</label><br />
+                            <div class="well">
+                                <div id="date" class="input-append" datetimez ng-model="var1">
+                                    <input data-format="hh:mm" type="time" id="input1" name="input1" ng-model="var1_1.value">
+                                    <span class="add-on">
+                                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <label for="checkouttime">Check Out Time</label><br />
+                            <div class="well">
+                                <div id="date" class="input-append" datetimez ng-model="var2">
+                                    <input data-format="hh:mm" type="time" id="input2" name="input1" ng-model="var2_1.value">
+                                    <span class="add-on">
+                                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="image" class="col-md-3 control-label">image</label>
+
+                <div class="col-md-3">
+                          @*<div class="input-icon right">
+                            <img id="blah" src="#" alt="" />
+                            <p ng-repeat="file in files">
+                                {{file.name}}
+                            </p>
+
+                        </div>*@
+                    <div id="preview" ng-model="images"></div>
+                </div>
+                <div class="col-md-3">
+                    <input id="file-input" type="file" multiple>
+                        @*<div class="btn">
+                            <input class="file" type='file' ng-file-model="files" multiple />   
+                        </div>*@
+                </div>
+                <div>
+                        <div class="col-md-3">
+                          
+                        </div>
+                </div>
+                </div>
+                <div class="form-actions pal">
+                    <div class="form-group mbn">
+                        <div class="col-md-offset-3 col-md-6">
+                            <button type="button" class="btn btn-primary" ng-click="save()">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    @*<link rel="text/javascript" data-require="angular.js@1.4.0" data-semver="1.4.0" href="~/Scripts/angular-1.4.0-js">~/Scripts/angular-1.4.0-js/>*@
+    <script data-require="angular.js@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>
+    <script src="~/Scripts/angularjs-1.6.4-min.js"></script>
+   
+    <script src="~/Scripts/HotelSupplier/HotelSupplier.js"></script>
+</body>
+</html>

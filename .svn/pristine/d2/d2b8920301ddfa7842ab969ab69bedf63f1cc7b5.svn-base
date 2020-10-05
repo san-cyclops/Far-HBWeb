@@ -1,0 +1,48 @@
+﻿
+var app = angular.module('userForm', []);
+app.controller('userController', function ($scope) {
+    $scope.username = "";
+    $scope.usertype = "";
+    $scope.password = "";
+    $scope.cpassword = "";
+
+
+
+    $scope.save = function () {
+        if ($scope.username == "" || $scope.usertype == "" || $scope.password == ""|| $scope.cpassword == "") {
+            alert("Please fill out this field.");
+            return false;
+
+
+        }
+        var sub = {
+            UserName: $scope.username,
+            UserType: $scope.usertype,
+            password: $scope.password,
+           
+
+        };
+     
+
+        var getUserDetails = "";
+       
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/GetUserFormData",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.then(function (d) {
+
+            console.log("success");
+            $window.alert(d.data);
+
+        }, function (d) {
+            $window.alert("Oops!! Something went wrong!!!!.");
+        });
+    }
+
+});

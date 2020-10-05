@@ -1,0 +1,186 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link  href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<!DOCTYPE html>
+<style>
+    th,td{
+         height:40px;
+    }
+    table{
+        height:100px!important;
+    }
+</style>
+<html>
+
+<body ng-controller="payController" data-ng-app="RoomPayment">
+
+    <div class="panel panel-dark">
+        <div class="panel-heading" style="font-size:23px;">
+            Room Payment
+        </div>
+        <br />
+
+        <form action="#" class="form-horizontal">
+            <div class="grid">
+                <table class="table table-bordered" style="">
+                    <thead>
+                        <tr>
+                            <th>Bookin No</th>
+                            <th>Room ID</th>
+                            <th>Date From</th>
+                            <th>Date To</th>
+                            <th>Name</th>
+                            <th>Telephone No</th>
+                            <th>Email</th>
+                            <th>NIC No</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="fields in updatedata" ng-click="processData(fields)">
+                            <td>{{fields.BookingNo}}</td>
+                            <td>{{fields.RoomID}}</td>
+                            <td>{{fields.DateFrom}}</td>
+                            <td>{{fields.DateTo}}</td>
+                            <td>{{fields.Adult1FirstName}}</>
+                            <td>{{fields.Adult1Telephone}}</>
+                            <td>{{fields.Adult1Email}}</>
+                            <td>{{fields.Adult1NICNo}}</>
+                            <td>{{fields.Price   +   fields.RoomType }}</>
+                        </tr>
+
+                    </tbody>
+               </table>
+
+           </div>
+            @*<div data-pagination="" data-num-pages="numPages()"
+                 data-current-page="currentPage" data-max-size="maxSize"
+                 data-boundary-links="true">
+            </div>*@
+          
+            <div class="bookingdetails">
+                <div class="form-body pal">
+                    <div class="form-group">
+
+                        <label for="booking no" class="col-md-2 control-label"> Booking No </label>
+
+                        <div class="col-md-2">
+                            <div class="input-icon right">
+                                <input id="bookingno" type="text" class="form-control" data-ng-model="bno" style="padding-left:40px;" value= "{{bno}}"/>
+                               
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+
+                        <label for="room no" class="col-md-2 control-label"> Room ID</label>
+
+                        <div class="col-md-2">
+                            <input id="roomid" type="text" class="form-control" data-ng-model="rid" style="padding-left:40px;" value="{{rid}}" />
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputrefference" class="col-md-2 control-label"> Amount </label>
+                        <div class="col-md-2">
+                            <div class="input-icon right">
+
+                                <input id="amount" type="text" class="form-control" data-ng-model="amount" style="padding-left:40px;"/>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <label for="inputrefference" class="col-md-2 control-label"> Contact Info </label>
+                        <div class="col-md-2">
+                            <input id="bno" type="text" class="form-control" placeholder="Name" data-ng-model="name" value="{{name}}" />
+                        </div>
+                        <div class="col-md-2">
+                            <input id="tno" type="text" class="form-control" placeholder="Telephone No" data-ng-model="telephoneno" value="{{telephoneno}}" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputrefference" class="col-md-2 control-label"> Tax </label>
+                        <div class="col-md-2">
+                            <div class="input-icon right">
+
+                                <input id="tax" type="number" placeholder="" class="form-control" data-ng-model="tax" style="padding-left:40px;" value="" />
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <label for="inputrefference" class="col-md-2 control-label"> Email </label>
+                        <div class="col-md-2">
+                            <input id="email" type="text" class="form-control" data-ng-model="email" style="padding-left:10px;" value="{{email}}" />
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputrefference" class="col-md-2 control-label"> Total Amount </label>
+                        <div class="col-md-2">
+                            <div class="input-icon right">
+
+                                <input id="tot" type="text" class="form-control" data-ng-model="total" style="padding-left:40px;" value="{{amount+tax}}" />
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <label for="inputrefference" class="col-md-2 control-label"> Credit Card No</label>
+                        <div class="col-md-2">
+                            <input id="tot" type="number" class="form-control" data-ng-model="creditno" style="padding-left:40px;" />
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" ng-click="paid()">Paid</button>
+                        </div>
+
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
+<script src="~/Scripts/RoomPayment/payment.js"></script>

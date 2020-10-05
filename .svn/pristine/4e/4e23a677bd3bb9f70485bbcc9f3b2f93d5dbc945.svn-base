@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+@{
+    ViewBag.Title = "RoomMaster";
+    Layout = null;
+    }
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+
+@*<script data-require="ui-bootstrap" data-semver="0.11.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>*@
+@*<link data-require="bootstrap-css" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />*@
+@*<script data-require="angular.js@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>*@
+
+<html>
+<body ng-controller="demoController" data-ng-app="RoomMaster">
+
+    <div class="panel panel-yellow" style="padding-right:5%;padding-left:5%;">
+        <div class="panel-heading" style="font-size:23px;">
+          Room Master
+        </div>
+        <br/>
+        <form action="#" class="form-horizontal">
+            <div class="form-body pal">
+                <div class="form-group">
+
+                    <label for="inputName" class="col-md-3 control-label"> Hotel Name </label>
+
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input id="name" type="text" placeholder="" class="form-control" data-ng-model="hname" style="padding-left:40px;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    </div>
+                <div class="form-group">
+                    <label for="inputaddress" class="col-md-3 control-label"> Address </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input id="add" type="text" placeholder="" class="form-control" data-ng-model="address" style="padding-left:40px;"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputroom" class="col-md-3 control-label"> Room ID </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input id="rid" type="text" placeholder="" class="form-control" data-ng-model="roomid" style="padding-left:40px;"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputrefference" class="col-md-3 control-label"> Refference </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input id="ref" type="text" placeholder="" class="form-control" data-ng-model="refference" style="padding-left:40px;"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputboard" class="col-md-3 control-label"> Board Type </label>
+                    <div class="col-md-3">
+                        <select class="form-control" data-ng-model="board" ng-options="p for p in btype">
+
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inpuroom" class="col-md-3 control-label"> Room Type </label>
+                    <div class="col-md-3">
+                        <select class="form-control" data-ng-model="room" ng-options="p for p in roomtype">
+
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputami" class="col-md-3 control-label"> Aminities </label>
+                    <div class="col-md-3">
+                        <select class="form-control" data-ng-model="aminities" ng-options="p for p in aminity">
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary" ng-click="add1()" style="margin-left:10px">
+                            Add
+                        </button>
+
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                        <span ng-repeat="x in aminitylist">
+                            <button ng-click="remove($index)">{{ x }} x </button>
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="inputnear" class="col-md-3 control-label"> Nearby</label>
+
+                    <div class="col-md-3">
+
+                        <div class="input-icon right">
+
+                            <input id="nearbyn" type="text" placeholder="Name" class="form-control" data-ng-model="name" style="padding-left:40px;"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="input-icon right">
+
+                            <input id="nearbyd" type="number" placeholder="Distance" class="form-control" data-ng-model="distance" style="padding-left:40px;"/>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="col-md-3">
+
+                            <div>
+                                <button type="submit" class="btn btn-primary" ng-click="add()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in items">
+
+                                {{item.name}}
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in items">
+
+                                {{item.distance}}
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="item in items">
+
+                                <button class="btn btn-danger" ng-click="removeitems($index)">X</button>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="inputprice" class="col-md-3 control-label"> Price  </label>
+
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+
+                            <input id="price" type="text" placeholder="" class="form-control" data-ng-model="price" style="padding-left:40px;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="form-actions pal">
+
+                    <div class="form-group mbn">
+
+                        <div class="col-md-offset-3 col-md-6">
+                            <button type="submit" class="btn btn-primary" ng-click="save()">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+ 
+</body>
+</html>
+
+<script src="~/Scripts/RoomMaster/master.js"></script>

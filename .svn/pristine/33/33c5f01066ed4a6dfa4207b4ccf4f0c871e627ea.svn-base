@@ -1,0 +1,772 @@
+﻿var app = angular.module('mymodule', []);
+app.service('studentService', function ($http) {
+    this.get = function (HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x, Children1x, C1Age1x, C1Age2x, C1Age3x, C1Age4x, Adults2x, Children2x, C2Age1x, C2Age2x, C2Age3x, C2Age4x, Adults3x, Children3x, C3Age1x, C3Age2x, C3Age3x, C3Age4x, visitorsCurrencyx) {
+        // var url = "http://hotels.tag2travel.com:4585/api/HotelBooking/GetHotelDetailsRS?HotelCode=" + HotelCodex + "&des=" + Destinationx + "&DepartureDate=" + DepartureDatex + "&ReturnDate=" + ReturnDatex + "&Rooms=" + Roomsx + "&Adults1=" + Adults1x + "&Children1=" + Children1x + "&C1Age1=" + C1Age1x + "&C1Age2=" + C1Age2x + "&C1Age3=" + C1Age3x + "&C1Age4=" + C1Age4x + "&Adults2=" + Adults2x + "&Children2=" + Children2x + "&C2Age1=" + C2Age1x + "&C2Age2=" + C2Age2x + "&C2Age3=" + C2Age3x + "&C2Age4=" + C2Age4x + "&Adults3=" + Adults3x + "&Children3=" + Children3x + "&C3Age1=" + C3Age1x + "&C3Age2=" + C3Age2x + "&C3Age3=" + C3Age3x + "&C3Age4=" + C3Age4x;
+       // var url = "http://localhost:8995/api/HotelBooking/GetHotelDetailsRS?HotelCode=" + HotelCodex + "&des=" + Destinationx + "&DepartureDate=" + DepartureDatex + "&ReturnDate=" + ReturnDatex + "&Rooms=" + Roomsx + "&Adults1=" + Adults1x + "&Children1=" + Children1x + "&C1Age1=" + C1Age1x + "&C1Age2=" + C1Age2x + "&C1Age3=" + C1Age3x + "&C1Age4=" + C1Age4x + "&Adults2=" + Adults2x + "&Children2=" + Children2x + "&C2Age1=" + C2Age1x + "&C2Age2=" + C2Age2x + "&C2Age3=" + C2Age3x + "&C2Age4=" + C2Age4x + "&Adults3=" + Adults3x + "&Children3=" + Children3x + "&C3Age1=" + C3Age1x + "&C3Age2=" + C3Age2x + "&C3Age3=" + C3Age3x + "&C3Age4=" + C3Age4x + "&visitorsCurrency=" + visitorsCurrencyx;
+        var url = "http://67.222.132.248:9091/api/HotelBooking/GetHotelDetailsRS?HotelCode=" + HotelCodex + "&des=" + Destinationx + "&DepartureDate=" + DepartureDatex + "&ReturnDate=" + ReturnDatex + "&Rooms=" + Roomsx + "&Adults1=" + Adults1x + "&Children1=" + Children1x + "&C1Age1=" + C1Age1x + "&C1Age2=" + C1Age2x + "&C1Age3=" + C1Age3x + "&C1Age4=" + C1Age4x + "&Adults2=" + Adults2x + "&Children2=" + Children2x + "&C2Age1=" + C2Age1x + "&C2Age2=" + C2Age2x + "&C2Age3=" + C2Age3x + "&C2Age4=" + C2Age4x + "&Adults3=" + Adults3x + "&Children3=" + Children3x + "&C3Age1=" + C3Age1x + "&C3Age2=" + C3Age2x + "&C3Age3=" + C3Age3x + "&C3Age4=" + C3Age4x + "&visitorsCurrency=" + visitorsCurrencyx;
+        var response = $http.get(url);
+        return response;
+    };
+    this.getratecommnet = function (rateKey, Rooms, Adults1, Children1, C1Age1, C1Age2, C1Age3, C1Age4, Adults2, Children2, C2Age1, C2Age2, C2Age3, C2Age4, Adults3, Children3, C3Age1, C3Age2, C3Age3, C3Age4, visitorsCurrency) {
+        // var url2 = "http://hotels.tag2travel.com:4585/api/HotelBooking/GetCheckRateRs?rateKey=" + sub;
+        //var url2 = "http://localhost:8995/api/HotelBooking/GetCheckRateRs?rateKey=" + rateKey + "&Rooms=" + Rooms + "&Adults1=" + Adults1 + "&Children1=" + Children1 + "&C1Age1=" + C1Age1 + "&C1Age2=" + C1Age2 + "&C1Age3=" + C1Age3 + "&C1Age4=" + C1Age4 + "&Adults2=" + Adults2 + "&Children2=" + Children2 + "&C2Age1=" + C2Age1 + "&C2Age2=" + C2Age2 + "&C2Age3=" + C2Age3 + "&C2Age4=" + C2Age4 + "&Adults3=" + Adults3 + "&Children3=" + Children3 + "&C3Age1=" + C3Age1 + "&C3Age2=" + C3Age2 + "&C3Age3=" + C3Age3 + "&C3Age4=" + C3Age4 + "&visitorsCurrency=" + visitorsCurrency;
+        var url2 = "http://67.222.132.248:9091/api/HotelBooking/GetCheckRateRs?rateKey=" + rateKey + "&Rooms=" + Rooms + "&Adults1=" + Adults1 + "&Children1=" + Children1 + "&C1Age1=" + C1Age1 + "&C1Age2=" + C1Age2 + "&C1Age3=" + C1Age3 + "&C1Age4=" + C1Age4 + "&Adults2=" + Adults2 + "&Children2=" + Children2 + "&C2Age1=" + C2Age1 + "&C2Age2=" + C2Age2 + "&C2Age3=" + C2Age3 + "&C2Age4=" + C2Age4 + "&Adults3=" + Adults3 + "&Children3=" + Children3 + "&C3Age1=" + C3Age1 + "&C3Age2=" + C3Age2 + "&C3Age3=" + C3Age3 + "&C3Age4=" + C3Age4 + "&visitorsCurrency=" + visitorsCurrency;
+        var response2 = $http.get(url2);
+        return response2;
+    };
+    this.getConfirmBooking = function (sub) {
+        // var url3 = "http://hotels.tag2travel.com:4585/api/HotelBooking/GetConfirmBooking?Des=" + sub.Des + "&DepartureDate=" + sub.DepartureDate + "&ReturnDate=" + sub.ReturnDate + "&Rooms=" + sub.Rooms + "&name=" + sub.Name + "&surname=" + sub.Surname + "&rateKey1=" + sub.RateKey1 + "&Adults1=" + sub.Adults1 + "&Adults1name=" + sub.Adults1name + "&Adults1surname=" + sub.Adults1surname + "&Children1=" + sub.Children1 + "&C1Age1=" + sub.C1Age1 + "&C1Age2=" + sub.C1Age2 + "&C1Age3=" + sub.C1Age3 + "&C1Age4=" + sub.C1Age4 + "&rateKey2=" + sub.RateKey2 + "&Adults2=" + sub.Adults2 + "&Adults2name=" + sub.Adults2name + "&Adults2surname=" + sub.Adults2surname + "&Children2=" + sub.Children2 + "&C2Age1=" + sub.C2Age1 + "&C2Age2=" + sub.C2Age2 + "&C2Age3=" + sub.C2Age3 + "&C2Age4=" + sub.C2Age4 + "&rateKey3=" + sub.RateKey3 + "&Adults3=" + sub.Adults3 + "&Adults3name=" + sub.Adults3name + "&Adults3surname=" + sub.Adults3surname + "&Children3=" + sub.Children3 + "&C3Age1=" + sub.C3Age1 + "&C3Age2=" + sub.C3Age2 + "&C3Age3=" + sub.C3Age3 + "&C3Age4=" + sub.C3Age4 + "&ClientReference=" + sub.ClientReference + "&Remark=" + sub.Remark + "&HotelName=" + sub.HotelName + "&HotelAddress=" + sub.HotelAddress + "&HotelPhone=" + sub.HotelPhone + "&Pax=" + sub.Pax + "&Destination=" + sub.Destination + "&RoomType=" + sub.RoomType + "&Board=" + sub.Board + "&Price=" + sub.Price + "&Description=" + sub.Description + "&Mobile=" + sub.Mobile + "&Email=" + sub.Email + "&HotelEmail=" + sub.HoltelEmail;
+       // var url3 = "http://localhost:8995/api/HotelBooking/GetConfirmBooking?Des=" + sub.Des + "&DepartureDate=" + sub.DepartureDate + "&ReturnDate=" + sub.ReturnDate + "&Rooms=" + sub.Rooms + "&name=" + sub.Name + "&surname=" + sub.Surname + "&rateKey1=" + sub.RateKey1 + "&Adults1=" + sub.Adults1 + "&Adults1name=" + sub.Adults1name + "&Adults1surname=" + sub.Adults1surname + "&Children1=" + sub.Children1 + "&C1Age1=" + sub.C1Age1 + "&C1Age2=" + sub.C1Age2 + "&C1Age3=" + sub.C1Age3 + "&C1Age4=" + sub.C1Age4 + "&rateKey2=" + sub.RateKey2 + "&Adults2=" + sub.Adults2 + "&Adults2name=" + sub.Adults2name + "&Adults2surname=" + sub.Adults2surname + "&Children2=" + sub.Children2 + "&C2Age1=" + sub.C2Age1 + "&C2Age2=" + sub.C2Age2 + "&C2Age3=" + sub.C2Age3 + "&C2Age4=" + sub.C2Age4 + "&rateKey3=" + sub.RateKey3 + "&Adults3=" + sub.Adults3 + "&Adults3name=" + sub.Adults3name + "&Adults3surname=" + sub.Adults3surname + "&Children3=" + sub.Children3 + "&C3Age1=" + sub.C3Age1 + "&C3Age2=" + sub.C3Age2 + "&C3Age3=" + sub.C3Age3 + "&C3Age4=" + sub.C3Age4 + "&ClientReference=" + sub.ClientReference + "&Remark=" + sub.Remark + "&HotelName=" + sub.HotelName + "&HotelAddress=" + sub.HotelAddress + "&HotelPhone=" + sub.HotelPhone + "&Pax=" + sub.Pax + "&Destination=" + sub.Destination + "&RoomType=" + sub.RoomType + "&Board=" + sub.Board + "&Price=" + sub.Price + "&Description=" + sub.Description + "&Mobile=" + sub.Mobile + "&Email=" + sub.Email + "&HotelEmail=" + sub.HoltelEmail;
+        var url3 = "http://67.222.132.248:9091/api/HotelBooking/GetConfirmBooking?Des=" + sub.Des + "&DepartureDate=" + sub.DepartureDate + "&ReturnDate=" + sub.ReturnDate + "&Rooms=" + sub.Rooms + "&name=" + sub.Name + "&surname=" + sub.Surname + "&rateKey1=" + sub.RateKey1 + "&Adults1=" + sub.Adults1 + "&Adults1name=" + sub.Adults1name + "&Adults1surname=" + sub.Adults1surname + "&Children1=" + sub.Children1 + "&C1Age1=" + sub.C1Age1 + "&C1Age2=" + sub.C1Age2 + "&C1Age3=" + sub.C1Age3 + "&C1Age4=" + sub.C1Age4 + "&rateKey2=" + sub.RateKey2 + "&Adults2=" + sub.Adults2 + "&Adults2name=" + sub.Adults2name + "&Adults2surname=" + sub.Adults2surname + "&Children2=" + sub.Children2 + "&C2Age1=" + sub.C2Age1 + "&C2Age2=" + sub.C2Age2 + "&C2Age3=" + sub.C2Age3 + "&C2Age4=" + sub.C2Age4 + "&rateKey3=" + sub.RateKey3 + "&Adults3=" + sub.Adults3 + "&Adults3name=" + sub.Adults3name + "&Adults3surname=" + sub.Adults3surname + "&Children3=" + sub.Children3 + "&C3Age1=" + sub.C3Age1 + "&C3Age2=" + sub.C3Age2 + "&C3Age3=" + sub.C3Age3 + "&C3Age4=" + sub.C3Age4 + "&ClientReference=" + sub.ClientReference + "&Remark=" + sub.Remark + "&HotelName=" + sub.HotelName + "&HotelAddress=" + sub.HotelAddress + "&HotelPhone=" + sub.HotelPhone + "&Pax=" + sub.Pax + "&Destination=" + sub.Destination + "&RoomType=" + sub.RoomType + "&Board=" + sub.Board + "&Price=" + sub.Price + "&Description=" + sub.Description + "&Mobile=" + sub.Mobile + "&Email=" + sub.Email + "&HotelEmail=" + sub.HoltelEmail;
+        var response3 = $http.get(url3);
+        return response3;
+    }; this.getList = function (paymentData) {
+        return $http({
+             method: "POST",
+             url: "/Hotel/Sendpayment",
+             dataType: 'json',
+             data: paymentData,
+             headers: { "Content-Type": "application/json" }
+        });
+    };
+});
+app.controller('ctrl', function ($scope, $q, $window, $http, studentService, filterFilter) {
+    $scope.hClass = [];
+    $scope.hMClass = [];
+    $scope.respData = [];
+    $scope.paymentview = false;
+    $scope.loaded = false;
+    $scope.loaded1 = false;
+    $scope.loaded2 = false;
+    $scope.rate = "";
+    $scope.items = ['0', '1', '2', '3', '4'];
+    $scope.datax = $window.data;
+
+    var x = $window.data.DepartureDate;
+    var y = $window.data.ReturnDate;
+
+    var myDepartureDate = new Date(parseInt(x.replace('/Date(', '')));
+    var myReturnDate = new Date(parseInt(y.replace('/Date(', '')));
+    $scope.Adults = $scope.datax.Adults1 + $scope.datax.Adults2 + $scope.datax.Adults3;
+    $scope.Childrens = $scope.datax.Children1 + $scope.datax.Children2 + $scope.datax.Children3;
+    $scope.visitorsCurrency = $scope.datax.visitorsCurrency;
+    $scope.Name = "";
+    $scope.HotelName = "";
+    $scope.HotelAddress = "";
+    $scope.HotelPhone = "";
+    $scope.DateFrom = $window.data.DepartureDate;
+    $scope.DateTo = $window.data.ReturnDate;
+    $scope.Pax = $scope.Adults + $scope.Childrens;
+    $scope.Destination = "";
+    $scope.RoomType = "";
+    $scope.Board = "";
+    $scope.Price = "";
+    $scope.Mobile = "";
+    $scope.Description = "";
+    $scope.EmailAddress = "";
+    $scope.Adults1name = "";
+    $scope.Adults1surname = "";
+    $scope.Adults2name = "";
+    $scope.Adults2surname = "";
+    $scope.Adults3name = "";
+    $scope.Adults3surname = "";
+    $scope.InterestPoint = "";
+    //$scope.InterestPointDistance = "";
+    //$scope.InterestPointObj = "";
+
+    loadData($scope.datax.HotelCode, $scope.datax.Des, $scope.datax.DepartureDate, $scope.datax.ReturnDate, $scope.datax.Rooms, $scope.datax.Adults1, $scope.datax.Children1, $scope.datax.C1Age1, $scope.datax.C1Age2, $scope.datax.C1Age3, $scope.datax.C1Age4, $scope.datax.Adults2, $scope.datax.Children2, $scope.datax.C2Age1, $scope.datax.C2Age2, $scope.datax.C2Age3, $scope.datax.C2Age4, $scope.datax.Adults3, $scope.datax.Children3, $scope.datax.C3Age1, $scope.datax.C3Age2, $scope.datax.C3Age3, $scope.datax.C3Age4, $scope.datax.visitorsCurrency);
+
+    function loadData(HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x, Children1x, C1Age1x, C1Age2x, C1Age3x, C1Age4x, Adults2x, Children2x, C2Age1x, C2Age2x, C2Age3x, C2Age4x, Adults3x, Children3x, C3Age1x, C3Age2x, C3Age3x, C3Age4x,visitorsCurrencyx) {
+
+        var promiseStudent = studentService.get(HotelCodex, Destinationx, DepartureDatex, ReturnDatex, Roomsx, Adults1x, Children1x, C1Age1x, C1Age2x, C1Age3x, C1Age4x, Adults2x, Children2x, C2Age1x, C2Age2x, C2Age3x, C2Age4x, Adults3x, Children3x, C3Age1x, C3Age2x, C3Age3x, C3Age4x, visitorsCurrencyx);
+
+        $scope.combineResult = $q.all([
+                promiseStudent
+        ]).then(function (resp) {
+            console.log("sdfuisdfhsdfguagsdfiubafsd");
+   
+            $scope.hotels = angular.fromJson(resp[0].data);
+
+
+            $scope.respData = $scope.hotels[0];
+
+         
+            $scope.rooms = $scope.hotels[0].rooms;
+            $scope.facilities =  $scope.hotels[0].facilityrep;
+            $scope.DateFromx = $scope.hotels[0].checkIn;
+            $scope.DateTox =  $scope.hotels[0].checkOut;
+            $scope.loaded = true;
+            $scope.HotelName = $scope.hotels[0].name;
+            $scope.HotelAddress =  $scope.hotels[0].address;
+            $scope.HotelPhone =  $scope.hotels[0].phoneNumber;
+            $scope.Destination =  $scope.hotels[0].destinationName;
+            $scope.Board =  $scope.hotels[0].categoryName;
+            $scope.Description =  $scope.hotels[0].description;
+            $scope.lat = parseFloat($scope.hotels[0].latitude);
+            $scope.lng = parseFloat($scope.hotels[0].longitude);
+            $scope.AccommodationType = $scope.hotels[0].accommodationTypeCode;
+            $scope.InterestPoint =  $scope.hotels[0].interestPoints[0];
+            $scope.postalCode = $scope.hotels[0].postalCode;
+            $scope.hotelEmail = $scope.hotels[0].email;
+           //$scope.InterestPointObj = [
+            // {
+            //     "Nearbyplace": "$scope.InterestPoint",
+            //     "Distance": "$scope.InterestPointDistance"
+            // },
+
+            //]
+
+            if ($scope.datax.Rooms === 1) {
+
+            }
+            if ($scope.datax.Rooms === 2) {
+                $scope.room2 = true;
+                $scope.room3 = false;
+            }
+            if ($scope.datax.Rooms === 3) {
+                $scope.room2 = true;
+                $scope.room3 = true;
+            }
+
+            initMap();
+            initMapSmall();
+
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving the data.');
+            alert("Oops! Something went wrong while retrieving the data.");
+        });
+    }
+
+    $scope.removeTask = function (taskId) {
+        $scope.rateKey = taskId;        
+        var removeTask = studentService.getratecommnet($scope.rateKey, $scope.datax.Rooms, $scope.datax.Adults1, $scope.datax.Children1, $scope.datax.C1Age1, $scope.datax.C1Age2, $scope.datax.C1Age3, $scope.datax.C1Age4, $scope.datax.Adults2, $scope.datax.Children2, $scope.datax.C2Age1, $scope.datax.C2Age2, $scope.datax.C2Age3, $scope.datax.C2Age4, $scope.datax.Adults3, $scope.datax.Children3, $scope.datax.C3Age1, $scope.datax.C3Age2, $scope.datax.C3Age3, $scope.datax.C3Age4, $scope.datax.visitorsCurrency);
+        removeTask.then(function (d) {
+            console.log("Succss");
+
+            // $scope.respData = d;s
+            $scope.rate = d.data;
+
+
+            $scope.loaded1 = true;
+            $scope.loaded2 = true;
+
+            $scope.RoomType = $scope.rate.hotel.rooms[0].name;
+            $scope.Price = $scope.rate.hotel.rooms[0].rates[0].net;
+           // $scope.PriceOther = $scope.rate.hotel.rooms[0].rates[0].visitorsRate;// other price sends price from visitors currency
+
+            $scope.NetPrice = (($scope.Price * 3 / 100) + $scope.Price).toFixed(2);
+           // $scope.NetPriceOther = (($scope.PriceOther * 3 / 100) + $scope.PriceOther).toFixed(2);
+
+           
+            $scope.rateCurrency = $scope.rate.hotel.rooms[0].strRateCurrency;
+
+            $scope.MealType = $scope.rate.hotel.rooms[0].rates[0].boardName;
+            $scope.cancellationPolicies = $scope.rate.hotel.rooms[0].rates[0].cancellationPolicies;
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving the data.');
+            alert("Oops! Something went wrong while retrieving the data.");
+        });
+
+    };
+
+    $scope.go = function (path) {
+        $window.location.href = path;
+    };
+
+    $scope.CurrentDate = new Date();
+
+
+    // Adults
+    var counter = 0;
+
+    $scope.titiles = [
+   { name: 'Mr', },
+   { name: 'Mrs', },
+   { name: 'Ms', }
+    ];
+
+    $scope.questionelemnt = [{
+        id: counter,
+        titile: '',
+        question: 'Room 1 Holder',
+        name: '',
+        surname: '',
+        Mobile: '',
+        EmailAddress: ''
+    }];
+
+
+
+    for (var i = 0; i < $scope.datax.Adults1 - 1; i++) {
+        counter++;
+        $scope.questionelemnt.push({
+            id: counter,
+            titile: '',
+            question: 'Room 1',
+            name: '',
+            surname: '',
+            Mobile: '',
+            EmailAddress: ''
+        });
+
+
+    }
+    for (var i = 0; i < $scope.datax.Adults2 ; i++) {
+        counter++;
+        $scope.questionelemnt.push({
+            id: counter,
+            titile: '',
+            question: 'Room 2',
+            name: '',
+            surname: '',
+            Mobile: '',
+            EmailAddress: ''
+        });
+
+
+    }
+    for (var i = 0; i < $scope.datax.Adults3 ; i++) {
+        counter++;
+        $scope.questionelemnt.push({
+            id: counter,
+            titile: '',
+            question: 'Room 3',
+            name: '',
+            surname: '',
+            Mobile: '',
+            EmailAddress: ''
+        });
+    }
+
+
+    // Childs
+    var counter1 = 0;
+    //var RoomNumber="Room 1";
+    if ($scope.datax.Children1 == "" && $scope.datax.Children2 == "" && $scope.datax.Children3 == "") {
+        $scope.childelemnt = '';
+    }
+
+    else if ($scope.datax.Children1 == "" && $scope.datax.Children2 == "" && $scope.datax.Children3 !== "") {
+
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 3',
+            name: '',
+            surname: ''
+        }];
+
+        for (var i = 0; i < $scope.datax.Children3 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 3',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+    else if ($scope.datax.Children1 == "" && $scope.datax.Children2 !== "" && $scope.datax.Children3 == "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 2',
+            name: '',
+            surname: ''
+        }];
+
+        for (var i = 0; i < $scope.datax.Children2 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 2',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+    else if ($scope.datax.Children1 == "" && $scope.datax.Children2 !== "" && $scope.datax.Children3 !== "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 2',
+            name: '',
+            surname: ''
+        }];
+
+        for (var i = 0; i < $scope.datax.Children2 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 2',
+                name: '',
+                surname: ''
+            });
+        }
+        for (var i = 0; i < $scope.datax.Children3; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 3',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+    else if ($scope.datax.Children1 !== "" && $scope.datax.Children2 == "" && $scope.datax.Children3 == "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 1',
+            name: '',
+            surname: ''
+        }];
+
+        for (var i = 0; i < $scope.datax.Children1 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 1',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+
+    else if ($scope.datax.Children1 !== "" && $scope.datax.Children2 == "" && $scope.datax.Children3 !== "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 1',
+            name: '',
+            surname: ''
+        }];
+
+        for (var i = 0; i < $scope.datax.Children1 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 1',
+                name: '',
+                surname: ''
+            });
+        }
+        for (var i = 0; i < $scope.datax.Children3; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 3',
+                name: '',
+                surname: ''
+            });
+        }
+
+
+    }
+
+    else if ($scope.datax.Children1 !== "" && $scope.datax.Children2 !== "" && $scope.datax.Children3 == "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 1',
+            name: '',
+            surname: ''
+        }];
+        for (var i = 0; i < $scope.datax.Children1 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 1',
+                name: '',
+                surname: ''
+            });
+        }
+        for (var i = 0; i < $scope.datax.Children2; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 2',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+    else if ($scope.datax.Children1 !== "" && $scope.datax.Children2 !== "" && $scope.datax.Children3 !== "") {
+        $scope.childelemnt = [{
+            id: counter,
+            titile: '',
+            question: 'Room 1',
+            name: '',
+            surname: ''
+        }];
+        for (var i = 0; i < $scope.datax.Children1 - 1; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 1',
+                name: '',
+                surname: ''
+            });
+        }
+        for (var i = 0; i < $scope.datax.Children2; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 2',
+                name: '',
+                surname: ''
+            });
+        }
+        for (var i = 0; i < $scope.datax.Children3; i++) {
+            counter1++;
+            $scope.childelemnt.push({
+                id: counter,
+                titile: '',
+                question: 'Room 3',
+                name: '',
+                surname: ''
+            });
+        }
+
+    }
+
+    $scope.showitems = function ($event) {
+        $('#displayitems').css('visibility', 'none');
+    }
+
+
+    $scope.sendList = function () {
+
+ 
+        var pattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+        //var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        for (var i = 0; i < $scope.questionelemnt.length; i++) {
+            if ($scope.questionelemnt[i].titile === "" || !isNaN($scope.questionelemnt[i].titile)) {
+                $window.alert('Choose the gender!');
+                return false;
+            }
+            if ($scope.questionelemnt[i].name === "" || !isNaN($scope.questionelemnt[i].name)) {
+                $window.alert('Insert first name!');
+                return false;
+            }
+            if ($scope.questionelemnt[i].surname === "" || !isNaN($scope.questionelemnt[i].surname)) {
+                $window.alert('Insert surname!');
+                return false;
+            }
+            if ($scope.questionelemnt[0].Mobile === "" || isNaN($scope.questionelemnt[0].Mobile)) {
+                $window.alert('Insert a valid phone number!');
+                return false;
+            }
+            else if ($scope.questionelemnt[0].Mobile.length !== 9) {
+                $window.alert('Insert a valid phone number!');
+                return false;
+            }
+            else if ($scope.questionelemnt[0].EmailAddress === "") {
+                $window.alert('Insert a valid email address!');
+                return false;
+            }
+                //else if (reg.test($scope.questionelemnt[0].EmailAddress.value) == false) {
+                //        $window.alert('Insert a valid email address!');
+                //        return false;
+                //    }
+            else if (!pattern.test($scope.questionelemnt[0].EmailAddress)) {
+                $window.alert('Insert a valid email address!');
+                return false;
+            }
+            else
+                continue;
+
+        }
+
+
+        for (var i = 0; i < $scope.questionelemnt.length; i++) {
+
+            if (i === 0) {
+                $scope.Adults1 = $scope.questionelemnt[0].name;
+                $scope.Adults1SurName = $scope.questionelemnt[0].surname;
+            }
+            if (i === 1) {
+                $scope.Adults2 = $scope.questionelemnt[1].name;
+                $scope.Adults2SurName = $scope.questionelemnt[1].surname;
+            }
+            if (i === 2) {
+                $scope.Adults2 = $scope.questionelemnt[2].name;
+                $scope.Adults3name = $scope.questionelemnt[2].surname;
+            }
+        }
+
+
+
+        $scope.Mobile = $scope.questionelemnt[0].Mobile;
+        $scope.EmailAddress = $scope.questionelemnt[0].EmailAddress;
+
+
+
+
+
+        if (!$.trim($scope.childelemnt)) {
+
+        }
+        else {
+            for (var i = 0; i < $scope.childelemnt.length; i++) {
+                if ($scope.childelemnt[i].name === "" || !isNaN($scope.childelemnt[i].name)) {
+                    $window.alert('Insert child name!');
+                    return false;
+                }
+                else if ($scope.childelemnt[i].surname === "" || !isNaN($scope.childelemnt[i].surname)) {
+                    $window.alert('Insert child surname!');
+                    return false;
+                }
+                else
+                    continue;
+
+            }
+        }
+
+
+        for (var i = 0; i < $scope.childelemnt.length; i++) {
+            if (i === 0) {
+                $scope.Child1Name = $scope.childelemnt[0].name;
+                $scope.Child1surname = $scope.childelemnt[0].surname;
+            }
+            if (i === 1) {
+                $scope.Child2Name = $scope.childelemnt[1].name;
+                $scope.Child2surname = $scope.childelemnt[1].surname;
+            }
+            if (i === 2) {
+                $scope.Child3Name = $scope.childelemnt[2].name;
+                $scope.Child3surname = $scope.childelemnt[2].surname;
+            }
+            if (i === 4) {
+                $scope.Child4Name = $scope.childelemnt[3].name;
+                $scope.Child4surname = $scope.childelemnt[3].surname;
+            }
+
+        }
+
+
+        var paymentData = {
+            TransactionID: "",
+            Referencenumber: "",
+            destination: $scope.Destination,
+            hotelname: $scope.HotelName,
+            hoteladdress: $scope.HotelAddress + $scope.postalCode,
+            hotelphone: $scope.HotelPhone,
+            hotelemail: $scope.email,
+            roomtype: $scope.RoomType,
+            board: $scope.MealType,
+            noofrooms: $scope.datax.Rooms,
+            checkin: $scope.DateFrom,
+            checkout: $scope.DateTo,
+            rate: $scope.NetPrice,
+            grossamount: $scope.Price,
+            totalamount: $scope.NetPrice,
+            ratecomment: $scope.rate.hotel.rooms[0].rates[0].rateComments,
+            ratekey1: $scope.rateKey,
+            pax: $scope.Pax,
+            Adults1: $scope.Adults1,
+            Adults2: $scope.Adults2,
+            Adults3: $scope.Adults3,
+            adults1surname: $scope.Adults1SurName,
+            adults2surname: $scope.Adults2SurName,
+            adults3surname: $scope.Adults3SurName,
+            adults1email: $scope.EmailAddress,
+            adults1phone: $scope.Mobile,
+            child1name: $scope.Child1Name,
+            child2name: $scope.Child2Name,
+            child3name: $scope.Child3Name,
+            child4name: $scope.Child4Name,
+            Child1surname: $scope.Child1surname,
+            Child2surname: $scope.Child2surname,
+            Child3surname: $scope.Child3surname,
+            Child4surname: $scope.Child4surname,
+            C1Age1: $scope.datax.C1Age1,
+            C1Age2: $scope.datax.C1Age2,
+            C1Age3: $scope.datax.C1Age3,
+            C1Age4: $scope.datax.C1Age4,
+            C2Age1: $scope.datax.C2Age1,
+            C2Age2: $scope.datax.C2Age2,
+            C2Age3: $scope.datax.C2Age3,
+            C2Age4: $scope.datax.C2Age4,
+            C3Age1: $scope.datax.C3Age1,
+            C3Age2: $scope.datax.C3Age2,
+            C3Age3: $scope.datax.C3Age3,
+            C3Age4: $scope.datax.C3Age4,
+            clientID:"",
+            txnReference :"",
+            responseCode :"",
+            responseText :"",
+            holderName:"",
+            number:"",
+            type:"",
+            paymentAmount:"",
+            currency:""
+        };
+
+        var sendList = studentService.getList(paymentData);
+        sendList.then(function (d) {
+            console.log("Succss getConfirmBooking");
+
+
+            $window.location.href = d.data;
+        });
+
+        //$http.post('/Home/Sendpayment', data)
+        //  .success(function (d) {
+
+        //      alert(d);
+
+        //      $window.location.href = d;
+
+        //  });
+
+
+
+        //var sendList = studentService.getList(data);
+        //sendList.then(function (d) {
+        //    console.log("Succss getConfirmBooking");
+        //    // $scope.respData = d;
+        //    $scope.ConBook = d.data;
+        //    $scope.loaded1 = false;
+        //    $scope.loaded2 = true;
+        //    $scope.paymentview = true;
+        //    if (!$.trim($scope.ConBook.booking)) {
+        //        $scope.loaded = false;
+        //        window.location.href = "HotelResultEmpty";
+        //    } else {
+        //        $scope.TransactionID = $scope.ConBook.booking.clientReference;
+        //        $scope.Referencenumber = $scope.ConBook.booking.reference;
+        //        $scope.Bookingvalue = $scope.Price;
+        //        $scope.GuestNames = $scope.ConBook.GuestNames;
+        //        $scope.ChildNames = $scope.ConBook.ChildNames;
+        //        var amount = $scope.NetPrice;
+        //        $scope.LeadGuestName = $scope.ConBook.booking.holder.name;
+        //        $scope.LeadGuestSurname = $scope.ConBook.booking.holder.surname;
+        //        //$http.post('/Home/SendPay?Amount=' + amount);
+        //    }
+        //});
+    };
+
+    $scope.SubscribeEmail = "";
+    $scope.SubscribeName = "";
+
+    $scope.sendSubscribeMail = function ()    //**************************subscribe mail**************************
+    {
+        var sub = {
+            SubscribeEmail: $scope.SubscribeEmail,
+            SubscribeName: $scope.SubscribeName
+
+        };
+        //$http.post('/Home/sendSubscribeMail', sub);
+        $http.post('/Home/sendSubscribeMail', sub)
+           .success(function () {
+               alert("Subscribed");
+               document.clear();
+           })
+
+
+    };
+
+     
+    function initMap() {
+        var myLatLng = { lat: $scope.lat, lng: $scope.lng };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: ''
+        });
+
+    }
+
+    function initMapSmall() {
+        var myLatLng = { lat: $scope.lat, lng: $scope.lng };
+
+
+        var mapSmall = new google.maps.Map(document.getElementById('mapSmall'), {
+            zoom: 14,
+            center: myLatLng
+        });
+
+        var marker2 = new google.maps.Marker({
+            position: myLatLng,
+            map: mapSmall,
+            title: ''
+        });
+    }
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+app.factory("myFactory", function () {
+    var savedData = {}
+
+    function set(data) {
+        savedData = data;
+    }
+
+    function get() {
+        return savedData;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+});
+
+app.filter('unique', function () {
+    return function (collection, keyname) {
+        var output = [],
+            keys = [];
+
+        angular.forEach(collection, function (item) {
+            var key = item[keyname];
+            if (keys.indexOf(key) === -1) {
+                keys.push(key);
+                output.push(item);
+            }
+        });
+        return output;
+    };
+});
+

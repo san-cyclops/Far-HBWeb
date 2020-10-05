@@ -1,0 +1,274 @@
+﻿@model WebUI.Models.HotelBooking
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        p {
+            font-style: oblique;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        /*##star Rating Styles ----------------------*/
+        .stars {
+            padding-top: 10px;
+            width: 100%;
+            display: inline-block;
+        }
+
+        span.glyphicon {
+            padding: 2px;
+        }
+
+        .glyphicon-star-empty {
+            color: #9d9d9d;
+        }
+
+        .glyphicon-star-empty,
+        .glyphicon-star {
+            font-size: 13px;
+        }
+
+        .glyphicon-star {
+            color: #FD4;
+            transition: all .25s;
+        }
+
+            .glyphicon-star:hover {
+                transform: rotate(-15deg) scale(1.3);
+            }
+    </style>
+
+</head>
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+</script>
+<link href="~/Content/PromoOverlay.css" rel="stylesheet" />
+
+<body data-ng-app="APIModule">
+    <div ng-controller="APIController">
+        <div class="loading" ng-cloak="" ng-show="overlay">Loading&#8230;</div>
+        <div>
+            @*class="container"*@
+            <div>
+                <div class="col-xs-12">
+
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[0].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[0].name}}</p>w
+                            <p>{{respData.hotels[0].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[0].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[0].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[0].code,respData.hotels[0].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[1].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[1].name}}</p>
+                            <p>{{respData.hotels[1].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[1].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[1].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[1].code,respData.hotels[1].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[2].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[2].name}}</p>
+                            <p>{{respData.hotels[2].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[2].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[2].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[2].code,respData.hotels[2].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[3].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[3].name}}</p>
+                            <p>{{respData.hotels[3].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[3].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[3].hotelstar) track by $index" class="glyphicon glyphicon-star">
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[3].code,respData.hotels[3].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[4].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[4].name}}</p>
+                            <p>{{respData.hotels[4].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[4].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[4].hotelstar) track by $index" class="glyphicon glyphicon-star">
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[4].code,respData.hotels[4].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[5].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[5].name}}</p>
+                            <p>{{respData.hotels[5].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[5].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[5].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[5].code,respData.hotels[5].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[6].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[6].name}}</p>
+                            <p>{{respData.hotels[6].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[6].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[6].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[6].code,respData.hotels[6].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[7].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[7].name}}</p>
+                            <p>{{respData.hotels[7].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[7].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[7].hotelstar) track by $index" class="glyphicon glyphicon-star">
+
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[7].code,respData.hotels[7].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+
+                        </div>
+
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[8].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[8].name}}</p>
+                            <p>{{respData.hotels[8].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[8].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[8].hotelstar) track by $index" class="glyphicon glyphicon-star">
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[8].code,respData.hotels[8].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-cm-5 col-xs-5">
+                            <img class="img-responsive" src={{respData.hotels[9].giata}} id="hotelImg" alt="" />
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                            <p>{{respData.hotels[9].name}}</p>
+                            <p>{{respData.hotels[9].rooms[0].rates[0].boardName}}</p>
+
+                            <b><p> LKR {{(respData.hotels[9].minRate)}} </p></b>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[9].hotelstar) track by $index" class="glyphicon glyphicon-star">
+                                </span>
+                            </div>
+                            <button type="button" style="font-size: 10px;" class="btn btn-facebook  color-fff" data-ng-click="setTab(respData.hotels[9].code,respData.hotels[9].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)">Check Availability</button>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #22BCE5;margin-top:3px">&nbsp;</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+<script src="~/Scripts/ApiHotelResult/Module.js"></script>
+<script src="~/Scripts/ApiHotelResult/Service.js"></script>
+<script src="~/Scripts/ApiHotelResult/Controller.js"></script>
+
+</html>

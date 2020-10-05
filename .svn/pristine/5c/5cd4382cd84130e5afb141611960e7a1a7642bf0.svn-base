@@ -1,0 +1,320 @@
+﻿@using WebUI.Controllers
+
+@{
+    Layout = null;
+}
+
+
+<link href="~/Content/main.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+<body data-ng-app="HotelBookingModule">
+    <div ng-controller="HotelBooikingCtrl">
+
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                Booking List
+            </div>
+            <div class="panel-body pan">
+                <form action="#">
+                    <div class="form-body pal">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputName" class="control-label">
+                                        Client ref
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+                                        <input id="ClientReference" type="text" placeholder="" data-ng-model="clientReference" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bookingtype" class="control-label">
+                                        Booking type
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+
+                                        <select data-ng-model="status" id='status' class="form-control adults1" placeholder="Status" ng-options="o for o in statuslist track by o"></select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Date from
+                            </label>
+                            <div class="">
+                                <i class=""></i>
+                                <input class="form-control" required id="datefrom" name="datefrom" placeholder="Date From" type="text" data-ng-model="start" readonly />
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Date to
+                            </label>
+                            <div class="">
+                                <i class=""></i>
+                                <input class="form-control" required id="dateto" name="dateto" placeholder="Date To" type="text" data-ng-model="end" readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Country
+                            </label>
+                            <div class="form-group">
+                                <input id="Country" type="text" placeholder="" data-ng-model="country" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                            <option value="volvo">sri lanka</option>
+                            <option value="saab">2</option>
+                            <option value="fiat">3</option>
+
+                        </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Destination
+                            </label>
+                            <div class="form-group">
+                                <input id="Destination" type="text" placeholder="" data-ng-model="destination" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                            <option value="volvo">sri lanka</option>
+                            <option value="saab">2</option>
+                            <option value="fiat">3</option>
+
+                        </select>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">
+                                Hotel
+                            </label>
+                            <div class="form-group">
+                                <input id="Hotel" type="text" placeholder="" data-ng-model="hotel" class="form-control" />
+                                @*<i class=""></i> <select name="cars">
+                            <option value="volvo">sri lanka</option>
+                            <option value="saab">2</option>
+                            <option value="fiat">3</option>
+
+                        </select>*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Filtertype" class="control-label">
+                                        Filter type
+                                    </label>
+                                    <div class="">
+                                        <i class=""></i>
+                                        <select name="filterType" data-ng-model="filterType" ng-options="o for o in filterTypeOption track by o" class="form-control adults1"></select>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-actions text-right pal">
+
+                                        @*<button type="button" class="btn btn-primary">
+                                    <a ng-href='#here' ng-click='getHotelBooking()' style="color:black; text-decoration:none;">View</a>
+                                </button>*@
+                                        <a style="border-radius: 2px;background: #73AD21; padding: 10px; width: 50px; color:white;
+    height: 5px;text-decoration:none;" ng-href='#here' ng-click='getHotelBooking()'>Click Me</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        @*<div class="col-md-7 col-lg-7 col-cm-7 col-xs-7">
+                <p>{{respData.bookings[0].status}}</p>
+                <p>{{respData.bookings.bookings[0].hotel.destinationCode}}</p>
+                <p>
+                    {{respData.bookings[0].clientReference}}
+                </p>
+                <p>
+                    {{respData.bookings[0].reference}}
+                </p>
+                <p>
+                    {{ respData.bookings[0].creationDate}}
+                </p>
+                <p>
+                    {{respData.bookings[0].hotel.destinationCode}}
+                </p>
+                <p>
+                    {{respData.bookings[0].holder.name}}
+                </p>
+                <p>{{respData.bookings[0].holder.surname}}</p>
+
+            </div>*@
+
+
+
+        @*<div>
+            <ul>
+                <li ng-repeat="x in respData.bookings">
+                {{x.holder.name}}: {{x.clientReference}}</li>
+                </ul>
+            </div>*@
+
+
+        <div class="panel panel-orange" ng-show="showBooking">
+            <div class="panel-heading">Booking List- Farholiday</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Last Name</th>
+                            <th>Creation Date </th>
+                            <th>Client Reference </th>
+                            <th>Reference </th>
+                            <th>Destination code</th>
+                            <th>Hotel code</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in respData.bookings">
+                            <td>{{x.holder.name}}</td>
+                            <td>{{x.holder.surname}}</td>
+                            <td>{{x.creationDate}}</td>
+                            <td>{{x.clientReference}}</td>
+                            <td>{{x.reference}}</td>
+                            <td>{{x.hotel.destinationCode}}</td>
+                            <td>{{x.hotel.code}}</td>
+
+                            <td ng-if="x.status == 'CONFIRMED'"><span class="label label-sm label-success">{{x.status}}</span></td>
+                            <td ng-if="x.status == 'CANCELLED'"><span class="label label-sm label-red">{{x.status}}</span></td>
+
+                                           
+                                    <td>
+                                        <a style="border-radius: 1px;background: #73AD21; padding: 5px; width: 50px; color:white;
+    height: 5px;text-decoration:none;" class="label label-sm label-success" ng-href='#here' ng-click='getHotelBookingDetails(x.reference)'>View Detail</a>
+                                    </td>
+
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+
+            </div>
+
+
+
+
+        <div class="panel panel-pink" ng-show="showDetail">
+            <div class="panel-heading">Booking Details - Farholidays</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Cancellation Reference</th>
+                            <th>Creation Date </th>
+                            @*<th>Hotel Code</th>*@
+                            <th>Hotel Name </th>
+                            @*<th>Category Code</th>*@
+                            <th>Category Name</th>
+                            @*<th>Destination Code</th>*@
+                            <th>Destination Name</th>
+                            <th>Hotel Name</th>
+                            <th>Total Net</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @*<td>{{htlData.clientReference}}</td>*@
+                            <td>{{htlData.reference}}</td>
+                            <td>{{htlData.cancellationReference}}</td>
+                            <td>{{htlData.creationDate}}</td>                            
+                            @*<td>{{htlData.hotel.code}}</td>*@
+                            <td>{{htlData.name}}</td>
+                            @*<td>{{htlData.hotel.categoryCode}}</td>*@
+                            <td>{{htlData.categoryName}}</td>
+                            @*<td>{{htlData.hotel.destinationCode}}</td>*@
+                            <td>{{htlData.destinationName}}</td>
+                            <td>{{htlData.hotelName}}</td>
+                            <td>{{htlData.totalNet}}</td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        </div>
+
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+    <script>
+
+
+                    $(document).ready(function () {
+
+                        var startDate = new Date();
+                        var date = new Date();
+                        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                        var date_input = $('input[name="datefrom"]'); //our date input has the name "date"
+                        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+
+                        date_input.datepicker({
+                            format: 'mm/dd/yyyy',
+                            container: container,
+                            todayHighlight: true,
+                            autoclose: true,
+                            //startDate: today
+
+
+                        }).on('changeDate', function (selected) {
+                            startDate = new Date(selected.date.valueOf());
+                            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+                            $('#dateto').datepicker('setStartDate', startDate);
+
+                        });
+
+                        var date_input1 = $('input[name="dateto"]'); //our date input has the name "date"
+                        var container1 = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                        date_input1.datepicker({
+                            format: 'mm/dd/yyyy',
+                            container: container1,
+                            autoclose: true
+                        });
+
+                    })
+
+
+    </script>
+    <!--END PAGE WRAPPER-->
+
+
+</body>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/ApiHotelBookingList/HotelBookingListController.js"></script>

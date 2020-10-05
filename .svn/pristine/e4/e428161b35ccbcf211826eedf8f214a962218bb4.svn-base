@@ -1,0 +1,258 @@
+﻿@model HB.WebUI.Models.BookingRS
+@{
+
+}
+
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+</script>
+
+
+<div class="main-container">
+
+    <style>
+        /*****booking confirm view style**********/
+        #voucherTable {
+            border: 1px solid #a8adb5;
+        }
+
+        #printButton {
+            width: 100px;
+            border: none;
+            background-color: #216fed;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .labelx {
+            font-weight: normal;
+        }
+
+        #myrow {
+            margin-right: 0px;
+        }
+
+        /*.morecontent span {
+               display: none;
+               }
+               .morelink {
+               display: block;
+               }*/
+
+
+        #target {
+            /*width:300px;*/
+            /*height:300px;
+         height:160px;*/
+            /*padding:5px;*/
+            display: none;
+        }
+
+        /*#target1 {
+                   display:none;
+               }*/
+
+        .Hide {
+            display: none;
+        }
+    </style>
+
+    <div ng-show="paymentview">
+        <link href="~/Content/paymentvoucherCSS.css" rel="stylesheet" />
+        <div id="DivIdToPrint">
+            <div><br /></div>
+            <div class="container" id="voucherTable" style="padding-top:30px; padding-bottom:30px;max-width:1340px;">
+                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6">
+                    <!--********upper section***1******-->
+                    <img src="../../Content/img/log.png" class="img-responsive" style="width:300px; height:50px;" />
+
+
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" style="text-align:right;">
+                    <!--********upper section***2******-->
+                    <span>Transaction ID:<span>@Model.booking.clientReference </span></span><br />
+                    <span>Reference No:<span>@Model.booking.reference </span></span><br />
+
+                </div>
+                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12"></div>
+
+                <div class="row" id="myrow">
+                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ">
+                        <div class="col-md-7 col-lg-7 col-xs-12 col-sm-6">
+                            <!--***********middle section****1******-->
+                            <div id="voucherTable">
+                                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                    <h3 style="font-size:20px; font-weight:bold; background-color:#eaecef;">Booking Details</h3>
+                                    <hr />
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                    <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
+                                        <div>
+                                            <span style="font-size:22px; font-weight:bold;">@Model.booking.hotel.name</span>
+                                            @*<div class="star">
+                                                    <span ng-repeat="n in createArray(respData.hotels[0].hotelstar) track by $index" class="glyphicon glyphicon-star" style="color:gold;">
+                                                    </span>
+                                                </div>*@
+                                            <span>></span>
+                                            <p><span> @Model.HotelPaymentDetails.hoteladdress </span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+                                        <div>
+                                            <p style="font-weight:bold;">Check in: <span>@Model.HotelPaymentDetails.checkin</span></p>
+                                            <p style="font-weight:bold;">Check out:<span>@Model.HotelPaymentDetails.checkout </span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" style="height:20px;"></div>
+                                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                    <br />
+                                    <br /><br /><br />
+                                    <p style="font-weight:bold;">No of Rooms:<span style="font-weight:normal;"> @Model.HotelPaymentDetails.noofrooms </span></p>
+                                    <p style="font-weight:bold;">Room Type:<span style="font-weight:normal;"> @Model.HotelPaymentDetails.roomtype</span></p>
+                                    <p style="font-weight:bold;">Meal Type:<span style="font-weight:normal;"> @Model.HotelPaymentDetails.board </span></p>
+                                    <p style="font-weight:bold;">Cancelation Policy: <span style="font-weight:normal;">Non refundable</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-lg-5 col-xs-12 col-sm-6" id="voucherTable">
+                            <br />
+                            <div style="height:100%;">
+                                @*<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                        <p style="font-size:16px; font-weight:bold; background-color:#eaecef;"> Sale Summery</p>
+                                        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                                            <p style="font-weight:bold;">Rate:</p>
+                                            <p style="font-weight:bold;">No of Rooms: </p>
+                                            <hr />
+                                            <p style="font-weight:bold;">Gross Amount:</p>
+                                            <p style="font-weight:bold;">Tax:</p>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                                            <p> @Model.HotelPaymentDetails.grossamount : LKR</p>
+                                            <p>@Model.HotelPaymentDetails.noofrooms</p>
+                                            <hr />
+                                            <p> @Model.HotelPaymentDetails.rate : LKR</p>
+                                            <p>3%</p>
+                                        </div>
+                                        <br />
+                                    </div>*@
+                                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" style="padding-top:20px; font-size:20px;">
+                                    <p style="font-size:20px; font-weight:bold;">Total Amount:</p>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" style="padding-top:20px; font-size:20px;">
+                                    <p style="font-size:20px; font-weight:bold;">@Model.HotelPaymentDetails.rate : LKR</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" style="padding-top:10px;"></div>
+
+                <div class="row" id="myrow">
+
+                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ">
+
+                        <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12" style="padding-top:10px;">
+
+                            <p style="font-size: 20px; font-weight: bold; background-color: #eaecef;">Guest Details</p>
+
+                            <p style="color: black;">
+                                <b>Lead Guest:</b>
+                            </p>
+                            <span style="font-weight: bold;">Name:</span><span>@Model.HotelPaymentDetails.Adults1  @Model.HotelPaymentDetails.Adults1surname</span><br><br>
+                            <span style="font-weight: bold;">Mobile:</span><span> @Model.HotelPaymentDetails.Adults1phone</span>
+                            <span style="font-weight: bold;">Email:</span><span> @Model.HotelPaymentDetails.Adults1email</span>
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <div>
+                                    <p><span>@Model.GuestNames</span></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <div>
+                                    <p><span>@Model.ChildNames</span></p>
+                                </div>
+                            </div>
+                            <p style="color:black;">
+                                <b>Child details:</b>
+                            </p>
+
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="col-md-5 col-lg-5 col-xs-12 col-sm-12" style="padding-left:0px;padding-right:0px;">
+                            <!--***********lower section****2******-->
+                            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" id="voucherTable" style="width:100%;">
+                                <div class="divwidth">
+                                    <p style="font-weight: bold;">Rate comment:</p>
+                                    @*<textarea rows="20" cols="60" disabled style="background-color:white; border:none; padding-bottom:10px; max-width: 100%;">{{rate.hotel.rooms[0].rates[0].rateComments}}</textarea>*@
+                                    <button class="Show" style="border:none;border-radius:2px;background-color:#216fed;color:white;">Show</button>
+                                    <button class="Hide" style="border:none;border-radius:2px;background-color:#216fed;color:white;">Hide</button>
+                                    <div id="target">
+                                        @Model.HotelPaymentDetails.ratecomment
+                                    </div>
+                                    <div id="target1">
+                                        @*{{rate.hotel.rooms[0].rates[0].rateComments}}*@
+                                        <span class="available-text"> @Model.HotelPaymentDetails.ratecomment  </span>
+                                    </div>
+
+                                    <script>
+
+                                            $('.Show').click(function() {
+                                                $('#target').show(500);
+                                                $('#target1').hide(0);
+                                                $('.Show').hide(0);
+                                                $('.Hide').show(0);
+                                            });
+                                            $('.Hide').click(function() {
+                                                $('#target1').show(500);
+                                                $('#target').hide(0);
+                                                $('.Show').show(0);
+                                                $('.Hide').hide(0);
+                                            });
+
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="col-md-12 col-lg-12" style="height:10px;"></div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/ApiHotelPayment/Module.js"></script>
+<script src="~/Scripts/ApiHotelPayment/PaymentController.js"></script>

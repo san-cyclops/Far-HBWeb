@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Promo";
+}
+
+
+@******stylesheet*******@
+
+<link href="~/Content/hotelDetailsOfPromotion-style.css" rel="stylesheet" />
+<style>
+    /*.container {
+           position: relative;
+           width: 50%;
+       }*/
+
+
+    .promoimg {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        backface-visibility: hidden;
+        position: relative;
+        /*width: 50%;*/
+    }
+
+
+
+        /*.promoimg:hover {
+            opacity: 0.9;
+            transition: .3s ease-in-out;
+            width: 101%;
+            height: 101%;
+        }*/
+
+
+
+    /*.text {
+           background-color: #4CAF50;
+           color: white;
+           font-size: 16px;
+           padding: 16px 32px;
+       }*/
+
+    #checkAvailabilityButton {
+    background-color:cornflowerblue;
+    color:white;
+    border:none;
+    border-radius:4px;
+    }
+
+    #hotelName {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    color:#5c6066;
+    }
+
+    #hotelImg {
+    width:251px;
+    Height:188px;
+    }
+
+    .glyphicon glyphicon-star {
+      
+    }
+
+
+
+
+
+
+</style>
+<link href="~/Content/PromoOverlay.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+</script>
+
+
+<body data-ng-app="APIModule">
+    <div ng-controller="APIController">
+        <div class="loading" ng-cloak="" ng-show="overlay">Loading&#8230;</div>
+        <!-- Navigation -->
+        <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Logo and responsive toggle -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <!-- Navbar links -->
+        <!-- /.container -->
+        <!-- Content -->
+        <div class="container">
+            <!-- Heading -->
+            <div style="padding:10px;">
+
+            </div>
+            <!-- /.row -->
+            <!-- Projects Row -->
+            <div>
+                <div class="row">
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                
+                                    <img class="img-responsive" src={{respData.hotels[0].giata}} alt="" id="hotelImg">
+                                
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[0].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[0].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[0].minRate)}} </p>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[0].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+                                </span>
+                            </div>
+                                <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[0].code,respData.hotels[0].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                                <br />
+                           
+                    </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                
+                                    <img class="img-responsive" src={{respData.hotels[1].giata}} alt="" id="hotelImg">
+                              
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[1].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[1].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[1].minRate)}} </p>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[1].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>
+                                <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[1].code,respData.hotels[1].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)"/>
+                            
+                    </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg" >                               
+                                    <img class="img-responsive" src={{respData.hotels[2].giata}} alt="" id="hotelImg">                             
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[2].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[2].rooms[0].rates[0].boardName}}</p>
+                             <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[2].minRate)}} </p>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[2].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[2].code,respData.hotels[2].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">                    
+                                    <img class="img-responsive" src={{respData.hotels[3].giata}} alt="" id="hotelImg">
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[3].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[3].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[3].minRate)}} </p>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[3].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>                            
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[3].code,respData.hotels[3].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+                <!-- Projects Row -->
+                <div class="row">
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                <a href="#">
+                                    <img class="img-responsive" src={{respData.hotels[4].giata}} alt="" id="hotelImg">
+                                </a>
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[4].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[4].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[4].minRate)}} </p> 
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[4].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>                           
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left"  data-ng-click="setTab(respData.hotels[4].code,respData.hotels[4].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                <a href="#">
+                                    <img class="img-responsive" src={{respData.hotels[5].giata}} alt="" id="hotelImg">
+                                </a>
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[5].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[5].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[5].minRate)}} </p> 
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[5].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>                           
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[5].code,respData.hotels[5].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                <a href="#">
+                                    <img class="img-responsive" src={{respData.hotels[6].giata}} alt="" id="hotelImg">
+                                </a>
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[6].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[6].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[6].minRate)}} </p> 
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[6].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>                           
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[6].code,respData.hotels[6].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-3 portfolio-item" style="padding-bottom:40px;">
+                            <div class="promoimg">
+                                <a href="#">
+                                    <img class="img-responsive" src={{respData.hotels[7].giata}} alt="" id="hotelImg">
+                                </a>
+                            </div>
+                            <h3 id="hotelName" class="hotelDetailsOfPromotion">
+                                {{respData.hotels[7].name}}
+                            </h3>
+                            <p class="hotelDetailsOfPromotion">{{respData.hotels[7].rooms[0].rates[0].boardName}}</p>
+                            <p class="hotelDetailsOfPromotion"> LKR {{(respData.hotels[7].minRate)}} </p>
+                            <div class="star">
+                                <span ng-repeat="n in createArray(respData.hotels[7].hotelstar) track by $index" class="glyphicon glyphicon-star"  style="color:gold;">
+
+                                </span>
+                            </div>                            
+                            <input type="button" value="Check Availability" id="checkAvailabilityButton" style="float:left" data-ng-click="setTab(respData.hotels[7].code,respData.hotels[7].destinationCode,respData.StrcheckIn,respData.StrcheckOut,1,1)" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="row text-center">
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.container -->
+            <!-- jQuery -->
+            <script src="js/jquery-1.11.3.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="js/bootstrap.min.js"></script>
+</div>
+</div>
+</body>
+
+
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+<script src="~/Scripts/ApiHotelResult/Module.js"></script>
+<script src="~/Scripts/ApiHotelResult/Service.js"></script>
+<script src="~/Scripts/ApiHotelResult/Controller.js"></script>
+@Scripts.Render("~/bundles/modernizr")

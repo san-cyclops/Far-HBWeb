@@ -1,0 +1,202 @@
+﻿@model WebUI.Models.BookingRS
+@{
+
+}
+
+
+<script type="text/javascript">
+
+    var data = @Html.Raw(Json.Encode(Model));
+
+</script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="http://hotels.tag2travel.com/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="http://hotels.tag2travel.com/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<style>
+          
+        .col-md-1,
+        .col-md-2,
+        .col-md-3,
+        .col-md-4,
+        .col-md-5,
+        .col-md-6,
+        .col-md-7,
+        .col-md-8,
+        .col-md-9,
+        .col-md-10,
+        .col-md-11,
+        .col-md-12
+        {
+          position: relative;
+          min-height: 1px;
+          padding-right: 15px;
+          padding-left: 15px;
+        }
+
+                 .container {
+            max-width: 970px;
+          }
+          .col-md-1,
+          .col-md-2,
+          .col-md-3,
+          .col-md-4,
+          .col-md-5,
+          .col-md-6,
+          .col-md-7,
+          .col-md-8,
+          .col-md-9,
+          .col-md-10,
+          .col-md-11 {
+            float: left;
+          }
+          .col-md-1 {
+            width: 8.333333333333332%;
+          }
+          .col-md-2 {
+            width: 16.666666666666664%;
+          }
+          .col-md-3 {
+            width: 25%;
+          }
+          .col-md-4 {
+            width: 33.33333333333333%;
+          }
+          .col-md-5 {
+            width: 41.66666666666667%;
+          }
+          .col-md-6 {
+            width: 50%;
+          }
+          .col-md-7 {
+            width: 58.333333333333336%;
+          }
+          .col-md-8 {
+            width: 66.66666666666666%;
+          }
+          .col-md-9 {
+            width: 75%;
+          }
+          .col-md-10 {
+            width: 83.33333333333334%;
+          }
+          .col-md-11 {
+            width: 91.66666666666666%;
+          }
+          .col-md-12 {
+            width: 100%;
+          }
+          .row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="row" style="font-size:11px;">
+            <div class="col-md-2 col-sm-3"><b>Payment Receipt</b></div>
+            <div class="col-md-6 hidden-sm"></div>
+            <div class="col-md-4 col-sm-3" style="text-align:right;"><b>Date: @Model.booking.creationDate</b></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-sm-6" style="border:1px;border-style:solid;border-color:#eeeeee;">
+                <a href="http://tag2travel.com/"><img alt="" class="image-logo" src="~/Content/img/logo.png" style="width:250px;height:42px;float:right;"></a>
+                <p></p>
+                <p><b>TAG2TRAVEL.COM</b></p>
+                <p>Email: sales@tag2travel.com</p>
+                <p>Call-us: +94 115 920 607</p>
+                <p>WhatsApp: +94 767 688 881</p>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;border:1px;border-style:solid;border-color:#eeeeee;">
+            <div class="col-md-12 col-sm-6" style="background-color:#515151">
+                <p style="color:#fff;padding:10px;font-size:14px;">Booking Details</p>
+            </div>
+            <div class="col-md-6 col-sm-6" style="font-size:13px;">
+                <p></p>
+                <p><b>Client reference:</b> @Model.booking.clientReference</p>
+                <p><b>Passenger name:</b> @Model.HotelPaymentDetails.Adults1  @Model.HotelPaymentDetails.Adults1surname</p>
+                <p><b>Booking reference:</b> @Model.booking.reference</p>
+            </div>
+            <div class="col-md-6 col-sm-6" style="font-size:13px;">
+                <p></p>
+                <p><b>Booking confirmation date:</b> @Model.booking.creationDate</p>
+                <p><b>Passenger mobile:</b> @Model.HotelPaymentDetails.Adults1phone</p>
+                <p><b>Passenger email:</b> @Model.HotelPaymentDetails.Adults1email</p>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;border:1px;border-style:solid;border-color:#eeeeee;">
+            <div class="col-md-12 col-sm-6" style="background-color:#515151">
+                <p style="color:#fff;padding:10px;font-size:14px;">Services</p>
+            </div>           
+            <p style="text-align:left;color:#000;padding:20px;background-color:#eeeeee;font-size:13px;"><b>ACCOMMODATION</b></p>
+            <div class="col-md-12 col-sm-6" style="font-size:13px;">
+                <p></p>
+                @if (@Model.booking.status.ToString() == "CONFIRMED")
+                {
+                    <span style="float:right;color:#fff;padding:10px;background-color:#5cb85c;font-size:13px;"><b>CONFIRMED</b></span>
+
+                }
+                else
+                { 
+                    <span style="float:right;color:#fff;padding:10px;background-color:#f74f57;font-size:13px;"><b>CANCELLED</b></span>
+                }
+                  @*<span style="float:right;color:#fff;padding:10px;background-color:#5cb85c;font-size:13px;"><b>status</b></span>*@
+                <p><b>@Model.booking.hotel.name</b></p>
+                <p>@Model.HotelPaymentDetails.hoteladdress</p>
+                <p><b>From:-</b> @Model.HotelPaymentDetails.checkin <b>To:-</b> @Model.HotelPaymentDetails.checkout</p>
+                <p><b>No of rooms:</b> @Model.HotelPaymentDetails.noofrooms </p>
+                <p><b>Cancellation policy:</b> <span style="padding:2px;color:#fff;background-color:#a21c1d;">Non refundable</span></p>
+            </div>
+          
+           <p></p>
+            <div class="row">
+                <div class="col-md-12 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
+                        <p style="color:#1b3c6f;font-size:14px;"><b>Room type</b></p>
+                        <p>@Model.HotelPaymentDetails.roomtype</p>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <p style="color:#1b3c6f;font-size:14px;"><b>Meal Type</b></p>
+                        <p>@Model.HotelPaymentDetails.board</p>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <p style="color:#1b3c6f;font-size:14px;"><b>Occupancy</b></p>
+                        <p>@Model.HotelPaymentDetails.pax</p>
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                        <p style="text-align:right;color:#a21c1d;font-size:14px;"><b>Gross amount</b></p>
+                        <p style="text-align:right">@Model.HotelPaymentDetails.grossamount</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-12 col-sm-6" style="text-align:right;color:#000;padding-top:2px;padding-left:15px;padding-right:15px;padding-bottom:2px;background-color:#eeeeee;font-size:14px;">
+                <p>Tax: 3%</p>
+                <p><b>Total net amount : LKR @Model.HotelPaymentDetails.totalamount</b></p>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;border:1px;border-style:solid;border-color:#eeeeee;">
+            <div class="col-md-12 col-sm-6" style="font-size:13px;">
+                <p></p>
+                <p></p>
+                <p style="color:#000;padding:15px;background-color:#eeeeee;font-size:13px;"><b>Rate comment </b><br /> @Model.HotelPaymentDetails.ratecomment</p>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/ApiHotelPayment/Module.js"></script>
+<script src="~/Scripts/ApiHotelPayment/PaymentController.js"></script>

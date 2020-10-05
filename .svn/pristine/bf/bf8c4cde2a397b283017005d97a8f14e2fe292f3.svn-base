@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="61dbdeac48c14c75972017b7695c3fe4" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="HBNEWModel.HRZRoomBooking" Width="1.5" PointX="4.75" PointY="15.75" />
+        <EntityTypeShape EntityType="HBNEWModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.AccommodationRep" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.BoardRep" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.CategoryRep" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.ChainRep" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.Content" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="HBNEWModel.CountryRep" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.CurrencyRep" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.DestinationsRep" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.DocumentRep" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilityGroupRep" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilityRep" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilityTypeRep" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.GeoLocationRep" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HBNEWModel.GroupCategoryRep" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.GroupZoneRep" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelBoardCodesRep" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelFacilityRep" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelPaymentDetail" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelPhoneRep" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelRep" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelRoomFacilityRep" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelRoomRep" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelRoomStayFacilityRep" Width="1.5" PointX="4.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelRoomStayRep" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelSegmentRep" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HotelTerminalRep" Width="1.5" PointX="11.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZAminity" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZHotelImage" Width="1.5" PointX="13.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZHotelSupplier" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZLanguage" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZNearbyPlace" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZPromotion" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZRoomMaster" Width="1.5" PointX="15.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZRoomUnavailable" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZUser" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.ImageRep" Width="1.5" PointX="7.75" PointY="16.75" />
+        <EntityTypeShape EntityType="HBNEWModel.ImageTypeRep" Width="1.5" PointX="16.75" PointY="10.75" />
+        <EntityTypeShape EntityType="HBNEWModel.IssueRep" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.LanguageRep" Width="1.5" PointX="9.75" PointY="17.75" />
+        <EntityTypeShape EntityType="HBNEWModel.PromotionRep" Width="1.5" PointX="11.75" PointY="17.75" />
+        <EntityTypeShape EntityType="HBNEWModel.RateCommentRep" Width="1.5" PointX="17.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HBNEWModel.RoomRep" Width="1.5" PointX="13.75" PointY="17.75" />
+        <EntityTypeShape EntityType="HBNEWModel.SegmentRep" Width="1.5" PointX="15.75" PointY="17.75" />
+        <EntityTypeShape EntityType="HBNEWModel.sysdiagram" Width="1.5" PointX="17.75" PointY="16.75" />
+        <EntityTypeShape EntityType="HBNEWModel.TerminalRep" Width="1.5" PointX="18.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HBNEWModel.ZoneRep" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="HBNEWModel.AgentLogin" Width="1.5" PointX="18.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HBNEWModel.AgentMarkup" Width="1.5" PointX="18.75" PointY="10.75" />
+        <EntityTypeShape EntityType="HBNEWModel.CurrencyRate" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilitySumRep" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilitySumReps_back" Width="1.5" PointX="19.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HBNEWModel.FacilitySumRepsBackup" Width="1.5" PointX="19.75" PointY="16.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZPayment" Width="1.5" PointX="17.75" PointY="19.75" />
+        <EntityTypeShape EntityType="HBNEWModel.HRZUserPrivilege" Width="1.5" PointX="19.75" PointY="19.75" />
+        <AssociationConnector Association="HBNEWModel.FK_dbo_ZoneReps_dbo_Contents_Description_ContentID" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

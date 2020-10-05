@@ -1,0 +1,13 @@
+﻿angular.module('app', ['gm.datepickerMultiSelect'])
+.controller('cancellationCtrl', function () {
+    this.activeDate;
+    this.roomID;
+    this.selectedDates = [new Date().setHours(0, 0, 0, 0)];
+
+    this.identity = angular.identity;
+   
+    this.saveDetails = function (roomId, activeDate) {
+        console.log("Saved");
+
+    }
+});

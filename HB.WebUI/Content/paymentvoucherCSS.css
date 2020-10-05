@@ -1,0 +1,5 @@
+﻿@supports (-webkit-appearance:none) {
+    #InternetExplorerHacks {
+        max-width:1340px;
+    }
+}

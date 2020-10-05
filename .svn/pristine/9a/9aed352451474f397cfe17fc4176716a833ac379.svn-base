@@ -1,0 +1,184 @@
+﻿app.controller("APIController", function ($scope,$window, $http,filterFilter, APIService) {
+    var currency_input = 5;
+    var currency_from = "USD"; // currency codes : http://en.wikipedia.org/wiki/ISO_4217
+    var currency_to = "LKR";
+    //getcurrencyConvert();
+ 
+    $scope.datax = $window.data;
+    $scope.respData = 0;
+    //var x = $window.data.DepartureDate;
+    //var y = $window.data.ReturnDate;
+
+    //var myDepartureDate = new Date(parseInt(x.replace('/Date(', '')));
+    //var myReturnDate = new Date(parseInt(y.replace('/Date(', '')));
+    $scope.loaded = false;
+    getAll();
+    // Star Rating
+
+    $scope.createArray = function (n) {
+        return new Array(n);
+    }
+ 
+    function getAll() {
+        var sub = {
+            Des: $scope.datax.Des.slice($scope.datax.Des.lastIndexOf("(") + 1, $scope.datax.Des.lastIndexOf(")")),
+            DepartureDate: $window.data.DepartureDate,
+            ReturnDate: $window.data.ReturnDate,
+            Rooms: $scope.datax.Rooms,
+            Adults1 : $scope.datax.Adults1,
+            Children1: $scope.datax.Children1,
+            C1Age1: $scope.datax.C1Age1,
+            C1Age2: $scope.datax.C1Age2,
+            C1Age3: $scope.datax.C1Age3,
+            C1Age4: $scope.datax.C1Age4,
+            Adults2: $scope.datax.Adults2,
+            Children2: $scope.datax.Children2,
+            C2Age1: $scope.datax.C2Age1,
+            C2Age2: $scope.datax.C2Age2,
+            C2Age3: $scope.datax.C2Age3,
+            C2Age4: $scope.datax.C2Age4,
+            Adults3: $scope.datax.Adults3,
+            Children3: $scope.datax.Children3,
+            C3Age1: $scope.datax.C3Age1,
+            C3Age2: $scope.datax.C3Age2,
+            C3Age3: $scope.datax.C3Age3,
+            C3Age4: $scope.datax.C3Age4
+        };
+
+        var getAll = APIService.hotelavailability(sub);
+        getAll.then(function (d) {
+            console.log("Succss");
+            $scope.respData = d.data.hotels;
+
+            if (!$.trim($scope.respData.hotels)) {
+                $scope.loaded = false;
+                window.location.href = "/Home/HotelResultEmpty";
+ 
+
+            }
+            else {
+                $scope.respData = d.data.hotels;
+                $scope.respDatapara = d.config.data;
+                $scope.loaded = true;
+            }
+
+
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving  the data.');
+            window.location.href = "/Home/HotelResultEmpty";
+        });
+    }
+
+    
+
+
+
+    //*****************
+     
+    function getcurrencyConvert() {
+        var rate = currencyConverter(currency_from, currency_to, currency_input);
+        console.log(rate);
+        $scope.dtss = rate;
+    };
+
+
+    function httpGet(theUrl) {
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false);
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+    function currencyConverter(currency_from, currency_to, currency_input) {
+        var yql_base_url = "https://query.yahooapis.com/v1/public/yql";
+        var yql_query = 'select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20("' + currency_from + currency_to + '")';
+        var yql_query_url = yql_base_url + "?q=" + yql_query + "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+        var http_response = httpGet(yql_query_url);
+        var http_response_json = JSON.parse(http_response);
+        //console.log(http_response);
+
+        return http_response_json.query.results.rate.Rate;
+    }
+
+
+    //*****************
+ 
+   
+
+    $scope.getCount = function(strCat) {
+        return filterFilter($scope.respData.hotels, { hotelstar: strCat }).length;
+    };
+
+    $scope.getPriceRange = function(pricefrom, priceto) {
+        return filterFilter($scope.respData.hotels, function(hotel) {
+            // calculation
+            return hotel.minRate >= pricefrom && hotel.minRate <= priceto;
+        }).length;
+    };
+
+    $scope.filters = {};
+
+    $scope.weDontLike = function() {
+        return function(hotel) {
+            return hotel.minRate >= 0 && hotel.minRate <= 5000;
+        }
+    }
+
+
+
+    
+
+
+    $scope.HotelApiRequestName = function () {
+
+
+        var sub = {
+            Des: $scope.datax.Des.slice($scope.datax.Des.lastIndexOf("(") + 1, $scope.datax.Des.lastIndexOf(")")),
+            DepartureDate: $window.data.DepartureDate,
+            ReturnDate: $window.data.ReturnDate,
+            Rooms: $scope.datax.Rooms,
+            Adults1: $scope.datax.Adults1,
+            Children1: $scope.datax.Children1,
+            C1Age1: $scope.datax.C1Age1,
+            C1Age2: $scope.datax.C1Age2,
+            C1Age3: $scope.datax.C1Age3,
+            C1Age4: $scope.datax.C1Age4,
+            Adults2: $scope.datax.Adults2,
+            Children2: $scope.datax.Children2,
+            C2Age1: $scope.datax.C2Age1,
+            C2Age2: $scope.datax.C2Age2,
+            C2Age3: $scope.datax.C2Age3,
+            C2Age4: $scope.datax.C2Age4,
+            Adults3: $scope.datax.Adults3,
+            Children3: $scope.datax.Children3,
+            C3Age1: $scope.datax.C3Age1,
+            C3Age2: $scope.datax.C3Age2,
+            C3Age3: $scope.datax.C3Age3,
+            C3Age4: $scope.datax.C3Age4,
+            C3Age4: $scope.hotelName
+        };
+
+        var getAll = APIService.hotelavailabilityFilter(sub);
+        getAll.then(function (d) {
+            console.log("Succss");
+            // $scope.respData = d;
+            $scope.respData = d.data.hotels;
+            $scope.respDatapara = d.config.data;
+        }, function (error) {
+            console.log('Oops! Something went wrong while retrieving  the data.');
+            alert("Oops! Something went wrong while retrieving  the data.");
+        });
+         
+      
+    };
+
+
+});
+
+app.filter("rounded", function () {
+    return function (val) {
+        return val.toFixed(2);
+    }
+});
+
+ 

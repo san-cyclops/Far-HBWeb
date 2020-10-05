@@ -1,0 +1,21 @@
+﻿app.service("APIService", function($http) {
+    this.getDestinations = function () {
+        var url = "/api/HotelBooking/GetDestinationsRSList";
+        return $http.get(url).then(function(response) {
+            return response.data;
+        });
+    };
+   
+
+    this.hotelSearch = function (sub) {
+        return $http({
+            method: "post",
+            data: sub,
+            contentType: "application/json; charset=utf-8",
+            url: "Home/Booking"
+            
+        });
+    };
+
+ 
+});

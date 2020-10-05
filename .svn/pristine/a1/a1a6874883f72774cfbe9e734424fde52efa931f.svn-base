@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title - Tag2Travel </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angular")
+
+    @RenderSection("scripts", false)
+
+
+
+   
+
+
+
+</head>
+<body>
+@*<div class="navbar navbar-inverse navbar-fixed-top">   *************header***************
+</div>*@
+
+
+
+   @***************end of header******************@
+
+<div>
+        @RenderBody()
+        
+
+    </div>
+
+ 
+</body>
+
+
+
+</html>

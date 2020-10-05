@@ -1,0 +1,155 @@
+﻿var app;
+(function () {
+
+    app = angular.module("RoomPayment", []);
+
+})();
+app.service('RoomService', function ($http) {
+
+    this.setRoomDetails = function (sub) {
+
+        return $http({
+            data: sub,
+            method: "post",
+            contentType: "application/json; charset=utf-8",
+            url: "/home/GetHotelPaymentData",
+
+
+        });
+
+
+    };
+});
+
+
+app.controller('payController', function ($scope, $http) {
+
+   
+    $scope.bno = "";
+    //$scope.roomid = "";
+    $scope.total = "";
+    $scope.tax = "";
+    $scope.amount = "";
+
+    $scope.rid = "";
+    $scope.booking = "";
+    $scope.name = "";
+    $scope.telephoneno = "";
+    $scope.email = "";
+    $scope.creditno = "";
+
+    roombookingdetails();
+    //$scope.bno = ['b1', 'b2', 'b3', 'b4', 'b5'];
+    //$scope.roomid = ['r001','r002','r003','r004','r005'];
+     
+
+    function roombookingdetails () {
+
+
+        var post = $http({
+            method: "POST",
+            url: "/Home/GetBookingDetails",
+            dataType: 'json',
+            headers: { "Content-Type": "application/json" }
+        });
+
+        post.then(function (d) {
+
+            console.log("success");
+            $window.alert(d.data);
+            location.reload();
+
+             $scope.data  =[
+							[{ $scope:address = d.data.Address}],
+							[{ $scope:bookingno = d.data.BNO}],
+							[{ $scope:datefrom = d.data.DateFrom}]
+                            [{ $scope:dateto = d.data.DateTo}]
+                            [{ $scope:roomid = d.data.RId}]
+                            [{ $scope:name = d.data.NAME}]
+                            [{ $scope:telephoneno = d.data.Telephone}]
+                            [{ $scope:email = d.data.EMAIL}]
+                            [{ $scope:nicno = d.data.NICNo}]
+                            [{ $scope:refference = d.data.Refference}]
+                            [{ $scope:board = d.data.BoardType}]
+                            [{ $scope: room = d.data.RoomType }]
+							];
+             $scope.updateData = $scope.data;
+        },
+        function (d) {
+            $window.alert("Oops!! Something went wrong!!!!.");
+        });
+    }
+
+    $scope.paid = function ()
+    {
+            console.log("dd");
+
+        if ($scope.booking == "")
+        {
+            alert("Please select Booking ID.");
+            return false;
+        }
+        if ($scope.rid == "")
+        {
+            alert("Please select Room ID.");
+            return false;
+        }
+        if ($scope.amount == "")
+        {
+            alert("Please enter Amount.");
+            return false;
+        }
+        if ($scope.amount <= 0) {
+            alert("Please enter valid Amount.");
+            return false;
+        }
+        if ($scope.tax == "")
+        {
+            alert("Please enter Tax.");
+            return false;
+        }
+        if ($scope.tax < 0) {
+            alert("Please enter valid Tax.");
+            return false;
+        }
+        if ($scope.total == "")
+        {
+            alert("Please enter Total.");
+            return false;
+        }
+        if ($scope.total <= 0) {
+            alert("Please enter valid Total Amount.");
+            return false;
+        }
+
+        var sub ={
+            BookingNo: $scope.bno,
+            Amount:$scope.amount,
+            Tax:$scope.tax,
+            Total:$scope.total,
+            RoomID: $scope.rid,
+            Booking: $scope.booking,
+            Name: $scope.name,
+            TelephoneNo:$scope.telephoneno,
+            Email:$scope.email,
+            CreditCardNo:$scope.creditno,
+}
+      
+
+        var post = $http({
+            method: "POST",
+            url: "/home/GetHotelPaymentData",
+            dataType: 'json',
+            data: sub,
+            headers: { "Content-Type": "application/json" }
+        });
+        //else {
+        //alert("Successfully Saved!")
+        //}
+}
+});
+       
+
+    
+
+ 

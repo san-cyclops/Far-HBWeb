@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    
+    <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+    
+    
+</head>
+<body >
+    <div class="panel panel-blue">
+        <div class="panel-heading">
+            Login Form
+        </div>
+
+        <form action="#" class="form-horizontal">
+
+            <div class="form-body pal" id="room">
+
+                <div class="form-group">
+                    <label for="inputName" class="col-md-3 control-label">
+                        Username:
+                    </label>
+                    <div class="col-md-3">
+                        <div class="input-icon right">
+                            <i class="fa fa-user"></i>
+                            <input id="inputName" type="text" placeholder="" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+
+
+                    </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-md-3 control-label">
+                    Password:
+                </label>
+                <div class="col-md-3">
+                    <div class="input-icon right">
+                        <i class="fa fa-lock"></i>
+                        <input id="inputPassword" type="text" placeholder="" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+            </div>
+
+                </div>
+                <div class="form-group mbn">
+                    <div class="col-lg-12" align="right">
+                        <div class="form-group mbn">
+                            <div class="col-lg-3">
+                            </div>
+
+                            <div class="col-lg-3">
+
+                                <button type="submit" class="btn btn-primary" id="sign">
+                                    Sign In
+                                </button>
+
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+   
+
+    <script>
+
+        $('#sign').on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: '/Home/AdminDashboard',
+
+            });
+        });
+    </script>
+
+</body>
+
+
+</html>
+
+
